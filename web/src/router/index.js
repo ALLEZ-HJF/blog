@@ -6,6 +6,12 @@ Vue.use(Router)
 
 export const constantRoutes = [
   {
+    path: '/',
+    component: layoutWeb,
+    hidden: true,
+    redirect: '/web/index'
+  },
+  {
     path: '/web',
     component: layoutWeb,
     hidden: true,

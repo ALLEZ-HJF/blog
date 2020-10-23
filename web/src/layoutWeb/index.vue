@@ -7,7 +7,10 @@
               <div class="left">
                 <el-image src="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg" lazy></el-image>
               <div class="navMenu">
-                <div>首页</div>
+                  <router-link tag="a" :to="{ name: 'web/index' }">首页</router-link>
+                  <router-link tag="a" :to="{ name: 'web/index' }">首页</router-link>
+                  <router-link tag="a" :to="{ name: 'web/index' }">首页</router-link>
+                  <router-link tag="a" :to="{ name: 'web/index' }">首页</router-link>
               </div>
               </div>
               <div class="right"></div>
@@ -59,6 +62,7 @@ export default {
           }
           .navMenu {
             color: @defaultColor;
+            display: flex;
           }
         }
       }
