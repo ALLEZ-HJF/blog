@@ -1,12 +1,34 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import layoutWeb from '@/layoutWeb'
+import layoutAdmin from '@/layoutAdmin'
 Vue.use(Router)
 
 export const constantRoutes = [
   {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
+    path: '/web',
+    component: layoutWeb,
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        name: 'web/index',
+        component: () => import('@/views/web/index/index'),
+        meta: { title: '首页' }
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    component: layoutAdmin,
+    hidden: true,
+    children: [
+      {
+        path: 'login',
+        name: 'login',
+        component: () => import('@/views/admin/login/index')
+      }
+    ]
   }
 ]
 
