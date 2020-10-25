@@ -1,3 +1,34 @@
+'use strict'
+const path = require('path')
+
+function resolve(dir) {
+  return path.join(__dirname, dir)
+}
+
+const name = 'blog'
+
 module.exports = {
-    lintOnSave: process.env.NODE_ENV !== 'production'
+    publicPath: '/',
+    outputDir: 'dist',
+    assetsDir: 'static',
+    lintOnSave: process.env.NODE_ENV === 'development',
+    productionSourceMap: false,
+    devServer: {
+      port: port,
+      open: true,
+      overlay: {
+        warnings: false,
+        errors: true
+      }
+    },
+    configureWebpack: {
+        // provide the app's title in webpack's name field, so that
+        // it can be accessed in index.html to inject the correct title.
+        name: name,
+        resolve: {
+          alias: {
+            '@': resolve('src')
+          }
+        }
+    }
 }

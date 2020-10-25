@@ -1,6 +1,6 @@
 <template>
   <div class="indexContainer">
-    1
+    <div>123</div>
   </div>
 </template>
 
@@ -9,4 +9,6 @@ export default {}
 </script>
 
 <style>
+.indexContainer {
+}
 </style>
