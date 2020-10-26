@@ -1,9 +1,9 @@
 const router = require('koa-router')()
 const userController = require('../controllers/User')
 
-router.prefix('/users')
+router.prefix('api_v1/users')
 
-router.post('/getAll',userController.getAll)
+router.post('/getUserList',userController.getUserList)
 router.post('/addUser',userController.addUser)
 
 

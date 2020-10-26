@@ -1,0 +1,13 @@
+{
+    "name": "blog-server",
+    "version": "1.0.0",
+    "description": "blog-server相关API文档",
+    "title": "blog-server API",
+    "url": "http://localhost:3000/api_v1",
+    "sampleUrl": "http://localhost:3000/api_v1",
+    "forceLanguage": "zh-cn",
+    "template": {
+        "withCompare": true,
+        "withGenerator": true
+    }
+}

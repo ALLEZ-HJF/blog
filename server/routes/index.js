@@ -9,34 +9,9 @@ router.get('/', async (ctx, next) => {
   })
 })
 
-router.post('/getVerifyCode', async (ctx, next) => {
- var captcha = svgCaptcha.create({
-   size: 4,
-   fontSize: 40,
-   width: 100,
-   height: 40,
-   background:'#ccc'
- })
- ctx.response.type = 'image/svg+xml'
- ctx.body = captcha.data
- ctx.session.captcha = captcha.text
-})
-
-router.post('/uploadFile', async (ctx, next) => {
-  const file = ctx.request.files.file
-  // 创建可读写流 
-  const reader = fs.createReadStream(file.path)
-  let filePath = '/public/uploads/'+ file.name
-  // 创建可写流
-  const upStream = fs.createWriteStream(filePath);
-  // 可读流通过管道写入可写流
-  reader.pipe(upStream);
-  ctx.body = {
-    code: 200,
-    msg: '上传成功',
-    data: filePath
-  }
-})
-
+router.get('/apidoc', function (req, res, next) {
+  　　res.type('text/html')
+  　　res.sendfile('public/apidoc/index.html')
+});
 
 module.exports = router

@@ -1,21 +1,21 @@
 const db = require('../config/db')
 const Sequelize = db.sequelize
 // 引入数据表模型
-const User = Sequelize.import('../schema/User');
+const user = Sequelize.import('../schema/user');
 // 自动创建数据表
-User.sync({force:false})
+user.sync({force:false})
 
-class UserModel {
+class userModel {
     // 创建用户模型
-    static async addUser(data) {
-        return await User.create(data)
+    static async adduser(data) {
+        return await user.create(data)
     }
 
-    static async getAllUser() {
-        return await User.findAll({
-            attributes: ['username','nickname','phone','id','avater']
+    static async getUserList() {
+        return await user.findAll({
+            attributes: ['username','nickname','phone','avater']
         })
     }
 }
 
-module.exports = UserModel
+module.exports = userModel

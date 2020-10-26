@@ -2,7 +2,7 @@ const { formatTime } = require('../public/javascripts/utils/index')
 // 用户表数据模型
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('users',{
-        id: {
+        uid: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             allowNull: true,
@@ -32,6 +32,20 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING(12),
             allowNull: true,
             field: 'phone'
+        },
+        state: {
+            type: DataTypes.ENUM,
+            values: ['valid', 'lock'],
+            field: 'state',
+            defaultValue: 'valid'
+        },
+        gid: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'user_group',
+                key: 'gid'
+            }
         },
         createTime: {
             type: DataTypes.DATE,

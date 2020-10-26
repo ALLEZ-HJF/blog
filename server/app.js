@@ -11,6 +11,7 @@ const path = require('path')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
+const userGroup = require('./routes/userGroup')
 
 // 设置session
 app.keys = ['some secret hurr'];
@@ -59,7 +60,7 @@ app.use(async (ctx, next) => {
     ctx.response.status = err.statusCode || err.status || 500;
     ctx.response.body = {
         msg: err.message,
-        code: 400
+        code: 500
     };
     // 手动释放error事件
     ctx.app.emit('error', err, ctx);
@@ -69,6 +70,7 @@ app.use(async (ctx, next) => {
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
+app.use(userGroup.routes(), userGroup.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
