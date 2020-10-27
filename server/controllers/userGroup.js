@@ -7,11 +7,7 @@ class userGroupController {
         const data = ctx.request.body
         const res = await userGroupModel.getUserGroupList(data)
         ctx.response.status = 200
-        ctx.body = {
-            code: 200,
-            data: data,
-            msg: '获取成功'
-        }
+        ctx.success(200,'获取成功',res)
     }
 }
 

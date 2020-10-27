@@ -7,6 +7,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const session = require('koa-session')
 const koaBody = require('koa-body');
+const responseData = require('./middleware/responseData')
 const path = require('path')
 
 const index = require('./routes/index')
@@ -48,6 +49,8 @@ app.use(require('koa-static')(__dirname + '/public'))
 app.use(views(__dirname + '/views', {
   extension: 'ejs'
 }))
+// 自定义统一返回数据格式
+app.use(responseData())
 
 // logger
 app.use(async (ctx, next) => {

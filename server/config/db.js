@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+const {Op,Sequelize} = require('sequelize')
 const { dbName,name,password,host,port } = require('./config')
 
 // 数据库名字 数据库账号 数据库密码 参数配置
@@ -15,4 +15,4 @@ const sequelize = new Sequelize(dbName,name,password,{
     timezone: "+08:00"
 })
 
-module.exports = { sequelize }
+module.exports = { sequelize,Op }

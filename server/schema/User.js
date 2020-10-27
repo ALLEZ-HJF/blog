@@ -29,9 +29,14 @@ module.exports = function(sequelize, DataTypes) {
             field: 'avater'
         },
         phone: {
-            type: DataTypes.STRING(12),
+            type: DataTypes.STRING(11),
             allowNull: true,
             field: 'phone'
+        },
+        introduction: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'introduction'
         },
         state: {
             type: DataTypes.ENUM,
