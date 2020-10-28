@@ -1,4 +1,4 @@
-const userModel = require('../models/user')
+const userModel = require('../models/users')
 
 class userController {
     // 获取所有用户

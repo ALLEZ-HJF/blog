@@ -1,4 +1,4 @@
-const userGroupModel = require('../models/UserGroup')
+const userGroupModel = require('../models/user_group')
 
 class userGroupController {
 

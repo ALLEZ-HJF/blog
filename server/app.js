@@ -12,7 +12,7 @@ const path = require('path')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-const userGroup = require('./routes/userGroup')
+const userGroup = require('./routes/user_group')
 
 // 设置session
 app.keys = ['some secret hurr'];

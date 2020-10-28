@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const userController = require('../controllers/User')
+const userController = require('../controllers/users')
 
 router.prefix('/api_v1/users')
 // 获取用户列表

@@ -2,9 +2,8 @@ const db = require('../config/db')
 const Sequelize = db.sequelize
 const Op = db.Op
 // 引入数据表模型
-const user = Sequelize.import('../schema/user');
-// 自动创建数据表
-user.sync({force:false})
+const user = db.user
+const user_group = db.user_group
 
 class userModel {
     // 修改用户
@@ -82,6 +81,10 @@ class userModel {
                         state: data.state
                     }
                 ]
+            },
+            include: {
+                model: user_group,
+                attributes: ['groupName']
             },
             offset: data.page_num,
             limit: data.page_size
