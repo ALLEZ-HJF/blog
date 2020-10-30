@@ -1,4 +1,67 @@
 /** 
+ * @api {POST} http://127.0.0.1:3000/api_v1/users/editUser 修改用户
+ * @apiVersion 1.0.0
+ * @apiName editUser
+ * @apiGroup User
+ * @apiDescription 修改用户
+ * 
+ * @apiParam {String} username 用户名
+ * @apiParam {String} password 密码
+ * @apiParam {String} nickname 昵称 
+ * @apiParam {String} avater 用户头像 
+ * @apiParam {String} phone 手机号 
+ * @apiParam {String} introduction 个人介绍
+ * @apiParam {int} gid 用户组id 
+ * 
+ * 
+ * @apiSuccess {int} status 状态码
+ * @apiSuccess {String} msg 简略描述
+ * @apiSuccess {Object} data 返回数据
+ * 
+ * @apiSuccessExample Response-Success:
+ *     HTTP 1.1/ 200K
+ *     {
+ *         'status': 200,
+ *         'msg': 'success'
+ *     }
+ * @apiErrorExample Response-Fail:
+ *     HTTP 1.1/ 404K
+ *     {
+ *         'status': 500,
+ *         'msg': 'Fail'
+ *     }
+*/
+
+/** 
+ * @api {POST} http://127.0.0.1:3000/api_v1/users/delUser 删除用户
+ * @apiVersion 1.0.0
+ * @apiName delUser
+ * @apiGroup User
+ * @apiDescription 删除用户
+ * 
+ * @apiParam {int} uid 用户id
+ * 
+ * 
+ * @apiSuccess {int} status 状态码
+ * @apiSuccess {String} msg 简略描述
+ * @apiSuccess {Object} data 返回数据
+ * 
+ * @apiSuccessExample Response-Success:
+ *     HTTP 1.1/ 200K
+ *     {
+ *         'status': 200,
+ *         'msg': 'success'
+ *     }
+ * @apiErrorExample Response-Fail:
+ *     HTTP 1.1/ 404K
+ *     {
+ *         'status': 500,
+ *         'msg': 'Fail'
+ *     }
+*/
+
+
+/** 
  * @api {POST} http://127.0.0.1:3000/api_v1/users/register 用户注册
  * @apiVersion 1.0.0
  * @apiName register

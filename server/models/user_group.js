@@ -1,13 +1,32 @@
-const db = require('../config/db')
-const Sequelize = db.sequelize
-// 引入数据表模型
-const user_group = db.user_group
+const { formatTime } = require('../public/javascripts/utils/index')
 
-class UserGroupModel {
-    // 获取用户组列表
-    static async getUserGroupList(data) {
-        return await user_group.findAll(data)
-    }
+// 用户组数据模型
+module.exports = function(sequelize, DataTypes) {
+    return sequelize.define('user_group',{
+        gid: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            allowNull: true,
+            autoIncrement: true
+        },
+        groupName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        state: {
+            type: DataTypes.ENUM,
+            values: ['valid', 'lock'],
+            field: 'state',
+            defaultValue: 'valid'
+        },
+        createTime: {
+            type: DataTypes.DATE,
+            get() {
+                return formatTime()
+            }
+        }
+    },{
+        freezeTableName: true,
+        timestamps: false,
+    })
 }
-
-module.exports = UserGroupModel

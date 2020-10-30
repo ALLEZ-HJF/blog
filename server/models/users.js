@@ -1,95 +1,65 @@
-const db = require('../config/db')
-const Sequelize = db.sequelize
-const Op = db.Op
-// 引入数据表模型
-const user = db.user
-const user_group = db.user_group
-
-class userModel {
-    // 修改用户
-    static async editUser(data) {
-        return await user.update(data,{
-            where: {
-                uid: data.uid
+const { formatTime } = require('../public/javascripts/utils/index')
+// 用户表数据模型
+module.exports = function(sequelize, DataTypes) {
+    return sequelize.define('users',{
+        uid: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            allowNull: true,
+            autoIncrement: true
+        },
+        username: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            field: 'username'
+        },
+        nickname: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            field: 'nickname'
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            field: 'password'
+        },
+        avater: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'avater'
+        },
+        phone: {
+            type: DataTypes.STRING(11),
+            allowNull: true,
+            field: 'phone'
+        },
+        introduction: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'introduction'
+        },
+        state: {
+            type: DataTypes.ENUM,
+            values: ['valid', 'lock'],
+            field: 'state',
+            defaultValue: 'valid'
+        },
+        gid: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'user_group',
+                key: 'gid'
             }
-        })
-    }
-    // 删除用户 state => lock
-    static async delUser(data) {
-        return await user.update({state: 'lock'},{
-            where: {
-                uid: data.uid
+        },
+        createTime: {
+            type: DataTypes.DATE,
+            get() {
+                return formatTime()
             }
-        })
-    }
-    // 添加用户
-    static async insertUser(data) {
-        return await user.create(data)
-    }
-    // 根据id 或 用户名 查询用户
-    static async getUserByNameOrUid(data) {
-        if (!data.uid) {
-            data.uid = '' 
         }
-        if (!data.username) {
-            data.username = ''
-        }
-        return await user.findOne({
-            where: {
-                [Op.or]: [
-                    { uid: data.uid },
-                    { username: data.username }
-                ]
-            }
-        })
-    }
-    static async getUserList(data) {
-        if (!data.username) {
-            data.username = ''
-        }
-        if (!data.phone) {
-            data.phone = ''
-        }
-        if (!data.state) {
-            data.state = 'valid'
-        }
-        if (!data.page_num) {
-            data.page_num = 0
-        } else {
-            data.page_num = --data.page_num * data.page_size
-        }
-        if (!data.page_size) {
-            data.page_size = 10
-        } else {
-            data.page_size = Number(data.page_size)
-        }
-        return await user.findAndCountAll({
-            attributes: ['uid','username','nickname','phone','avater','introduction','state','gid'],
-            where: {
-                [Op.and]: [
-                    {
-                        username: {
-                            [Op.like]: `%${data.username}%`
-                        }
-                    },
-                    {
-                        phone: {
-                            [Op.like]: `%${data.phone}%`
-                        }
-                    },
-                    {
-                        state: data.state
-                    }
-                ]
-            },
-            include: {
-                model: user_group,
-                attributes: ['groupName']
-            },
-            offset: data.page_num,
-            limit: data.page_size
-        })
-    }
+    },{
+        freezeTableName: true,
+        timestamps: false,
+    })
 }
-
-module.exports = userModel

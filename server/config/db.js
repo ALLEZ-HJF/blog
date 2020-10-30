@@ -15,8 +15,8 @@ const sequelize = new Sequelize(dbName,name,password,{
     timezone: "+08:00"
 })
 
-const user = sequelize.import('../schema/users');
-const user_group = sequelize.import('../schema/user_group');
+const user = sequelize.import('../models/users');
+const user_group = sequelize.import('../models/user_group');
 user.sync({force:false})
 user_group.sync({force:false})
 
