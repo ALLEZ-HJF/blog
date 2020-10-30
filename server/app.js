@@ -5,27 +5,18 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const session = require('koa-session')
 const koaBody = require('koa-body');
 const responseData = require('./middleware/responseData')
 const path = require('path')
+const koajwt = require('koa-jwt')
+const { singKey } = require('./config/config')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
 const userGroup = require('./routes/user_group')
+const articles = require('./routes/articles')
 
-// 设置session
-app.keys = ['some secret hurr'];
-const CONFIG = {
-    key: 'koa:sess', //cookie key (default is koa:sess)
-    maxAge: 86400000, // cookie 的过期时间 maxAge in ms (default is 1 days)
-    overwrite: true, //是否可以 overwrite (默认 default true)
-    httpOnly: true, //cookie 是否只有服务器端可以访问 httpOnly or not (default true)
-    signed: true, //签名默认 true
-    rolling: false, //在每次请求时强行设置cookie，这将重置cookie过期时间(默认:false)
-    renew: false, //(boolean) renew session when session is nearly expired,
-};
-app.use(session(CONFIG, app));
+
 
 // 文件上传
 app.use(koaBody({
@@ -61,19 +52,35 @@ app.use(async (ctx, next) => {
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
   } catch (err) {
     ctx.response.status = err.statusCode || err.status || 500;
-    ctx.response.body = {
-        msg: err.message,
-        code: 500
-    };
+    if (ctx.response.status === 401) {
+      ctx.response.body = {
+          msg: '登录失效,请重新登录',
+          code: ctx.response.status 
+      };
+    } else {
+      ctx.response.body = {
+          msg: err.message,
+          code: ctx.response.status 
+      };
+    }
     // 手动释放error事件
     ctx.app.emit('error', err, ctx);
   }
 })
 
+// token验证
+app.use(koajwt({
+  secret: singKey
+}).unless({
+  path: [/\/api_v1\/users\/login/,'/api_v1/users/register']
+}));
+
 // routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(userGroup.routes(), userGroup.allowedMethods())
+app.use(articles.routes(), articles.allowedMethods())
+
 
 // error-handling
 app.on('error', (err, ctx) => {

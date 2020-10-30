@@ -1,13 +1,23 @@
+const { sequelize } = require('../config/db')
 const db = require('../config/db')
 const Op = db.Op
 // 引入数据表模型
-const user = db.user
+const users = db.users
 const user_group = db.user_group
 
 class userDao {
+    // 根据用户名查询到密码返回对比
+    static async login(data) {
+        return await users.findOne({
+            attributes: ['uid','username','nickname','password','phone','avater','introduction','state','gid'],
+            where: {
+                username: data.username
+            }
+        })
+    }
     // 修改用户
     static async editUser(data) {
-        return await user.update(data,{
+        return await users.update(data,{
             where: {
                 uid: data.uid
             }
@@ -15,7 +25,7 @@ class userDao {
     }
     // 删除用户 state => lock
     static async delUser(data) {
-        return await user.update({state: 'lock'},{
+        return await users.update({state: 'lock'},{
             where: {
                 uid: data.uid
             }
@@ -23,11 +33,12 @@ class userDao {
     }
     // 添加用户
     static async insertUser(data) {
-        return await user.create(data)
+        return await users.create(data)
     }
     // 根据id 或 用户名 查询用户
     static async getUserByNameOrUid(data) {
-        return await user.findOne({
+        return await users.findOne({
+            attributes: ['uid','username','nickname','phone','avater','introduction','state','gid'],
             where: {
                 [Op.or]: [
                     { uid: data.uid },
@@ -37,8 +48,8 @@ class userDao {
         })
     }
     static async getUserList(data) {
-        return await user.findAndCountAll({
-            attributes: ['uid','username','nickname','phone','avater','introduction','state','gid'],
+        return await users.findAndCountAll({
+            attributes: ['uid','username','nickname','phone','avater','introduction','state','gid',sequelize.col('user_group.groupName')],
             where: {
                 [Op.and]: [
                     {
@@ -58,8 +69,9 @@ class userDao {
             },
             include: {
                 model: user_group,
-                attributes: ['groupName']
+                attributes: []
             },
+            raw:true,
             offset: data.page_num,
             limit: data.page_size
         })

@@ -15,16 +15,24 @@ const sequelize = new Sequelize(dbName,name,password,{
     timezone: "+08:00"
 })
 
-const user = sequelize.import('../models/users');
+const users = sequelize.import('../models/users');
 const user_group = sequelize.import('../models/user_group');
-user.sync({force:false})
-user_group.sync({force:false})
+const articles = sequelize.import('../models/articles');
+sequelize.sync({ force: false });
 
 // 关联
-user_group.hasOne(user);
-user.belongsTo(user_group, {
+user_group.hasOne(users);
+users.belongsTo(user_group, {
   foreignKey: 'gid'
 });
 
+users.hasMany(users);
+articles.belongsTo(users,{
+  foreignKey: 'uid'
+})
 
-module.exports = { sequelize,Op,user,user_group }
+
+
+
+
+module.exports = { sequelize,Op,users,user_group, articles }

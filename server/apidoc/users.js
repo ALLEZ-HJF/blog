@@ -1,4 +1,33 @@
 /** 
+ * @api {POST} http://127.0.0.1:3000/api_v1/users/login 登录
+ * @apiVersion 1.0.0
+ * @apiName login
+ * @apiGroup User
+ * @apiDescription 登录
+ * 
+ * @apiParam {String} username 用户名
+ * @apiParam {String} password 密码
+ * 
+ * 
+ * @apiSuccess {int} status 状态码
+ * @apiSuccess {String} msg 简略描述
+ * @apiSuccess {Object} data 返回数据
+ * 
+ * @apiSuccessExample Response-Success:
+ *     HTTP 1.1/ 200K
+ *     {
+ *         'status': 200,
+ *         'msg': 'success'
+ *     }
+ * @apiErrorExample Response-Fail:
+ *     HTTP 1.1/ 404K
+ *     {
+ *         'status': 500,
+ *         'msg': 'Fail'
+ *     }
+*/
+
+/** 
  * @api {POST} http://127.0.0.1:3000/api_v1/users/editUser 修改用户
  * @apiVersion 1.0.0
  * @apiName editUser

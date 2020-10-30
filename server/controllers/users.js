@@ -1,6 +1,34 @@
 const userDao = require('../dao/users')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { singKey } = require('../config/config')
 
 class userController {
+    // 用户登录
+    static async login(ctx) {
+        let param = ctx.request.body
+        if (!param.username) {
+            ctx.fail(500,'请输入账号')
+        } else if (!param.password) {
+            ctx.fail(500,'请输入密码')
+        } else {
+            const data = await userDao.login(param)
+            ctx.response.status = 200
+            if (data) {
+                const confirmRes = bcrypt.compareSync(param.password, data.password)
+                if (confirmRes) {
+                    // 密码正确 创建token
+                    const token = jwt.sign({data},singKey,{ expiresIn: '24h' })
+                    ctx.success(200,'登录成功',{token : token, data})
+                } else {
+                 ctx.fail(500,'密码错误')
+                }
+            } else {
+                ctx.fail(500,'账号不存在')
+            }
+        }
+    }
+
     // 获取所有用户
     static async getUserList(ctx) {
         let param = ctx.request.body
@@ -34,15 +62,19 @@ class userController {
             param.uid = '' 
         }
         if (!param.username) {
-            param.username = ''
-        }
-        const data = await userDao.getUserByNameOrUid(param)
-        if (!data) {
-            const data = await userDao.insertUser(param)
-            ctx.response.status = 200
-            ctx.success(200,'添加成功',data)
+            ctx.fail(500,'请输入用户名')
+        } else if (!param.password) {
+            ctx.fail(500,'请输入密码')
         } else {
-            ctx.fail(500,'用户已存在')
+            param.password = bcrypt.hashSync(param.password,10)
+            const data = await userDao.getUserByNameOrUid(param)
+            if (!data) {
+                const data = await userDao.insertUser(param)
+                ctx.response.status = 200
+                ctx.success(200,'添加成功',data)
+            } else {
+                ctx.fail(500,'用户已存在')
+            }
         }
     }
     // 删除用户

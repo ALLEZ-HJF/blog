@@ -3,5 +3,7 @@ module.exports = {
     port: 3306,
     name: 'root',
     password: '123456',
-    dbName: 'blog'
+    dbName: 'blog',
+    singKey: 'blogToken',
+    version: 1
 }
