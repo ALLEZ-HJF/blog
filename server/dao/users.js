@@ -27,12 +27,6 @@ class userDao {
     }
     // 根据id 或 用户名 查询用户
     static async getUserByNameOrUid(data) {
-        if (!data.uid) {
-            data.uid = '' 
-        }
-        if (!data.username) {
-            data.username = ''
-        }
         return await user.findOne({
             where: {
                 [Op.or]: [
@@ -43,25 +37,6 @@ class userDao {
         })
     }
     static async getUserList(data) {
-        if (!data.username) {
-            data.username = ''
-        }
-        if (!data.phone) {
-            data.phone = ''
-        }
-        if (!data.state) {
-            data.state = 'valid'
-        }
-        if (!data.page_num) {
-            data.page_num = 0
-        } else {
-            data.page_num = --data.page_num * data.page_size
-        }
-        if (!data.page_size) {
-            data.page_size = 10
-        } else {
-            data.page_size = Number(data.page_size)
-        }
         return await user.findAndCountAll({
             attributes: ['uid','username','nickname','phone','avater','introduction','state','gid'],
             where: {
