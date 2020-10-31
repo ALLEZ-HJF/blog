@@ -52,11 +52,11 @@ module.exports = function(sequelize, DataTypes) {
                 key: 'gid'
             }
         },
-        createTime: {
-            type: DataTypes.DATE,
-            get() {
-                return formatTime()
-            }
+        update_time: {
+            type: DataTypes.DATE
+        },
+        create_time: {
+            type: DataTypes.DATE
         }
     },{
         freezeTableName: true,

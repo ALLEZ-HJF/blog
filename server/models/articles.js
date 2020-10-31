@@ -33,7 +33,11 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true
         },
         comment_num: {
-             type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER,
+            allowNull: true
+        },
+        imgs_str: {
+            type: DataTypes.STRING,
             allowNull: true
         },
         state: {
@@ -42,11 +46,11 @@ module.exports = function(sequelize, DataTypes) {
             field: 'state',
             defaultValue: 'invalid'
         },
-        createTime: {
-            type: DataTypes.DATE,
-            get() {
-                return formatTime()
-            }
+        update_time: {
+            type: DataTypes.DATE
+        },
+        create_time: {
+            type: DataTypes.DATE
         }
     },{
         freezeTableName: true,

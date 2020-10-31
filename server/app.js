@@ -10,6 +10,7 @@ const responseData = require('./middleware/responseData')
 const path = require('path')
 const koajwt = require('koa-jwt')
 const { singKey } = require('./config/config')
+const handleToken = require('./middleware/handleToken')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -42,6 +43,7 @@ app.use(views(__dirname + '/views', {
 }))
 // 自定义统一返回数据格式
 app.use(responseData())
+app.use(handleToken())
 
 // logger
 app.use(async (ctx, next) => {

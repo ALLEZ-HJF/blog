@@ -62,7 +62,7 @@
 */
 
 /** 
- * @api {POST} http://127.0.0.1:3000/api_v1/users/delUser 删除用户
+ * @api {POST} http://127.0.0.1:3000/api_v1/users/ 删除用户
  * @apiVersion 1.0.0
  * @apiName delUser
  * @apiGroup User

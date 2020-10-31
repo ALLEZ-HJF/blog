@@ -1,7 +1,5 @@
 const userDao = require('../dao/users')
 const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
-const { singKey } = require('../config/config')
 
 class userController {
     // 用户登录
@@ -18,7 +16,7 @@ class userController {
                 const confirmRes = bcrypt.compareSync(param.password, data.password)
                 if (confirmRes) {
                     // 密码正确 创建token
-                    const token = jwt.sign({data},singKey,{ expiresIn: '24h' })
+                    const token = ctx.sign({data},{ expiresIn: '24h' })
                     ctx.success(200,'登录成功',{token : token, data})
                 } else {
                  ctx.fail(500,'密码错误')
