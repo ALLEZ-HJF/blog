@@ -17,6 +17,7 @@ class userDao {
     }
     // 修改用户
     static async editUser(data) {
+        data.update_time = Date.now()
         return await users.update(data,{
             where: {
                 uid: data.uid
@@ -25,6 +26,7 @@ class userDao {
     }
     // 删除用户 state => lock
     static async delUser(data) {
+        data.update_time = Date.now()
         return await users.update({state: 'lock'},{
             where: {
                 uid: data.uid
@@ -33,6 +35,7 @@ class userDao {
     }
     // 添加用户
     static async insertUser(data) {
+        data.create_time = Date.now()
         return await users.create(data)
     }
     // 根据id 或 用户名 查询用户

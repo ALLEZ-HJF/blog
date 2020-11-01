@@ -9,13 +9,14 @@ const koaBody = require('koa-body');
 const responseData = require('./middleware/responseData')
 const path = require('path')
 const koajwt = require('koa-jwt')
-const { singKey } = require('./config/config')
+const { singKey,version } = require('./config/config')
 const handleToken = require('./middleware/handleToken')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
 const userGroup = require('./routes/user_group')
 const articles = require('./routes/articles')
+const categories = require('./routes/categories')
 
 
 
@@ -74,7 +75,7 @@ app.use(async (ctx, next) => {
 app.use(koajwt({
   secret: singKey
 }).unless({
-  path: [/\/api_v1\/users\/login/,'/api_v1/users/register']
+  path: [`/api_v${version}/users/login`,`/api_v${version}/users/register`]
 }));
 
 // routes
@@ -82,6 +83,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 app.use(userGroup.routes(), userGroup.allowedMethods())
 app.use(articles.routes(), articles.allowedMethods())
+app.use(categories.routes(), categories.allowedMethods())
 
 
 // error-handling

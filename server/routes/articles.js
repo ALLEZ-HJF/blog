@@ -11,5 +11,7 @@ router.post('/insertArticle',articlesController.insertArticle)
 router.post('/delArticle',articlesController.delArticle)
 // 修改文章
 router.post('/editArticle',articlesController.editArticle)
+// 审核文章
+router.post('/articleVerify',articlesController.articleVerify)
 
 module.exports = router

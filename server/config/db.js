@@ -22,21 +22,37 @@ const sequelize = new Sequelize(dbName,name,password,{
 const users = sequelize.import('../models/users');
 const user_group = sequelize.import('../models/user_group');
 const articles = sequelize.import('../models/articles');
-sequelize.sync({ force: false });
+const categories = sequelize.import('../models/categories');
 
 // 关联
-user_group.hasOne(users);
+user_group.hasOne(users,{
+  foreignKey: 'gid'
+});
 users.belongsTo(user_group, {
   foreignKey: 'gid'
 });
 
-users.hasMany(users);
-articles.belongsTo(users,{
+users.hasMany(articles,{
+  foreignKey: 'uid'
+});
+// 文章跟用户表管理
+articles.belongsTo(users, {
   foreignKey: 'uid'
 })
 
+// 文章跟类型表管理
+categories.hasMany(articles,{
+  foreignKey: 'cid'
+})
+articles.belongsTo(categories,{
+  foreignKey: 'cid'
+})
+
+sequelize.sync({ force: false });
 
 
 
 
-module.exports = { sequelize,Op,users,user_group, articles }
+
+
+module.exports = { sequelize,Op,users,user_group, articles, categories }

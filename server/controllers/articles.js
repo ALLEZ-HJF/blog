@@ -2,7 +2,7 @@ const articlesDao = require('../dao/articles')
 
 class articlesController {
 
-    // 获取用户组列表
+    // 获取文章
     static async getArticleList(ctx) {
         const param = ctx.request.body
         const res = await articlesDao.getArticleList(param)
@@ -53,6 +53,10 @@ class articlesController {
             ctx.fail(500,'请输入用户id')
             return
         }
+        if (!param.cid) {
+            ctx.fail(500,'请选择文章类型')
+            return
+        }
         if (ctx.verify(token).data.uid != param.uid) {
             ctx.fail(500,'无法修改他人文章')
             return
@@ -63,6 +67,23 @@ class articlesController {
         } else {
             ctx.fail(500,'修改失败')
         }
+    }
+
+     // 文章审核
+     static async articleVerify(ctx) {
+        const param = ctx.request.body
+        if (!param.aid) {
+            ctx.fail(500,'请输入文章id')
+            return
+        }
+        const res = await articlesDao.articleVerify(param)
+        if (res[0]) {
+            ctx.response.status = 200
+            ctx.success(200,'审核成功',res)
+        } else {
+            ctx.fail(500,'审核失败')
+        }
+        
     }
 }
 

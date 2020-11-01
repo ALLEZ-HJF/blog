@@ -1,4 +1,37 @@
 /** 
+ * @api {POST} http://127.0.0.1:3000/api_v1/articles/articleVerify 审核文章
+ * @apiVersion 1.0.0
+ * @apiName articleVerify
+ * @apiGroup articles
+ * @apiDescription 审核文章
+ * 
+ * @apiParam {int} aid 文章id 
+ * 
+ * 
+ * @apiSuccess {int} status 状态码
+ * @apiSuccess {String} msg 简略描述
+ * @apiSuccess {Object} data 返回数据
+ * 
+ * @apiSuccessExample Response-Success:
+ *     HTTP 1.1/ 200K
+ *     {
+ *         'status': 200,
+ *         'msg': 'success',
+ *         'data': [
+ *             {
+                  1
+               }
+ *          ]
+ *     }
+ * @apiErrorExample Response-Fail:
+ *     HTTP 1.1/ 404K
+ *     {
+ *         'status': 500,
+ *         'msg': 'fail'
+ *     }
+*/
+
+/** 
  * @api {POST} http://127.0.0.1:3000/api_v1/articles/editArticle 修改文章
  * @apiVersion 1.0.0
  * @apiName editArticle
@@ -7,6 +40,7 @@
  * 
  * @apiParam {int} aid 文章id 
  * @apiParam {int} uid 用户id
+ * @apiParam {int} cid 文章类型id
  * @apiParam {string} title 文章标题
  * @apiParam {string} content 文章内容
  * @apiParam {string} sub_title 副标题
@@ -76,6 +110,7 @@
  * @apiGroup articles
  * @apiDescription 发布文章
  * 
+ * @apiParam {int} cid 文章类型id
  * @apiParam {string} title 文章标题
  * @apiParam {string} content 文章内容
  * @apiParam {string} sub_title 副标题
@@ -123,6 +158,7 @@
  * 
  * @apiParam {int} aid 文章id
  * @apiParam {int} uid 用户id
+ * @apiParam {int} cid 文章类型id
  * @apiParam {string} title 文章标题
  * @apiParam {string} state 状态 valid | invalid | lock
  * @apiParam {int} page_num 页码
