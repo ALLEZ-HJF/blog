@@ -13,6 +13,12 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false
         },
+        role: {
+            type: DataTypes.ENUM,
+            values: ['admin', 'user'],
+            field: 'role',
+            defaultValue: 'user'
+        },
         state: {
             type: DataTypes.ENUM,
             values: ['valid', 'lock'],

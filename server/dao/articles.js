@@ -7,8 +7,18 @@ const users = db.users
 const categories = db.categories
 
 class articlesDao {
+     // 添加阅读量
+    static async addArticleLookNum(data) {
+        let article = await articles.findByPk(data.aid)
+        return await articles.update({look_num: ++article.look_num ,update_time: Date.now()},{
+            where: {
+                aid: data.aid,
+                state: 'valid'
+            }
+        })
+    }
      // 审核文章 state => valid
-     static async articleVerify(data) {
+    static async articleVerify(data) {
         return await articles.update({state:'valid',update_time: Date.now()},{
             where: {
                 aid: data.aid
@@ -41,7 +51,7 @@ class articlesDao {
     // 获取文章列表
     static async getArticleList(data) {
         return await articles.findAndCountAll({
-            attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid',sequelize.col('user.nickname'),sequelize.col('user.avater'),sequelize.col('category.cid'),sequelize.col('category.name')],
+            attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num',sequelize.col('user.nickname'),sequelize.col('user.avater'),sequelize.col('category.cid'),sequelize.col('category.name')],
             where: {
                 aid: {
                     [Op.like]: `%${data.aid || ''}%`

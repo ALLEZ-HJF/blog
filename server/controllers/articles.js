@@ -83,7 +83,21 @@ class articlesController {
         } else {
             ctx.fail(500,'审核失败')
         }
-        
+    }
+    // 添加阅读量
+    static async addArticleLookNum(ctx) {
+        const param = ctx.request.body
+        if (!param.aid) {
+            ctx.fail(500,'请输入文章id')
+            return
+        }
+        const res = await articlesDao.addArticleLookNum(param)
+        if (res[0]) {
+            ctx.response.status = 200
+            ctx.success(200,'成功')
+        } else {
+            ctx.fail(500,'失败')
+        }
     }
 }
 

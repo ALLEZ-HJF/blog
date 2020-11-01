@@ -38,23 +38,28 @@ module.exports = function(sequelize, DataTypes) {
         },
         look_num: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
+            defaultValue: 0
         },
         like_num: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
+            defaultValue: 0
         },
         unlike_num: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
+            defaultValue: 0
         },
         comment_num: {
             type: DataTypes.INTEGER,
-            allowNull: true
+            allowNull: true,
+            defaultValue: 0
         },
         imgs_str: {
             type: DataTypes.STRING,
-            allowNull: true
+            allowNull: true,
+            defaultValue: ''
         },
         state: {
             type: DataTypes.ENUM,

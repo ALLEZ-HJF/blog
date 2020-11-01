@@ -13,5 +13,7 @@ router.post('/delArticle',articlesController.delArticle)
 router.post('/editArticle',articlesController.editArticle)
 // 审核文章
 router.post('/articleVerify',articlesController.articleVerify)
+// 增加文章阅读量
+router.post('/addArticleLookNum',articlesController.addArticleLookNum)
 
 module.exports = router
