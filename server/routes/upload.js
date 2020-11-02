@@ -10,13 +10,19 @@ router.prefix('/api_v'+version+'/upload')
 router.post('/uploadFile', async (ctx, next) => {
   const files = ctx.request.files.file
   let imgArr = []
+  // 如果没有文件夹创建文件夹
+  const isDir = fs.existsSync(path.resolve('./public/uploads/'))
+  if (!isDir) {
+    fs.mkdirSync(path.resolve('./public/uploads/'))
+  }
   if (files.length) {
     for (let file of files) {
       // 创建可读流
       const reader = fs.createReadStream(file.path);
       // 获取上传文件扩展名
-      let filePath = path.resolve(`./public/uploads/${Date.now()+'.'+file.type.split('/')[1]}`)
-      let respPath = ctx.origin +  `/uploads/${Date.now()+'.'+file.type.split('/')[1]}`
+      const fileName = Date.now()+'.'+file.type.split('/')[1]
+      let filePath = path.resolve(`./public/uploads/${fileName}`)
+      let respPath = ctx.origin +  `/uploads/${fileName}`
       imgArr.push(respPath)
       // 创建可写流
       const upStream = fs.createWriteStream(filePath);
@@ -26,8 +32,9 @@ router.post('/uploadFile', async (ctx, next) => {
   } else {
     const reader = fs.createReadStream(files.path);
     // 获取上传文件扩展名
-    let filePath = path.resolve(`./public/uploads/${Date.now()+'.'+files.type.split('/')[1]}`)
-    let respPath = ctx.origin +  `/uploads/${Date.now()+'.'+files.type.split('/')[1]}`
+    const fileName = Date.now()+'.'+files.type.split('/')[1]
+    let filePath = path.resolve(`./public/uploads/${fileName}`)
+    let respPath = ctx.origin +  `/uploads/${fileName}`
     imgArr.push(respPath)
     // 创建可写流
     const upStream = fs.createWriteStream(filePath);
