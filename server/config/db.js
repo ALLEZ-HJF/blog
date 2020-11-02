@@ -21,8 +21,9 @@ const sequelize = new Sequelize(dbName,name,password,{
 
 const users = sequelize.import('../models/users');
 const user_group = sequelize.import('../models/user_group');
-const articles = sequelize.import('../models/articles');
 const categories = sequelize.import('../models/categories');
+const articles = sequelize.import('../models/articles');
+const comments = sequelize.import('../models/comments');
 
 // 关联
 user_group.hasOne(users,{
@@ -35,17 +36,25 @@ users.belongsTo(user_group, {
 users.hasMany(articles,{
   foreignKey: 'uid'
 });
-// 文章跟用户表管理
+// 文章跟用户表关联
 articles.belongsTo(users, {
   foreignKey: 'uid'
 })
 
-// 文章跟类型表管理
+// 文章跟类型表关联
 categories.hasMany(articles,{
   foreignKey: 'cid'
 })
 articles.belongsTo(categories,{
   foreignKey: 'cid'
+})
+
+// 文章跟评论表关联
+articles.hasMany(comments,{
+  foreignKey: 'aid'
+})
+comments.belongsTo(articles,{
+  foreignKey: 'aid'
 })
 
 sequelize.sync({ force: false });
@@ -55,4 +64,4 @@ sequelize.sync({ force: false });
 
 
 
-module.exports = { sequelize,Op,users,user_group, articles, categories }
+module.exports = { sequelize,Op,users,user_group, articles, categories, comments }

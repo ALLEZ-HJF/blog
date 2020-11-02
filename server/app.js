@@ -17,6 +17,7 @@ const users = require('./routes/users')
 const userGroup = require('./routes/user_group')
 const articles = require('./routes/articles')
 const categories = require('./routes/categories')
+const comments = require('./routes/comments')
 
 
 
@@ -84,6 +85,7 @@ app.use(users.routes(), users.allowedMethods())
 app.use(userGroup.routes(), userGroup.allowedMethods())
 app.use(articles.routes(), articles.allowedMethods())
 app.use(categories.routes(), categories.allowedMethods())
+app.use(comments.routes(), comments.allowedMethods())
 
 
 // error-handling

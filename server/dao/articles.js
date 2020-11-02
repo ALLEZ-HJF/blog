@@ -51,7 +51,7 @@ class articlesDao {
     // 获取文章列表
     static async getArticleList(data) {
         return await articles.findAndCountAll({
-            attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num',sequelize.col('user.nickname'),sequelize.col('user.avater'),sequelize.col('category.cid'),sequelize.col('category.name')],
+            attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num',sequelize.col('user.nickname'),sequelize.col('user.avatar'),sequelize.col('category.cid'),sequelize.col('category.name')],
             where: {
                 aid: {
                     [Op.like]: `%${data.aid || ''}%`

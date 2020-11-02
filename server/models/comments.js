@@ -1,56 +1,49 @@
-const { formatTime } = require('../public/javascripts/utils/index')
-// 用户表数据模型
+// 评论数据模型
 module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('users',{
-        uid: {
+    return sequelize.define('comments',{
+        commid: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             allowNull: true,
             autoIncrement: true
         },
-        username: {
-            type: DataTypes.STRING,
+        aid: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'articles',
+                key: 'aid'
+            }
+        },
+        uid: {
+            type: DataTypes.INTEGER,
             allowNull: false,
-            field: 'username'
+            field: 'uid'
         },
         nickname: {
             type: DataTypes.STRING,
             allowNull: false,
             field: 'nickname'
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            field: 'password'
-        },
         avatar: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
             field: 'avatar'
         },
-        phone: {
-            type: DataTypes.STRING(11),
-            allowNull: true,
-            field: 'phone'
-        },
-        introduction: {
+        content: {
             type: DataTypes.STRING,
             allowNull: true,
-            field: 'introduction'
+            field: 'content'
+        },
+        imgs: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         state: {
             type: DataTypes.ENUM,
             values: ['valid', 'lock'],
             field: 'state',
             defaultValue: 'valid'
-        },
-        gid: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user_group',
-                key: 'gid'
-            }
         },
         update_time: {
             type: DataTypes.DATE

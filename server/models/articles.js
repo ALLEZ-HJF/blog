@@ -1,4 +1,3 @@
-const { formatTime } = require('../public/javascripts/utils/index')
 // 文章表数据模型
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('articles',{
@@ -56,10 +55,9 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
             defaultValue: 0
         },
-        imgs_str: {
+        imgs: {
             type: DataTypes.STRING,
-            allowNull: true,
-            defaultValue: ''
+            allowNull: true
         },
         state: {
             type: DataTypes.ENUM,

@@ -9,7 +9,7 @@ class userDao {
     // 根据用户名查询到密码返回对比
     static async login(data) {
         return await users.findOne({
-            attributes: ['uid','username','nickname','password','phone','avater','introduction','state','gid'],
+            attributes: ['uid','username','nickname','password','phone','avatar','introduction','state','gid'],
             where: {
                 username: data.username
             }
@@ -41,7 +41,7 @@ class userDao {
     // 根据id 或 用户名 查询用户
     static async getUserByNameOrUid(data) {
         return await users.findOne({
-            attributes: ['uid','username','nickname','phone','avater','introduction','state','gid'],
+            attributes: ['uid','username','nickname','phone','avatar','introduction','state','gid'],
             where: {
                 [Op.or]: [
                     { uid: data.uid },
@@ -52,7 +52,7 @@ class userDao {
     }
     static async getUserList(data) {
         return await users.findAndCountAll({
-            attributes: ['uid','username','nickname','phone','avater','introduction','state','gid',sequelize.col('user_group.groupName')],
+            attributes: ['uid','username','nickname','phone','avatar','introduction','state','gid',sequelize.col('user_group.groupName')],
             where: {
                 [Op.and]: [
                     {
