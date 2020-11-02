@@ -18,6 +18,7 @@ const userGroup = require('./routes/user_group')
 const articles = require('./routes/articles')
 const categories = require('./routes/categories')
 const comments = require('./routes/comments')
+const upload = require('./routes/upload')
 
 
 
@@ -76,7 +77,7 @@ app.use(async (ctx, next) => {
 app.use(koajwt({
   secret: singKey
 }).unless({
-  path: [`/api_v${version}/users/login`,`/api_v${version}/users/register`]
+  path: [`/api_v${version}/users/login`,`/api_v${version}/users/register`,/^\/uploads/]
 }));
 
 // routes
@@ -86,6 +87,7 @@ app.use(userGroup.routes(), userGroup.allowedMethods())
 app.use(articles.routes(), articles.allowedMethods())
 app.use(categories.routes(), categories.allowedMethods())
 app.use(comments.routes(), comments.allowedMethods())
+app.use(upload.routes(), upload.allowedMethods())
 
 
 // error-handling

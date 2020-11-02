@@ -1,7 +1,4 @@
 const router = require('koa-router')()
-const svgCaptcha = require('svg-captcha')
-const fs = require('fs')
-const path = require('path')
 
 router.get('/', async (ctx, next) => {
   await ctx.render('index', {
