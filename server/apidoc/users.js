@@ -2,7 +2,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/users/login 登录
  * @apiVersion 1.0.0
  * @apiName login
- * @apiGroup User
+ * @apiGroup 用户管理
  * @apiDescription 登录
  * 
  * @apiParam {String} username 用户名
@@ -31,7 +31,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/users/editUser 修改用户
  * @apiVersion 1.0.0
  * @apiName editUser
- * @apiGroup User
+ * @apiGroup 用户管理
  * @apiDescription 修改用户
  * 
  * @apiParam {String} username 用户名
@@ -65,7 +65,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/users/ 删除用户
  * @apiVersion 1.0.0
  * @apiName delUser
- * @apiGroup User
+ * @apiGroup 用户管理
  * @apiDescription 删除用户
  * 
  * @apiParam {int} uid 用户id
@@ -94,7 +94,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/users/register 用户注册
  * @apiVersion 1.0.0
  * @apiName register
- * @apiGroup User
+ * @apiGroup 用户管理
  * @apiDescription 用户注册
  * 
  * @apiParam {String} username 用户名
@@ -128,7 +128,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/users/getUserList 用户列表
  * @apiVersion 1.0.0
  * @apiName getUserList
- * @apiGroup User
+ * @apiGroup 用户管理
  * @apiDescription 用户列表
  * 
  * @apiParam {String} username 用户名

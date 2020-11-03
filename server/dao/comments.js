@@ -1,4 +1,3 @@
-const { sequelize } = require('../config/db')
 const db = require('../config/db')
 const Op = db.Op
 const comments = db.comments

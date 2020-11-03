@@ -2,7 +2,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/upload/uploadFile 文件上传
  * @apiVersion 1.0.0
  * @apiName uploadFile
- * @apiGroup upload
+ * @apiGroup 上传管理
  * @apiDescription 文件上传
  * 
  * @apiParam {Array} file 文件

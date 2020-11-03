@@ -4,7 +4,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/category/delCategory 删除分类
  * @apiVersion 1.0.0
  * @apiName delCategory
- * @apiGroup category
+ * @apiGroup 分类管理
  * @apiDescription 删除分类
  * 
  * @apiParam {int} cid 分类id
@@ -32,7 +32,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/category/editCategory 修改分类
  * @apiVersion 1.0.0
  * @apiName editCategory
- * @apiGroup category
+ * @apiGroup 分类管理
  * @apiDescription 修改分类
  * 
  * @apiParam {int} cid 分类id
@@ -61,7 +61,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/category/insertCategory 添加分类
  * @apiVersion 1.0.0
  * @apiName insertCategory
- * @apiGroup category
+ * @apiGroup 分类管理
  * @apiDescription 添加分类
  * 
  * @apiParam {int} pid 分类父id 默认 0
@@ -98,7 +98,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/category/getCategoryList 获取分类列表
  * @apiVersion 1.0.0
  * @apiName getCategoryList
- * @apiGroup category
+ * @apiGroup 分类管理
  * @apiDescription 获取分类列表
  * 
  * @apiParam {int} pid 分类父id 默认 0

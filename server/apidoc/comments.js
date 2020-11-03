@@ -2,7 +2,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/comments/delComment 删除评论
  * @apiVersion 1.0.0
  * @apiName delComment
- * @apiGroup comments
+ * @apiGroup 文章评论
  * @apiDescription 删除评论
  * 
  * @apiParam {int} commid 评论id
@@ -32,7 +32,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/comments/insertComment 添加评论
  * @apiVersion 1.0.0
  * @apiName insertComment
- * @apiGroup comments
+ * @apiGroup 文章评论
  * @apiDescription 添加评论
  * 
  * @apiParam {int} aid 文章id
@@ -73,7 +73,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/comments/getCommentList 获取文章评论列表
  * @apiVersion 1.0.0
  * @apiName getCommentList
- * @apiGroup comments
+ * @apiGroup 文章评论
  * @apiDescription 获取文章评论列表
  * 
  * @apiParam {int} aid 文章id

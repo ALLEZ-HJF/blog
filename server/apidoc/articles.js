@@ -2,7 +2,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/articles/addArticleLookNum 增加文章阅读量
  * @apiVersion 1.0.0
  * @apiName addArticleLookNum
- * @apiGroup articles
+ * @apiGroup 文章管理
  * @apiDescription 增加文章阅读量
  * 
  * @apiParam {int} aid 文章id 
@@ -35,7 +35,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/articles/articleVerify 审核文章
  * @apiVersion 1.0.0
  * @apiName articleVerify
- * @apiGroup articles
+ * @apiGroup 文章管理
  * @apiDescription 审核文章
  * 
  * @apiParam {int} aid 文章id 
@@ -68,7 +68,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/articles/editArticle 修改文章
  * @apiVersion 1.0.0
  * @apiName editArticle
- * @apiGroup articles
+ * @apiGroup 文章管理
  * @apiDescription 修改文章
  * 
  * @apiParam {int} aid 文章id 
@@ -107,7 +107,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/articles/delArticle 删除文章
  * @apiVersion 1.0.0
  * @apiName delArticle
- * @apiGroup articles
+ * @apiGroup 文章管理
  * @apiDescription 删除文章
  * 
  * @apiParam {int} aid 文章id
@@ -140,7 +140,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/articles/insertArticle 发布文章
  * @apiVersion 1.0.0
  * @apiName insertArticle
- * @apiGroup articles
+ * @apiGroup 文章管理
  * @apiDescription 发布文章
  * 
  * @apiParam {int} cid 文章类型id
@@ -186,7 +186,7 @@
  * @api {POST} http://127.0.0.1:3000/api_v1/articles/getArticleList 获取文章列表
  * @apiVersion 1.0.0
  * @apiName getArticleList
- * @apiGroup articles
+ * @apiGroup 文章管理
  * @apiDescription 获取文章列表
  * 
  * @apiParam {int} aid 文章id
