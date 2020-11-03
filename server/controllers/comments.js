@@ -43,6 +43,24 @@ class commentsController {
             return
         }
         const data = await commentsDao.getCommentList(param)
+        let replys = []
+        data.rows.forEach(item => {
+            item.replys.forEach((item2,index) => {
+               if (item2.pid !== 0) {
+                    replys.push(item2)
+                    item.replys.splice(index,1)
+               }
+            })
+            replys.forEach(item3 => {
+                item.replys.forEach((item2,index) => {
+                    item2.replys = []
+                    if (item2.rid === item3.pid) {
+                        item2.replys.push(item3)
+                        replys.splice(index,1)
+                    }
+                 })
+            })
+        })
         ctx.success(200,'获取成功',data)
     }
 }

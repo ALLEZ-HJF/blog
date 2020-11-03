@@ -24,6 +24,7 @@ const user_group = sequelize.import('../models/user_group');
 const categories = sequelize.import('../models/categories');
 const articles = sequelize.import('../models/articles');
 const comments = sequelize.import('../models/comments');
+const replys = sequelize.import('../models/replys');
 
 // 关联
 user_group.hasOne(users,{
@@ -57,6 +58,19 @@ comments.belongsTo(articles,{
   foreignKey: 'aid'
 })
 
+// 评论与回复关系 1个评论有多个回复
+comments.hasMany(replys,{
+  foreignKey: 'commid'
+})
+replys.belongsTo(comments,{
+  foreignKey: 'commid'
+})
+
+replys.belongsTo(users,{
+  foreignKey: 'uid'
+})
+
+
 sequelize.sync({ force: false });
 
 
@@ -64,4 +78,4 @@ sequelize.sync({ force: false });
 
 
 
-module.exports = { sequelize,Op,users,user_group, articles, categories, comments }
+module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys }
