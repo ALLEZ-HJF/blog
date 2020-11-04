@@ -28,6 +28,10 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
             defaultValue: 0
         },
+        aid: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
         content: {
             type: DataTypes.STRING,
             allowNull: true

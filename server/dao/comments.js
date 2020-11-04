@@ -10,7 +10,8 @@ class commentsDao {
      static async delComment(data) {
         return comments.update({state:'lock'},{
             where: {
-                commid: data.commid
+                commid: data.commid,
+                aid: data.aid
             }
         })
     }
@@ -18,15 +19,12 @@ class commentsDao {
     static async insertComment(data) {
         return comments.create(data)
     }
-    // 获取评论列表
-    static async getCommentList(data) {
-        return comments.findAndCountAll({
+    // 获取评论＋回复 根据文章id获取
+    static async getCommentByAid(data) {
+        return comments.findAll({
             where: {
                 aid:data.aid,
-                state: data.state || 'valid',
-                uid: {
-                    [Op.like]: `%${data.uid || ''}%`
-                }
+                state: data.state || 'valid'
             },
             include: [
                 {
@@ -38,11 +36,10 @@ class commentsDao {
                     include: {
                         model: users,
                         attributes: ['nickname','avatar']
-                    }
+                    },
+                    required:false
                 }
-            ],
-            offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
-            limit: Number(data.page_size) || 10
+            ]
         })
     }
 }

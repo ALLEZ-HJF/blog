@@ -70,17 +70,13 @@
 */
 
 /** 
- * @api {POST} http://127.0.0.1:3000/api_v1/comments/getCommentList 获取文章评论列表
+ * @api {POST} http://127.0.0.1:3000/api_v1/comments/getCommentByAid 获取文章评论与回复列表
  * @apiVersion 1.0.0
- * @apiName getCommentList
+ * @apiName getCommentByAid
  * @apiGroup 文章评论
  * @apiDescription 获取文章评论列表
  * 
  * @apiParam {int} aid 文章id
- * @apiParam {int} uid 用户id
- * @apiParam {string} state 状态 valid | invalid | lock
- * @apiParam {int} page_num 页码
- * @apiParam {int} page_size 显示条数
  * 
  * 
  * @apiSuccess {int} status 状态码

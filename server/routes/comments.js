@@ -9,7 +9,7 @@ router.prefix('/api_v'+version+'/comments')
 router.post('/delComment',commentsController.delComment)
 // 添加评论
 router.post('/insertComment',commentsController.insertComment)
-// 获取评论列表
-router.post('/getCommentList',commentsController.getCommentList)
+// 获取评论＋回复
+router.post('/getCommentByAid',commentsController.getCommentByAid)
 
 module.exports = router

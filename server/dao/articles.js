@@ -7,6 +7,18 @@ const users = db.users
 const categories = db.categories
 
 class articlesDao {
+    // 添加评论数或者减少评论数
+    static async handleArticleCommentNum(data,flag) {
+        let article = await articles.findByPk(data.aid)
+        let num = flag ? ++ article.comment_num : -- article.comment_num
+        await articles.update({comment_num: num, update_time: Date.now()},{
+            where: {
+                aid: data.aid,
+                state: 'valid'
+            }
+        })
+    }
+
      // 添加阅读量
     static async addArticleLookNum(data) {
         let article = await articles.findByPk(data.aid)
