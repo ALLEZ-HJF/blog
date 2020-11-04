@@ -1,7 +1,29 @@
 const userDao = require('../dao/users')
+const codesDao = require('../dao/codes')
 const bcrypt = require('bcrypt')
+const sendEmail = require('../middleware/sendEmail')
 
 class userController {
+    // 发送邮箱验证码
+    static async sendCode(ctx) {
+        let param = ctx.request.body
+        if (!param.email) {
+            ctx.fail(500,'请输入邮箱地址')
+            return
+        }
+        let numArr = []
+        for(let i=0;i<4;i++) {
+            let num = Math.floor(Math.random()*10)
+            numArr.push(num)
+        }
+        const isSend = sendEmail(param.email,'用户注册','验证码是:' + numArr.join(''),'验证码是:' + numArr.join('') + ', 有效期 10 分钟！')
+        if (isSend) {
+            const data = await codesDao.insertCode({code: numArr.join(''), create_time: Date.now()})
+            ctx.success(200,'发送成功',data.code_id)
+        } else {
+            ctx.fail(500,'发送失败')
+        }
+    }
     // 用户登录
     static async login(ctx) {
         let param = ctx.request.body
@@ -56,6 +78,7 @@ class userController {
     // 添加用户
     static async insertUser(ctx) {
         let param = ctx.request.body
+        const verify = await codesDao.getCodeInfo(param.code_id)
         if (!param.uid) {
             param.uid = '' 
         }
@@ -63,7 +86,14 @@ class userController {
             ctx.fail(500,'请输入用户名')
         } else if (!param.password) {
             ctx.fail(500,'请输入密码')
-        } else {
+        } else if (!param.email) {
+            ctx.fail(500,'请输入邮箱地址')
+        } else if (verify.code != param.code) {
+            ctx.fail(500,'验证码错误')
+        } else if ((new Date().getTime() - new Date(verify.create_time).getTime()) / 60 / 1000 > 10){
+            ctx.fail(500,'验证码已过期,请重新发送')
+            codesDao.delCode({code_id: param.code_id})
+        }else {
             param.password = bcrypt.hashSync(param.password,10)
             const data = await userDao.getUserByNameOrUid(param)
             if (!data) {

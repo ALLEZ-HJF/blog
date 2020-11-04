@@ -1,4 +1,3 @@
-const { formatTime } = require('../public/javascripts/utils/index')
 // 用户表数据模型
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('users',{
@@ -33,6 +32,21 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
             field: 'phone'
         },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            field: 'email'
+        },
+        sex: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'sex'
+        },
+        age: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            field: 'age'
+        },
         introduction: {
             type: DataTypes.STRING,
             allowNull: true,
@@ -40,9 +54,9 @@ module.exports = function(sequelize, DataTypes) {
         },
         state: {
             type: DataTypes.ENUM,
-            values: ['valid', 'lock'],
+            values: ['valid','invalid','lock'],
             field: 'state',
-            defaultValue: 'valid'
+            defaultValue: 'invalid'
         },
         gid: {
             type: DataTypes.INTEGER,

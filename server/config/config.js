@@ -5,5 +5,7 @@ module.exports = {
     password: '123456',
     dbName: 'blog',
     singKey: 'blogToken',
-    version: 1
+    version: 1,
+    emailUser: '254534216@qq.com',
+    emailPass: 'dhttgfwozmflcabi'
 }

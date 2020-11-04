@@ -45,7 +45,8 @@ class userDao {
             where: {
                 [Op.or]: [
                     { uid: data.uid },
-                    { username: data.username }
+                    { username: data.username },
+                    { email: data.email }
                 ]
             }
         })

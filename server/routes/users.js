@@ -14,5 +14,8 @@ router.post('/delUser',userController.delUser)
 router.post('/editUser',userController.editUser)
 // 用户登录
 router.post('/login',userController.login)
+// 发送验证码
+router.post('/sendCode',userController.sendCode)
+
 
 module.exports = router
