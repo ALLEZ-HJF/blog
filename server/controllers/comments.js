@@ -35,7 +35,7 @@ class commentsController {
         const userInfo = ctx.verify(ctx.request.header.authorization).data
         param.uid = userInfo.uid
         param.nickname = userInfo.nickname
-        param.avatar = userInfo.avatar
+        param.avatar = userInfo.avatar || ''
         param.create_time = Date.now()
         const data = await commentsDao.insertComment(param)
         ctx.response.status = 200

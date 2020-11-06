@@ -143,7 +143,7 @@
  * @apiGroup 文章管理
  * @apiDescription 发布文章
  * 
- * @apiParam {int} cid 文章类型id
+ * @apiParam {int} cids 文章类型id字符串 逗号分隔
  * @apiParam {string} title 文章标题
  * @apiParam {string} content 文章内容
  * @apiParam {string} sub_title 副标题
@@ -191,8 +191,54 @@
  * 
  * @apiParam {int} aid 文章id
  * @apiParam {int} uid 用户id
- * @apiParam {int} cid 文章类型id
+ * @apiParam {int} cids 文章类型id字符串 逗号分隔
  * @apiParam {string} title 文章标题
+ * @apiParam {string} state 状态 valid | invalid | lock
+ * @apiParam {int} page_num 页码
+ * @apiParam {int} page_size 显示条数
+ * 
+ * 
+ * @apiSuccess {int} status 状态码
+ * @apiSuccess {String} msg 简略描述
+ * @apiSuccess {Object} data 返回数据
+ * 
+ * @apiSuccessExample Response-Success:
+ *     HTTP 1.1/ 200K
+ *     {
+ *         'status': 200,
+ *         'msg': 'success',
+ *         'data': [
+ *             {
+                "aid": 9,
+                "title": "测试222",
+                "sub_title": null,
+                "content": "12322",
+                "state": "invalid",
+                "create_time": "2020-10-31 10:37:40",
+                "update_time": "2020-10-31 10:37:40",
+                "uid": 1,
+                "nickname": "admin",
+                "avater": "11"
+               }
+ *          ]
+ *     }
+ * @apiErrorExample Response-Fail:
+ *     HTTP 1.1/ 404K
+ *     {
+ *         'status': 500,
+ *         'msg': 'fail'
+ *     }
+*/
+
+
+/** 
+ * @api {POST} http://127.0.0.1:3000/api_v1/articles/getArticleByCid 根据分类类型查询文章
+ * @apiVersion 1.0.0
+ * @apiName getArticleByCid
+ * @apiGroup 文章管理
+ * @apiDescription 根据分类类型查询文章
+ * 
+ * @apiParam {int} cid 文章类型id
  * @apiParam {string} state 状态 valid | invalid | lock
  * @apiParam {int} page_num 页码
  * @apiParam {int} page_size 显示条数

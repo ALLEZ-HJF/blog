@@ -4,12 +4,12 @@ const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
-const logger = require('koa-logger')
 const koaBody = require('koa-body');
 const koajwt = require('koa-jwt')
 const { singKey,version } = require('./config/config')
 const responseData = require('./middleware/responseData')
 const handleToken = require('./middleware/handleToken')
+const { logger, accessLogger } = require('./config/logger');
 
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -21,7 +21,8 @@ const upload = require('./routes/upload')
 const replys = require('./routes/replys')
 
 
-
+// 访问日志
+app.use(accessLogger())
 // 文件上传
 app.use(koaBody({
   multipart: true,
@@ -38,7 +39,6 @@ app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
 app.use(json())
-app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
@@ -68,6 +68,7 @@ app.use(async (ctx, next) => {
           code: ctx.response.status 
       };
     }
+    logger.error(err);
     // 手动释放error事件
     ctx.app.emit('error', err, ctx);
   }

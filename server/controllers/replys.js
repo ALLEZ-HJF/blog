@@ -18,7 +18,7 @@ class replysController {
         } else {
             const res = await replysDao.insertReply(param)
             ctx.response.status = 200
-            ctx.success(200,'回复成功')
+            ctx.success(200,'回复成功',res)
             articles.handleArticleCommentNum({aid:param.aid},true)
         }
     }
