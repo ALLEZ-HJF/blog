@@ -7,14 +7,6 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
             autoIncrement: true
         },
-        cid: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'categories',
-                key: 'cid'
-            }
-        },
         uid: {
             type: DataTypes.INTEGER,
             allowNull: false,
@@ -32,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true
         },
         content: {
-            type: DataTypes.TEXT,
+            type: DataTypes.TEXT('long'),
             allowNull: false
         },
         look_num: {

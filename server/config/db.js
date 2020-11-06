@@ -26,6 +26,7 @@ const articles = sequelize.import('../models/articles');
 const comments = sequelize.import('../models/comments');
 const replys = sequelize.import('../models/replys');
 const codes = sequelize.import('../models/codes');
+const article_category = sequelize.import('../models/article_category');
 
 // 关联
 user_group.hasOne(users,{
@@ -43,12 +44,15 @@ articles.belongsTo(users, {
   foreignKey: 'uid'
 })
 
-// 文章跟类型表关联
-categories.hasMany(articles,{
+// 文章跟类型表关联 创建中间表 多对多
+
+categories.belongsToMany(articles,{
+  through: article_category,
   foreignKey: 'cid'
 })
-articles.belongsTo(categories,{
-  foreignKey: 'cid'
+articles.belongsToMany(categories,{
+  through: article_category,
+  foreignKey: 'aid'
 })
 
 // 文章跟评论表关联
@@ -79,4 +83,4 @@ sequelize.sync({ force: false });
 
 
 
-module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes }
+module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes,article_category }

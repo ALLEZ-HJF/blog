@@ -9,6 +9,14 @@ class articlesController {
         ctx.response.status = 200
         ctx.success(200,'获取成功',res)
     }
+
+    static async getArticleByCid(ctx) {
+        const param = ctx.request.body
+        const res = await articlesDao.getArticleByCid(param)
+        ctx.response.status = 200
+        ctx.success(200,'获取成功',res)
+    }
+
     // 发布文章
     static async insertArticle(ctx) {
         const param = ctx.request.body
@@ -51,10 +59,6 @@ class articlesController {
         }
         if (!param.uid) {
             ctx.fail(500,'请输入用户id')
-            return
-        }
-        if (!param.cid) {
-            ctx.fail(500,'请选择文章类型')
             return
         }
         if (ctx.verify(token).data.uid != param.uid) {

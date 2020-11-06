@@ -3,10 +3,120 @@ const sequelize = db.sequelize
 const Op = db.Op
 // 引入数据表模型
 const articles = db.articles
-const users = db.users
 const categories = db.categories
+const article_category = db.article_category
+const users = db.users
 
 class articlesDao {
+    // 添加文章
+    static async insertArticle(data) {
+        let article = await articles.create(data)
+        let cids = data.cids.split(',')
+        let categorys = await categories.findAll({
+            where: {
+                cid: cids
+            }
+        })
+        categorys.forEach(item => {
+            item.state = 'invalid'
+        })
+        await article.setCategories(categorys)
+        return article
+    }
+
+    // 根据分类获取文章列表
+    static async getArticleByCid(data) {
+        let aids = await article_category.findAll({
+            where: {
+                cid: data.cid,
+                state: data.state || 'valid'
+            },
+            attributes: ['aid'],
+            offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
+            limit: Number(data.page_size) || 10
+        })
+        let count = await article_category.count({
+            where: {
+                cid: data.cid,
+                state: data.state || 'valid'
+            }
+        })
+        aids = aids.map((item) => {
+            return item.aid
+        })
+        let rows = ''
+        if (aids.length !== 0) {
+            console.log(aids,'!');
+            rows =  await articles.findAll({
+                where: {
+                    aid: aids
+                },
+                include:[
+                    {
+                        model: users,
+                        attributes: ['nickname','avatar','uid']
+                    },
+                    {
+                        model: categories,
+                        attributes: ['name','cid'],
+                        through: { attributes: [] },
+                        required: false
+                    }
+                ],
+            })
+        }
+        let result = [ {count: count, rows:rows } ]
+        return result
+    }
+
+    // 获取文章列表
+    static async getArticleList(data) {
+        let allData = await articles.findAll({
+            attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num'],
+            where: {
+                aid: {
+                    [Op.like]: `%${data.aid || ''}%`
+                },
+                uid: {
+                    [Op.like]: `%${data.uid || ''}%`
+                },
+                title: {
+                    [Op.like]: `%${data.title || ''}%`
+                },
+                state: data.state || 'invalid'
+            },
+            include:[
+                {
+                    model: users,
+                    attributes: ['nickname','avatar','uid']
+                },
+                {
+                    model: categories,
+                    attributes: ['name','cid'],
+                    through: { attributes: [] },
+                    required: false
+                }
+            ],
+            offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
+            limit: Number(data.page_size) || 10
+        })
+        let count = await articles.count({
+            where: {
+                aid: {
+                    [Op.like]: `%${data.aid || ''}%`
+                },
+                uid: {
+                    [Op.like]: `%${data.uid || ''}%`
+                },
+                title: {
+                    [Op.like]: `%${data.title || ''}%`
+                },
+                state: data.state || 'invalid'
+            }
+        })
+        return { count: count , rows: allData}
+    }
+
     // 添加评论数或者减少评论数
     static async handleArticleCommentNum(data,flag) {
         let article = await articles.findByPk(data.aid)
@@ -31,69 +141,59 @@ class articlesDao {
     }
      // 审核文章 state => valid
     static async articleVerify(data) {
-        return await articles.update({state:'valid',update_time: Date.now()},{
+        let result = await articles.update({state:'valid',update_time: Date.now()},{
             where: {
                 aid: data.aid
             }
         })
+        article_category.update({state:'valid'},{
+            where: {
+                aid: data.aid
+            }
+        })
+        return result
     }
     // 修改文章
     static async editArticle(data) {
         data.update_time = Date.now()
-        return await articles.update(data,{
+        let cids = data.cids.split(',')
+        let categorys = await categories.findAll({
             where: {
-                aid: data.aid,
-                uid: data.uid
+                cid: cids
             }
         })
+        let result = []
+        let article = await articles.findByPk(data.aid)
+        console.log(article);
+        if (article === null) {
+            result = [0]
+        } else {
+            result = articles.update(data,{
+                where: {
+                    aid: data.aid,
+                    uid: data.uid
+                }
+            })
+            await article.setCategories(categorys)
+        }
+        return result
     }
     // 删除文章 state => lock
     static async delArticle(data) {
         data.update_time = Date.now()
-        return await articles.update({state: 'lock'},{
+        let result = articles.update({state: 'lock'},{
             where: {
                 aid: data.aid
             }
         })
-    }
-    // 添加文章
-    static async insertArticle(data) {
-        return await articles.create(data)
-    }
-    // 获取文章列表
-    static async getArticleList(data) {
-        return await articles.findAndCountAll({
-            attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num',sequelize.col('user.nickname'),sequelize.col('user.avatar'),sequelize.col('category.cid'),sequelize.col('category.name')],
+        article_category.update({state:'lock'},{
             where: {
-                aid: {
-                    [Op.like]: `%${data.aid || ''}%`
-                },
-                uid: {
-                    [Op.like]: `%${data.uid || ''}%`
-                },
-                title: {
-                    [Op.like]: `%${data.title || ''}%`
-                },
-                cid: {
-                    [Op.like]: `%${data.cid || ''}%`
-                },
-                state: data.state || 'invalid'
-            },
-            include:[
-                {
-                    model: users,
-                    attributes: []
-                },
-                {
-                    model: categories,
-                    attributes: []
-                }
-            ],
-            raw:true,
-            offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
-            limit: Number(data.page_size) || 10
+                aid: data.aid
+            }
         })
+        return result 
     }
+
 }
 
 module.exports = articlesDao

@@ -6,10 +6,9 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const koaBody = require('koa-body');
-const responseData = require('./middleware/responseData')
-const path = require('path')
 const koajwt = require('koa-jwt')
 const { singKey,version } = require('./config/config')
+const responseData = require('./middleware/responseData')
 const handleToken = require('./middleware/handleToken')
 
 const index = require('./routes/index')
