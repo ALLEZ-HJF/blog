@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="less">
-@import "@/style/variables.less";
+@import "@/styles/variables.less";
 .layoutContainer {
   height: 100%;
   .el-container {
