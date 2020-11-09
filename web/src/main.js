@@ -18,7 +18,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 Vue.use(ElementUI)
-
 new Vue({
   render: h => h(App),
   router,

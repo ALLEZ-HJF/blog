@@ -4,6 +4,14 @@ const bcrypt = require('bcrypt')
 const sendEmail = require('../middleware/sendEmail')
 
 class userController {
+
+    // 作者排行榜
+    static async getUserRankingList(ctx) {
+        let param = ctx.request.body
+        let data = await userDao.getUserRankingList(param)
+        ctx.success(200,'获取成功',data)
+    }
+
     // 发送邮箱验证码
     static async sendCode(ctx) {
         let param = ctx.request.body

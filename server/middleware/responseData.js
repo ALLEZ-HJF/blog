@@ -9,7 +9,7 @@ function responseData(option={}) {
             }
         }
         ctx.fail = function(code,msg,data) {
-            ctx.response.status = 500
+            ctx.response.status = 200
             ctx.body = {
                 code: code || 500,
                 msg: msg || 'fail',

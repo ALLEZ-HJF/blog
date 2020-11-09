@@ -4,8 +4,30 @@ const Op = db.Op
 // 引入数据表模型
 const users = db.users
 const user_group = db.user_group
+const articles = db.articles
 
 class userDao {
+    // 作者排行榜
+    static async getUserRankingList(data) {
+        return await users.findAll({
+            attributes: [
+                'uid','username','nickname','phone','avatar','introduction',
+                [sequelize.literal(`(SELECT COUNT(*) FROM articles WHERE articles.uid = users.uid)`),'article_count'],
+                [sequelize.literal(`(SELECT SUM(articles.look_num) FROM articles WHERE articles.uid = users.uid)`),'article_look_num']
+            ],
+            include: [
+                {
+                    model: articles,
+                    duplicating:false,
+                    attributes: []
+                }
+            ],
+            order: sequelize.literal('(SELECT SUM(articles.look_num) FROM articles WHERE articles.uid = users.uid) DESC'),
+            offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
+            limit: Number(data.page_size) || 10
+        })
+    } 
+
     // 根据用户名查询到密码返回对比
     static async login(data) {
         return await users.findOne({

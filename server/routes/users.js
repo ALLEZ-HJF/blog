@@ -16,6 +16,8 @@ router.post('/editUser',userController.editUser)
 router.post('/login',userController.login)
 // 发送验证码
 router.post('/sendCode',userController.sendCode)
+// 作者排行榜
+router.post('/getUserRankingList',userController.getUserRankingList)
 
 
 module.exports = router
