@@ -28,13 +28,13 @@ export const constantRoutes = [
     path: '/admin',
     component: layoutAdmin,
     hidden: true,
-    redirect: {name: 'userList'}
+    redirect: { name: 'userList' }
   },
   {
     path: '/admin/users',
     component: layoutAdmin,
     meta: { title: '用户管理', icon: 'el-icon-s-custom' },
-    redirect: { name: 'userList'},
+    redirect: { name: 'userList' },
     children: [
       {
         path: 'userList',
@@ -53,24 +53,23 @@ export const constantRoutes = [
   {
     path: '/admin/articles',
     component: layoutAdmin,
-    meta: { title: '文章管理',icon: 'el-icon-document' },
+    meta: { title: '文章管理', icon: 'el-icon-document' },
     children: [
       {
         path: 'category',
         name: 'category',
         component: () => import('@/views/admin/articlesCategory/index'),
-        meta: { title: '文章类型'}
+        meta: { title: '文章类型' }
       },
       {
         path: 'articleList',
         name: 'articleList',
         component: () => import('@/views/admin/articlesList/index'),
-        meta: { title: '文章列表'}
+        meta: { title: '文章列表' }
       }
     ]
   }
 ]
-
 
 const createRouter = () => new Router({
   // mode: 'history', // require service support

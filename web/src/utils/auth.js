@@ -1,15 +1,20 @@
-import Cookies from 'js-cookie'
-
-const TokenKey = 'vue_admin_template_token'
-
 export function getToken() {
-  return Cookies.get(TokenKey)
+  return window.localStorage.getItem('token')
 }
-
 export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  return window.localStorage.setItem('token', token)
+}
+export function removeToken() {
+  return window.localStorage.removeItem('token')
 }
 
-export function removeToken() {
-  return Cookies.remove(TokenKey)
+// 用户详情
+export function getUserInfo() {
+  return JSON.parse(window.localStorage.getItem('userInfo'))
+}
+export function setUserInfo(userInfo) {
+  return window.localStorage.setItem('userInfo', JSON.stringify(userInfo))
+}
+export function removeUserInfo() {
+  return window.localStorage.removeItem('userInfo')
 }

@@ -37,15 +37,6 @@ module.exports = {
       errors: true
     },
     disableHostCheck: true,
-    proxy: {
-      [process.env.VUE_APP_BASE_API]: {
-        target: `http://localhost:3000/api_v1/`,
-        changeOrigin: true,
-        pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: ''
-        }
-      }
-    },
     before: require('./mock/mock-server.js')
   },
   configureWebpack: {
@@ -89,6 +80,14 @@ module.exports = {
         symbolId: 'icon-[name]'
       })
       .end()
+      config.module
+      .rule('eslint')
+      .use('eslint-loader')
+      .loader('eslint-loader')
+      .tap(options => {
+        options.fix = true
+        return options
+      }).end()
 
     config
       .when(process.env.NODE_ENV !== 'development',

@@ -2,18 +2,30 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
+import qs from 'qs'
 
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
+  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+  transformRequest: [(data) => {
+    for (const key in data) {
+      if (data[key] === '' || data[key] === null) {
+        delete data[key]
+      }
+    }
+    if (data) {
+      return qs.stringify(data)
+    }
+  }],
   timeout: 5000 // request timeout
 })
 
 // request interceptor
 service.interceptors.request.use(
   config => {
-    if (store.getters.token) {
-      config.headers['token'] = getToken()
+    if (getToken()) {
+      config.headers.Authorization = 'Bearer ' + getToken()
     }
     return config
   },
@@ -26,18 +38,12 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-
     if (res.code !== 200) {
       Message({
         message: res.msg || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
-      if (res.code === 401) {
-        store.dispatch('user/resetToken').then(() => {
-            location.reload()
-        })
-      }
       return Promise.reject(new Error(res.msg || 'Error'))
     } else {
       return res
@@ -45,7 +51,7 @@ service.interceptors.response.use(
   },
   error => {
     Message({
-      message: error.msg,
+      message: error,
       type: 'error',
       duration: 5 * 1000
     })

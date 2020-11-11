@@ -3,7 +3,7 @@
     <el-container>
       <el-header>
         <el-row>
-          <el-col :xl="4" :lg="4" :md="4" :sm="0" :xs="0"></el-col>
+          <el-col :xl="4" :lg="4" :md="4" :sm="0" :xs="0" />
           <el-col :xl="16" :lg="16" :md="16" :sm="24" :xs="24">
             <div class="left">
               <img class="logoImg" src="@/assets/logo.png">
@@ -28,84 +28,111 @@
       </el-main>
     </el-container>
     <el-dialog title="用户登录" :visible.sync="loginDialogFormVisible" width="400px">
-      <el-form :model="loginForm" ref="loginForm" label-width="80px" label-position="left" :rules="loginRules" >
+      <el-form ref="loginForm" :model="loginForm" label-width="80px" label-position="left" :rules="loginRules">
         <el-form-item label="用户名:" prop="username">
-          <el-input v-model="loginForm.username" autocomplete="off" placeholder="请输入用户名"></el-input>
+          <el-input v-model="loginForm.username" autocomplete="off" placeholder="请输入用户名" />
         </el-form-item>
         <el-form-item label="密码:" prop="password">
-          <el-input v-model="loginForm.password" autocomplete="off" placeholder="请输入密码"></el-input>
+          <el-input v-model="loginForm.password" type="password" autocomplete="off" placeholder="请输入密码" show-password />
         </el-form-item>
-        <el-form-item label="邮箱:" prop="email" v-if="isNoAccount">
-          <el-input v-model="loginForm.email" autocomplete="off" placeholder="请输入密码"></el-input>
+        <el-form-item v-if="isNoAccount" label="邮箱:" prop="email">
+          <el-input v-model="loginForm.email" autocomplete="off" placeholder="请输入密码" />
         </el-form-item>
         <el-form-item label="验证码:" prop="code">
           <el-input v-model="loginForm.code" autocomplete="off">
-            <template slot="append" class="getCode">
-              <span class="getCode" @click="getCode">{{ isSend ? '请'+num+'秒后再试' : '点击获取验证码' }}</span> 
+            <template slot="append" class="sendCode">
+              <span class="sendCode" @click="sendCode">{{ isSend ? '请'+num+'秒后再试' : '点击获取验证码' }}</span>
             </template>
           </el-input>
         </el-form-item>
-        <el-button type="primary" style="width: 100%" @click="login">登录&nbsp;/&nbsp;注册</el-button>
+        <el-button type="primary" style="width: 100%" :loading="isLoading" :disabled="!isSend" @click="login">登录&nbsp;/&nbsp;注册</el-button>
       </el-form>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { login } from '@/api/user'
+import { login, sendCode } from '@/api/user'
+import { setToken, setUserInfo, getUserInfo } from '@/utils/auth'
 export default {
   data() {
     return {
       loginDialogFormVisible: false,
       loginForm: {
         username: '',
-        password: ''
+        password: '',
+        code_id: '',
+        isLogin: true
       },
       loginRules: {
         username: [
-            { required: true, message: '请输入用户名', trigger: 'blur' },
-            { min: 6, max: 20, message: '用户名长度在 6 到 20 个字符之间', trigger: 'blur' }
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 5, max: 20, message: '用户名长度在 5 到 20 个字符之间', trigger: 'blur' }
         ],
         password: [
-            { required: true, message: '请输入密码', trigger: 'blur' }
+          { required: true, message: '请输入密码', trigger: 'blur' }
         ],
         email: [
           { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-          { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur'}
+          { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
         ],
         code: [
-            { required: true, message: '请输入验证码', trigger: 'blur' }
+          { required: true, message: '请输入验证码', trigger: 'blur' }
         ]
       },
       isSend: false,
       isNoAccount: false,
+      isLoading: false,
       timer: null,
-      num: 120
+      num: 120,
+      userInfo: ''
+    }
+  },
+  created() {
+    const userInfo = getUserInfo()
+    if (userInfo && userInfo !== '{}') {
+      this.userInfo = userInfo
     }
   },
   methods: {
     login() {
-      login()
+      this.isLoading = true
+      this.$refs.loginForm.validate(async(valid) => {
+        if (valid) {
+          const data = await login(this.loginForm)
+          setToken(data.data.token)
+          setUserInfo(data.data.data)
+          this.loginDialogFormVisible = false
+          if (this.timer) {
+            window.clearInterval(this.timer)
+            this.num = 120
+            this.isSend = false
+          }
+        }
+      })
     },
     showLoginDialog() {
       this.loginDialogFormVisible = true
     },
-    getCode() {
+    async sendCode() {
       if (this.loginForm.username === '') {
+        this.$message.info('请输入用户名')
         return false
       }
       if (this.isSend) {
         this.$message.info('请' + this.num + '秒后再试!')
       } else {
+        const resData = await sendCode(this.loginForm)
+        this.loginForm.code_id = resData.data
         this.isSend = true
-        this.timer = window.setInterval(()=>{
+        this.timer = window.setInterval(() => {
           --this.num
           if (this.num === 0) {
             this.isSend = false
             this.num = 120
             window.clearInterval(this.timer)
           }
-        },1000)
+        }, 1000)
       }
     }
   }
@@ -171,10 +198,10 @@ export default {
       flex: 1;
       background: @bgColor;
     }
-    
+
   }
 }
-.getCode {
+.sendCode {
     color: @defaultColor;
     cursor: pointer;
 }

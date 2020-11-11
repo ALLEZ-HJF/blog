@@ -12,6 +12,20 @@ import '@/permission'
 
 Vue.config.productionTip = false
 
+// 全局过滤表格多余字段
+Vue.prototype.filterRow = (formData, row) => {
+  const data = {}
+  for (const key in formData) {
+    for (const rowkey in row) {
+      if (key === rowkey) {
+        data[key] = row[rowkey]
+        break
+      }
+    }
+  }
+  return data
+}
+
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()

@@ -63,43 +63,49 @@ class userDao {
     // 根据id 或 用户名 查询用户
     static async getUserByNameOrUid(data) {
         return await users.findOne({
-            attributes: ['uid','username','nickname','phone','avatar','introduction','state','gid'],
+            attributes: {
+                exclude: ['password']
+            },
             where: {
                 [Op.or]: [
-                    { uid: data.uid },
-                    { username: data.username },
-                    { email: data.email }
-                ]
+                    { uid: data.uid || '' },
+                    { username: data.username || '' },
+                    { email: data.email || '' }
+                ],
+                state: 'valid'
             }
         })
     }
     static async getUserList(data) {
+       var arr = ['uid','username','phone','email']
+       let orList = []
+       for (const key in data) {
+           if (arr.indexOf(key) !== -1) {
+               let obj = {}
+                obj[key] = {
+                    [Op.like]: `%${data[key] || '' }%`
+                }
+                orList.push(obj)
+           }
+       }
+       if (orList.length === 0) {
+           orList.push({
+               state: data.state || 'valid'
+           })
+       }
         return await users.findAndCountAll({
-            attributes: ['uid','username','nickname','phone','avatar','introduction','state','gid',sequelize.col('user_group.groupName')],
+            attributes: ['uid','username','nickname','phone','avatar','introduction','state','gid','email','sex',sequelize.col('user_group.groupName')],
             where: {
-                [Op.and]: [
-                    {
-                        username: {
-                            [Op.like]: `%${data.username}%`
-                        }
-                    },
-                    {
-                        phone: {
-                            [Op.like]: `%${data.phone}%`
-                        }
-                    },
-                    {
-                        state: data.state
-                    }
-                ]
+                state: data.state || 'valid',
+                [Op.or]: orList
             },
             include: {
                 model: user_group,
                 attributes: []
             },
             raw:true,
-            offset: data.page_num,
-            limit: data.page_size
+            offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
+            limit: Number(data.page_size) || 10
         })
     }
 }

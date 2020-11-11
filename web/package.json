@@ -16,10 +16,6 @@
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "path-to-regexp": "^6.2.0",
-    "sass": "^1.29.0",
-    "sass-loader": "^10.0.5",
-    "scss": "^0.2.4",
-    "svg-sprite-loader": "^5.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.4.7",
     "vuex": "^3.5.1"
@@ -33,7 +29,10 @@
     "eslint-plugin-vue": "^6.2.2",
     "less": "^3.12.2",
     "less-loader": "^7.0.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "sass": "^1.29.0",
+    "sass-loader": "^10.0.5",
+    "svg-sprite-loader": "^5.0.0"
   },
   "eslintConfig": {
     "root": true,

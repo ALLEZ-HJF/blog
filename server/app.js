@@ -6,6 +6,7 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const koaBody = require('koa-body');
 const koajwt = require('koa-jwt')
+var cors = require('koa2-cors');
 const { singKey,version } = require('./config/config')
 const responseData = require('./middleware/responseData')
 const handleToken = require('./middleware/handleToken')
@@ -20,7 +21,8 @@ const comments = require('./routes/comments')
 const upload = require('./routes/upload')
 const replys = require('./routes/replys')
 
-
+// 允许跨域
+app.use(cors());
 // 访问日志
 app.use(accessLogger())
 // 文件上传
@@ -56,19 +58,6 @@ app.use(async (ctx, next) => {
     const ms = new Date() - start
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
   } catch (err) {
-    ctx.response.status = err.statusCode || err.status || 500;
-    if (ctx.response.status === 401) {
-      ctx.response.body = {
-          msg: '登录失效,请重新登录',
-          code: ctx.response.status 
-      };
-    } else {
-      ctx.response.body = {
-          msg: err.message,
-          code: ctx.response.status 
-      };
-    }
-    logger.error(err);
     // 手动释放error事件
     ctx.app.emit('error', err, ctx);
   }
@@ -78,7 +67,7 @@ app.use(async (ctx, next) => {
 app.use(koajwt({
   secret: singKey
 }).unless({
-  path: [`/api_v${version}/users/login`,`/api_v${version}/users/register`,/^\/uploads/]
+  path: [`/api_v${version}/users/login`,`/api_v${version}/users/register`,`/api_v${version}/users/sendCode`,/^\/uploads/]
 }));
 
 // routes
@@ -94,7 +83,21 @@ app.use(replys.routes(), replys.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
-  console.error('server error', err, ctx)
+  ctx.response.status = err.statusCode || err.status || 500;
+    if (ctx.response.status === 401) {
+      ctx.response.body = {
+          msg: '登录失效,请重新登录',
+          code: ctx.response.status 
+      };
+      ctx.response.status = 200
+    } else {
+      ctx.response.body = {
+          msg: err.message,
+          code: ctx.response.status 
+      };
+    }
+    logger.error(err);
+    console.error('server error', err, ctx)
 });
 
 module.exports = app
