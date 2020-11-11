@@ -45,6 +45,7 @@
             </template>
           </el-input>
         </el-form-item>
+        <span class="registerText" @click="isNoAccount = !isNoAccount">{{ isNoAccount ? '前往登陆' : '注册账号' }}</span>
         <el-button type="primary" style="width: 100%" :loading="isLoading" :disabled="!isSend" @click="login">登录&nbsp;/&nbsp;注册</el-button>
       </el-form>
     </el-dialog>
@@ -52,7 +53,7 @@
 </template>
 
 <script>
-import { login, sendCode } from '@/api/user'
+import { login, sendCode, register } from '@/api/user'
 import { setToken, setUserInfo, getUserInfo } from '@/utils/auth'
 export default {
   data() {
@@ -99,7 +100,13 @@ export default {
       this.isLoading = true
       this.$refs.loginForm.validate(async(valid) => {
         if (valid) {
-          const data = await login(this.loginForm)
+          let data = ''
+          if (!this.isNoAccount) {
+            data = await login(this.loginForm)
+          } else {
+            // 注册
+            data = await register(this.loginForm)
+          }
           setToken(data.data.token)
           setUserInfo(data.data.data)
           this.loginDialogFormVisible = false
@@ -122,6 +129,9 @@ export default {
       if (this.isSend) {
         this.$message.info('请' + this.num + '秒后再试!')
       } else {
+        if (this.isNoAccount) {
+          this.loginForm.isLogin = false
+        }
         const resData = await sendCode(this.loginForm)
         this.loginForm.code_id = resData.data
         this.isSend = true
@@ -204,5 +214,11 @@ export default {
 .sendCode {
     color: @defaultColor;
     cursor: pointer;
+}
+.registerText {
+  color: @defaultColor;
+  float: right;
+  margin-bottom: 15px;
+  cursor: pointer;
 }
 </style>

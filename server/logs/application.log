@@ -1139,3 +1139,207 @@
   index: 'users_ibfk_1',
   reltype: 'child'
 }
+[2020-11-11T17:51:18.924] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:112:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:52:50.680] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:110:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:53:31.526] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:107:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:53:51.079] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:108:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:54:26.292] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:108:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:54:56.581] [ERROR] application - ValidationError [SequelizeValidationError]: notNull Violation: users.nickname cannot be null,
+notNull Violation: users.gid cannot be null
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\instance-validator.js:74:15
+    at tryCatcher (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise._settlePromiseFromHandler (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:547:31)
+    at Promise._settlePromise (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:604:18)
+    at Promise._settlePromise0 (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:649:10)
+    at Promise._settlePromises (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:729:18)
+    at Promise._fulfill (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:673:18)
+    at PromiseArray._resolve (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise_array.js:127:19)
+    at PromiseArray._promiseFulfilled (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise_array.js:145:14)
+    at Promise._settlePromise (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:609:26)
+    at Promise._settlePromise0 (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:649:10)
+    at Promise._settlePromises (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:729:18)
+    at _drainQueueStep (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:93:12)
+    at _drainQueue (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:86:9)
+    at Async._drainQueues (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:102:5)
+    at Immediate.Async.drainQueues [as _onImmediate] (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:15:14)
+    at processImmediate (internal/timers.js:458:21) {
+  errors: [
+    ValidationErrorItem {
+      message: 'users.nickname cannot be null',
+      type: 'notNull Violation',
+      path: 'nickname',
+      value: null,
+      origin: 'CORE',
+      instance: [users],
+      validatorKey: 'is_null',
+      validatorName: null,
+      validatorArgs: []
+    },
+    ValidationErrorItem {
+      message: 'users.gid cannot be null',
+      type: 'notNull Violation',
+      path: 'gid',
+      value: null,
+      origin: 'CORE',
+      instance: [users],
+      validatorKey: 'is_null',
+      validatorName: null,
+      validatorArgs: []
+    }
+  ]
+}
+[2020-11-11T17:55:32.415] [ERROR] application - ValidationError [SequelizeValidationError]: notNull Violation: users.gid cannot be null
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\instance-validator.js:74:15
+    at tryCatcher (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise._settlePromiseFromHandler (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:547:31)
+    at Promise._settlePromise (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:604:18)
+    at Promise._settlePromise0 (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:649:10)
+    at Promise._settlePromises (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:729:18)
+    at Promise._fulfill (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:673:18)
+    at PromiseArray._resolve (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise_array.js:127:19)
+    at PromiseArray._promiseFulfilled (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise_array.js:145:14)
+    at Promise._settlePromise (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:609:26)
+    at Promise._settlePromise0 (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:649:10)
+    at Promise._settlePromises (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:729:18)
+    at _drainQueueStep (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:93:12)
+    at _drainQueue (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:86:9)
+    at Async._drainQueues (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:102:5)
+    at Immediate.Async.drainQueues [as _onImmediate] (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:15:14)
+    at processImmediate (internal/timers.js:458:21) {
+  errors: [
+    ValidationErrorItem {
+      message: 'users.gid cannot be null',
+      type: 'notNull Violation',
+      path: 'gid',
+      value: null,
+      origin: 'CORE',
+      instance: [users],
+      validatorKey: 'is_null',
+      validatorName: null,
+      validatorArgs: []
+    }
+  ]
+}
+[2020-11-11T17:56:05.054] [ERROR] application - ForeignKeyConstraintError [SequelizeForeignKeyConstraintError]: Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)
+    at Query.formatError (C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\dialects\mysql\query.js:233:16)
+    at Execute.handler [as onResult] (C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\dialects\mysql\query.js:51:23)
+    at Execute.execute (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\commands\command.js:30:14)
+    at Connection.handlePacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:425:32)
+    at PacketParser.onPacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:75:12)
+    at PacketParser.executeStart (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:82:25)
+    at Socket.emit (events.js:314:20)
+    at addChunk (_stream_readable.js:304:12)
+    at readableAddChunk (_stream_readable.js:280:9)
+    at Socket.Readable.push (_stream_readable.js:219:10)
+    at TCP.onStreamRead (internal/stream_base_commons.js:188:23) {
+  parent: Error: Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)
+      at Packet.asError (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packets\packet.js:712:17)
+      at Execute.execute (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\commands\command.js:28:26)
+      at Connection.handlePacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:425:32)
+      at PacketParser.onPacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:75:12)
+      at PacketParser.executeStart (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packet_parser.js:75:16)
+      at Socket.<anonymous> (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:82:25)
+      at Socket.emit (events.js:314:20)
+      at addChunk (_stream_readable.js:304:12)
+      at readableAddChunk (_stream_readable.js:280:9)
+      at Socket.Readable.push (_stream_readable.js:219:10)
+      at TCP.onStreamRead (internal/stream_base_commons.js:188:23) {
+    code: 'ER_NO_REFERENCED_ROW_2',
+    errno: 1452,
+    sqlState: '23000',
+    sqlMessage: 'Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)',
+    sql: 'INSERT INTO `users` (`uid`,`username`,`nickname`,`password`,`email`,`state`,`gid`,`create_time`) VALUES (DEFAULT,?,?,?,?,?,?,?);',
+    parameters: [
+      '123456',
+      '',
+      '$2b$10$Z4yoZDOYU.U/s7jQCJuP/uf.SEV94BGKlrdFHf0J0/9/XbgjBIKBa',
+      '254534216@qq.com',
+      'invalid',
+      2,
+      '2020-11-11 17:56:05'
+    ]
+  },
+  original: Error: Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)
+      at Packet.asError (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packets\packet.js:712:17)
+      at Execute.execute (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\commands\command.js:28:26)
+      at Connection.handlePacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:425:32)
+      at PacketParser.onPacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:75:12)
+      at PacketParser.executeStart (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packet_parser.js:75:16)
+      at Socket.<anonymous> (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:82:25)
+      at Socket.emit (events.js:314:20)
+      at addChunk (_stream_readable.js:304:12)
+      at readableAddChunk (_stream_readable.js:280:9)
+      at Socket.Readable.push (_stream_readable.js:219:10)
+      at TCP.onStreamRead (internal/stream_base_commons.js:188:23) {
+    code: 'ER_NO_REFERENCED_ROW_2',
+    errno: 1452,
+    sqlState: '23000',
+    sqlMessage: 'Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)',
+    sql: 'INSERT INTO `users` (`uid`,`username`,`nickname`,`password`,`email`,`state`,`gid`,`create_time`) VALUES (DEFAULT,?,?,?,?,?,?,?);',
+    parameters: [
+      '123456',
+      '',
+      '$2b$10$Z4yoZDOYU.U/s7jQCJuP/uf.SEV94BGKlrdFHf0J0/9/XbgjBIKBa',
+      '254534216@qq.com',
+      'invalid',
+      2,
+      '2020-11-11 17:56:05'
+    ]
+  },
+  sql: 'INSERT INTO `users` (`uid`,`username`,`nickname`,`password`,`email`,`state`,`gid`,`create_time`) VALUES (DEFAULT,?,?,?,?,?,?,?);',
+  parameters: [
+    '123456',
+    '',
+    '$2b$10$Z4yoZDOYU.U/s7jQCJuP/uf.SEV94BGKlrdFHf0J0/9/XbgjBIKBa',
+    '254534216@qq.com',
+    'invalid',
+    2,
+    '2020-11-11 17:56:05'
+  ],
+  fields: [ 'gid' ],
+  table: 'user_group',
+  value: 2,
+  index: 'users_ibfk_1',
+  reltype: 'child'
+}

@@ -56,11 +56,11 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.ENUM,
             values: ['valid','invalid','lock'],
             field: 'state',
-            defaultValue: 'invalid'
+            defaultValue: 'valid'
         },
         gid: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: 'user_group',
                 key: 'gid'

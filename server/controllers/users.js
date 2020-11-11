@@ -15,7 +15,7 @@ class userController {
     static async sendCode(ctx) {
         let param = ctx.request.body
         let isLogin = param.isLogin
-        if (isLogin) {
+        if (isLogin === 'true') {
             try {
                 const userInfo = await userDao.getUserByNameOrUid(param)
                 param.email = userInfo.email
@@ -33,7 +33,7 @@ class userController {
             let num = Math.floor(Math.random()*10)
             numArr.push(num)
         }
-        const isSend = sendEmail(param.email, isLogin ? '用户登录' : '用户注册','验证码是:' + numArr.join(''),'验证码是:' + numArr.join('') + ', 有效期 10 分钟！')
+        const isSend = sendEmail(param.email, isLogin === 'true' ? '用户登录' : '用户注册','验证码是:' + numArr.join(''),'验证码是:' + numArr.join('') + ', 有效期 10 分钟！')
         if (isSend) {
             const data = await codesDao.insertCode({code: numArr.join(''), create_time: Date.now()})
             ctx.success(200,'发送成功',data.code_id)
@@ -90,9 +90,6 @@ class userController {
     static async insertUser(ctx) {
         let param = ctx.request.body
         const verify = await codesDao.getCodeInfo(param.code_id)
-        if (!param.uid) {
-            param.uid = '' 
-        }
         if (!param.username) {
             ctx.fail(500,'请输入用户名')
         } else if (!param.password) {
@@ -106,11 +103,15 @@ class userController {
             codesDao.delCode({code_id: param.code_id})
         }else {
             param.password = bcrypt.hashSync(param.password,10)
-            const data = await userDao.getUserByNameOrUid(param)
-            if (!data) {
+            param.nickname = ''
+            const userInfo = await userDao.getUserByNameOrUid(param)
+            if (!userInfo) {
                 const data = await userDao.insertUser(param)
+                const token = ctx.sign({data},{ expiresIn: '15d' })
+                let userInfo = JSON.parse(JSON.stringify(data))
+                delete userInfo.password
                 ctx.response.status = 200
-                ctx.success(200,'添加成功',data)
+                ctx.success(200,'添加成功',{token : token, data: userInfo})
             } else {
                 ctx.fail(500,'用户已存在')
             }

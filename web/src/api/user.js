@@ -43,3 +43,12 @@ export function editUser(data) {
     data
   })
 }
+
+// 编辑用户
+export function register(data) {
+  return request({
+    url: 'users/register',
+    method: 'post',
+    data
+  })
+}
