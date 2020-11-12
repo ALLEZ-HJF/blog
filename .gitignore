@@ -7,6 +7,7 @@ yarn-error.log*
 package-lock.json
 tests/**/coverage/
 server/public/apidoc/
+server/logs
 
 # Editor directories and files
 .idea

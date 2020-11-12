@@ -1,4 +1,0 @@
-[2020-11-09T17:51:04.388] [INFO] access - 127.0.0.1 - - "POST /api_v1/users/login HTTP/1.1" 200 59 "http://localhost:3001/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
-[2020-11-09T17:51:14.789] [INFO] access - 127.0.0.1 - - "POST /api_v1/users/login HTTP/1.1" 200 59 "http://localhost:3001/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
-[2020-11-09T17:51:33.862] [INFO] access - 127.0.0.1 - - "POST /api_v1/users/login HTTP/1.1" 200 59 "http://localhost:3001/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
-[2020-11-09T17:53:03.046] [INFO] access - 127.0.0.1 - - "POST /api_v1/users/login HTTP/1.1" 200 59 "http://localhost:3001/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36"
