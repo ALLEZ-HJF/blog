@@ -1,0 +1,1345 @@
+[2020-11-11T14:09:02.349] [ERROR] application - Error: data and hash arguments required
+    at Object.compareSync (C:\Users\pc\Desktop\demo\blog\server\node_modules\bcrypt\bcrypt.js:166:15)
+    at login (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:64:47)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T14:10:48.949] [ERROR] application - Error: data and hash arguments required
+    at Object.compareSync (C:\Users\pc\Desktop\demo\blog\server\node_modules\bcrypt\bcrypt.js:166:15)
+    at login (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:64:47)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T14:11:36.863] [ERROR] application - Error: data and hash arguments required
+    at Object.compareSync (C:\Users\pc\Desktop\demo\blog\server\node_modules\bcrypt\bcrypt.js:166:15)
+    at login (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:64:47)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T14:14:24.430] [ERROR] application - Error: data and hash arguments required
+    at Object.compareSync (C:\Users\pc\Desktop\demo\blog\server\node_modules\bcrypt\bcrypt.js:166:15)
+    at login (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:64:47)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T14:18:24.389] [ERROR] application - TypeError: Cannot read property 'code' of null
+    at login (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:55:24)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:21:33.786] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:21:52.912] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:22:11.125] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:22:30.718] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:22:35.947] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:22:45.033] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:22:57.860] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:23:05.260] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:23:11.900] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:23:49.567] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:24:24.968] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:24:50.699] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:25:10.436] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:25:21.247] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:26:01.374] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:26:28.165] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:26:49.936] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:27:12.070] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:27:23.223] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:27:52.523] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:28:12.039] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:28:22.503] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:28:32.388] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:28:57.760] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:29:47.926] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:30:03.399] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:30:11.539] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:30:18.344] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:30:30.987] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:31:38.911] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:32:00.111] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:32:25.352] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:33:02.055] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:33:11.780] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:33:13.749] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:33:22.499] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:33:50.989] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:36:33.140] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:37:03.994] [ERROR] application - UnauthorizedError: Authentication Error
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:23:22)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T15:40:09.923] [ERROR] application - UnauthorizedError: Bad Authorization header format. Format is "Authorization: Bearer <token>"
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at resolveAuthorizationHeader (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\resolvers\auth-header.js:26:18)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:20:49
+    at Array.find (<anonymous>)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:20:24)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+[2020-11-11T15:40:49.858] [ERROR] application - UnauthorizedError: Bad Authorization header format. Format is "Authorization: Bearer <token>"
+    at Object.throw (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa\lib\context.js:97:11)
+    at resolveAuthorizationHeader (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\resolvers\auth-header.js:26:18)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:20:49
+    at Array.find (<anonymous>)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:20:24)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-unless\index.js:29:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\app.js:57:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:11
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:15
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at views (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-views\src\index.js:91:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:15)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at filter (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-json\index.js:25:12)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:54)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-body\index.js:148:14
+[2020-11-11T16:29:56.733] [ERROR] application - ReferenceError: object is not defined
+    at Function.getUserList (C:\Users\pc\Desktop\demo\blog\server\dao\users.js:81:13)
+    at getUserList (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:85:36)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:44:32)
+    at next (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:45:18)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\lib\router.js:346:16
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:44:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:36:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\lib\router.js:351:31)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\lib\router.js:332:32)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:73:16)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T16:30:14.267] [ERROR] application - ReferenceError: uid is not defined
+    at Function.getUserList (C:\Users\pc\Desktop\demo\blog\server\dao\users.js:81:37)
+    at getUserList (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:85:36)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:44:32)
+    at next (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:45:18)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\lib\router.js:346:16
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:44:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:36:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\lib\router.js:351:31)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\lib\router.js:332:32)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:73:16)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T16:35:21.292] [ERROR] application - ReferenceError: Cannot access 'key' before initialization
+    at Function.getUserList (C:\Users\pc\Desktop\demo\blog\server\dao\users.js:85:26)
+    at getUserList (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:85:36)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:44:32)
+    at next (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:45:18)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\lib\router.js:346:16
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:44:32)
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\node_modules\koa-compose\index.js:36:12
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\lib\router.js:351:31)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-router\lib\router.js:332:32)
+    at dispatch (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-compose\index.js:42:32)
+    at jwt (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-jwt\lib\index.js:73:16)
+    at processTicksAndRejections (internal/process/task_queues.js:93:5)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:08:56.829] [ERROR] application - ForeignKeyConstraintError [SequelizeForeignKeyConstraintError]: Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)
+    at Query.formatError (C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\dialects\mysql\query.js:233:16)
+    at Execute.handler [as onResult] (C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\dialects\mysql\query.js:51:23)
+    at Execute.execute (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\commands\command.js:30:14)
+    at Connection.handlePacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:425:32)
+    at PacketParser.onPacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:75:12)
+    at PacketParser.executeStart (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:82:25)
+    at Socket.emit (events.js:314:20)
+    at addChunk (_stream_readable.js:304:12)
+    at readableAddChunk (_stream_readable.js:280:9)
+    at Socket.Readable.push (_stream_readable.js:219:10)
+    at TCP.onStreamRead (internal/stream_base_commons.js:188:23) {
+  parent: Error: Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)
+      at Packet.asError (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packets\packet.js:712:17)
+      at Execute.execute (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\commands\command.js:28:26)
+      at Connection.handlePacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:425:32)
+      at PacketParser.onPacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:75:12)
+      at PacketParser.executeStart (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packet_parser.js:75:16)
+      at Socket.<anonymous> (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:82:25)
+      at Socket.emit (events.js:314:20)
+      at addChunk (_stream_readable.js:304:12)
+      at readableAddChunk (_stream_readable.js:280:9)
+      at Socket.Readable.push (_stream_readable.js:219:10)
+      at TCP.onStreamRead (internal/stream_base_commons.js:188:23) {
+    code: 'ER_NO_REFERENCED_ROW_2',
+    errno: 1452,
+    sqlState: '23000',
+    sqlMessage: 'Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)',
+    sql: 'UPDATE `users` SET `uid`=?,`password`=?,`nickname`=?,`phone`=?,`introduction`=?,`gid`=?,`update_time`=? WHERE `uid` = ?',
+    parameters: [
+      '2',
+      '$2b$10$twWw0eteULZ61pyiE4NEB.sWVRaep6/Zu9AOOsEqmCHucNYp/fPzq',
+      '',
+      '',
+      '',
+      '',
+      '2020-11-11 17:08:56',
+      '2'
+    ]
+  },
+  original: Error: Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)
+      at Packet.asError (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packets\packet.js:712:17)
+      at Execute.execute (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\commands\command.js:28:26)
+      at Connection.handlePacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:425:32)
+      at PacketParser.onPacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:75:12)
+      at PacketParser.executeStart (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packet_parser.js:75:16)
+      at Socket.<anonymous> (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:82:25)
+      at Socket.emit (events.js:314:20)
+      at addChunk (_stream_readable.js:304:12)
+      at readableAddChunk (_stream_readable.js:280:9)
+      at Socket.Readable.push (_stream_readable.js:219:10)
+      at TCP.onStreamRead (internal/stream_base_commons.js:188:23) {
+    code: 'ER_NO_REFERENCED_ROW_2',
+    errno: 1452,
+    sqlState: '23000',
+    sqlMessage: 'Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)',
+    sql: 'UPDATE `users` SET `uid`=?,`password`=?,`nickname`=?,`phone`=?,`introduction`=?,`gid`=?,`update_time`=? WHERE `uid` = ?',
+    parameters: [
+      '2',
+      '$2b$10$twWw0eteULZ61pyiE4NEB.sWVRaep6/Zu9AOOsEqmCHucNYp/fPzq',
+      '',
+      '',
+      '',
+      '',
+      '2020-11-11 17:08:56',
+      '2'
+    ]
+  },
+  sql: 'UPDATE `users` SET `uid`=?,`password`=?,`nickname`=?,`phone`=?,`introduction`=?,`gid`=?,`update_time`=? WHERE `uid` = ?',
+  parameters: [
+    '2',
+    '$2b$10$twWw0eteULZ61pyiE4NEB.sWVRaep6/Zu9AOOsEqmCHucNYp/fPzq',
+    '',
+    '',
+    '',
+    '',
+    '2020-11-11 17:08:56',
+    '2'
+  ],
+  fields: [ 'gid' ],
+  table: 'user_group',
+  value: undefined,
+  index: 'users_ibfk_1',
+  reltype: 'child'
+}
+[2020-11-11T17:51:18.924] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:112:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:52:50.680] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:110:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:53:31.526] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:107:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:53:51.079] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:108:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:54:26.292] [ERROR] application - TypeError: Cannot read property 'uid' of null
+    at insertUser (C:\Users\pc\Desktop\demo\blog\server\controllers\users.js:108:27)
+    at async C:\Users\pc\Desktop\demo\blog\server\app.js:57:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\handleToken.js:11:5
+    at async C:\Users\pc\Desktop\demo\blog\server\middleware\responseData.js:19:9
+    at async serve (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-static\index.js:53:9)
+    at async bodyParser (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-bodyparser\index.js:82:48)
+    at async C:\Users\pc\Desktop\demo\blog\server\node_modules\koa-log4\koa-logger.js:86:7
+    at async cors (C:\Users\pc\Desktop\demo\blog\server\node_modules\koa2-cors\dist\index.js:91:9)
+[2020-11-11T17:54:56.581] [ERROR] application - ValidationError [SequelizeValidationError]: notNull Violation: users.nickname cannot be null,
+notNull Violation: users.gid cannot be null
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\instance-validator.js:74:15
+    at tryCatcher (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise._settlePromiseFromHandler (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:547:31)
+    at Promise._settlePromise (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:604:18)
+    at Promise._settlePromise0 (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:649:10)
+    at Promise._settlePromises (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:729:18)
+    at Promise._fulfill (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:673:18)
+    at PromiseArray._resolve (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise_array.js:127:19)
+    at PromiseArray._promiseFulfilled (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise_array.js:145:14)
+    at Promise._settlePromise (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:609:26)
+    at Promise._settlePromise0 (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:649:10)
+    at Promise._settlePromises (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:729:18)
+    at _drainQueueStep (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:93:12)
+    at _drainQueue (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:86:9)
+    at Async._drainQueues (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:102:5)
+    at Immediate.Async.drainQueues [as _onImmediate] (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:15:14)
+    at processImmediate (internal/timers.js:458:21) {
+  errors: [
+    ValidationErrorItem {
+      message: 'users.nickname cannot be null',
+      type: 'notNull Violation',
+      path: 'nickname',
+      value: null,
+      origin: 'CORE',
+      instance: [users],
+      validatorKey: 'is_null',
+      validatorName: null,
+      validatorArgs: []
+    },
+    ValidationErrorItem {
+      message: 'users.gid cannot be null',
+      type: 'notNull Violation',
+      path: 'gid',
+      value: null,
+      origin: 'CORE',
+      instance: [users],
+      validatorKey: 'is_null',
+      validatorName: null,
+      validatorArgs: []
+    }
+  ]
+}
+[2020-11-11T17:55:32.415] [ERROR] application - ValidationError [SequelizeValidationError]: notNull Violation: users.gid cannot be null
+    at C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\instance-validator.js:74:15
+    at tryCatcher (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\util.js:16:23)
+    at Promise._settlePromiseFromHandler (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:547:31)
+    at Promise._settlePromise (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:604:18)
+    at Promise._settlePromise0 (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:649:10)
+    at Promise._settlePromises (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:729:18)
+    at Promise._fulfill (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:673:18)
+    at PromiseArray._resolve (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise_array.js:127:19)
+    at PromiseArray._promiseFulfilled (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise_array.js:145:14)
+    at Promise._settlePromise (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:609:26)
+    at Promise._settlePromise0 (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:649:10)
+    at Promise._settlePromises (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\promise.js:729:18)
+    at _drainQueueStep (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:93:12)
+    at _drainQueue (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:86:9)
+    at Async._drainQueues (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:102:5)
+    at Immediate.Async.drainQueues [as _onImmediate] (C:\Users\pc\Desktop\demo\blog\server\node_modules\bluebird\js\release\async.js:15:14)
+    at processImmediate (internal/timers.js:458:21) {
+  errors: [
+    ValidationErrorItem {
+      message: 'users.gid cannot be null',
+      type: 'notNull Violation',
+      path: 'gid',
+      value: null,
+      origin: 'CORE',
+      instance: [users],
+      validatorKey: 'is_null',
+      validatorName: null,
+      validatorArgs: []
+    }
+  ]
+}
+[2020-11-11T17:56:05.054] [ERROR] application - ForeignKeyConstraintError [SequelizeForeignKeyConstraintError]: Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)
+    at Query.formatError (C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\dialects\mysql\query.js:233:16)
+    at Execute.handler [as onResult] (C:\Users\pc\Desktop\demo\blog\server\node_modules\sequelize\lib\dialects\mysql\query.js:51:23)
+    at Execute.execute (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\commands\command.js:30:14)
+    at Connection.handlePacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:425:32)
+    at PacketParser.onPacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:75:12)
+    at PacketParser.executeStart (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packet_parser.js:75:16)
+    at Socket.<anonymous> (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:82:25)
+    at Socket.emit (events.js:314:20)
+    at addChunk (_stream_readable.js:304:12)
+    at readableAddChunk (_stream_readable.js:280:9)
+    at Socket.Readable.push (_stream_readable.js:219:10)
+    at TCP.onStreamRead (internal/stream_base_commons.js:188:23) {
+  parent: Error: Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)
+      at Packet.asError (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packets\packet.js:712:17)
+      at Execute.execute (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\commands\command.js:28:26)
+      at Connection.handlePacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:425:32)
+      at PacketParser.onPacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:75:12)
+      at PacketParser.executeStart (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packet_parser.js:75:16)
+      at Socket.<anonymous> (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:82:25)
+      at Socket.emit (events.js:314:20)
+      at addChunk (_stream_readable.js:304:12)
+      at readableAddChunk (_stream_readable.js:280:9)
+      at Socket.Readable.push (_stream_readable.js:219:10)
+      at TCP.onStreamRead (internal/stream_base_commons.js:188:23) {
+    code: 'ER_NO_REFERENCED_ROW_2',
+    errno: 1452,
+    sqlState: '23000',
+    sqlMessage: 'Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)',
+    sql: 'INSERT INTO `users` (`uid`,`username`,`nickname`,`password`,`email`,`state`,`gid`,`create_time`) VALUES (DEFAULT,?,?,?,?,?,?,?);',
+    parameters: [
+      '123456',
+      '',
+      '$2b$10$Z4yoZDOYU.U/s7jQCJuP/uf.SEV94BGKlrdFHf0J0/9/XbgjBIKBa',
+      '254534216@qq.com',
+      'invalid',
+      2,
+      '2020-11-11 17:56:05'
+    ]
+  },
+  original: Error: Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)
+      at Packet.asError (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packets\packet.js:712:17)
+      at Execute.execute (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\commands\command.js:28:26)
+      at Connection.handlePacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:425:32)
+      at PacketParser.onPacket (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:75:12)
+      at PacketParser.executeStart (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\packet_parser.js:75:16)
+      at Socket.<anonymous> (C:\Users\pc\Desktop\demo\blog\server\node_modules\mysql2\lib\connection.js:82:25)
+      at Socket.emit (events.js:314:20)
+      at addChunk (_stream_readable.js:304:12)
+      at readableAddChunk (_stream_readable.js:280:9)
+      at Socket.Readable.push (_stream_readable.js:219:10)
+      at TCP.onStreamRead (internal/stream_base_commons.js:188:23) {
+    code: 'ER_NO_REFERENCED_ROW_2',
+    errno: 1452,
+    sqlState: '23000',
+    sqlMessage: 'Cannot add or update a child row: a foreign key constraint fails (`blog`.`users`, CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `user_group` (`gid`) ON DELETE CASCADE ON UPDATE CASCADE)',
+    sql: 'INSERT INTO `users` (`uid`,`username`,`nickname`,`password`,`email`,`state`,`gid`,`create_time`) VALUES (DEFAULT,?,?,?,?,?,?,?);',
+    parameters: [
+      '123456',
+      '',
+      '$2b$10$Z4yoZDOYU.U/s7jQCJuP/uf.SEV94BGKlrdFHf0J0/9/XbgjBIKBa',
+      '254534216@qq.com',
+      'invalid',
+      2,
+      '2020-11-11 17:56:05'
+    ]
+  },
+  sql: 'INSERT INTO `users` (`uid`,`username`,`nickname`,`password`,`email`,`state`,`gid`,`create_time`) VALUES (DEFAULT,?,?,?,?,?,?,?);',
+  parameters: [
+    '123456',
+    '',
+    '$2b$10$Z4yoZDOYU.U/s7jQCJuP/uf.SEV94BGKlrdFHf0J0/9/XbgjBIKBa',
+    '254534216@qq.com',
+    'invalid',
+    2,
+    '2020-11-11 17:56:05'
+  ],
+  fields: [ 'gid' ],
+  table: 'user_group',
+  value: 2,
+  index: 'users_ibfk_1',
+  reltype: 'child'
+}

@@ -9,11 +9,8 @@ class categoriesDao {
    static async getCategoryList(data) {
       return await categories.findAndCountAll({
         where: {
-          state: 'valid',
-          pid: data.pid || 0
-        },
-        offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
-        limit: Number(data.page_size) || 10
+          state: data.state || 'valid'
+        }
       })
    }
    // 添加分类

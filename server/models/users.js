@@ -38,9 +38,10 @@ module.exports = function(sequelize, DataTypes) {
             field: 'email'
         },
         sex: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER(1),
             allowNull: true,
-            field: 'sex'
+            field: 'sex',
+            defaultValue: 1     // 0 女 1 男
         },
         age: {
             type: DataTypes.INTEGER,

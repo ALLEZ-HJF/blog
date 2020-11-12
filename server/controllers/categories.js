@@ -1,12 +1,33 @@
 const categoriesDao = require('../dao/categories')
 
+
+function formatCategoryList(filterArr,arr) {
+  filterArr.forEach(item => {
+    item.children = arr.filter(sItem => {
+      return sItem.pid === item.cid
+    })
+    if (item.children.length > 0) {
+      formatCategoryList(item.children,arr)
+    }
+  })
+  return filterArr
+}
+
 class categoriesController {
   // 获取分类列表
   static async getCategoryList(ctx) {
      const param = ctx.request.body
      const data = await categoriesDao.getCategoryList(param)
-     ctx.response.status = 200
-     ctx.success(200,'获取成功',data)
+     if (param.state === 'valid') {
+      let arr = JSON.parse(JSON.stringify(data.rows)) 
+      let filterArr = arr.filter(item => {
+        return item.pid === 0
+      })
+      filterArr = formatCategoryList(filterArr,arr)
+      ctx.success(200,'获取成功',{count: data.count, rows: filterArr})
+     } else {
+      ctx.success(200,'获取成功',data)
+     }
   }
   
   // 添加分类

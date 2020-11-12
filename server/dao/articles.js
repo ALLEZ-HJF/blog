@@ -164,7 +164,6 @@ class articlesDao {
         })
         let result = []
         let article = await articles.findByPk(data.aid)
-        console.log(article);
         if (article === null) {
             result = [0]
         } else {

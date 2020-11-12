@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.ENUM,
             values: ['admin', 'user'],
             field: 'role',
-            defaultValue: 'user'
+            defaultValue: 'admin'
         },
         state: {
             type: DataTypes.ENUM,

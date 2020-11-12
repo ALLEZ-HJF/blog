@@ -40,6 +40,13 @@
         <el-form-item label="昵称">
           <el-input v-model="editUserForm.nickname" autocomplete="off" />
         </el-form-item>
+        <el-form-item label="状态">
+          <el-select v-model="editUserForm.state">
+            <el-option value="valid" label="正常" />
+            <el-option value="invalid" label="未审核" />
+            <el-option value="lock" label="锁定" />
+          </el-select>
+        </el-form-item>
         <el-form-item label="密码">
           <el-input v-model="editUserForm.password" type="password" autocomplete="off" show-password />
         </el-form-item>
@@ -100,11 +107,11 @@
           <el-table-column
             fixed="right"
             label="操作"
-            min-width="150"
+            min-width="180"
           >
             <template slot-scope="scope">
-              <el-button type="warning" size="small" @click="showEditUser(scope.row)">编辑</el-button>
-              <el-button size="small" type="danger" @click="delUser(scope.row)">删除</el-button>
+              <el-button type="warning" size="small" icon="el-icon-edit" @click="showEditUser(scope.row)">编辑</el-button>
+              <el-button v-if="scope.row.state === 'valid'" size="small" type="danger" icon="el-icon-delete" @click="delUser(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -140,7 +147,8 @@ export default {
         username: '',
         nickname: '',
         email: '',
-        password: ''
+        password: '',
+        state: ''
       },
       editDialogFormVisible: false
     }

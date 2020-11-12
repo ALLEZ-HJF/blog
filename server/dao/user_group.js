@@ -8,7 +8,7 @@ class UserGroupDao {
     static async getUserGroupList(data) {
         return await user_group.findAndCountAll({
             where: {
-                state: 'valid'
+                state: data.state || 'valid'
             },
             offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
             limit: Number(data.page_size) || 10
