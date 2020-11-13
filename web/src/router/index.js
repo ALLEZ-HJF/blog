@@ -71,6 +71,13 @@ export const constantRoutes = [
         name: 'articleList',
         component: () => import('@/views/admin/articlesList/index'),
         meta: { title: '文章列表', role: 'admin' }
+      },
+      {
+        path: 'handleArticle',
+        name: 'handleArticle',
+        component: () => import('@/views/admin/handleArticle/index'),
+        hidden: true,
+        meta: { title: '处理文章', role: 'admin' }
       }
     ]
   },
