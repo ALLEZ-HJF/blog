@@ -24,6 +24,10 @@ class articlesDao {
         return article
     }
 
+    static async getArticleByAid(aid) {
+        return await articles.findByPk(aid)
+    }
+
     // 根据分类获取文章列表
     static async getArticleByCid(data) {
         let aids = await article_category.findAll({
@@ -83,12 +87,12 @@ class articlesDao {
                 title: {
                     [Op.like]: `%${data.title || ''}%`
                 },
-                state: data.state || 'invalid'
+                state: data.state || 'valid'
             },
             include:[
                 {
                     model: users,
-                    attributes: ['nickname','avatar','uid']
+                    attributes: ['nickname','username','avatar','uid']
                 },
                 {
                     model: categories,

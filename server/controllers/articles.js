@@ -10,6 +10,17 @@ class articlesController {
         ctx.success(200,'获取成功',res)
     }
 
+    static async getArticleByAid(ctx) {
+        const aid = ctx.request.body.aid
+        if (!aid) {
+            ctx.fail(500,'请输入文章id')
+            return false
+        }
+        const res = await articlesDao.getArticleByAid(aid)
+        ctx.response.status = 200
+        ctx.success(200,'获取成功',res)
+    }
+
     static async getArticleByCid(ctx) {
         const param = ctx.request.body
         const res = await articlesDao.getArticleByCid(param)

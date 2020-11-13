@@ -5,6 +5,8 @@ const articlesController = require('../controllers/articles')
 router.prefix('/api_v'+version+'/articles')
 // 获取文章列表
 router.post('/getArticleList',articlesController.getArticleList)
+// 根据文章id找文章详情
+router.post('/getArticleByAid',articlesController.getArticleByAid)
 // 根据分类获取文章列表
 router.post('/getArticleByCid',articlesController.getArticleByCid)
 // 添加文章
