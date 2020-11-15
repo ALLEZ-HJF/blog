@@ -93,7 +93,7 @@
   </div>
 </template>
 <script>
-import { getArticleList, delArticle, editArticle, articleVerify } from '@/api/article'
+import { getArticleList, delArticle } from '@/api/article'
 import pagination from '@/components/pagination/pagination'
 export default {
   components: {

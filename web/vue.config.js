@@ -47,6 +47,11 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
+    },
+    output: { // 输出重构  打包编译后的 文件名称  【模块名称.时间戳.版本号】
+      path: path.resolve(__dirname, 'dist'),
+      filename: `static/[name].${new Date().getTime()}.js`,
+      chunkFilename: `static/[name].${new Date().getTime()}.js`
     }
   },
   chainWebpack(config) {
