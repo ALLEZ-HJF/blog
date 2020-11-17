@@ -14,7 +14,7 @@
           </el-form-item>
           <el-form-item label="状态">
             <el-select v-model="searchForm.state">
-              <el-option value="valid" label="正常" />
+              <el-option value="valid" label="已审核" />
               <el-option value="invalid" label="未审核" />
               <el-option value="lock" label="锁定" />
             </el-select>
@@ -70,18 +70,13 @@
             width="250"
           />
           <el-table-column
-            prop="state"
-            label="状态"
-            width="100"
-          />
-          <el-table-column
             fixed="right"
             label="操作"
             min-width="200"
           >
             <template slot-scope="scope">
-              <el-button type="success" size="small" icon="el-icon-check" @click="gotoPublish(scope.row)">审核</el-button>
-              <el-button type="warning" size="small" icon="el-icon-edit" @click="showEditArticle(scope.row)">编辑</el-button>
+              <el-button v-if="scope.row.state !== 'valid'" type="success" size="small" icon="el-icon-check" @click="gotoPublish(scope.row)">审核</el-button>
+              <el-button type="warning" size="small" icon="el-icon-edit" @click="gotoPublish(scope.row,true)">编辑</el-button>
               <el-button v-if="scope.row.state === 'valid'" size="small" type="danger" icon="el-icon-delete" @click="delArticle(scope.row)">删除</el-button>
             </template>
           </el-table-column>
@@ -119,15 +114,15 @@ export default {
     this.getArticleList()
   },
   methods: {
-    gotoPublish(row) {
+    gotoPublish(row, isEdit) {
       if (row) {
-        this.$router.push({ name: 'handleArticle', query: { aid: row.aid }})
+        this.$router.push({ name: 'handleArticle', query: { aid: row.aid, isEdit: isEdit }})
       } else {
         this.$router.push({ name: 'handleArticle' })
       }
     },
     delArticle(row) {
-      this.$confirm('是否删除该文章?, 是否继续?', '提示', {
+      this.$confirm('是否删除该文章? 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'error'

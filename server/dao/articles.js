@@ -25,7 +25,20 @@ class articlesDao {
     }
 
     static async getArticleByAid(aid) {
-        return await articles.findByPk(aid)
+        return await articles.findByPk(aid,{
+            include:[
+                {
+                    model: users,
+                    attributes: ['nickname','username','avatar','uid']
+                },
+                {
+                    model: categories,
+                    attributes: ['name','cid'],
+                    through: { attributes: [] },
+                    required: false
+                }
+            ]
+        })
     }
 
     // 根据分类获取文章列表
@@ -50,7 +63,6 @@ class articlesDao {
         })
         let rows = ''
         if (aids.length !== 0) {
-            console.log(aids,'!');
             rows =  await articles.findAll({
                 where: {
                     aid: aids

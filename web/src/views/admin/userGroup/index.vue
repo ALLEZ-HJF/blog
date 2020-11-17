@@ -59,11 +59,6 @@
             width="200"
           />
           <el-table-column
-            prop="state"
-            label="状态"
-            width="100"
-          />
-          <el-table-column
             fixed="right"
             label="操作"
             min-width="180"
@@ -135,7 +130,7 @@ export default {
       })
     },
     delUserGroup(row) {
-      this.$confirm('是否删除该用户组?, 是否继续?', '提示', {
+      this.$confirm('是否删除该用户组? 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'error'

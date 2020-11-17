@@ -39,6 +39,8 @@ class articlesController {
             ctx.fail(500,'请输入标题')
         } else if (!param.content) {
             ctx.fail(500,'请输入内容')
+        } else if (!param.cids) {
+            ctx.fail(500,'请选择分类')
         } else {
             const res = await articlesDao.insertArticle(param)
             ctx.response.status = 200

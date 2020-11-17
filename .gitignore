@@ -8,6 +8,7 @@ package-lock.json
 tests/**/coverage/
 server/public/apidoc/
 server/logs
+server/public/uploads/
 
 # Editor directories and files
 .idea

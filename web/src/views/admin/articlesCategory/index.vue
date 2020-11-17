@@ -62,17 +62,12 @@
             width="200"
           />
           <el-table-column
-            prop="state"
-            label="状态"
-            width="100"
-          />
-          <el-table-column
             fixed="right"
             label="操作"
             min-width="300"
           >
             <template slot-scope="scope">
-              <el-button v-if="scope.row.state === 'valid'" type="success" size="mini" icon="el-icon-circle-plus-outline" @click="insertSubCategory(scope.row)">添加分类</el-button>
+              <el-button v-if="scope.row.state === 'valid' && scope.row.pid === 0" type="success" size="mini" icon="el-icon-circle-plus-outline" @click="insertSubCategory(scope.row)">添加分类</el-button>
               <el-button type="warning" size="mini" icon="el-icon-edit" @click="showEditCategory(scope.row)">编辑</el-button>
               <el-button v-if="scope.row.state === 'valid'" size="mini" type="danger" icon="el-icon-delete" @click="delCategory(scope.row)">删除</el-button>
             </template>
@@ -90,7 +85,6 @@ export default {
       state: 'valid',
       tableLoading: true,
       categoryList: [],
-      categoryListTotal: 0,
       newCategoryForm: {
         name: '',
         pid: ''
@@ -141,7 +135,7 @@ export default {
       })
     },
     delCategory(row) {
-      this.$confirm('是否删除该分类?, 是否继续?', '提示', {
+      this.$confirm('是否删除该分类? 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'error'
@@ -158,7 +152,7 @@ export default {
       if (data.code === 200) {
         this.$message.success('修改成功')
         this.editDialogFormVisible = false
-        this.getCategoryList(1)
+        this.getCategoryList()
       }
     },
     showEditCategory(row) {
@@ -166,12 +160,8 @@ export default {
       this.editDialogFormVisible = true
     },
     async getCategoryList(page_num) {
-      if (page_num) {
-        this.page_num = page_num
-      }
       const { data } = await getCategoryList({ state: this.state })
       this.categoryList = data.rows
-      this.categoryListTotal = data.count
       this.tableLoading = false
     }
   }
