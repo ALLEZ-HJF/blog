@@ -88,7 +88,7 @@ class articlesDao {
     // 获取文章列表
     static async getArticleList(data) {
         let allData = await articles.findAll({
-            attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num'],
+            attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num','imgs'],
             where: {
                 aid: {
                     [Op.like]: `%${data.aid || ''}%`

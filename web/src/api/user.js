@@ -52,3 +52,12 @@ export function register(data) {
     data
   })
 }
+
+// 作者排行榜
+export function getUserRankingList(data) {
+  return request({
+    url: 'users/getUserRankingList',
+    method: 'post',
+    data
+  })
+}

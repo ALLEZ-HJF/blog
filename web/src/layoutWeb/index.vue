@@ -3,8 +3,7 @@
     <el-container>
       <el-header>
         <el-row>
-          <el-col :xl="4" :lg="4" :md="4" :sm="0" :xs="0" />
-          <el-col :xl="16" :lg="16" :md="16" :sm="24" :xs="24">
+          <el-col :xl="{span:16,offset:4}" :lg="{span:16,offset:4}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
             <div class="left">
               <img class="logoImg" src="@/assets/logo.png">
               <div class="navMenu">
@@ -12,16 +11,34 @@
               </div>
             </div>
             <div class="right">
-              <el-input class="rightMenu" size="small" prefix-icon="el-icon-search" placeholder="请输入内容回车搜索" />
-              <el-button class="rightMenu" size="small" type="primary">写文章</el-button>
-              <el-button class="rightMenu" plain size="small" type="primary" @click="showLoginDialog">登录</el-button>
+              <el-input class="rightMenu hidden-sm-and-down" size="small" prefix-icon="el-icon-search" placeholder="请输入内容回车搜索" />
+              <el-button v-if="userInfo" class="rightMenu" size="small" type="primary">写文章</el-button>
+              <el-button v-if="!userInfo" class="rightMenu" plain size="small" type="primary" @click="showLoginDialog">登录</el-button>
+              <div>
+                <el-dropdown>
+                  <span v-if="userInfo" class="el-dropdown-link">
+                    <el-avatar :src="userInfo.avatar" />
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>个人主页</el-dropdown-item>
+                    <el-dropdown-item>退出登录</el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </div>
             </div>
           </el-col>
         </el-row>
       </el-header>
+      <div class="categoryListBox">
+        <el-row>
+          <el-col :xl="{span:16,offset:4}" :lg="{span:16,offset:4}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
+            <selectCategory ref="selectCategory" :select-ids="selectIds" :category-list="categoryList" />
+          </el-col>
+        </el-row>
+      </div>
       <el-main>
         <el-row>
-          <el-col :span="18" :offset="3" class="main">
+          <el-col :xl="{span:16,offset:4}" :lg="{span:16,offset:4}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}" class="main">
             <router-view />
           </el-col>
         </el-row>
@@ -55,7 +72,13 @@
 <script>
 import { login, sendCode, register } from '@/api/user'
 import { setToken, setUserInfo, getUserInfo } from '@/utils/auth'
+import SelectCategory from '@/components/SelectCategory'
+import { getCategoryList } from '@/api/category'
+
 export default {
+  components: {
+    SelectCategory
+  },
   data() {
     return {
       loginDialogFormVisible: false,
@@ -86,16 +109,21 @@ export default {
       isLoading: false,
       timer: null,
       num: 120,
-      userInfo: ''
+      userInfo: getUserInfo(),
+      selectIds: [],
+      categoryList: []
     }
   },
   created() {
-    const userInfo = getUserInfo()
-    if (userInfo && userInfo !== '{}') {
-      this.userInfo = userInfo
-    }
+    // this.getCategoryList()
   },
   methods: {
+    async getCategoryList() {
+      const data = await getCategoryList({ state: 'valid' })
+      if (data.code === 200) {
+        this.categoryList = data.data.rows
+      }
+    },
     login() {
       this.isLoading = true
       this.$refs.loginForm.validate(async(valid) => {
@@ -109,6 +137,7 @@ export default {
           }
           setToken(data.data.token)
           setUserInfo(data.data.data)
+          this.userInfo = data.data.data
           this.loginDialogFormVisible = false
           if (this.timer) {
             window.clearInterval(this.timer)
@@ -157,6 +186,19 @@ export default {
     height: 100%;
     display: flex;
     flex-direction: column;
+    .categoryListBox {
+      padding: 15px;
+      background: @headerBgColor;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+      .item {
+        color: #999;
+        font-size: 15px;
+        &:hover,&.active {
+          color: @defaultColor;
+        }
+      }
+    }
     .el-header {
       background: @headerBgColor;
       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
@@ -201,14 +243,18 @@ export default {
           .el-input {
             margin-right: 50px;
           }
+          .el-avatar {
+            margin-left: 25px;
+            cursor: pointer;
+          }
         }
       }
     }
     .el-main {
       flex: 1;
       background: @bgColor;
+      padding: 0;
     }
-
   }
 }
 .sendCode {
@@ -221,4 +267,5 @@ export default {
   margin-bottom: 15px;
   cursor: pointer;
 }
+
 </style>

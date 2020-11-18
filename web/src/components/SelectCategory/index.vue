@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     handleSelectCategory(index, id, pid, index2) {
-      if (index2 !== null) {
+      if (index2 !== undefined) {
         this.categoryList[index].children[index2].isSelect = !this.categoryList[index].children[index2].isSelect
         for (let i = 0; i < this.categoryList[index].children.length; i++) {
           if (this.categoryList[index].children[i].isSelect) {

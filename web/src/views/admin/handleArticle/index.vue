@@ -86,9 +86,6 @@ export default {
     }
     this.getCategoryList()
   },
-  mounted() {
-    tinymce.init({})
-  },
   methods: {
     // 获取富文本返回的值
     getContent(content) {

@@ -18,7 +18,6 @@ class userDao {
             include: [
                 {
                     model: articles,
-                    duplicating:false,
                     attributes: []
                 }
             ],
