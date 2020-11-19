@@ -7,10 +7,11 @@ const bodyparser = require('koa-bodyparser')
 const koaBody = require('koa-body');
 const koajwt = require('koa-jwt')
 var cors = require('koa2-cors');
-const { singKey,version } = require('./config/config')
+const { singKey } = require('./config/config')
 const responseData = require('./middleware/responseData')
 const handleToken = require('./middleware/handleToken')
 const { logger, accessLogger } = require('./config/logger');
+const { path } = require('./config/noFilter')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -67,7 +68,7 @@ app.use(async (ctx, next) => {
 app.use(koajwt({
   secret: singKey
 }).unless({
-  path: [`/api_v${version}/users/login`,`/api_v${version}/users/register`,`/api_v${version}/users/sendCode`,/^\/uploads/]
+  path: path  // 不验证的api
 }));
 
 // routes

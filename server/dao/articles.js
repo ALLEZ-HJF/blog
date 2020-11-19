@@ -29,7 +29,7 @@ class articlesDao {
             include:[
                 {
                     model: users,
-                    attributes: ['nickname','username','avatar','uid']
+                    attributes: ['nickname','username','avatar','uid', 'introduction']
                 },
                 {
                     model: categories,

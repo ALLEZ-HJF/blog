@@ -14,9 +14,9 @@
               <el-input class="rightMenu hidden-sm-and-down" size="small" prefix-icon="el-icon-search" placeholder="请输入内容回车搜索" />
               <el-button v-if="userInfo" class="rightMenu" size="small" type="primary">写文章</el-button>
               <el-button v-if="!userInfo" class="rightMenu" plain size="small" type="primary" @click="showLoginDialog">登录</el-button>
-              <div>
+              <div v-if="userInfo">
                 <el-dropdown>
-                  <span v-if="userInfo" class="el-dropdown-link">
+                  <span class="el-dropdown-link">
                     <el-avatar :src="userInfo.avatar" />
                   </span>
                   <el-dropdown-menu slot="dropdown">
@@ -39,7 +39,7 @@
       <el-main>
         <el-row>
           <el-col :xl="{span:16,offset:4}" :lg="{span:16,offset:4}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}" class="main">
-            <router-view />
+            <router-view :key="$route.fullPath" />
           </el-col>
         </el-row>
       </el-main>
@@ -115,7 +115,7 @@ export default {
     }
   },
   created() {
-    // this.getCategoryList()
+    this.getCategoryList()
   },
   methods: {
     async getCategoryList() {

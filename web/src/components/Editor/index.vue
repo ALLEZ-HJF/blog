@@ -45,6 +45,10 @@ export default {
     content: {
       type: String,
       default: ''
+    },
+    isOnlyRead: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -89,7 +93,10 @@ export default {
     if (this.content) {
       this.value = this.content
     }
-    tinymce.init({})
+    if (this.isOnlyRead) {
+      this.init.readonly = true
+      tinymce.editors['tinymce'].setMode('readonly')
+    }
   }
 }
 </script>
@@ -102,5 +109,6 @@ export default {
   border-radius: 5px;
   padding: 15px;
   color: #666;
+  overflow: auto;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="articleItem">
+  <div class="articleItem" @click="gotoDetail">
     <div class="articleInfo">
       <div class="userInfo">
         <el-image class="avatar" :src="item.user.avatar" lazy />
@@ -28,6 +28,11 @@ export default {
     }
   },
   created() {
+  },
+  methods: {
+    gotoDetail() {
+      this.$router.push({ name: 'articleDetail', params: { aid: this.item.aid }})
+    }
   }
 }
 </script>
@@ -42,7 +47,7 @@ export default {
     align-items: center;
     transition: background 0.5s;
     &:hover {
-      background: #eeeeee;
+      background: #fafafa;
     }
     .articleInfo {
       display: flex;
@@ -73,7 +78,7 @@ export default {
       .subTitle {
         font-size: 14px;
         color: #666666;
-        margin: 5px 0;
+        margin: 8px 0;
       }
       .title,.subTitle {
         display: block;
@@ -96,8 +101,8 @@ export default {
       justify-content: space-around;
       .el-image {
         display: block;
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         margin-right: 10px;
       }
     }

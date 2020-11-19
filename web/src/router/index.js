@@ -23,9 +23,15 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        name: 'web/index',
+        name: 'index',
         component: () => import('@/views/web/index/index'),
         meta: { title: '首页' }
+      },
+      {
+        path: 'articleDetail/:aid',
+        name: 'articleDetail',
+        component: () => import('@/views/web/articleDetail/index'),
+        meta: { title: '文章详情' }
       }
     ]
   },

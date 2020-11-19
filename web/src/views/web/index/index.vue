@@ -51,7 +51,6 @@ export default {
       const data = await getUserRankingList({ page_num: 1, page_size: 5 })
       if (data.code === 200) {
         this.userList = data.data
-        console.log(this.userList)
       }
     },
     // 文章列表
