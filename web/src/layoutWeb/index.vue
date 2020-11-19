@@ -7,7 +7,7 @@
             <div class="left">
               <img class="logoImg" src="@/assets/logo.png">
               <div class="navMenu">
-                <router-link class="menu active" tag="a" :to="{ name: 'web/index' }">首页</router-link>
+                <router-link class="menu active" tag="a" :to="{ name: 'index' }">首页</router-link>
               </div>
             </div>
             <div class="right">

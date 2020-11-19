@@ -5,6 +5,28 @@
         <div class="title">{{ article.title }}</div>
         <div class="subTitle">{{ article.sub_title }}</div>
         <editor v-if="article.content" :content="article.content" :is-only-read="true" />
+        <!-- 评论 -->
+        <div v-if="userInfo" class="commentBox">
+          <div class="avatar">
+            <el-image lazy :src="userInfo.avatar" />
+          </div>
+          <div class="comment">
+            <el-input v-model="commContent" type="textarea" autosize placeholder="请输入评论..." @focus="commentFocus" @blur="commentBlur" />
+            <div v-if="isShowCommentToolBar" class="commentToolBar">
+              <div class="menuList">
+                <div class="menu">
+                  <i class="el-icon-picture" />
+                  <span>图片</span>
+                </div>
+              </div>
+              <el-button type="primary" size="small">评论</el-button>
+            </div>
+          </div>
+        </div>
+        <!-- 文章回复与评论 -->
+        <div class="commentList">
+          <!-- 评论列表 -->
+        </div>
       </el-col>
       <el-col class="authorDetail  hidden-md-and-down" :xl="6" :lg="6">
         <div v-if="article.user" class="authorInfo">
@@ -14,6 +36,7 @@
           <div class="userInfo">
             <span class="nickname">{{ article.user.nickname }}</span>
             <span class="introduction">{{ article.user.introduction }}</span>
+            <span class="lookNum">阅读: &nbsp;&nbsp; {{ article.look_num }}</span>
           </div>
         </div>
         <div class="authorArticleList">
@@ -29,7 +52,7 @@
               <div v-if="item.aid != aid" :key="item.aid" class="item" @click="gotoDetail(item.aid)">
                 <div class="articleInfo">
                   <span class="articleTitle">{{ item.title }}</span>
-                  <span class="lookNum">浏览量:&nbsp;&nbsp; {{ item.look_num }}</span>
+                  <span class="lookNum">阅读:&nbsp;&nbsp; {{ item.look_num }}</span>
                 </div>
                 <i class="el-icon-arrow-right" />
               </div>
@@ -42,7 +65,9 @@
 </template>
 
 <script>
-import { getArticleByAid, getArticleList } from '@/api/article'
+import { getArticleByAid, getArticleList, addArticleLookNum } from '@/api/article'
+import { getCommentByAid } from '@/api/comment'
+import { getUserInfo } from '@/utils/auth'
 import Editor from '@/components/Editor'
 export default {
   components: {
@@ -52,7 +77,13 @@ export default {
     return {
       aid: '',
       article: {},
-      articleList: []
+      articleList: [],
+      page_num: 1,
+      page_size: 10,
+      commentList: [],
+      userInfo: getUserInfo(),
+      commContent: '',
+      isShowCommentToolBar: false
     }
   },
   mounted() {
@@ -60,14 +91,37 @@ export default {
     this.getArticleDetail()
   },
   methods: {
+    // 评论获得焦点
+    commentFocus(event) {
+      this.isShowCommentToolBar = true
+    },
+    // 评论失去焦点
+    commentBlur(event) {
+      this.isShowCommentToolBar = false
+    },
     gotoDetail(aid) {
       this.$router.push({ name: 'articleDetail', params: { aid: aid }})
+    },
+    // 添加浏览量
+    async addArticleLookNum() {
+      const data = await addArticleLookNum({ aid: this.aid })
+      if (data.code === 200) {
+        this.article.look_num++
+      }
     },
     async getArticleDetail() {
       const data = await getArticleByAid({ aid: this.aid })
       if (data.code === 200) {
         this.article = data.data
         this.getArticleList()
+        this.addArticleLookNum()
+        this.getCommentByAid()
+      }
+    },
+    async getCommentByAid() {
+      const data = await getCommentByAid({ aid: this.aid, page_num: this.page_num, page_size: this.page_size })
+      if (data.code === 200) {
+        this.commentList.concat(data.data.rows)
       }
     },
     async getArticleList() {
@@ -81,6 +135,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "@/styles/variables.less";
 .articleDetail {
   margin-top: 25px;
   background: #fafafa;
@@ -89,11 +144,65 @@ export default {
     font-size: 28px;
     color: #333333;
     font-weight: 600;
+    margin-left: 10px;
   }
   .subTitle {
     font-size: 18px;
     color: #666666;
     margin-top: 10px;
+    margin-left: 10px;
+  }
+  // 一级回复
+  .commentBox {
+    padding: 10px 15px;
+    background: #eeeeee;
+    border-radius: 4px;
+    display: flex;
+    margin-top: 20px;
+    .avatar {
+      width: 50px;
+      height: 50px;
+      margin-right: 20px;
+      .el-image {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+      }
+    }
+    .comment {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      .commentToolBar {
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .menuList {
+          flex: 1;
+          .menu {
+            font-size: 14px;
+            color: @defaultColor;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+          }
+          .el-icon-picture {
+            font-size: 18px;
+            margin-right: 8px;
+          }
+        }
+        .el-button {
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+  // 评论
+  .commentList {
+    padding: 15px;
+    border-radius: 6px;
+    margin: 10px;
   }
 }
 .authorDetail {
@@ -170,7 +279,11 @@ export default {
       .introduction {
         font-size: 14px;
         color: #999999;
-        margin-top: 5px;
+        margin: 5px 0;
+      }
+      .lookNum {
+        font-size: 12px;
+        color: #999999;
       }
     }
   }
