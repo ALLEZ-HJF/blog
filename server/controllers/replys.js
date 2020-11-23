@@ -7,8 +7,6 @@ class replysController {
         const param = ctx.request.body
         const userInfo = ctx.verify(ctx.header.authorization).data
         param.uid = userInfo.uid
-        param.create_time = Date.now()
-        param.update_time = Date.now()
         if (!param.commid) {
             ctx.fail(500,'请输入评论id')
         } else if (!param.content && !param.imgs) {

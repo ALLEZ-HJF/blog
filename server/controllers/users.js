@@ -120,6 +120,7 @@ class userController {
     // 删除用户
     static async delUser(ctx) {
         let body = ctx.request.body
+        body.update_time = Date.now()
         const data = await userDao.delUser(body)
         ctx.response.status = 200
         ctx.success(200,'删除成功',data)
@@ -131,6 +132,7 @@ class userController {
             // 加密密码
             body.password = bcrypt.hashSync(body.password,10)
         }
+        body.update_time = Date.now()
         const data = await userDao.editUser(body)
         ctx.response.status = 200
         ctx.success(200,'修改成功',data)

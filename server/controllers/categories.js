@@ -45,6 +45,7 @@ class categoriesController {
     ctx.fail(500,'请输入分类id')
     return
   }
+  param.update_time = Date.now()
   const data = await categoriesDao.editCategory(param)
   if (data[0]) {
     ctx.response.status = 200
@@ -63,6 +64,7 @@ static async delCategory(ctx) {
     ctx.fail(500,'请输入分类id')
     return
   }
+  param.update_time = Date.now()
   const data = await categoriesDao.delCategory(param)
   if (data[0]) {
     ctx.response.status = 200

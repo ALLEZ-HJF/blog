@@ -1,3 +1,4 @@
+const moment = require('moment')
 // 评论数据模型
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('comments',{
@@ -40,10 +41,18 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: 'valid'
         },
         update_time: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+            get() {
+                return moment(this.getDataValue('update_time')).format('YYYY-MM-DD HH:mm:ss');
+            }
         },
         create_time: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+            get() {
+                return moment(this.getDataValue('create_time')).format('YYYY-MM-DD HH:mm:ss');
+            }
         }
     },{
         freezeTableName: true,

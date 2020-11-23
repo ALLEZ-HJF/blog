@@ -33,8 +33,6 @@ class articlesController {
         const param = ctx.request.body
         const userInfo = ctx.verify(ctx.header.authorization).data
         param.uid = userInfo.uid
-        param.create_time = Date.now()
-        param.update_time = Date.now()
         if (!param.title) {
             ctx.fail(500,'请输入标题')
         } else if (!param.content) {
@@ -54,6 +52,7 @@ class articlesController {
             ctx.fail(500,'请输入文章id')
             return
         }
+        param.update_time = Date.now()
         const res = await articlesDao.delArticle(param)
         if (res[0]) {
             ctx.success(200,'删除成功',res)
@@ -78,6 +77,7 @@ class articlesController {
             ctx.fail(500,'无法修改他人文章')
             return
         }
+        param.update_time = Date.now()
         const res = await articlesDao.editArticle(param)
         if (res[0]) {
             ctx.success(200,'修改成功',res)
@@ -93,6 +93,7 @@ class articlesController {
             ctx.fail(500,'请输入文章id')
             return
         }
+        param.update_time = Date.now()
         const res = await articlesDao.articleVerify(param)
         if (res[0]) {
             ctx.response.status = 200

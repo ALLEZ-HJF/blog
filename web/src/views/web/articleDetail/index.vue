@@ -11,9 +11,9 @@
             <div class="avatar">
               <el-image lazy :src="userInfo.avatar" />
             </div>
-            <commentInput v-if="aid" :aid="aid" />
+            <commentInput v-if="aid" :aid="aid" @insertResult="insertResult" />
           </div>
-          <commentList v-if="aid" :aid="aid" />
+          <commentList v-if="aid" ref="commentList" :aid="aid" />
         </div>
       </el-col>
       <el-col class="authorDetail  hidden-md-and-down" :xl="6" :lg="6">
@@ -71,7 +71,6 @@ export default {
       articleList: [],
       page_num: 1,
       page_size: 10,
-      commentList: [],
       userInfo: getUserInfo()
     }
   },
@@ -80,6 +79,15 @@ export default {
     this.getArticleDetail()
   },
   methods: {
+    // 返回的评论数据
+    insertResult(data) {
+      const res = data
+      res.user = {}
+      res.user.avatar = this.userInfo.avatar
+      res.user.nickname = this.userInfo.nickname
+      res.replys = []
+      this.$refs.commentList.list.unshift(res)
+    },
     gotoDetail(aid) {
       this.$router.push({ name: 'articleDetail', params: { aid: aid }})
     },
