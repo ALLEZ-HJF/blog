@@ -46,6 +46,8 @@ class commentsDao {
                     attributes: ['nickname','avatar']
                 }
             ],
+            offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
+            limit: Number(data.page_size) || 10,
             order: [['create_time','DESC'],['replys','create_time','DESC']]
         })
     }

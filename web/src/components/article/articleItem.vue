@@ -7,7 +7,7 @@
       </div>
       <div class="title">{{ item.title }}</div>
       <div v-if="item.sub_title" class="subTitle">{{ item.sub_title }}</div>
-      <div class="update_time">{{ item.update_time }}  <span class="look_num">查看次数: {{ item.look_num }}</span>  </div>
+      <div class="update_time">{{ item.update_time }}  <span class="look_num">查看次数: {{ item.look_num }}</span>  <span class="look_num">评论: {{ item.comment_num }}</span>  </div>
     </div>
     <div v-if="item.imgs" class="cover  hidden-sm-and-down">
       <el-image v-for="img in item.imgs.split(',')" :key="img" :src="img" lazy />

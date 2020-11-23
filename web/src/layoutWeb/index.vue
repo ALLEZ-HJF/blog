@@ -39,7 +39,7 @@
       <el-main>
         <el-row>
           <el-col :xl="{span:16,offset:4}" :lg="{span:16,offset:4}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}" class="main">
-            <router-view :key="$route.fullPath" />
+            <router-view :key="$route.fullPath" ref="main" />
           </el-col>
         </el-row>
       </el-main>
@@ -111,7 +111,8 @@ export default {
       num: 120,
       userInfo: getUserInfo(),
       selectIds: [],
-      categoryList: []
+      categoryList: [],
+      timer: null
     }
   },
   created() {

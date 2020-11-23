@@ -1,12 +1,12 @@
 <template>
-  <div class="comment">
+  <div class="comment" :class="commid || rid ? 'childComment' : ''">
     <el-input v-model="comment.content" type="textarea" autosize placeholder="请输入评论..." @focus="commentFocus" />
     <div v-if="isShowCommentToolBar" class="commentToolBar">
       <div class="menuList">
-        <div class="menu">
+        <!-- <div class="menu">
           <i class="el-icon-picture" />
           <span>图片</span>
-        </div>
+        </div> -->
       </div>
       <el-button type="primary" size="small" @click="insertComment">评论</el-button>
     </div>
@@ -116,5 +116,10 @@ export default {
         flex-shrink: 0;
     }
     }
+}
+.childComment {
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 15px;
 }
 </style>

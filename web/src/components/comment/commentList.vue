@@ -6,11 +6,24 @@
       <div class="avatar">
         <el-image lazy :src="item.user.avatar" />
       </div>
-      <div class="commentInfo">
+      <div class="commentInfo" :class="replys.length > 0 && item.pid === 0 ? 'childrenCommentInfo' : ''">
         <span class="nickname">{{ item.user.nickname }}</span>
         <span class="content">{{ item.content }}</span>
         <div class="menuList">
-          <span class="createTime">{{ item.create_time }}</span>
+          <div>
+            <span class="createTime">{{ item.create_time }}</span>
+            <el-popconfirm
+              confirm-button-text="确定"
+              cancel-button-text="取消"
+              icon="el-icon-info"
+              icon-color="red"
+              title="确定删除该评论吗?"
+              @onConfirm="delComment"
+            >
+              <span v-if="userInfo.uid === item.uid" slot="reference" class="delReply" @click="delData(item)">删除</span>
+            </el-popconfirm>
+
+          </div>
           <div v-if="!item.pid">
             <span class="reply" @click="showReply(item)">回复</span>
           </div>
@@ -23,7 +36,8 @@
 </template>
 
 <script>
-import { getCommentByAid } from '@/api/comment'
+import { getCommentByAid, delComment } from '@/api/comment'
+import { delReply } from '@/api/reply'
 import commentInput from '@/components/comment/commentInput'
 import { getUserInfo } from '@/utils/auth'
 export default {
@@ -52,7 +66,9 @@ export default {
       list: [],
       isShowReplyBox: false,
       activeItem: {},
-      userInfo: getUserInfo()
+      userInfo: getUserInfo(),
+      delObj: {},
+      status: 1
     }
   },
   mounted() {
@@ -69,6 +85,41 @@ export default {
     })
   },
   methods: {
+    delComment() {
+      if (this.delObj.rid) {
+        this.list.forEach(async(item, index) => {
+          if (item.rid === this.delObj.rid) {
+            try {
+              const data = await delReply({ aid: this.aid, rid: this.delObj.rid })
+              if (data.code) {
+                this.$message.success('删除成功')
+                this.list.splice(index, 1)
+              }
+            } catch (error) {
+            }
+          }
+        })
+      } else {
+        // 评论删除
+        this.list.forEach(async(item, index) => {
+          if (item.commid === this.delObj.commid) {
+            try {
+              const data = await delComment({ aid: this.aid, commid: this.delObj.commid })
+              if (data.code) {
+                this.$message.success('删除成功')
+                this.list.splice(index, 1)
+              }
+            } catch (error) {
+            }
+          }
+        })
+      }
+    },
+    // 删除评论
+    delData(item) {
+      this.delObj = {}
+      this.delObj = item
+    },
     insertResult(data) {
       const res = data
       res.user = {}
@@ -92,9 +143,15 @@ export default {
       }
     },
     async getCommentByAid() {
-      const data = await getCommentByAid({ aid: this.aid, page_num: this.page_num, page_size: this.page_size })
-      if (data.code === 200) {
-        this.list = this.list.concat(data.data)
+      if (this.status) {
+        const data = await getCommentByAid({ aid: this.aid, page_num: this.page_num, page_size: this.page_size })
+        if (data.code === 200) {
+          this.list = this.list.concat(data.data)
+          this.page_num++
+          if (data.data.length == 0 || data.data.length < this.page_size) {
+            this.status = 0
+          }
+        }
       }
     },
     showReply(item) {
@@ -155,7 +212,14 @@ export default {
               color: @defaultColor;
             }
           }
+          .delReply {
+            margin-left: 15px;
+            cursor: pointer;
+          }
         }
+      }
+      .childrenCommentInfo {
+        border-bottom: 1px solid #cccccc;
       }
     }
   }

@@ -77,8 +77,23 @@ export default {
   mounted() {
     this.aid = Number(this.$route.params.aid)
     this.getArticleDetail()
+    this.$nextTick(() => {
+      const el = document.getElementsByClassName('el-main')[0]
+      const offsetHeight = el.offsetHeight
+      el.onscroll = (e) => {
+        if (el.scrollHeight - (el.scrollTop + el.offsetHeight) < 200) {
+          this.handleMethod()
+        }
+      }
+    })
   },
   methods: {
+    handleMethod() {
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.$refs.commentList.getCommentByAid()
+      }, 1000)
+    },
     // 返回的评论数据
     insertResult(data) {
       const res = data
