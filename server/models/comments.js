@@ -18,17 +18,11 @@ module.exports = function(sequelize, DataTypes) {
         uid: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            field: 'uid'
-        },
-        nickname: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            field: 'nickname'
-        },
-        avatar: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            field: 'avatar'
+            field: 'uid',
+            references: {
+                model: 'users',
+                key: 'uid'
+            }
         },
         content: {
             type: DataTypes.STRING,

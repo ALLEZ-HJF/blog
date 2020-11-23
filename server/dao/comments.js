@@ -26,10 +26,12 @@ class commentsDao {
                 aid:data.aid,
                 state: data.state || 'valid'
             },
+            as: 'comments',
             include: [
                 {
                     model: replys,
                     attributes: ['rid','commid','uid','pid','content','imgs','state','create_time'],
+                    as: 'replys',
                     where: {
                         state: 'valid'
                     },
@@ -38,8 +40,13 @@ class commentsDao {
                         attributes: ['nickname','avatar']
                     },
                     required:false
+                },
+                {
+                    model: users,
+                    attributes: ['nickname','avatar']
                 }
-            ]
+            ],
+            order: [['create_time','DESC'],['replys','create_time','DESC']]
         })
     }
 }

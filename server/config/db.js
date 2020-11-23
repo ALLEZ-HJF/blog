@@ -64,6 +64,14 @@ comments.belongsTo(articles,{
 })
 
 // 评论与回复关系 1个评论有多个回复
+users.hasMany(comments,{
+  foreignKey: 'uid'
+})
+comments.belongsTo(users,{
+  foreignKey: 'uid'
+})
+
+// 评论与回复关系 1个评论有多个回复
 comments.hasMany(replys,{
   foreignKey: 'commid'
 })

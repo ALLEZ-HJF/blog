@@ -34,8 +34,6 @@ class commentsController {
         }
         const userInfo = ctx.verify(ctx.request.header.authorization).data
         param.uid = userInfo.uid
-        param.nickname = userInfo.nickname
-        param.avatar = userInfo.avatar || ''
         param.create_time = Date.now()
         const data = await commentsDao.insertComment(param)
         ctx.response.status = 200
@@ -54,19 +52,18 @@ class commentsController {
         const data2 = JSON.parse(JSON.stringify(data))
         let replys = []
         data2.forEach(item => {
-            item.replys.forEach((item2,index) => {
-                item2.replys = []
-                if (item2.pid) {
-                    replys.push(item2)
-                    item.replys.splice(index,1)
+            for (let i=0;i<item.replys.length; i++) {
+                item.replys[i].replys = []
+                if (item.replys[i].pid !== 0) {
+                    replys.push(item.replys[i])
+                    item.replys.splice(i,1)
+                    i--
                 }
-               
-            })
+            }
             item.replys.forEach((item2) => {
-                replys.forEach((item3,index) => {
+                replys.forEach((item3) => {
                     if (item3.pid === item2.rid) {
                         item2.replys.push(item3)
-                        replys.splice(index,1)
                     }
                 })
             })
