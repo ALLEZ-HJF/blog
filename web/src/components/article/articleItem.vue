@@ -8,6 +8,9 @@
       <div class="title">{{ item.title }}</div>
       <div v-if="item.sub_title" class="subTitle">{{ item.sub_title }}</div>
       <div class="update_time">{{ item.update_time }}  <span class="look_num">查看次数: {{ item.look_num }}</span>  <span class="look_num">评论: {{ item.comment_num }}</span>  </div>
+      <div class="categortyList">
+        <span v-for="category in item.categories" :key="category.cid" class="item">{{ category.name }}</span>
+      </div>
     </div>
     <div v-if="item.imgs" class="cover  hidden-sm-and-down">
       <el-image v-for="img in item.imgs.split(',')" :key="img" :src="img" lazy />
@@ -37,11 +40,12 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@import "@/styles/variables.less";
 .articleItem {
     border-top: 1px solid #eeeeee;
     padding: 20px;
     display: flex;
-    height: 150px;
+    height: 180px;
     cursor: pointer;
     overflow: hidden;
     align-items: center;
@@ -92,6 +96,18 @@ export default {
         color: #999999;
         .look_num {
             margin-left: 15px;
+        }
+      }
+      .categortyList {
+        font-size: 12px;
+        width: 100%;
+        margin-top: 15px;
+        .item {
+          margin-right: 8px;
+          padding: 5px;
+          background: @defaultColor;
+          border-radius: 5px;
+          color: #ffffff;
         }
       }
     }

@@ -1,19 +1,22 @@
 <template>
   <div class="indexContainer">
     <el-row :gutter="20">
-      <el-col :xl="18" :lg="18" :md="24" :sm="24" :xs="24">
-        <div class="articleList">
+      <el-col style="margin-bottom: 20px" :xl="18" :lg="18" :md="24" :sm="24" :xs="24">
+        <div v-if="articleList.length > 0" class="articleList">
           <div v-for="item in articleList" :key="item.aid" class="articleItem">
             <articleItem :item="item" />
           </div>
         </div>
+        <div v-else class="noMore">暂无数据</div>
+        <div v-if="articleListSearchForm.status === 0" class="noMore">暂无更多</div>
       </el-col>
       <el-col class="hidden-md-and-down" :xl="6" :lg="6">
         <div class="aside">
           <span class="text">排行榜</span>
-          <div class="userList">
+          <div v-if="userList.length > 0" class="userList">
             <userItem v-for="item in userList" :key="item.uid" :item="item" />
           </div>
+          <div v-else class="noMore">暂无数据</div>
         </div>
       </el-col>
     </el-row>
@@ -21,7 +24,6 @@
 </template>
 
 <script>
-import { getArticleList } from '@/api/article'
 import { getUserRankingList } from '@/api/user'
 import articleItem from '@/components/article/articleItem.vue'
 import userItem from '@/components/user/userItem.vue'
@@ -33,19 +35,39 @@ export default {
   },
   data() {
     return {
-      searchForm: {
-        page_num: 1,
-        page_size: 10
-      },
-      articleList: [],
       userList: []
+    }
+  },
+  computed: {
+    articleList() {
+      return this.$store.getters.articleList
+    },
+    articleListSearchForm() {
+      return this.$store.getters.articleListSearchForm
     }
   },
   mounted() {
     this.getArticleList()
     this.getUserRankingList()
+    this.$nextTick(() => {
+      const el = document.getElementsByClassName('el-main')[0]
+      el.onscroll = (e) => {
+        if (el.scrollHeight - (el.scrollTop + el.offsetHeight) < 200) {
+          this.handleMethod()
+        }
+      }
+    })
   },
   methods: {
+    handleMethod() {
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        if (this.articleListSearchForm.status) {
+          this.articleListSearchForm.page_num++
+          this.getArticleList()
+        }
+      }, 1000)
+    },
     // 作者列表 默认显示前五
     async getUserRankingList() {
       const data = await getUserRankingList({ page_num: 1, page_size: 5 })
@@ -55,9 +77,9 @@ export default {
     },
     // 文章列表
     async getArticleList() {
-      const data = await getArticleList(this.searchForm)
-      if (data.code === 200) {
-        this.articleList = data.data.rows
+      const data = await this.$store.dispatch('article/getArticleList', this.articleListSearchForm)
+      if (data.count === this.articleList.length) {
+        this.articleListSearchForm.status = 0
       }
     }
   }
@@ -76,5 +98,13 @@ export default {
     font-size: 14px;
     margin-left: 5px;
   }
+}
+.noMore {
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+  background: #ffffff;
+  padding: 20px 0;
+  border-radius: 2px;
 }
 </style>

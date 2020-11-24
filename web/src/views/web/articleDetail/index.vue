@@ -79,7 +79,6 @@ export default {
     this.getArticleDetail()
     this.$nextTick(() => {
       const el = document.getElementsByClassName('el-main')[0]
-      const offsetHeight = el.offsetHeight
       el.onscroll = (e) => {
         if (el.scrollHeight - (el.scrollTop + el.offsetHeight) < 200) {
           this.handleMethod()

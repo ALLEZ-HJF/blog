@@ -127,7 +127,7 @@ class articlesDao {
                 title: {
                     [Op.like]: `%${data.title || ''}%`
                 },
-                state: data.state || 'invalid'
+                state: data.state || 'valid'
             }
         })
         return { count: count , rows: allData}

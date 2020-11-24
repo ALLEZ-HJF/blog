@@ -11,7 +11,7 @@
               </div>
             </div>
             <div class="right">
-              <el-input class="rightMenu hidden-sm-and-down" size="small" prefix-icon="el-icon-search" placeholder="请输入内容回车搜索" />
+              <el-input v-if="isShowSearch" v-model="searchText" class="rightMenu hidden-sm-and-down" size="small" prefix-icon="el-icon-search" placeholder="请输入内容回车搜索" @change="search" />
               <el-button v-if="userInfo" class="rightMenu" size="small" type="primary">写文章</el-button>
               <el-button v-if="!userInfo" class="rightMenu" plain size="small" type="primary" @click="showLoginDialog">登录</el-button>
               <div v-if="userInfo">
@@ -74,6 +74,7 @@ import { login, sendCode, register } from '@/api/user'
 import { setToken, setUserInfo, getUserInfo } from '@/utils/auth'
 import SelectCategory from '@/components/SelectCategory'
 import { getCategoryList } from '@/api/category'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -107,18 +108,48 @@ export default {
       isSend: false,
       isNoAccount: false,
       isLoading: false,
-      timer: null,
       num: 120,
       userInfo: getUserInfo(),
       selectIds: [],
       categoryList: [],
-      timer: null
+      timer: null,
+      searchText: '',
+      isShowSearch: false
     }
+  },
+  watch: {
+    $route: {
+      handler: function(val, oldVal) {
+        if (val.name !== 'index') {
+          this.isShowSearch = false
+        } else {
+          this.isShowSearch = true
+        }
+      },
+      immediate: true,
+      deep: true
+    }
+  },
+  computed: {
+    ...mapGetters(['articleListSearchForm', 'articleList'])
   },
   created() {
     this.getCategoryList()
   },
   methods: {
+    ...mapActions('article', ['resetArticleList', 'getArticleList']),
+    search(val) {
+      this.articleListSearchForm.page_num = 1
+      this.articleListSearchForm.page_size = 10
+      this.articleListSearchForm.title = val
+      this.articleListSearchForm.status = 1
+      this.resetArticleList().then(async(res) => {
+        const data = await this.getArticleList()
+        if (data.count === this.articleList.length) {
+          this.articleListSearchForm.status = 0
+        }
+      })
+    },
     async getCategoryList() {
       const data = await getCategoryList({ state: 'valid' })
       if (data.code === 200) {

@@ -95,8 +95,7 @@ export default {
                 this.$message.success('删除成功')
                 this.list.splice(index, 1)
               }
-            } catch (error) {
-            }
+            } catch (error) {}
           }
         })
       } else {
@@ -109,8 +108,7 @@ export default {
                 this.$message.success('删除成功')
                 this.list.splice(index, 1)
               }
-            } catch (error) {
-            }
+            } catch (error) {}
           }
         })
       }
@@ -148,7 +146,7 @@ export default {
         if (data.code === 200) {
           this.list = this.list.concat(data.data)
           this.page_num++
-          if (data.data.length == 0 || data.data.length < this.page_size) {
+          if (data.data.length === 0 || data.data.length < this.page_size) {
             this.status = 0
           }
         }
