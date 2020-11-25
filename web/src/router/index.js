@@ -32,6 +32,18 @@ export const constantRoutes = [
         name: 'articleDetail',
         component: () => import('@/views/web/articleDetail/index'),
         meta: { title: '文章详情' }
+      },
+      {
+        path: 'handleArticle',
+        name: 'handleArticle',
+        component: () => import('@/views/web/handleArticle/index'),
+        meta: { title: '发布文章' }
+      },
+      {
+        path: 'homePage',
+        name: 'homePage',
+        component: () => import('@/views/web/homePage/index'),
+        meta: { title: '用户主页' }
       }
     ]
   },

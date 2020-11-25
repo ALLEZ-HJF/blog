@@ -78,6 +78,7 @@ export default {
         font-weight: 500;
         color: #333333;
         margin-top: 5px;
+        height: auto;
       }
       .subTitle {
         font-size: 14px;
@@ -110,6 +111,27 @@ export default {
           color: #ffffff;
         }
       }
+      @media screen and (max-width: 768px){
+        .title {
+          font-size: 16px;
+        }
+        .subTitle {
+          font-size: 14px;
+          margin: 5px 0;
+        }
+        .userInfo {
+          .avatar {
+            width: 30px;
+            height: 30px;
+          }
+        }
+        .categortyList {
+          margin-top: 8px;
+          .item {
+            padding: 2px;
+          }
+        }
+      }
     }
     .cover {
       width: 30%;
@@ -126,4 +148,9 @@ export default {
       border-bottom: 1px solid #eeeeee;
     }
   }
+@media screen and (max-width: 768px) {
+    .articleItem {
+      height: 125px;
+    }
+}
 </style>

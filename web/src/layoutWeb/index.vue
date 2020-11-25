@@ -8,20 +8,29 @@
               <img class="logoImg" src="@/assets/logo.png">
               <div class="navMenu">
                 <router-link class="menu active" tag="a" :to="{ name: 'index' }">首页</router-link>
+                <el-dropdown @command="goToPage">
+                  <span class="el-dropdown-link">
+                    {{ pathName }}<i class="el-icon-arrow-down el-icon--right" />
+                  </span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item command="index" :disabled="$route.name === 'index'">首页</el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
               </div>
             </div>
             <div class="right">
               <el-input v-if="isShowSearch" v-model="searchText" class="rightMenu hidden-sm-and-down" size="small" prefix-icon="el-icon-search" placeholder="请输入内容回车搜索" @change="search" />
-              <el-button v-if="userInfo" class="rightMenu" size="small" type="primary">写文章</el-button>
+              <el-button v-if="userInfo" class="rightMenu writeBtn" size="small" type="primary" @click="gotoWrite">写文章</el-button>
               <el-button v-if="!userInfo" class="rightMenu" plain size="small" type="primary" @click="showLoginDialog">登录</el-button>
               <div v-if="userInfo">
-                <el-dropdown>
+                <el-dropdown @command="handleCommand">
                   <span class="el-dropdown-link">
                     <el-avatar :src="userInfo.avatar" />
                   </span>
                   <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item>个人主页</el-dropdown-item>
-                    <el-dropdown-item>退出登录</el-dropdown-item>
+                    <el-dropdown-item command="write">写文章</el-dropdown-item>
+                    <el-dropdown-item command="homePage">个人主页</el-dropdown-item>
+                    <el-dropdown-item command="logout">退出登录</el-dropdown-item>
                   </el-dropdown-menu>
                 </el-dropdown>
               </div>
@@ -29,10 +38,10 @@
           </el-col>
         </el-row>
       </el-header>
-      <div class="categoryListBox">
+      <div v-if="isShowCategory" class="categoryListBox">
         <el-row>
           <el-col :xl="{span:16,offset:4}" :lg="{span:16,offset:4}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
-            <selectCategory ref="selectCategory" :select-ids="selectIds" :category-list="categoryList" />
+            <selectCategory ref="selectCategory" :select-ids="selectIds" :category-list="categoryList" @getSearchCids="getSearchCids" />
           </el-col>
         </el-row>
       </div>
@@ -114,7 +123,9 @@ export default {
       categoryList: [],
       timer: null,
       searchText: '',
-      isShowSearch: false
+      isShowSearch: false,
+      isShowCategory: false,
+      pathName: '首页'
     }
   },
   watch: {
@@ -122,8 +133,10 @@ export default {
       handler: function(val, oldVal) {
         if (val.name !== 'index') {
           this.isShowSearch = false
+          this.isShowCategory = false
         } else {
           this.isShowSearch = true
+          this.isShowCategory = true
         }
       },
       immediate: true,
@@ -138,11 +151,39 @@ export default {
   },
   methods: {
     ...mapActions('article', ['resetArticleList', 'getArticleList']),
-    search(val) {
+    handleCommand(command) {
+      if (command === 'write') {
+        this.$router.push({ name: 'handleArticle' })
+      } else if (command === 'homePage') {
+        // 前往个人中心
+        this.$router.push({ name: 'homePage' })
+      } else {
+        // 退出
+        this.$message.success('退出成功')
+        window.localStorage.clear()
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000)
+      }
+    },
+    goToPage(name) {
+      if (name === 'index') {
+        this.pathName = '首页'
+      }
+      this.$router.push({ name: name })
+    },
+    gotoWrite() {
+      this.$router.push({ name: 'handleArticle' })
+    },
+    getSearchCids(data) {
+      this.search('', data)
+    },
+    search(val, cids) {
       this.articleListSearchForm.page_num = 1
       this.articleListSearchForm.page_size = 10
       this.articleListSearchForm.title = val
       this.articleListSearchForm.status = 1
+      this.articleListSearchForm.cids = cids
       this.resetArticleList().then(async(res) => {
         const data = await this.getArticleList()
         if (data.count === this.articleList.length) {
@@ -161,20 +202,27 @@ export default {
       this.$refs.loginForm.validate(async(valid) => {
         if (valid) {
           let data = ''
-          if (!this.isNoAccount) {
-            data = await login(this.loginForm)
-          } else {
+          try {
+            if (!this.isNoAccount) {
+              data = await login(this.loginForm)
+            } else {
             // 注册
-            data = await register(this.loginForm)
-          }
-          setToken(data.data.token)
-          setUserInfo(data.data.data)
-          this.userInfo = data.data.data
-          this.loginDialogFormVisible = false
-          if (this.timer) {
-            window.clearInterval(this.timer)
-            this.num = 120
-            this.isSend = false
+              data = await register(this.loginForm)
+            }
+            setToken(data.data.token)
+            setUserInfo(data.data.data)
+            this.userInfo = data.data.data
+            this.loginDialogFormVisible = false
+            if (this.timer) {
+              window.clearInterval(this.timer)
+              this.num = 120
+              this.isSend = false
+            }
+            setTimeout(() => {
+              window.location.reload()
+            }, 1000)
+          } catch (error) {
+            this.isLoading = false
           }
         }
       })
@@ -234,7 +282,7 @@ export default {
     .el-header {
       background: @headerBgColor;
       box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-      height: 70px !important;
+      height: 70px;
       .el-row,
       .el-col {
         height: 100%;
@@ -263,6 +311,13 @@ export default {
             }
             .active {
               color: @defaultColor;
+            }
+            .el-dropdown-link {
+              color:  @defaultColor;
+              font-size: 16px;
+              font-weight: 600;
+              margin-left: 10px;
+              display: none;
             }
           }
         }
@@ -298,6 +353,24 @@ export default {
   float: right;
   margin-bottom: 15px;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    display: none;
+  }
+  .writeBtn {
+    display: none;
+  }
+  .el-header {
+    height: 60px !important;
+  }
+  .logoImg {
+    transform: scale(0.8);
+  }
+  .el-dropdown-link {
+    display: block !important;
+  }
 }
 
 </style>

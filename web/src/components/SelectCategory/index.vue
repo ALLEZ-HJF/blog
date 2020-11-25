@@ -57,6 +57,7 @@ export default {
           }
         }
       }
+      this.$emit('getSearchCids', this.getSelectIds())
       this.$forceUpdate()
     },
     getSelectIds() {

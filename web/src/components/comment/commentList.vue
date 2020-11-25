@@ -20,11 +20,10 @@
               title="确定删除该评论吗?"
               @onConfirm="delComment"
             >
-              <span v-if="userInfo.uid === item.uid" slot="reference" class="delReply" @click="delData(item)">删除</span>
+              <span v-if=" userInfo && userInfo.uid === item.uid" slot="reference" class="delReply" @click="delData(item)">删除</span>
             </el-popconfirm>
-
           </div>
-          <div v-if="!item.pid">
+          <div v-if="!item.pid && userInfo">
             <span class="reply" @click="showReply(item)">回复</span>
           </div>
         </div>
@@ -32,6 +31,7 @@
         <CommentList v-if="item.replys.length" :aid="aid" :replys="item.replys" :pid="item.pid" />
       </div>
     </div>
+    <div v-if="list.length === 0" class="noMore">暂无评论</div>
   </div>
 </template>
 
@@ -177,6 +177,11 @@ export default {
     background: #ffffff;
     padding: 15px;
     border-radius: 4px;
+    .noMore {
+      text-align: center;
+      font-size: 14px;
+      color: #999999;
+    }
     .item {
       display: flex;
       padding-bottom: 5px;

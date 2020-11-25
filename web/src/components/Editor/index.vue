@@ -1,6 +1,6 @@
 <template>
   <div>
-    <editor id="tinymce" v-model="value" :init="init" />
+    <editor id="tinymce" v-model="value" :init="init" :class="isOnlyRead ? 'onlyRead' : ''" />
   </div>
 </template>
 
@@ -110,5 +110,9 @@ export default {
   padding: 15px;
   color: #666;
   overflow: auto;
+}
+.onlyRead {
+  min-height: auto !important;
+  background: #eeeeee !important;
 }
 </style>

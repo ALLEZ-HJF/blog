@@ -47,7 +47,9 @@ export default {
     }
   },
   mounted() {
-    this.getArticleList()
+    if (this.articleList.length === 0) {
+      this.getArticleList()
+    }
     this.getUserRankingList()
     this.$nextTick(() => {
       const el = document.getElementsByClassName('el-main')[0]
@@ -106,5 +108,13 @@ export default {
   background: #ffffff;
   padding: 20px 0;
   border-radius: 2px;
+}
+@media screen and (max-width: 768px) {
+  .indexContainer {
+    margin-top: 0;
+  }
+  .articleList {
+    padding: 0;
+  }
 }
 </style>

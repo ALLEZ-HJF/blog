@@ -87,6 +87,10 @@ class articlesDao {
 
     // 获取文章列表
     static async getArticleList(data) {
+        let where = {}
+        if (data.cids) {
+            where.cid = data.cids.split(',')
+        }
         let allData = await articles.findAll({
             attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num','comment_num','imgs'],
             where: {
@@ -108,9 +112,10 @@ class articlesDao {
                 },
                 {
                     model: categories,
+                    where: where,
                     attributes: ['name','cid'],
                     through: { attributes: [] },
-                    required: false
+                    required: true
                 }
             ],
             offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
