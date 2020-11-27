@@ -40,7 +40,7 @@ export const constantRoutes = [
         meta: { title: '发布文章' }
       },
       {
-        path: 'homePage',
+        path: 'homePage/:uid',
         name: 'homePage',
         component: () => import('@/views/web/homePage/index'),
         meta: { title: '用户主页' }

@@ -1,5 +1,5 @@
 <template>
-  <div class="userItem">
+  <div class="userItem" @click="gotoHomePage">
     <div class="avatar">
       <el-image lazy :src="item.avatar" />
     </div>
@@ -20,6 +20,11 @@ export default {
     item: {
       type: Object,
       default: {}
+    }
+  },
+  methods: {
+    gotoHomePage() {
+      this.$router.push({ name: 'homePage', params: { uid: this.item.uid }})
     }
   }
 }

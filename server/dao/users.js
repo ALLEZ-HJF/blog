@@ -30,7 +30,7 @@ class userDao {
     // 根据用户名查询到密码返回对比
     static async login(data) {
         return await users.findOne({
-            attributes: ['uid','username','nickname','password','phone','avatar','introduction','state','gid'],
+            attributes: ['uid','username','nickname','password','phone','avatar','introduction','state','gid','email'],
             where: {
                 username: data.username
             }
@@ -60,18 +60,28 @@ class userDao {
         return await users.create(data)
     }
     // 根据id 或 用户名 查询用户
-    static async getUserByNameOrUid(data) {
+    static async getUserInfo(data) {
+        var arr = ['uid','username','email','phone']
+        let orList = []
+        for (const key in data) {
+            if (arr.indexOf(key) !== -1) {
+                let obj = {}
+                 obj[key] = data[key] || ''
+                 orList.push(obj)
+            }
+        }
+        if (orList.length === 0) {
+            orList.push({
+                state: data.state || 'valid'
+            })
+        }
         return await users.findOne({
             attributes: {
                 exclude: ['password']
             },
             where: {
-                [Op.or]: [
-                    { uid: data.uid || '' },
-                    { username: data.username || '' },
-                    { email: data.email || '' }
-                ],
-                state: 'valid'
+                state: data.state || 'valid',
+                [Op.or]: orList
             }
         })
     }

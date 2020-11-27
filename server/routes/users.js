@@ -18,6 +18,8 @@ router.post('/login',userController.login)
 router.post('/sendCode',userController.sendCode)
 // 作者排行榜
 router.post('/getUserRankingList',userController.getUserRankingList)
+// 获取用户详情
+router.post('/getUserInfo',userController.getUserInfo)
 
 
 module.exports = router

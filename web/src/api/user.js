@@ -61,3 +61,12 @@ export function getUserRankingList(data) {
     data
   })
 }
+
+// 获取用户详情
+export function getUserInfo(data) {
+  return request({
+    url: 'users/getUserInfo',
+    method: 'post',
+    data
+  })
+}

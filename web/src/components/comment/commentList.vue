@@ -190,6 +190,8 @@ export default {
         height: 40px;
         .el-image {
           border-radius: 50%;
+          width: 40px;
+          height: 40px;
         }
         margin-right: 10px;
       }

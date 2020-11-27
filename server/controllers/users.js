@@ -4,6 +4,12 @@ const bcrypt = require('bcrypt')
 const sendEmail = require('../middleware/sendEmail')
 
 class userController {
+    // 获取用户详情
+    static async getUserInfo(ctx) {
+        let param = ctx.request.body
+        let data = await userDao.getUserInfo(param)
+        ctx.success(200,'获取成功',data)
+    }
     // 作者排行榜
     static async getUserRankingList(ctx) {
         let param = ctx.request.body
@@ -17,7 +23,7 @@ class userController {
         let isLogin = param.isLogin
         if (isLogin === 'true') {
             try {
-                const userInfo = await userDao.getUserByNameOrUid(param)
+                const userInfo = await userDao.getUserInfo(param)
                 param.email = userInfo.email
             } catch (error) {
                 ctx.fail(500,'用户不存在')
@@ -104,7 +110,7 @@ class userController {
         }else {
             param.password = bcrypt.hashSync(param.password,10)
             param.nickname = ''
-            const userInfo = await userDao.getUserByNameOrUid(param)
+            const userInfo = await userDao.getUserInfo(param)
             if (!userInfo) {
                 const data = await userDao.insertUser(param)
                 const token = ctx.sign({data},{ expiresIn: '15d' })
@@ -133,6 +139,13 @@ class userController {
             body.password = bcrypt.hashSync(body.password,10)
         }
         body.update_time = Date.now()
+        if (body.phone) {
+           const data = await userDao.getUserInfo({phone: body.phone})
+           if (data !== '') {
+             ctx.fail(500,'该手机已绑定')
+             return
+           }
+        }
         const data = await userDao.editUser(body)
         ctx.response.status = 200
         ctx.success(200,'修改成功',data)
