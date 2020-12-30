@@ -116,9 +116,9 @@ export default {
   methods: {
     gotoPublish(row, isEdit) {
       if (row) {
-        this.$router.push({ name: 'handleArticle', query: { aid: row.aid, isEdit: isEdit }})
+        this.$router.push({ path: '/admin/articles/handleArticle', query: { aid: row.aid, isEdit: isEdit }})
       } else {
-        this.$router.push({ name: 'handleArticle' })
+        this.$router.push({ name: '/admin/articles/handleArticle' })
       }
     },
     delArticle(row) {

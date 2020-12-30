@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui'
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'element-ui/lib/theme-chalk/display.css'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
@@ -32,6 +34,7 @@ if (process.env.NODE_ENV === 'production') {
   mockXHR()
 }
 
+Vue.use(mavonEditor)
 Vue.use(ElementUI)
 new Vue({
   render: h => h(App),

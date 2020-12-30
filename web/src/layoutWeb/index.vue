@@ -72,7 +72,7 @@
           </el-input>
         </el-form-item>
         <span class="registerText" @click="isNoAccount = !isNoAccount">{{ isNoAccount ? '前往登陆' : '注册账号' }}</span>
-        <el-button type="primary" style="width: 100%" :loading="isLoading" :disabled="!isSend" @click="login">登录&nbsp;/&nbsp;注册</el-button>
+        <el-button type="primary" style="width: 100%" :loading="isLoading" :disabled="!isSend" @click="login">{{ isNoAccount ? '注册': '登录' }}</el-button>
       </el-form>
     </el-dialog>
   </div>
@@ -156,7 +156,7 @@ export default {
         this.$router.push({ name: 'handleArticle' })
       } else if (command === 'homePage') {
         // 前往个人中心
-        this.$router.push({ name: 'homePage' })
+        this.$router.push({ name: 'homePage', params: { uid: this.userInfo.uid }})
       } else {
         // 退出
         this.$message.success('退出成功')

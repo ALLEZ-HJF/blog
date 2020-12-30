@@ -4,7 +4,7 @@
       <el-input v-model="article.title" class="title" placeholder="请输入标题">
         <template slot="append">
           <el-popover
-            placement="bottom"
+            placement="left"
             title="封面图片"
             trigger="click"
           >
@@ -23,7 +23,7 @@
         </template>
       </el-input>
       <el-input v-model="article.sub_title" class="title subTitle" placeholder="请输入副标题" />
-      <editor v-if="!aid || article.content" :content="article.content" @getContent="getContent" />
+      <Markdown ref="markdown" />
       <div v-if="categoryList.length > 0" class="categoryBox">
         <div class="text">
           选择分类:
@@ -53,12 +53,12 @@ import { getArticleByAid, insertArticle, articleVerify, editArticle } from '@/ap
 import { getCategoryList } from '@/api/category'
 import { uploadFile } from '@/api/upload'
 import SelectCategory from '@/components/SelectCategory'
-import Editor from '@/components/Editor'
+import Markdown from '@/components/Markdown'
 
 export default {
   components: {
-    Editor,
-    SelectCategory
+    SelectCategory,
+    Markdown
   },
   data() {
     return {
@@ -87,10 +87,6 @@ export default {
     this.getCategoryList()
   },
   methods: {
-    // 获取富文本返回的值
-    getContent(content) {
-      this.article.content = content
-    },
     // 编辑文章
     async editArticle() {
       const imgArr = []
@@ -103,7 +99,7 @@ export default {
         cids: this.$refs['selectCategory'].getSelectIds(),
         title: this.article.title,
         sub_title: this.article.sub_title,
-        content: this.article.content,
+        content: this.$refs.markdown.content,
         imgs: imgArr.join(','),
         state: this.article.state
       }
@@ -151,7 +147,7 @@ export default {
         // 发布文章
         if (!this.article.title) {
           this.$message.info('请输入文章标题')
-        } else if (!this.article.content) {
+        } else if (!this.$refs.markdown.content) {
           this.$message.info('请输入文章内容')
         } else {
           // 发布
@@ -166,6 +162,7 @@ export default {
             return
           }
           this.article.cids = cids
+          this.article.content = this.$refs.markdown.content
           const data = await insertArticle(this.article)
           if (data.code === 200) {
             this.$message.success('发布成功')
@@ -193,6 +190,7 @@ export default {
         this.article.categories.forEach(item => {
           this.selectIds.push(item.cid)
         })
+        this.$refs.markdown.content = this.article.content
         if (this.article.imgs) {
           const imgArr = this.article.imgs.split(',')
           imgArr.forEach(item => {

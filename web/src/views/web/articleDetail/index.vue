@@ -4,7 +4,7 @@
       <el-col :xl="18" :lg="18" :md="24" :sm="24" :xs="24" class="articleDetail">
         <div class="title">{{ article.title }}</div>
         <div class="subTitle">{{ article.sub_title }}</div>
-        <editor v-if="article.content" :content="article.content" :is-only-read="true" />
+        <div class="content" v-html="content" />
         <div class="comment">
           <!-- 评论 -->
           <div v-if="userInfo" class="commentBox">
@@ -55,12 +55,13 @@
 <script>
 import { getArticleByAid, getArticleList, addArticleLookNum } from '@/api/article'
 import { getUserInfo } from '@/utils/auth'
-import Editor from '@/components/Editor'
 import commentInput from '@/components/comment/commentInput'
 import commentList from '@/components/comment/commentList'
+import marked from 'marked'
+import 'highlight.js/scss/atelier-estuary-dark.scss'
+import hljs from 'highlight.js' // 导入代码高亮文件
 export default {
   components: {
-    Editor,
     commentList,
     commentInput
   },
@@ -68,6 +69,7 @@ export default {
     return {
       aid: '',
       article: {},
+      content: '',
       articleList: [],
       page_num: 1,
       page_size: 10,
@@ -116,8 +118,10 @@ export default {
       const data = await getArticleByAid({ aid: this.aid })
       if (data.code === 200) {
         this.article = data.data
+        this.content = marked(this.article.content)
         this.getArticleList()
         this.addArticleLookNum()
+        this.highlighthandle()
       }
     },
     async getArticleList() {
@@ -125,28 +129,47 @@ export default {
       if (data.code === 200) {
         this.articleList = data.data.rows
       }
+    },
+    async highlighthandle() {
+      await hljs
+      const highlight = document.querySelectorAll('code,pre')
+      highlight.forEach((block) => {
+        hljs.highlightBlock(block)
+      })
     }
   }
 }
 </script>
-
+<style lang="less">
+.content {
+  padding: 15px;
+  .hljs {
+    margin-bottom: 10px;
+    border-radius: 4px;
+  }
+}
+</style>
 <style lang="less" scoped>
 @import "@/styles/variables.less";
+
 .articleDetail {
   margin-top: 25px;
-  background: #fafafa;
+  background: #ffffff;
   padding-top: 15px;
   .title {
     font-size: 28px;
     color: #333333;
     font-weight: 600;
     margin-left: 10px;
+    height: auto;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
   }
   .subTitle {
     font-size: 18px;
     color: #666666;
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 25px;
   }
   .comment {
     padding: 0 30px;

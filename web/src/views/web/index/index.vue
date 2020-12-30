@@ -7,8 +7,7 @@
             <articleItem :item="item" />
           </div>
         </div>
-        <div v-else class="noMore">暂无数据</div>
-        <div v-if="articleListSearchForm.status === 0" class="noMore">暂无更多</div>
+        <div v-if="articleList.length === 0 || articleListSearchForm.status === 0" class="noMore">暂无更多</div>
       </el-col>
       <el-col class="hidden-md-and-down" :xl="6" :lg="6">
         <div class="aside">
