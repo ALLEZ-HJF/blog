@@ -1,5 +1,6 @@
 const { sequelize } = require('../config/db')
 const db = require('../config/db')
+const moment = require('moment')
 const Op = db.Op
 // 引入数据表模型
 const users = db.users
@@ -82,6 +83,16 @@ class userDao {
             where: {
                 state: data.state || 'valid',
                 [Op.or]: orList
+            }
+        })
+    }
+    // 获取今日新增用户数量
+    static async getNewUserCount() {
+        return await users.count({
+            where: {
+                create_time: {
+                    [Op.gte]: moment().format('YYYY-MM-DD')
+                }
             }
         })
     }

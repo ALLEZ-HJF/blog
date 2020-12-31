@@ -27,6 +27,7 @@ const comments = sequelize.import('../models/comments');
 const replys = sequelize.import('../models/replys');
 const codes = sequelize.import('../models/codes');
 const article_category = sequelize.import('../models/article_category');
+const stat_day = sequelize.import('../models/stat_day');
 
 // 关联
 user_group.hasOne(users,{
@@ -91,4 +92,4 @@ sequelize.sync({ force: false });
 
 
 
-module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes,article_category }
+module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes,article_category,stat_day }

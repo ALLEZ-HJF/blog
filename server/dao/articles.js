@@ -1,5 +1,6 @@
 const db = require('../config/db')
 const sequelize = db.sequelize
+const moment = require('moment')
 const Op = db.Op
 // 引入数据表模型
 const articles = db.articles
@@ -84,7 +85,22 @@ class articlesDao {
         let result = [ {count: count, rows:rows } ]
         return result
     }
-
+    // 获取新增文章数量与未审核数量
+    static async getArticleSummary() {
+        const newCount = await articles.count({
+            where: {
+                create_time: {
+                    [Op.gte]: moment().format('YYYY-MM-DD')
+                }
+            }
+        })
+        const invalidCount = await articles.count({
+            where: {
+                state: 'invalid'
+            }
+        })
+        return {newCount:newCount,invalidCount: invalidCount}
+    }
     // 获取文章列表
     static async getArticleList(data) {
         let where = {}

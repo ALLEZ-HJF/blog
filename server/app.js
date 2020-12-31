@@ -21,6 +21,7 @@ const categories = require('./routes/categories')
 const comments = require('./routes/comments')
 const upload = require('./routes/upload')
 const replys = require('./routes/replys')
+const stat = require('./routes/stat')
 
 // 允许跨域
 app.use(cors());
@@ -57,7 +58,6 @@ app.use(async (ctx, next) => {
     const start = new Date()
     await next()
     const ms = new Date() - start
-    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
   } catch (err) {
     // 手动释放error事件
     ctx.app.emit('error', err, ctx);
@@ -80,6 +80,7 @@ app.use(categories.routes(), categories.allowedMethods())
 app.use(comments.routes(), comments.allowedMethods())
 app.use(upload.routes(), upload.allowedMethods())
 app.use(replys.routes(), replys.allowedMethods())
+app.use(stat.routes(), stat.allowedMethods())
 
 
 // error-handling
