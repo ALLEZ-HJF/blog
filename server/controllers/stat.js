@@ -15,7 +15,7 @@ class statController {
         const data = await statDayDao.getDayData(param)
         let countArr = data.count.map(x => x.count)
         let timeArr = data.rows.map(x => x.time)
-        ctx.success(200,'获取成功',{data:　countArr, time: timeArr} )
+        ctx.success(200,'获取成功',{data:　countArr, time: timeArr, list: data.rows} )
     }
     // 首页汇总
     static async getSummaryData(ctx) {

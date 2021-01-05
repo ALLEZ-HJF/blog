@@ -30,7 +30,6 @@ class statDayDao {
             }
         }
         return await statDay.findAndCountAll({
-           attributes: ['time'],
            where,
            group: 'time'
         })

@@ -1,4 +1,5 @@
 const articlesDao = require('../dao/articles')
+var { client } = require('../config/baiduApi.js')
 
 class articlesController {
 
@@ -40,9 +41,21 @@ class articlesController {
         } else if (!param.cids) {
             ctx.fail(500,'请选择分类')
         } else {
-            const res = await articlesDao.insertArticle(param)
-            ctx.response.status = 200
-            ctx.success(200,'发布成功,等待审核',res)
+            // 将标题 副标题 内容合并用于审核字符串是否含有敏感词汇
+            let str = ''
+            if (param.sub_title) {
+                str = str.concat(param.title+',',param.sub_title + ',',param.content)
+            } else {
+                str = str.concat(param.title + ',',param.content)
+            }
+           const isPass = await client.textCensorUserDefined(str)
+           if (isPass.conclusionType === 1) {
+                const res = await articlesDao.insertArticle(param)
+                ctx.response.status = 200
+                ctx.success(200,'发布成功,等待审核',res)
+           } else {
+               ctx.fail(500,isPass.data[0].msg)
+           }
         }
     }
     // 删除文章
