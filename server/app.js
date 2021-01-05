@@ -22,6 +22,7 @@ const comments = require('./routes/comments')
 const upload = require('./routes/upload')
 const replys = require('./routes/replys')
 const stat = require('./routes/stat')
+const draftArticles = require('./routes/draft_articles')
 
 // 允许跨域
 app.use(cors());
@@ -81,6 +82,7 @@ app.use(comments.routes(), comments.allowedMethods())
 app.use(upload.routes(), upload.allowedMethods())
 app.use(replys.routes(), replys.allowedMethods())
 app.use(stat.routes(), stat.allowedMethods())
+app.use(draftArticles.routes(), draftArticles.allowedMethods())
 
 
 // error-handling
