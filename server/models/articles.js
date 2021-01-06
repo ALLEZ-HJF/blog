@@ -56,7 +56,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.ENUM,
             values: ['valid','invalid','lock'],
             field: 'state',
-            defaultValue: 'invalid'
+            defaultValue: 'valid'
         },
         update_time: {
             type: DataTypes.DATE,

@@ -52,7 +52,7 @@ class articlesController {
            if (isPass.conclusionType === 1) {
                 const res = await articlesDao.insertArticle(param)
                 ctx.response.status = 200
-                ctx.success(200,'发布成功,等待审核',res)
+                ctx.success(200,'发布成功',res)
            } else {
                ctx.fail(500,isPass.data[0].msg)
            }

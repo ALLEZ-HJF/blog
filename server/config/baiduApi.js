@@ -1,4 +1,4 @@
-var AipContentCensorClient = require("../sdk/baidu").contentCensor;
+var AipContentCensorClient = require("baidu-aip-sdk").contentCensor;
 
 // 设置APPID/AK/SK
 var APP_ID = "23487413";
