@@ -96,6 +96,14 @@ class userController {
     static async insertUser(ctx) {
         let param = ctx.request.body
         const verify = await codesDao.getCodeInfo(param.code_id)
+        if (ctx.header.authorization) {
+            const userInfo = ctx.verify(ctx.header.authorization).data
+            if (!userInfo.gid && param.gid) {
+                delete param.gid 
+            }
+        } else {
+            delete param.gid 
+        }
         if (!param.username) {
             ctx.fail(500,'请输入用户名')
         } else if (!param.password) {
@@ -117,7 +125,7 @@ class userController {
                 let userInfo = JSON.parse(JSON.stringify(data))
                 delete userInfo.password
                 ctx.response.status = 200
-                ctx.success(200,'添加成功',{token : token, data: userInfo})
+                ctx.success(200,'注册成功',{token : token, data: userInfo})
             } else {
                 ctx.fail(500,'用户已存在')
             }
@@ -138,7 +146,6 @@ class userController {
             // 加密密码
             body.password = bcrypt.hashSync(body.password,10)
         }
-        body.update_time = Date.now()
         if (body.phone) {
            const data = await userDao.getUserInfo({phone: body.phone})
            if (data !== '') {
@@ -146,6 +153,11 @@ class userController {
              return
            }
         }
+        const userInfo = ctx.verify(ctx.header.authorization).data
+        if (body.gid && !userInfo.gid) {
+            delete body.gid
+        }
+        body.update_time = Date.now()
         const data = await userDao.editUser(body)
         ctx.response.status = 200
         ctx.success(200,'修改成功',data)

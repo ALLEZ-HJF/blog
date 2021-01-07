@@ -29,6 +29,7 @@ const codes = sequelize.import('../models/codes');
 const article_category = sequelize.import('../models/article_category');
 const stat_day = sequelize.import('../models/stat_day');
 const draft_articles = sequelize.import('../models/draft_articles');
+const resources = sequelize.import('../models/resources');
 
 // 关联
 user_group.hasOne(users,{
@@ -94,6 +95,14 @@ draft_articles.belongsTo(users, {
   foreignKey: 'uid'
 })
 
+// 资源与用户关联
+users.hasMany(resources, {
+  foreignKey: 'uid'
+})
+resources.belongsTo(users, {
+  foreignKey: 'uid'
+})
+
 sequelize.sync({ force: false });
 
 
@@ -101,4 +110,4 @@ sequelize.sync({ force: false });
 
 
 
-module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes,article_category,stat_day,draft_articles }
+module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes,article_category,stat_day,draft_articles, resources }

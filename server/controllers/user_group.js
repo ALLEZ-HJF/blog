@@ -16,10 +16,6 @@ class userGroupController {
             ctx.fail(500,'请输入用户组名称')
             return
         }
-        if (!param.role) {
-            ctx.fail(500,'请输入角色值')
-            return
-        }
         param.create_time = Date.now()
         const data = await userGroupDao.insertUserGroup(param)
         ctx.success(200,'创建成功',data)
