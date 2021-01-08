@@ -30,6 +30,7 @@ const article_category = sequelize.import('../models/article_category');
 const stat_day = sequelize.import('../models/stat_day');
 const draft_articles = sequelize.import('../models/draft_articles');
 const resources = sequelize.import('../models/resources');
+const routers = sequelize.import('../models/routers');
 
 // 关联
 user_group.hasOne(users,{
@@ -103,11 +104,16 @@ resources.belongsTo(users, {
   foreignKey: 'uid'
 })
 
-sequelize.sync({ force: false });
+routers.hasMany(routers,{
+  as: 'child',
+  foreignKey: 'pid'
+})
+
+sequelize.sync({ alter: true  });
 
 
 
 
 
 
-module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes,article_category,stat_day,draft_articles, resources }
+module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes,article_category,stat_day,draft_articles, resources, routers }
