@@ -7,7 +7,7 @@
       </div>
       <div class="title">{{ item.title }}</div>
       <div v-if="item.sub_title" class="subTitle">{{ item.sub_title }}</div>
-      <div class="update_time">{{ item.update_time }}  <span class="look_num">查看次数: {{ item.look_num }}</span>  <span class="look_num">评论: {{ item.comment_num }}</span>  </div>
+      <div class="update_time">{{ item.create_time }}  <span class="look_num">查看次数: {{ item.look_num }}</span>  <span class="look_num">评论: {{ item.comment_num }}</span>  </div>
       <div class="categortyList">
         <span v-for="category in item.categories" :key="category.cid" class="item">{{ category.name }}</span>
       </div>

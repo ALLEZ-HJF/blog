@@ -50,8 +50,15 @@ export const constantRoutes = [
   {
     path: '/admin',
     component: layoutAdmin,
-    hidden: true,
-    redirect: { name: 'userList', role: 'admin' }
+    redirect: { name: 'dashboard', role: 'admin' },
+    children: [
+      {
+        path: 'dashboard',
+        name: 'dashboard',
+        component: () => import('@/views/admin/dashboard/index'),
+        meta: { title: '首页', role: 'admin' }
+      }
+    ]
   },
   {
     path: '/admin/users',

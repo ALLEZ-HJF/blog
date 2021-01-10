@@ -5,9 +5,12 @@
 </template>
 
 <script>
-
+import { insertDayData } from '@/api/stat'
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    insertDayData()
+  }
 }
 </script>
 
