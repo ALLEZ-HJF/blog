@@ -8,7 +8,7 @@ class statController {
         const ip = getClientIP(ctx)
         const browser = ctx.header['user-agent']
         const data = await statDayDao.insertDayData({ip,browser})
-        ctx.body = data
+        ctx.success(200,'记录成功',data)
     }
     static async getDayData(ctx) {
         const param = ctx.request.query
@@ -21,7 +21,7 @@ class statController {
     static async getSummaryData(ctx) {
        const userCount = await usersDao.getNewUserCount()
        const articleCount = await articlesDao.getArticleSummary()
-       ctx.success(200,'获取成功', {user: userCount, newArticleCount: articleCount.newCount, invalidArticleCount: articleCount.invalidCount })
+       ctx.success(200,'获取成功', {newUser: userCount, newArticleCount: articleCount.newCount, invalidArticleCount: articleCount.invalidCount })
     }
 }
 
