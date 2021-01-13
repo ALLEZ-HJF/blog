@@ -39,7 +39,13 @@ class routerController {
             ctx.fail(500,'删除失败')
         }
     }
-
+    // 全部路由
+    static async getRouterList(ctx) {
+        const param = ctx.request.body
+        const res = await routersDao.getRouterList(param)
+        ctx.success(200,'获取成功', res)
+    }
+    // 用户路由
     static async getWebRouterList(ctx) {
         const res = await routersDao.getWebRouterList()
         ctx.success(200,'获取成功',res)

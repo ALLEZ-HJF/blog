@@ -10,8 +10,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         pid: {
             type: DataTypes.INTEGER,
-            allowNull: true,
-            defaultValue: 0
+            allowNull: true
         },
         path: {
             type: DataTypes.STRING,
@@ -55,7 +54,7 @@ module.exports = function(sequelize, DataTypes) {
         is_page: {
             type: DataTypes.ENUM,
             values: ['yes', 'no'],
-            field: 'is_menu',
+            field: 'is_page',
             defaultValue: 'yes'
         },
         sort: {

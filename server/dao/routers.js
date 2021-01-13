@@ -25,13 +25,34 @@ class routersDao {
             }
         })
     }
+    // 获取路由列表
+    static async getRouterList(data) {
+        return await routers.findAll({
+            where: {
+                state: data.state || 'valid',
+                role: data.role || 'user',
+                pid: null
+            },
+            order: [['sort','DESC']],
+            include : {
+                model: routers,
+                as:'child', 
+                required : false,
+                include : {
+                    all : true,
+                    nested : true
+                }
+            }
+        })
+    }
     // 获取路由列表 不需要登录
     static async getWebRouterList() {
         return await routers.findAll({
             where: {
                 role: 'user',
                 state: 'valid',
-                is_menu: 'yes'
+                is_page: 'yes',
+                pid: null
             },
             order: [['sort','DESC']],
             include : {
