@@ -2,7 +2,7 @@ const moment = require('moment')
 // 权限表数据模型
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('routers',{
-        id: {
+        rid: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             allowNull: true,

@@ -31,6 +31,7 @@ const stat_day = sequelize.import('../models/stat_day');
 const draft_articles = sequelize.import('../models/draft_articles');
 const resources = sequelize.import('../models/resources');
 const routers = sequelize.import('../models/routers');
+const user_group_power = sequelize.import('../models/user_group_power');
 
 // 关联
 user_group.hasOne(users,{
@@ -109,6 +110,10 @@ routers.hasMany(routers,{
   foreignKey: 'pid'
 })
 
+// 权限表
+user_group.belongsToMany(routers,{ through: 'user_group_power', foreignKey: 'gid' })
+routers.belongsToMany(user_group,{ through: 'user_group_power', foreignKey: 'rid' })
+
 sequelize.sync({ alter: true  });
 
 
@@ -116,4 +121,4 @@ sequelize.sync({ alter: true  });
 
 
 
-module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes,article_category,stat_day,draft_articles, resources, routers }
+module.exports = { sequelize,Op,users,user_group, articles, categories, comments,replys, codes,article_category,stat_day,draft_articles, resources, routers, user_group_power }

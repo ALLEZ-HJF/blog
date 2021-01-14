@@ -39,8 +39,9 @@ class routersDao {
                 as:'child', 
                 required : false,
                 include : {
-                    all : true,
-                    nested : true
+                    model: routers,
+                    as:'child',
+                    required : false,
                 }
             }
         })
@@ -60,8 +61,9 @@ class routersDao {
                 as:'child', 
                 required : false,
                 include : {
-                    all : true,
-                    nested : true
+                    model: routers,
+                    as:'child',
+                    required : false,
                 }
             }
         })

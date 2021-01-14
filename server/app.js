@@ -25,6 +25,7 @@ const stat = require('./routes/stat')
 const draftArticles = require('./routes/draft_articles')
 const resources = require('./routes/resources')
 const routers = require('./routes/routers')
+const user_group_power = require('./routes/user_group_power')
 
 // 允许跨域
 app.use(cors());
@@ -87,6 +88,7 @@ app.use(stat.routes(), stat.allowedMethods())
 app.use(draftArticles.routes(), draftArticles.allowedMethods())
 app.use(resources.routes(), resources.allowedMethods())
 app.use(routers.routes(), routers.allowedMethods())
+app.use(user_group_power.routes(), user_group_power.allowedMethods())
 
 
 // error-handling

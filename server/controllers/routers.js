@@ -14,8 +14,8 @@ class routerController {
     // 修改路由
     static async editRouter(ctx) {
         const param = ctx.request.body
-        if (!param.id) {
-            ctx.fail(500,'请携带权限id')
+        if (!param.rid) {
+            ctx.fail(500,'请携带权限rid')
             return false
         }
         const res = await routersDao.editRouter(param)
@@ -28,8 +28,8 @@ class routerController {
     // 删除路由
     static async delRouter(ctx) {
         const param = ctx.request.body
-        if (!param.id) {
-            ctx.fail(500,'请携带权限id')
+        if (!param.rid) {
+            ctx.fail(500,'请携带权限rid')
             return false
         }
         const res = await routersDao.delRouter(param)
