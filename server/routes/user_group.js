@@ -4,12 +4,12 @@ const { version } = require('../config/config')
 
 router.prefix('/api_v'+version+'/userGroup')
 // 用户组列表
-router.post('/getUserGroupList',UserGroupController.getUserGroupList)
+router.post('/admin/getUserGroupList',UserGroupController.getUserGroupList)
 // 添加用户组
-router.post('/insertUserGroup',UserGroupController.insertUserGroup)
+router.post('/admin/insertUserGroup',UserGroupController.insertUserGroup)
 // 修改用户组
-router.post('/editUserGroup',UserGroupController.editUserGroup)
+router.post('/admin/editUserGroup',UserGroupController.editUserGroup)
 // 删除用户组
-router.post('/delUserGroup',UserGroupController.delUserGroup)
+router.post('/admin/delUserGroup',UserGroupController.delUserGroup)
 
 module.exports = router

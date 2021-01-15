@@ -10,6 +10,7 @@ var cors = require('koa2-cors');
 const { singKey } = require('./config/config')
 const responseData = require('./middleware/responseData')
 const handleToken = require('./middleware/handleToken')
+const verifyPrower = require('./middleware/verifyPrower')
 const { logger, accessLogger } = require('./config/logger');
 const { path } = require('./config/noFilter')
 
@@ -55,13 +56,11 @@ app.use(views(__dirname + '/views', {
 // 自定义统一返回数据格式
 app.use(responseData())
 app.use(handleToken())
-
+app.use(verifyPrower())
 // logger
 app.use(async (ctx, next) => {
   try {
-    const start = new Date()
     await next()
-    const ms = new Date() - start
   } catch (err) {
     // 手动释放error事件
     ctx.app.emit('error', err, ctx);

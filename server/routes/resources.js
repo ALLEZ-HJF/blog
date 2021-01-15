@@ -4,9 +4,9 @@ const resourcesController = require('../controllers/resources')
 
 router.prefix('/api_v'+version+'/resources')
 
-router.post('/getResourceList',resourcesController.getResourceList)
-router.post('/insertResource',resourcesController.insertResource)
-router.post('/delResource',resourcesController.delResource)
+router.post('/web/insertResource',resourcesController.insertResource)
+router.post('/admin/getResourceList',resourcesController.getResourceList)
+router.post('/admin/delResource',resourcesController.delResource)
 
 
 module.exports = router

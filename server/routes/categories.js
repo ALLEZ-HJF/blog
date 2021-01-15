@@ -4,12 +4,12 @@ const categoriesController = require('../controllers/categories')
 
 router.prefix('/api_v'+version+'/category')
 // 获取分类列表
-router.post('/getCategoryList',categoriesController.getCategoryList)
+router.post('/web/getCategoryList',categoriesController.getCategoryList)
 // 添加分类
-router.post('/insertCategory',categoriesController.insertCategory)
+router.post('/admin/insertCategory',categoriesController.insertCategory)
 // 修改分类
-router.post('/editCategory',categoriesController.editCategory)
+router.post('/admin/editCategory',categoriesController.editCategory)
 // 删除分类
-router.post('/delCategory',categoriesController.delCategory)
+router.post('/admin/delCategory',categoriesController.delCategory)
 
 module.exports = router

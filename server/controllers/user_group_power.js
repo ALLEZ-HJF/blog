@@ -20,7 +20,6 @@ class userGroupPowerController {
             const data = await userGroupPowerDao.editPowerByGid(params.gid, params.rid_str.split(','))
             ctx.success(200,'分配成功',data)
         }
-
     }
 }
 

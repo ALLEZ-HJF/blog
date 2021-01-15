@@ -4,7 +4,7 @@ const replysController = require('../controllers/replys')
 
 router.prefix('/api_v'+version+'/replys')
 // 添加回复
-router.post('/insertReply',replysController.insertReply)
+router.post('/web/insertReply',replysController.insertReply)
 // 删除回复
-router.post('/delReply',replysController.delReply)
+router.post('/web/delReply',replysController.delReply)
 module.exports = router

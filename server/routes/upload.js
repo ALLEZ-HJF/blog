@@ -27,7 +27,7 @@ async function checkImg(path) {
 }
 
 // 多文件上传
-router.post('/uploadFile', async (ctx, next) => {
+router.post('/web/uploadFile', async (ctx, next) => {
   const files = ctx.request.files.file
   let fileTypeArr = ['image/png', 'image/jpg', 'image/jpeg', 'image/gif']  // 允许上传的格式
   let imgArr = []

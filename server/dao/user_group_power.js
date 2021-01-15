@@ -42,6 +42,10 @@ class UserGroupPowerDao {
         let userGroup = await user_group.findByPk(gid)
         return await userGroup.setRouters(routerArr)
     }
+    // 验证权限
+    static async verifyPrower() {
+        return true
+    }
 }
 
 module.exports = UserGroupPowerDao
