@@ -31,8 +31,8 @@ export default {
       'sidebar'
     ]),
     routes() {
-      console.log(this.$router.options)
-      return this.$router.options.routes
+      console.log(this.$store.state.permission.adminRoutes[0])
+      return this.$store.state.permission.adminRoutes
     },
     activeMenu() {
       const route = this.$route

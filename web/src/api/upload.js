@@ -2,7 +2,7 @@ import request from '@/utils/request'
 // 用户登录
 export function uploadFile(data) {
   return request({
-    url: 'upload/uploadFile',
+    url: 'upload/web/uploadFile',
     method: 'post',
     headers: { 'Content-Type': 'multipart/form-data' },
     transformRequest: [() => {

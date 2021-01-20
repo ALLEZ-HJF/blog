@@ -1,14 +1,14 @@
 const { version } = require('./config')
 module.exports.path = [
-    `/api_v${version}/users/login`,
-    `/api_v${version}/users/register`,
-    `/api_v${version}/users/sendCode`,
-    `/api_v${version}/articles/getArticleList`,
-    `/api_v${version}/articles/getArticleByAid`,
-    `/api_v${version}/articles/addArticleLookNum`,
-    `/api_v${version}/users/getUserRankingList`,
-    `/api_v${version}/category/getCategoryList`,
-    `/api_v${version}/comments/getCommentByAid`,
-    `/api_v${version}/stat/insertDayData`,
-    `/api_v${version}/upload/uploadFile`
+    `/api_v${version}/users/web/login`,
+    `/api_v${version}/users/web/register`,
+    `/api_v${version}/users/web/sendCode`,
+    `/api_v${version}/articles/web/getArticleList`,
+    `/api_v${version}/articles/web/getArticleByAid`,
+    `/api_v${version}/articles/web/addArticleLookNum`,
+    `/api_v${version}/users/web/getUserRankingList`,
+    `/api_v${version}/category/web/getCategoryList`,
+    `/api_v${version}/comments/web/getCommentByAid`,
+    `/api_v${version}/stat/web/insertDayData`,
+    `/api_v${version}/upload/web/uploadFile`
 ]

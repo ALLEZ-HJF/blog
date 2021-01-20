@@ -43,8 +43,29 @@ class UserGroupPowerDao {
         return await userGroup.setRouters(routerArr)
     }
     // 验证权限
-    static async verifyPrower() {
-        return true
+    static async verifyPrower(path, gid) {
+        // 根据api path查询 返回rid 根据rid 查询这个组是否分配了权限
+        const apiInfo = await routers.findOne({
+            attributes: ['rid'],
+            where: {
+                api: path
+            }
+        })
+        if (apiInfo) {
+            const power = await user_group_power.findOne({
+                where: {
+                    rid: apiInfo.rid,
+                    gid: gid
+                }
+            })
+            if (power.id) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
     }
 }
 

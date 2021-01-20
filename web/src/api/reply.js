@@ -4,7 +4,7 @@ import request from '@/utils/request'
 export function insertReply(data) {
   return request({
     method: 'post',
-    url: 'replys/insertReply',
+    url: 'replys/web/insertReply',
     data
   })
 }
@@ -13,7 +13,7 @@ export function insertReply(data) {
 export function delReply(data) {
   return request({
     method: 'post',
-    url: 'replys/delReply',
+    url: 'replys/web/delReply',
     data
   })
 }

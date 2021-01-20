@@ -7,8 +7,21 @@ class userController {
     // 获取用户详情
     static async getUserInfo(ctx) {
         let param = ctx.request.body
-        let data = await userDao.getUserInfo(param)
-        ctx.success(200,'获取成功',data)
+        if (JSON.stringify(param) === '{}' ) {
+            // 没有数据时 解析token
+            if (ctx.header.authorization) {
+                const userInfo = ctx.verify(ctx.header.authorization).data
+                param.uid = userInfo.uid
+                let data = await userDao.getUserInfo(param)
+                ctx.success(200,'获取成功',data)
+            } else {
+                ctx.fail(500,'获取失败')
+            }
+        } else {
+            let data = await userDao.getUserInfo(param)
+            ctx.success(200,'获取成功',data)
+        }
+        
     }
     // 作者排行榜
     static async getUserRankingList(ctx) {

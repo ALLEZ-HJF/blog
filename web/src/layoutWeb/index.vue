@@ -80,7 +80,7 @@
 
 <script>
 import { login, sendCode, register } from '@/api/user'
-import { setToken, setUserInfo, getUserInfo } from '@/utils/auth'
+import { setToken, getToken } from '@/utils/auth'
 import SelectCategory from '@/components/SelectCategory'
 import { getCategoryList } from '@/api/category'
 import { mapActions, mapGetters } from 'vuex'
@@ -118,7 +118,7 @@ export default {
       isNoAccount: false,
       isLoading: false,
       num: 120,
-      userInfo: getUserInfo(),
+      userInfo: '',
       selectIds: [],
       categoryList: [],
       timer: null,
@@ -148,6 +148,10 @@ export default {
   },
   created() {
     this.getCategoryList()
+    if (getToken()) {
+      // 有登录记录 获取userInfo
+      this.userInfo = this.$store.state.user.userInfo
+    }
   },
   methods: {
     ...mapActions('article', ['resetArticleList', 'getArticleList']),
@@ -160,6 +164,7 @@ export default {
       } else {
         // 退出
         this.$message.success('退出成功')
+        this.$store.dispatch('user/reset')
         window.localStorage.clear()
         setTimeout(() => {
           window.location.reload()
@@ -204,13 +209,12 @@ export default {
           let data = ''
           try {
             if (!this.isNoAccount) {
-              data = await login(this.loginForm)
+              data = await this.$store.dispatch('user/login', this.loginForm)
             } else {
             // 注册
-              data = await register(this.loginForm)
+              data = await this.$store.dispatch('user/register', this.loginForm)
             }
             setToken(data.data.token)
-            setUserInfo(data.data.data)
             this.userInfo = data.data.data
             this.loginDialogFormVisible = false
             if (this.timer) {
@@ -218,9 +222,6 @@ export default {
               this.num = 120
               this.isSend = false
             }
-            setTimeout(() => {
-              window.location.reload()
-            }, 1000)
           } catch (error) {
             this.isLoading = false
           }

@@ -1,5 +1,6 @@
 const db = require('../config/db')
 const routers = db.routers
+const user_group_power = db.user_group_power
 const Op = db.Op
 
 class routersDao {
@@ -31,6 +32,7 @@ class routersDao {
             where: {
                 state: data.state || 'valid',
                 role: data.role || 'user',
+                is_page: 'yes',
                 pid: null
             },
             order: [['sort','DESC']],
@@ -38,10 +40,75 @@ class routersDao {
                 model: routers,
                 as:'child', 
                 required : false,
+                where: {
+                    state: data.state || 'valid',
+                    role: data.role || 'user',
+                    is_page: 'yes'
+                },
                 include : {
                     model: routers,
                     as:'child',
                     required : false,
+                    where: {
+                        state: data.state || 'valid',
+                        role: data.role || 'user',
+                        is_page: 'yes'
+                    },
+                    include : {
+                        model: routers,
+                        as:'child',
+                        required : false,
+                        where: {
+                            state: data.state || 'valid',
+                            role: data.role || 'user',
+                            is_page: 'yes'
+                        }
+                    }
+                }
+            }
+        })
+    }
+    // 获取用户组的路由
+    static async getAdminRouterList(gid) {
+        const prowerArr = await user_group_power.findAll({
+            attributes: ['rid'],
+            where: {
+                gid: gid
+            }
+        })
+        const rids = prowerArr.map(x => x.rid)
+        return await routers.findAll({
+            where: {
+                is_page: 'yes',
+                pid: null,
+                rid: rids
+            },
+            order: [['sort','DESC']],
+            include : {
+                model: routers,
+                as:'child', 
+                required : false,
+                where: {
+                    rid: rids,
+                    is_page: 'yes'
+                },
+                include : {
+                    model: routers,
+                    as:'child', 
+                    required : false,
+                    where: {
+                        rid: rids,
+                        is_page: 'yes'
+                    },
+                    include : {
+                        model: routers,
+                        as:'child', 
+                        required : false,
+                        where: {
+                            rid: rids,
+                            is_page: 'yes'
+                        }
+                    }
                 }
             }
         })
@@ -60,10 +127,25 @@ class routersDao {
                 model: routers,
                 as:'child', 
                 required : false,
+                where: {
+                    role: 'user',
+                    state: 'valid',
+                    is_page: 'yes',
+                },
                 include : {
                     model: routers,
                     as:'child',
                     required : false,
+                    include : {
+                        model: routers,
+                        as:'child',
+                        required : false,
+                        where: {
+                            role: 'user',
+                            state: 'valid',
+                            is_page: 'yes',
+                        }
+                    }
                 }
             }
         })

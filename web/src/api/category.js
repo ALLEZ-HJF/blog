@@ -2,7 +2,7 @@ import request from '@/utils/request'
 // 获取分类列表
 export function getCategoryList(data) {
   return request({
-    url: 'category/getCategoryList',
+    url: 'category/web/getCategoryList',
     method: 'post',
     data
   })
@@ -11,7 +11,7 @@ export function getCategoryList(data) {
 // 删除分类
 export function delCategory(data) {
   return request({
-    url: 'category/delCategory',
+    url: 'category/admin/delCategory',
     method: 'post',
     data
   })
@@ -20,7 +20,7 @@ export function delCategory(data) {
 // 修改分类
 export function editCategory(data) {
   return request({
-    url: 'category/editCategory',
+    url: 'category/admin/editCategory',
     method: 'post',
     data
   })
@@ -29,7 +29,7 @@ export function editCategory(data) {
 // 添加分类
 export function insertCategory(data) {
   return request({
-    url: 'category/insertCategory',
+    url: 'category/admin/insertCategory',
     method: 'post',
     data
   })

@@ -4,7 +4,7 @@ import request from '@/utils/request'
 export function getCommentByAid(data) {
   return request({
     method: 'post',
-    url: 'comments/getCommentByAid',
+    url: 'comments/web/getCommentByAid',
     data
   })
 }
@@ -13,7 +13,7 @@ export function getCommentByAid(data) {
 export function insertComment(data) {
   return request({
     method: 'post',
-    url: 'comments/insertComment',
+    url: 'comments/web/insertComment',
     data
   })
 }
@@ -22,7 +22,7 @@ export function insertComment(data) {
 export function delComment(data) {
   return request({
     method: 'post',
-    url: 'comments/delComment',
+    url: 'comments/web/delComment',
     data
   })
 }

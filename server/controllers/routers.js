@@ -50,6 +50,16 @@ class routerController {
         const res = await routersDao.getWebRouterList()
         ctx.success(200,'获取成功',res)
     }
+
+    static async getAdminRouterList(ctx) {
+        const param = ctx.request.body
+        if (!param.gid) {
+            ctx.fail(500, '获取路由错误')
+            return false
+        }
+        const res = await routersDao.getAdminRouterList(param.gid)
+        ctx.success(200,'获取成功',res)
+    }
 }
 
 module.exports = routerController

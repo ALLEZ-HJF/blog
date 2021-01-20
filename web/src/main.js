@@ -8,10 +8,10 @@ import 'element-ui/lib/theme-chalk/display.css'
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import '@/styles/reset.css' // A modern alternative to CSS resets
 import '@/styles/index.scss' // global css
-import store from './store'
-import router from './router'
 import '@/icons' // icon
 import '@/permission'
+import store from './store'
+import router from './router'
 
 Vue.config.productionTip = false
 

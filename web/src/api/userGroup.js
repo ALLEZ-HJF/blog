@@ -2,7 +2,7 @@ import request from '@/utils/request'
 // 用户组列表
 export function getUserGroupList(data) {
   return request({
-    url: 'userGroup/getUserGroupList',
+    url: 'userGroup/admin/getUserGroupList',
     method: 'post',
     data
   })
@@ -11,7 +11,7 @@ export function getUserGroupList(data) {
 // 删除用户组
 export function delUserGroup(data) {
   return request({
-    url: 'userGroup/delUserGroup',
+    url: 'userGroup/admin/delUserGroup',
     method: 'post',
     data
   })
@@ -20,7 +20,7 @@ export function delUserGroup(data) {
 // 修改用户组
 export function editUserGroup(data) {
   return request({
-    url: 'userGroup/editUserGroup',
+    url: 'userGroup/admin/editUserGroup',
     method: 'post',
     data
   })
@@ -29,7 +29,7 @@ export function editUserGroup(data) {
 // 添加用户组
 export function insertUserGroup(data) {
   return request({
-    url: 'userGroup/insertUserGroup',
+    url: 'userGroup/admin/insertUserGroup',
     method: 'post',
     data
   })

@@ -2,7 +2,7 @@ import request from '@/utils/request'
 // 文章列表
 export function getArticleList(data) {
   return request({
-    url: 'articles/getArticleList',
+    url: 'articles/web/getArticleList',
     method: 'post',
     data
   })
@@ -11,7 +11,7 @@ export function getArticleList(data) {
 // 根据分类id查文章
 export function getArticleByCid(data) {
   return request({
-    url: 'articles/getArticleByCid',
+    url: 'articles/web/getArticleByCid',
     method: 'post',
     data
   })
@@ -19,7 +19,7 @@ export function getArticleByCid(data) {
 
 export function getArticleByAid(data) {
   return request({
-    url: 'articles/getArticleByAid',
+    url: 'articles/web/getArticleByAid',
     method: 'post',
     data
   })
@@ -28,7 +28,7 @@ export function getArticleByAid(data) {
 // 添加文章
 export function insertArticle(data) {
   return request({
-    url: 'articles/insertArticle',
+    url: 'articles/web/insertArticle',
     method: 'post',
     data
   })
@@ -37,7 +37,7 @@ export function insertArticle(data) {
 // 删除文章
 export function delArticle(data) {
   return request({
-    url: 'articles/delArticle',
+    url: 'articles/web/delArticle',
     method: 'post',
     data
   })
@@ -46,7 +46,7 @@ export function delArticle(data) {
 // 修改文章
 export function editArticle(data) {
   return request({
-    url: 'articles/editArticle',
+    url: 'articles/web/editArticle',
     method: 'post',
     data
   })
@@ -55,7 +55,7 @@ export function editArticle(data) {
 // 审核文章
 export function articleVerify(data) {
   return request({
-    url: 'articles/articleVerify',
+    url: 'articles/admin/articleVerify',
     method: 'post',
     data
   })
@@ -64,7 +64,7 @@ export function articleVerify(data) {
 // 添加浏览量
 export function addArticleLookNum(data) {
   return request({
-    url: 'articles/addArticleLookNum',
+    url: 'articles/web/addArticleLookNum',
     method: 'post',
     data
   })
