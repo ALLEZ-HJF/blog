@@ -27,6 +27,9 @@ export function generaMenu(routes, myRouter) {
       hidden: item.hidden,
       children: []
     }
+    if (item.redirect_name) {
+      page.redirect = { name: item.redirect_name }
+    }
     if (item.child.length > 0) {
       generaMenu(item.child, page.children)
     }

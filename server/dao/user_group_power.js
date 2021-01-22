@@ -9,20 +9,44 @@ class UserGroupPowerDao {
     // 获取用户组已分配的权限
     static async getPowerByGid(param) {
        let allRouter = await routers.findAll({
+           attributes: ['rid', 'title'],
            where: {
                state: 'valid',
-               role: param.role || 'user',
+               role: 'admin',
                pid: null
            },
            order: [['sort','DESC']],
             include : {
+                attributes: ['rid', 'title'],
+                order: [['sort','DESC']],
                 model: routers,
                 as:'child', 
                 required : false,
+                where: {
+                    state: 'valid',
+                    role: 'admin'
+                },
                 include : {
+                    attributes: ['rid', 'title'],
+                    order: [['sort','DESC']],
                     model: routers,
                     as:'child',
-                    required : false
+                    required : false,
+                    where: {
+                        state: 'valid',
+                        role: 'admin'
+                    },
+                    include : {
+                        attributes: ['rid', 'title'],
+                        order: [['sort','DESC']],
+                        model: routers,
+                        as:'child',
+                        required : false,
+                        where: {
+                            state: 'valid',
+                            role: 'admin'
+                        }
+                    }
                 }
             }
        })
@@ -58,10 +82,10 @@ class UserGroupPowerDao {
                     gid: gid
                 }
             })
-            if (power.id) {
-                return true
-            } else {
+            if (power === null) {
                 return false
+            } else {
+                return true
             }
         } else {
             return false

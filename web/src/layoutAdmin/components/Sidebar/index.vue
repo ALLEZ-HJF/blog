@@ -12,7 +12,7 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
+        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="'admin/' + route.path" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -31,8 +31,8 @@ export default {
       'sidebar'
     ]),
     routes() {
-      console.log(this.$store.state.permission.adminRoutes[0])
-      return this.$store.state.permission.adminRoutes
+      const adminRoutes = this.$store.state.permission.adminRoutes[0].children
+      return adminRoutes
     },
     activeMenu() {
       const route = this.$route

@@ -12,7 +12,11 @@ class resourcesDao {
         where: {
           uid: {
             [Op.like]: `%${data.uid || ''}%`
-          }
+          },
+          resource_type: {
+            [Op.like]: `%${data.resource_type || ''}%`
+          },
+          state: 'valid'
         },
         offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
         limit: Number(data.page_size) || 10

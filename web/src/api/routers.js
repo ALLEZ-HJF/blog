@@ -15,9 +15,34 @@ export function getAdminRouterList(data) {
   })
 }
 // 后台路由
-export function getRouterList() {
+export function getRouterList(data) {
   return request({
     url: 'routers/admin/getRouterList',
-    method: 'post'
+    method: 'post',
+    data
+  })
+}
+
+export function insertRouter(data) {
+  return request({
+    url: 'routers/admin/insertRouter',
+    method: 'post',
+    data
+  })
+}
+
+export function editRouter(data) {
+  return request({
+    url: 'routers/admin/editRouter',
+    method: 'post',
+    data
+  })
+}
+
+export function delRouter(data) {
+  return request({
+    url: 'routers/admin/delRouter',
+    method: 'post',
+    data
   })
 }

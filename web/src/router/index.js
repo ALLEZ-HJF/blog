@@ -9,7 +9,7 @@ export const constantRoutes = [
     path: '/',
     component: layoutWeb,
     hidden: true,
-    redirect: '/web/index'
+    redirect: 'web/index/content'
   },
   {
     path: '/404',

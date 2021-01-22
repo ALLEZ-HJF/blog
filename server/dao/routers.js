@@ -13,7 +13,7 @@ class routersDao {
         data.update_time = Date.now()
         return await routers.update(data,{
             where: {
-                id: data.id
+                rid: data.rid
             }
         })
     }
@@ -22,7 +22,7 @@ class routersDao {
         data.update_time = Date.now()
         return await routers.update({'state': 'lock'},{
             where: {
-                id: data.id
+                rid: data.rid
             }
         })
     }
@@ -32,7 +32,6 @@ class routersDao {
             where: {
                 state: data.state || 'valid',
                 role: data.role || 'user',
-                is_page: 'yes',
                 pid: null
             },
             order: [['sort','DESC']],
@@ -42,27 +41,27 @@ class routersDao {
                 required : false,
                 where: {
                     state: data.state || 'valid',
-                    role: data.role || 'user',
-                    is_page: 'yes'
+                    role: data.role || 'user'
                 },
+                order: [['sort','DESC']],
                 include : {
                     model: routers,
                     as:'child',
                     required : false,
                     where: {
                         state: data.state || 'valid',
-                        role: data.role || 'user',
-                        is_page: 'yes'
+                        role: data.role || 'user'
                     },
+                    order: [['sort','DESC']],
                     include : {
                         model: routers,
                         as:'child',
                         required : false,
                         where: {
                             state: data.state || 'valid',
-                            role: data.role || 'user',
-                            is_page: 'yes'
-                        }
+                            role: data.role || 'user'
+                        },
+                        order: [['sort','DESC']]
                     }
                 }
             }
@@ -92,6 +91,7 @@ class routersDao {
                     rid: rids,
                     is_page: 'yes'
                 },
+                order: [['sort','DESC']],
                 include : {
                     model: routers,
                     as:'child', 
@@ -100,6 +100,7 @@ class routersDao {
                         rid: rids,
                         is_page: 'yes'
                     },
+                    order: [['sort','DESC']],
                     include : {
                         model: routers,
                         as:'child', 
@@ -107,7 +108,8 @@ class routersDao {
                         where: {
                             rid: rids,
                             is_page: 'yes'
-                        }
+                        },
+                        order: [['sort','DESC']]
                     }
                 }
             }
@@ -132,6 +134,7 @@ class routersDao {
                     state: 'valid',
                     is_page: 'yes',
                 },
+                order: [['sort','DESC']],
                 include : {
                     model: routers,
                     as:'child',
@@ -145,7 +148,8 @@ class routersDao {
                             state: 'valid',
                             is_page: 'yes',
                         }
-                    }
+                    },
+                    order: [['sort','DESC']]
                 }
             }
         })

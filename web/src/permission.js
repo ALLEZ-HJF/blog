@@ -26,7 +26,6 @@ router.beforeEach(async(to, from, next) => {
       const adminRouter = await store.dispatch('permission/setAdminRouter', { gid: userInfo.gid })
       const routers = accessRoutes.concat(adminRouter)
       router.addRoutes(routers)
-      console.log(routers)
     } else {
       router.addRoutes(accessRoutes)
     }
