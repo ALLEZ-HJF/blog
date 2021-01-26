@@ -52,8 +52,17 @@ export function editArticle(data) {
   })
 }
 
+// 添加浏览量
+export function addArticleLookNum(data) {
+  return request({
+    url: 'articles/web/addArticleLookNum',
+    method: 'post',
+    data
+  })
+}
+
 // 审核文章
-export function articleVerify(data) {
+export function adminArticleVerify(data) {
   return request({
     url: 'articles/admin/articleVerify',
     method: 'post',
@@ -61,10 +70,37 @@ export function articleVerify(data) {
   })
 }
 
-// 添加浏览量
-export function addArticleLookNum(data) {
+// 文章列表
+export function adminGetArticleList(data) {
   return request({
-    url: 'articles/web/addArticleLookNum',
+    url: 'articles/admin/getArticleList',
+    method: 'post',
+    data
+  })
+}
+
+// 添加文章
+export function adminInsertArticle(data) {
+  return request({
+    url: 'articles/admin/insertArticle',
+    method: 'post',
+    data
+  })
+}
+
+// 删除文章
+export function adminDelArticle(data) {
+  return request({
+    url: 'articles/admin/delArticle',
+    method: 'post',
+    data
+  })
+}
+
+// 修改文章
+export function adminEditArticle(data) {
+  return request({
+    url: 'articles/admin/editArticle',
     method: 'post',
     data
   })

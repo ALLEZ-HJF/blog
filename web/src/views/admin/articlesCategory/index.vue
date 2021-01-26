@@ -78,7 +78,7 @@
   </div>
 </template>
 <script>
-import { getCategoryList, insertCategory, editCategory, delCategory } from '@/api/category'
+import { getAdminCategoryList, insertCategory, editCategory, delCategory } from '@/api/category'
 export default {
   data() {
     return {
@@ -106,11 +106,11 @@ export default {
   },
   watch: {
     state() {
-      this.getCategoryList()
+      this.getAdminCategoryList()
     }
   },
   async created() {
-    this.getCategoryList()
+    this.getAdminCategoryList()
   },
   methods: {
     insertSubCategory(row) {
@@ -127,7 +127,7 @@ export default {
           const data = await insertCategory(this.newCategoryForm)
           if (data.code === 200) {
             this.$message.success('添加成功')
-            this.getCategoryList()
+            this.getAdminCategoryList()
             this.addDialogFormVisible = false
             this.$refs.newCategoryForm.resetFields()
           }
@@ -143,7 +143,7 @@ export default {
         const data = await delCategory({ cid: row.cid })
         if (data.code === 200) {
           this.$message.success('删除成功')
-          this.getCategoryList()
+          this.getAdminCategoryList()
         }
       })
     },
@@ -152,15 +152,15 @@ export default {
       if (data.code === 200) {
         this.$message.success('修改成功')
         this.editDialogFormVisible = false
-        this.getCategoryList()
+        this.getAdminCategoryList()
       }
     },
     showEditCategory(row) {
       this.editCategoryForm = this.filterRow(this.editCategoryForm, row)
       this.editDialogFormVisible = true
     },
-    async getCategoryList(page_num) {
-      const { data } = await getCategoryList({ state: this.state })
+    async getAdminCategoryList(page_num) {
+      const { data } = await getAdminCategoryList({ state: this.state })
       this.categoryList = data.rows
       this.tableLoading = false
     }

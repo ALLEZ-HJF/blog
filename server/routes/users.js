@@ -8,6 +8,10 @@ router.prefix('/api_v'+version+'/users')
 router.post('/admin/getUserList',userController.getUserList)
 // 删除用户
 router.post('/admin/delUser',userController.delUser)
+// 添加管理员用户
+router.post('/admin/addUser',userController.insertAdminUser)
+// 修改用户 后台
+router.post('/admin/updateUser',userController.updateUser)
 // 添加用户
 router.post('/web/register',userController.insertUser)
 // 修改用户

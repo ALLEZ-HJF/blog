@@ -1,6 +1,6 @@
 <template>
   <div class="indexContainer">
-    <el-row :gutter="20">
+    <el-row :gutter="10">
       <el-col style="margin-bottom: 20px" :xl="18" :lg="18" :md="24" :sm="24" :xs="24">
         <div v-if="articleList.length > 0" class="articleList">
           <div v-for="item in articleList" :key="item.aid" class="articleItem">
@@ -11,7 +11,7 @@
       </el-col>
       <el-col class="hidden-md-and-down" :xl="6" :lg="6">
         <div class="aside">
-          <span class="text">排行榜</span>
+          <span class="text">作者排行榜</span>
           <div v-if="userList.length > 0" class="userList">
             <userItem v-for="item in userList" :key="item.uid" :item="item" />
           </div>
@@ -93,12 +93,17 @@ export default {
 }
 .articleList,.aside  {
   background: #ffffff;
-  padding: 20px 0;
-  border-radius: 2px;
+  border-radius: 6px;
   .text {
     font-size: 14px;
     margin-left: 5px;
   }
+  .userList {
+    margin-top: 8px;
+  }
+}
+.aside {
+  padding-top: 10px;
 }
 .noMore {
   text-align: center;

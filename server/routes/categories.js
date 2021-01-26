@@ -5,6 +5,7 @@ const categoriesController = require('../controllers/categories')
 router.prefix('/api_v'+version+'/category')
 // 获取分类列表
 router.post('/web/getCategoryList',categoriesController.getCategoryList)
+router.post('/admin/getCategoryList',categoriesController.getCategoryList)
 // 添加分类
 router.post('/admin/insertCategory',categoriesController.insertCategory)
 // 修改分类

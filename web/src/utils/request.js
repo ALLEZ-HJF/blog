@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import { getToken } from '@/utils/auth'
+import { getToken, removeToken } from '@/utils/auth'
 import qs from 'qs'
 
 // create an axios instance
@@ -38,11 +38,16 @@ service.interceptors.response.use(
   response => {
     const res = response.data
     if (res.code !== 200) {
-      Message({
-        message: res.msg || 'Error',
-        type: 'error',
-        duration: 5 * 1000
-      })
+      if (res.code !== 401) {
+        Message({
+          message: res.msg || 'Error',
+          type: 'error',
+          duration: 5 * 1000
+        })
+      } else {
+        // 登录失效
+        removeToken()
+      }
       return Promise.reject(new Error(res.msg || 'Error'))
     } else {
       return res

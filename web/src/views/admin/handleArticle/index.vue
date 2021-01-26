@@ -42,14 +42,14 @@
       </div>
     </el-card>
     <el-button v-if="!isEdit" type="primary" class="btn" @click="handlePublish">{{ aid ? '审核文章' : '发布文章' }}</el-button>
-    <el-button v-else type="warning" class="btn" @click="editArticle">编辑文章</el-button>
+    <el-button v-else type="warning" class="btn" @click="adminEditArticle">编辑文章</el-button>
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="dialogImageUrl" alt="">
     </el-dialog>
   </div>
 </template>
 <script>
-import { getArticleByAid, insertArticle, articleVerify, editArticle } from '@/api/article'
+import { getArticleByAid, adminInsertArticle, adminArticleVerify, adminEditArticle } from '@/api/article'
 import { getCategoryList } from '@/api/category'
 import { uploadFile } from '@/api/upload'
 import SelectCategory from '@/components/SelectCategory'
@@ -88,7 +88,7 @@ export default {
   },
   methods: {
     // 编辑文章
-    async editArticle() {
+    async adminEditArticle() {
       const imgArr = []
       this.articleImgArr.forEach(item => {
         imgArr.push(item.url)
@@ -103,7 +103,7 @@ export default {
         imgs: imgArr.join(','),
         state: this.article.state
       }
-      const data = await editArticle(reqObj)
+      const data = await adminEditArticle(reqObj)
       if (data.code === 200) {
         this.$message.success('修改成功')
       }
@@ -135,7 +135,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(async() => {
-          const data = await articleVerify({ aid: this.aid })
+          const data = await adminArticleVerify({ aid: this.aid })
           if (data.code === 200) {
             this.$message.success('审核成功')
             setTimeout(() => {
@@ -163,7 +163,7 @@ export default {
           }
           this.article.cids = cids
           this.article.content = this.$refs.markdown.content
-          const data = await insertArticle(this.article)
+          const data = await adminInsertArticle(this.article)
           if (data.code === 200) {
             this.$message.success('发布成功')
             setTimeout(() => {

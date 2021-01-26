@@ -16,6 +16,7 @@ class userDao {
                 [sequelize.literal(`(SELECT COUNT(*) FROM articles WHERE articles.uid = users.uid)`),'article_count'],
                 [sequelize.literal(`(SELECT SUM(articles.look_num) FROM articles WHERE articles.uid = users.uid)`),'article_look_num']
             ],
+            where: sequelize.where(sequelize.literal(`(SELECT COUNT(*) FROM articles WHERE articles.uid = users.uid)`), { [Op.gt] : 0} ),
             include: [
                 {
                     model: articles,
@@ -33,12 +34,22 @@ class userDao {
         return await users.findOne({
             attributes: ['uid','username','nickname','password','phone','avatar','introduction','state','gid','email'],
             where: {
-                username: data.username
+                username: data.username,
+                state: 'valid'
             }
         })
     }
     // 修改用户
     static async editUser(data) {
+        data.update_time = Date.now()
+        return await users.update(data,{
+            where: {
+                uid: data.uid
+            }
+        })
+    }
+    // 修改用户后台
+    static async updateUser(data) {
         data.update_time = Date.now()
         return await users.update(data,{
             where: {
@@ -58,6 +69,10 @@ class userDao {
     // 添加用户
     static async insertUser(data) {
         data.create_time = Date.now()
+        return await users.create(data)
+    }
+    // 添加管理员用户
+    static async insertAdminUser(data) {
         return await users.create(data)
     }
     // 根据id 或 用户名 查询用户

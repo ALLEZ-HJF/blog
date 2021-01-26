@@ -20,7 +20,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label=" ">
-            <el-button type="primary" icon="el-icon-search" @click="getArticleList(1)">搜索</el-button>
+            <el-button type="primary" icon="el-icon-search" @click="adminGetArticleList(1)">搜索</el-button>
           </el-form-item>
         </el-form>
       </el-card>
@@ -75,9 +75,9 @@
             min-width="200"
           >
             <template slot-scope="scope">
-              <el-button v-if="scope.row.state !== 'valid'" type="success" size="small" icon="el-icon-check" @click="gotoPublish(scope.row)">审核</el-button>
+              <!-- <el-button v-if="scope.row.state !== 'valid'" type="success" size="small" icon="el-icon-check" @click="gotoPublish(scope.row)">审核</el-button> -->
               <el-button type="warning" size="small" icon="el-icon-edit" @click="gotoPublish(scope.row,true)">编辑</el-button>
-              <el-button v-if="scope.row.state === 'valid'" size="small" type="danger" icon="el-icon-delete" @click="delArticle(scope.row)">删除</el-button>
+              <el-button v-if="scope.row.state === 'valid'" size="small" type="danger" icon="el-icon-delete" @click="adminDelArticle(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -88,7 +88,7 @@
   </div>
 </template>
 <script>
-import { getArticleList, delArticle } from '@/api/article'
+import { adminGetArticleList, adminDelArticle } from '@/api/article'
 import pagination from '@/components/pagination/pagination'
 export default {
   components: {
@@ -111,7 +111,7 @@ export default {
     }
   },
   async created() {
-    this.getArticleList()
+    this.adminGetArticleList()
   },
   methods: {
     gotoPublish(row, isEdit) {
@@ -121,25 +121,25 @@ export default {
         this.$router.push({ name: '/admin/articles/handleArticle' })
       }
     },
-    delArticle(row) {
+    adminDelArticle(row) {
       this.$confirm('是否删除该文章? 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'error'
       }).then(async() => {
-        const data = await delArticle({ aid: row.aid })
+        const data = await adminDelArticle({ aid: row.aid })
         if (data.code === 200) {
           this.$message.success('删除成功')
-          this.getArticleList()
+          this.adminGetArticleList()
         }
       })
     },
-    async getArticleList(page_num) {
+    async adminGetArticleList(page_num) {
       this.tableLoading = true
       if (page_num) {
         this.searchForm.page_num = page_num
       }
-      const { data } = await getArticleList(this.searchForm)
+      const { data } = await adminGetArticleList(this.searchForm)
       this.articleList = data.rows
       this.articleList.forEach(item => {
         const arr = []
@@ -153,10 +153,10 @@ export default {
     },
     handleSizeChange(page_size) {
       this.searchForm.page_size = page_size
-      this.getArticleList()
+      this.adminGetArticleList()
     },
     currentChange(page_num) {
-      this.getArticleList(page_num)
+      this.adminGetArticleList(page_num)
     }
   }
 }

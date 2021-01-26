@@ -1,4 +1,6 @@
 import request from '@/utils/request'
+import qs from 'qs'
+
 // 用户登录
 export function login(data) {
   return request({
@@ -68,5 +70,33 @@ export function getUserInfo(data) {
     url: 'users/web/getUserInfo',
     method: 'post',
     data
+  })
+}
+
+// 添加管理员账号
+export function addUser(data) {
+  return request({
+    url: 'users/admin/addUser',
+    method: 'post',
+    data
+  })
+}
+
+// 修改用户后台
+export function updateUser(data) {
+  return request({
+    url: 'users/admin/updateUser',
+    method: 'post',
+    data,
+    transformRequest: [(data) => {
+      for (const key in data) {
+        if (data[key] === '') {
+          delete data[key]
+        }
+      }
+      if (data) {
+        return qs.stringify(data)
+      }
+    }]
   })
 }

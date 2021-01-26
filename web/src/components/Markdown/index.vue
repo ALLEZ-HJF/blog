@@ -56,7 +56,6 @@ export default {
   methods: {
     change(value, render) {
       this.html = render
-      this.highlighthandle()
     },
     save() { // 保存文章内容
     },

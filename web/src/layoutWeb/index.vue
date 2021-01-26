@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import { login, sendCode, register } from '@/api/user'
+import { sendCode } from '@/api/user'
 import { setToken, getToken } from '@/utils/auth'
 import SelectCategory from '@/components/SelectCategory'
 import { getCategoryList } from '@/api/category'
@@ -131,7 +131,7 @@ export default {
   watch: {
     $route: {
       handler: function(val, oldVal) {
-        if (val.name !== 'index') {
+        if (val.name !== 'indexContent') {
           this.isShowSearch = false
           this.isShowCategory = false
         } else {

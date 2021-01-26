@@ -33,7 +33,6 @@
             <span>
               作者文章:
             </span>
-            <i class="el-icon-arrow-right" />
           </div>
           <div class="list">
             <template v-for="item in articleList">
@@ -153,9 +152,10 @@ export default {
 @import "@/styles/variables.less";
 
 .articleDetail {
-  margin-top: 25px;
+  margin-top: 20px;
   background: #ffffff;
   padding-top: 15px;
+  border-radius: 6px;
   .title {
     font-size: 28px;
     color: #333333;
@@ -194,14 +194,14 @@ export default {
   }
 }
 .authorDetail {
-  margin-top: 25px;
+  margin-top: 20px;
   .authorArticleList {
     background: #ffffff;
     border-radius: 6px;
     margin-top: 15px;
     .title {
       border-bottom: 1px solid #eeeeee;
-      padding: 15px 15px 10px 15px;
+      padding: 15px 15px 10px 10px;
       font-size: 14px;
       color: #666666;
       display: flex;

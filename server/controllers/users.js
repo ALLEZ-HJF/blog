@@ -144,6 +144,30 @@ class userController {
             }
         }
     }
+    // 添加管理员用户
+    static async insertAdminUser(ctx) {
+        let param = ctx.request.body
+        if (!param.username) {
+            ctx.fail(500,'请输入用户名')
+        } else if (!param.nickname) {
+            ctx.fail(500,'请输入昵称')
+        } else if (!param.password) {
+            ctx.fail(500,'请输入密码')
+        } else if (!param.email) {
+            ctx.fail(500,'请输入邮箱地址')
+        } else if (!param.gid) {
+            ctx.fail(500,'请选择用户组')
+        } else {
+            const userInfo = await userDao.getUserInfo(param)
+            if (!userInfo) {
+                param.password = bcrypt.hashSync(param.password,10)
+                const data = await userDao.insertAdminUser(param)
+                ctx.success(200,'添加成功', data)
+            } else {
+                ctx.fail(500,'用户已存在')
+            }
+        }
+    }
     // 删除用户
     static async delUser(ctx) {
         let body = ctx.request.body
@@ -173,6 +197,24 @@ class userController {
         body.update_time = Date.now()
         const data = await userDao.editUser(body)
         ctx.response.status = 200
+        ctx.success(200,'修改成功',data)
+    }
+    // 修改用户后台
+    static async updateUser(ctx) {
+        let body = ctx.request.body
+        if (body.password) {
+            // 加密密码
+            body.password = bcrypt.hashSync(body.password,10)
+        }
+        if (!body.uid) {
+            ctx.fail(500,'用户ID不能为空')
+            return
+        }
+        if (!body.gid) {
+            body.gid = null
+        }
+        body.update_time = Date.now()
+        const data = await userDao.updateUser(body)
         ctx.success(200,'修改成功',data)
     }
 }

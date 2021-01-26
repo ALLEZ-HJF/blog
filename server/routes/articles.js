@@ -15,9 +15,18 @@ router.post('/web/insertArticle',articlesController.insertArticle)
 router.post('/web/delArticle',articlesController.delArticle)
 // 修改文章
 router.post('/web/editArticle',articlesController.editArticle)
-// 审核文章
-router.post('/admin/articleVerify',articlesController.articleVerify)
 // 增加文章阅读量
 router.post('/web/addArticleLookNum',articlesController.addArticleLookNum)
+
+// 审核文章
+router.post('/admin/articleVerify',articlesController.articleVerify)
+// 获取文章列表
+router.post('/admin/getArticleList',articlesController.getArticleList)
+// 添加文章
+router.post('/admin/insertArticle',articlesController.insertArticle)
+// 修改文章
+router.post('/admin/editArticle',articlesController.editArticle)
+// 删除文章
+router.post('/admin/delArticle',articlesController.delArticle)
 
 module.exports = router

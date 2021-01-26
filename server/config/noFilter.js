@@ -10,5 +10,6 @@ module.exports.path = [
     `/api_v${version}/category/web/getCategoryList`,
     `/api_v${version}/comments/web/getCommentByAid`,
     `/api_v${version}/stat/web/insertDayData`,
-    `/api_v${version}/upload/web/uploadFile`
+    `/api_v${version}/upload/web/uploadFile`,
+    `/api_v${version}/routers/web/getWebRouterList`
 ]

@@ -8,6 +8,15 @@ export function getCategoryList(data) {
   })
 }
 
+// 获取分类列表后台
+export function getAdminCategoryList(data) {
+  return request({
+    url: 'category/admin/getCategoryList',
+    method: 'post',
+    data
+  })
+}
+
 // 删除分类
 export function delCategory(data) {
   return request({
