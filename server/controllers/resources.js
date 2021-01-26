@@ -1,4 +1,6 @@
 const resourcesDao = require('../dao/resources')
+const fs = require('fs')
+const path = require('path')
 
 class resourcesController {
     //  获取资源列表
@@ -25,13 +27,21 @@ class resourcesController {
         const param = ctx.request.body
         if (!param.rid) {
             ctx.fail(500,'请输入资源id')
-            return false
-        }
-        const res = await resourcesDao.delResource(param.rid)
-        if (res[0]) {
-            ctx.success(200,'删除成功')
+        } else if (!param.resource_url) {
+            ctx.fail(500,'资源地址不能为空')
         } else {
-            ctx.fail(500,'删除失败')
+            let pathArr = param.resource_url.split('/')
+            let filePath = path.resolve(`./public/uploads/${pathArr[pathArr.length - 1]}`)
+            const res = await resourcesDao.delResource(param.rid)
+            if (res[0]) {
+                // 判断是否有该文件
+                if (fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath)
+                }
+                ctx.success(200,'删除成功')
+            } else {
+                ctx.fail(500,'删除失败')
+            }
         }
     }
 }

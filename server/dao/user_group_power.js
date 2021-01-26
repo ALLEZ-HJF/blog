@@ -72,7 +72,8 @@ class UserGroupPowerDao {
         const apiInfo = await routers.findOne({
             attributes: ['rid'],
             where: {
-                api: path
+                api: path,
+                state: 'valid'
             }
         })
         if (apiInfo) {

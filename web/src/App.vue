@@ -19,4 +19,9 @@ body,html,#app {
   width: 100%;
   height: 100%;
 }
+#app {
+      font-family: Noto Sans SC;
+      font-style: normal;
+      font-weight: 400;
+ }
 </style>

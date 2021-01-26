@@ -39,6 +39,19 @@
           min-width="200"
         />
         <el-table-column
+          label="缩略图"
+          min-width="200"
+        >
+          <template slot-scope="scope">
+            <el-image
+              v-if="scope.row.resource_type === 'img' && scope.row.resource_type"
+              style="width: 200px; height: 100%"
+              :src="scope.row.resource_url"
+              :fit="fit"
+            />
+          </template>
+        </el-table-column>
+        <el-table-column
           fixed="right"
           label="操作"
           width="180"
@@ -93,7 +106,7 @@ export default {
         cancelButtonText: '取消',
         type: 'error'
       }).then(async() => {
-        const data = await delResource({ rid: row.rid })
+        const data = await delResource({ rid: row.rid, resource_url: row.resource_url })
         if (data.code === 200) {
           this.$message.success('删除成功')
           this.getResourceList()
