@@ -7,10 +7,11 @@ export function insertDayData() {
   })
 }
 
-export function getDayData() {
+export function getVisitData(params) {
   return request({
-    url: 'stat/admin/getDayData',
-    method: 'get'
+    url: 'stat/admin/getVisitData',
+    method: 'get',
+    params
   })
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="indexContainer">
     <el-row :gutter="10">
-      <el-col style="margin-bottom: 20px" :xl="18" :lg="18" :md="24" :sm="24" :xs="24">
+      <el-col style="margin-bottom: 20px" :xl="18" :lg="18" :md="18" :sm="24" :xs="24">
         <div v-if="articleList.length > 0" class="articleList">
           <div v-for="item in articleList" :key="item.aid" class="articleItem">
             <articleItem :item="item" />
@@ -9,7 +9,7 @@
         </div>
         <div v-if="articleList.length === 0 || articleListSearchForm.status === 0" class="noMore">暂无更多</div>
       </el-col>
-      <el-col class="hidden-md-and-down" :xl="6" :lg="6">
+      <el-col class="hidden-sm-and-down" :xl="6" :lg="6" :md="6">
         <div class="aside">
           <span class="text">作者排行榜</span>
           <div v-if="userList.length > 0" class="userList">
@@ -88,9 +88,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.indexContainer {
-  margin-top: 15px;
-}
 .articleList,.aside  {
   background: #ffffff;
   border-radius: 6px;
@@ -114,9 +111,6 @@ export default {
   border-radius: 2px;
 }
 @media screen and (max-width: 768px) {
-  .indexContainer {
-    margin-top: 0;
-  }
   .articleList {
     padding: 0;
   }

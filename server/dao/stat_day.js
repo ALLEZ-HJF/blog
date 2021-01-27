@@ -22,17 +22,26 @@ class statDayDao {
             return await statDay.create(param)
         }
     } 
-    static async getDayData(param) {
+    static async getVisitData(param) {
         let where = {}
-        if (param.create_time && param.end_time) {
+        if (param.start_time && param.end_time) {
             where.create_time = {
-                [Op.between]: [param.create_time, moment(param.end_time).add(1, 'days').format('YYYY-MM-DD')]
+                [Op.between]: [param.start_time, moment(param.end_time).add(1, 'days').format('YYYY-MM-DD')]
             }
         }
         return await statDay.findAndCountAll({
            where,
            group: 'time'
         })
+    }
+    static async getTodayVisitCount() {
+        return await statDay.count({
+            where: {
+                create_time: {
+                     [Op.between]: [moment().subtract(1, 'days').format('YYYY-MM-DD'), moment().add(1, 'days').format('YYYY-MM-DD')]
+                }
+            }
+         })
     }
 }
 

@@ -39,7 +39,6 @@
 import { getCommentByAid, delComment } from '@/api/comment'
 import { delReply } from '@/api/reply'
 import commentInput from '@/components/comment/commentInput'
-import { getUserInfo } from '@/utils/auth'
 export default {
   name: 'CommentList',
   components: {
@@ -66,7 +65,7 @@ export default {
       list: [],
       isShowReplyBox: false,
       activeItem: {},
-      userInfo: getUserInfo(),
+      userInfo: this.$store.state.user.userInfo,
       delObj: {},
       status: 1
     }

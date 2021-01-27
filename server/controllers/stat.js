@@ -10,18 +10,19 @@ class statController {
         const data = await statDayDao.insertDayData({ip,browser})
         ctx.success(200,'记录成功',data)
     }
-    static async getDayData(ctx) {
+    static async getVisitData(ctx) {
         const param = ctx.request.query
-        const data = await statDayDao.getDayData(param)
+        const data = await statDayDao.getVisitData(param)
         let countArr = data.count.map(x => x.count)
         let timeArr = data.rows.map(x => x.time)
-        ctx.success(200,'获取成功',{data:　countArr, time: timeArr, list: data.rows} )
+        ctx.success(200,'获取成功',{data:　countArr, time: timeArr} )
     }
     // 首页汇总
     static async getSummaryData(ctx) {
        const userCount = await usersDao.getNewUserCount()
        const articleCount = await articlesDao.getArticleSummary()
-       ctx.success(200,'获取成功', {newUser: userCount, newArticleCount: articleCount.newCount, invalidArticleCount: articleCount.invalidCount })
+       const tadayVisitCount = await statDayDao.getTodayVisitCount()
+       ctx.success(200,'获取成功', {newUser: userCount, newArticleCount: articleCount.newCount, invalidArticleCount: articleCount.invalidCount, tadayVisitCount: tadayVisitCount })
     }
 }
 

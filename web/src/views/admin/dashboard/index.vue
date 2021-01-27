@@ -39,7 +39,7 @@
           <div class="numBox">
             <div>今日访问人数</div>
             <div>
-              {{ this.visitTodayNum[this.visitTodayNum.length - 1] }}
+              {{ summaryObject.tadayVisitCount }}
             </div>
           </div>
           <div class="iconBox">
@@ -48,34 +48,92 @@
         </div>
       </el-col>
     </el-row>
+    <el-row style="margin-top: 20px">
+      <el-col :xl="16" :lg="16" :md="24" :sm="24" :xs="24" class="visitData">
+        <span>选择日期:</span>
+        <el-date-picker
+          v-model="date"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          size="small"
+          style="margin-bottom: 20px"
+          value-format="yyyy-MM-dd"
+          @change="selectDate"
+        />
+        <lineChart v-if="showVisitDataLineChart" ref="visitDataLineChart" :title="visitChartTitle" :x-data="visitChartXData" :series="visitChartSeries" />
+      </el-col>
+      <el-col :xl="8" :lg="8" :md="24" :sm="24" :xs="24">
+        <!-- <lineChart /> -->
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { getDayData, getSummaryData } from '@/api/stat'
+import { getVisitData, getSummaryData } from '@/api/stat'
+import lineChart from '@/components/chart/lineChart/index.vue'
 export default {
-
-  components: {},
+  components: {
+    lineChart
+  },
   data() {
     return {
       summaryObject: {},
-      visitTodayNum: 0,
-      dayData: []
+      date: [new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), new Date()],
+      visitChartSeries: [],
+      visitChartXData: [],
+      visitChartTitle: {
+        text: '七日访问量',
+        textStyle: {
+          fontSize: 16
+        }
+      },
+      showVisitDataLineChart: false
     }
   },
 
   computed: {},
 
   mounted() {
-    this.getDayData()
+    this.getVisitData()
     this.getSummaryData()
   },
-
   methods: {
-    async getDayData() {
-      const data = await getDayData()
-      this.visitTodayNum = data.data.data
-      this.dayData = data.data
+    // 选择日期获取
+    selectDate() {
+      this.getVisitData()
+    },
+    async getVisitData() {
+      const searchForm = {}
+      this.visitChartSeries = []
+      if (!this.date || !this.date.length) {
+        return
+      }
+      searchForm.start_time = this.date[0]
+      searchForm.end_time = this.date[1]
+      const data = await getVisitData(searchForm)
+      this.visitChartXData = data.data.time
+      this.visitChartSeries.push({
+        name: '访问人数',
+        type: 'line',
+        data: data.data.data,
+        markPoint: {
+          data: [
+            { type: 'max', name: '最大值' },
+            { type: 'min', name: '最小值' }
+          ]
+        }
+      })
+      if (!this.showVisitDataLineChart) {
+        this.showVisitDataLineChart = true
+      } else {
+        this.visitChartTitle.text = searchForm.start_time + '--' + searchForm.end_time + '访问量'
+        this.$nextTick(() => {
+          this.$refs.visitDataLineChart.updataChart()
+        })
+      }
     },
     async getSummaryData() {
       const data = await getSummaryData()
@@ -108,6 +166,7 @@ export default {
         align-items: center;
         margin-right: 20px;
         color: #333;
+        flex: 1;
         >div:last-child {
           margin-top: 20px;
           color: @defaultColor;
@@ -148,6 +207,13 @@ export default {
           }
         }
       }
+    }
+  }
+  .visitData {
+    span {
+      font-size: 16px;
+      color: #333;
+      margin-right: 20px;
     }
   }
 }

@@ -3,7 +3,7 @@
     <el-container>
       <el-header>
         <el-row>
-          <el-col :xl="{span:16,offset:4}" :lg="{span:16,offset:4}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
+          <el-col :xl="{span:18,offset:3}" :lg="{span:18,offset:3}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
             <div class="left">
               <img class="logoImg" src="@/assets/logo.png">
               <div class="navMenu">
@@ -40,14 +40,14 @@
       </el-header>
       <div v-if="isShowCategory" class="categoryListBox">
         <el-row>
-          <el-col :xl="{span:16,offset:4}" :lg="{span:16,offset:4}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
+          <el-col :xl="{span:18,offset:3}" :lg="{span:18,offset:3}" :md="{span:24,offset:0}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
             <selectCategory ref="selectCategory" :select-ids="selectIds" :category-list="categoryList" @getSearchCids="getSearchCids" />
           </el-col>
         </el-row>
       </div>
       <el-main>
         <el-row>
-          <el-col :xl="{span:16,offset:4}" :lg="{span:16,offset:4}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}" class="main">
+          <el-col :xl="{span:18,offset:3}" :lg="{span:18,offset:3}" :md="{span:24,offset:0}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}" class="main">
             <router-view :key="$route.fullPath" ref="main" />
           </el-col>
         </el-row>
@@ -342,6 +342,12 @@ export default {
       flex: 1;
       background: @bgColor;
       padding: 0;
+      padding-top: 20px;
+    }
+    @media screen and(max-width: 993px) {
+      .el-main {
+       padding-top: 0px;
+      }
     }
   }
 }

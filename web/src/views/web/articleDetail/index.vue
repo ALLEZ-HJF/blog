@@ -53,7 +53,6 @@
 
 <script>
 import { getArticleByAid, getArticleList, addArticleLookNum } from '@/api/article'
-import { getUserInfo } from '@/utils/auth'
 import commentInput from '@/components/comment/commentInput'
 import commentList from '@/components/comment/commentList'
 import marked from 'marked'
@@ -72,7 +71,7 @@ export default {
       articleList: [],
       page_num: 1,
       page_size: 10,
-      userInfo: getUserInfo()
+      userInfo: this.$store.state.user.userInfo
     }
   },
   mounted() {
@@ -146,13 +145,18 @@ export default {
     margin-bottom: 10px;
     border-radius: 4px;
   }
+  img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
 }
 </style>
 <style lang="less" scoped>
 @import "@/styles/variables.less";
 
 .articleDetail {
-  margin-top: 20px;
   background: #ffffff;
   padding-top: 15px;
   border-radius: 6px;
@@ -160,16 +164,16 @@ export default {
     font-size: 28px;
     color: #333333;
     font-weight: 600;
-    margin-left: 10px;
     height: auto;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
+    margin-left: 10px;
   }
   .subTitle {
     font-size: 18px;
     color: #666666;
     margin-top: 10px;
-    margin-left: 25px;
+    margin-left: 10px;
   }
   .comment {
     padding: 0 30px;
@@ -194,7 +198,6 @@ export default {
   }
 }
 .authorDetail {
-  margin-top: 20px;
   .authorArticleList {
     background: #ffffff;
     border-radius: 6px;
