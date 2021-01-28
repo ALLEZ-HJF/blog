@@ -4,12 +4,12 @@ const log4js = require('koa-log4');
 log4js.configure({
   appenders: {
     access: {
-      type: 'dateFile',
+      type: 'file',
       pattern: '-yyyy-MM-dd.log', //生成文件的规则
       filename: path.join('./logs', 'access.log') //生成文件名
     },
     application: {
-      type: 'dateFile',
+      type: 'file',
       pattern: '-yyyy-MM-dd.log',
       filename: path.join('./logs', 'application.log')
     },

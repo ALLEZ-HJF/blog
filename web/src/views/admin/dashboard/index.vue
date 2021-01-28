@@ -81,7 +81,7 @@ export default {
   data() {
     return {
       summaryObject: {},
-      date: [new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), new Date()],
+      date: [new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), new Date(new Date().getTime() - 24 * 60 * 60 * 1000)],
       visitChartSeries: [],
       visitChartXData: [],
       visitChartTitle: {
@@ -99,6 +99,9 @@ export default {
   mounted() {
     this.getVisitData()
     this.getSummaryData()
+    const websocket = new WebSocket('ws://localhost:3000/api_v1/systemInfo/admin/data')
+    websocket.addEventListener('open', () => {
+    })
   },
   methods: {
     // 选择日期获取

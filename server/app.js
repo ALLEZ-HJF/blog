@@ -1,19 +1,23 @@
 const Koa = require('koa')
-const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const koaBody = require('koa-body');
 const koajwt = require('koa-jwt')
-var cors = require('koa2-cors');
+const cors = require('koa2-cors');
+const websockify = require('koa-websocket'); // 加入websocket
+const app = websockify(new Koa())
+
+// 配置与中间件
 const { singKey } = require('./config/config')
+const { path } = require('./config/noFilter')
+const { logger, accessLogger } = require('./config/logger');
 const responseData = require('./middleware/responseData')
 const handleToken = require('./middleware/handleToken')
 const verifyPrower = require('./middleware/verifyPrower')
-const { logger, accessLogger } = require('./config/logger');
-const { path } = require('./config/noFilter')
 
+// 路由
 const index = require('./routes/index')
 const users = require('./routes/users')
 const userGroup = require('./routes/user_group')
@@ -27,6 +31,7 @@ const draftArticles = require('./routes/draft_articles')
 const resources = require('./routes/resources')
 const routers = require('./routes/routers')
 const user_group_power = require('./routes/user_group_power')
+const systemInfo = require('./routes/systemInfo')
 
 // 允许跨域
 app.use(cors());
@@ -57,16 +62,6 @@ app.use(views(__dirname + '/views', {
 app.use(responseData())
 app.use(handleToken())
 app.use(verifyPrower())
-// logger
-app.use(async (ctx, next) => {
-  try {
-    await next()
-  } catch (err) {
-    // 手动释放error事件
-    ctx.app.emit('error', err, ctx);
-  }
-})
-
 // token验证
 app.use(koajwt({
   secret: singKey
@@ -88,7 +83,7 @@ app.use(draftArticles.routes(), draftArticles.allowedMethods())
 app.use(resources.routes(), resources.allowedMethods())
 app.use(routers.routes(), routers.allowedMethods())
 app.use(user_group_power.routes(), user_group_power.allowedMethods())
-
+app.ws.use(systemInfo.routes()).use(systemInfo.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

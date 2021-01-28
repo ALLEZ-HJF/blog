@@ -48,6 +48,56 @@
   box-sizing: content-box;
 }
 
-.el-select--mini {
-  width: 178px !important;
+
+// 日期选择器宽度
+.el-date-editor--daterange.el-input__inner{
+  width: 270px;
+}
+
+// mini select宽度与input一致
+.el-input--mini ,.el-select--mini, .el-date-editor--date{
+  width: 163px !important;
+}
+
+// 给表格添加入场动画
+.el-table {
+  animation: showTable 1s ;
+}
+
+@keyframes showTable {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0)
+  }
+}
+
+
+// 在移动端 弹框操作宽度自适应(width < 500) 并且 是竖屏状态下
+@media screen and(max-width: 500px) and (orientation: portrait) {
+  .el-message-box {
+    width: auto;
+  }
+  .el-dialog {
+    width: 90% !important;
+    margin-top: 2vh !important;
+  }
+  .el-date-editor--daterange.el-input__inner{
+    width: 250px !important;
+  }
+  // 日期选择
+  .el-date-range-picker {
+    width: 70%;
+    top: 100px !important;
+    .el-picker-panel__body {
+      min-width: 250px;
+      width: 100%;
+      .el-date-range-picker__content {
+        width: 100%;
+      }
+    }
+  }
 }

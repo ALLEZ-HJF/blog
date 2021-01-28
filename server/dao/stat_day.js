@@ -7,7 +7,7 @@ const statDay = db.stat_day
 
 class statDayDao {
     static async insertDayData(param) {
-        let taday = moment().subtract(1, 'days').format('YYYY-MM-DD')
+        let taday = moment().format('YYYY-MM-DD')
         let tomorrow = moment().add(1, 'days').format('YYYY-MM-DD')
         let data = await statDay.findOne({
             where: {
@@ -26,7 +26,7 @@ class statDayDao {
         let where = {}
         if (param.start_time && param.end_time) {
             where.create_time = {
-                [Op.between]: [param.start_time, moment(param.end_time).add(1, 'days').format('YYYY-MM-DD')]
+                [Op.between]: [moment(param.start_time).hour(0).minutes(0).seconds(0), moment(param.end_time).add(1, 'days').format('YYYY-MM-DD')]
             }
         }
         return await statDay.findAndCountAll({
@@ -38,7 +38,7 @@ class statDayDao {
         return await statDay.count({
             where: {
                 create_time: {
-                     [Op.between]: [moment().subtract(1, 'days').format('YYYY-MM-DD'), moment().add(1, 'days').format('YYYY-MM-DD')]
+                     [Op.between]: [moment().hours(0).format('YYYY-MM-DD'), moment().add(1, 'days').format('YYYY-MM-DD')]
                 }
             }
          })

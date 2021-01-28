@@ -114,7 +114,8 @@ routers.hasMany(routers,{
 user_group.belongsToMany(routers,{ through: 'user_group_power', foreignKey: 'gid' })
 routers.belongsToMany(user_group,{ through: 'user_group_power', foreignKey: 'rid' })
 
-sequelize.sync({ alter: true  });
+// { alter: true  }
+sequelize.sync();
 
 
 
