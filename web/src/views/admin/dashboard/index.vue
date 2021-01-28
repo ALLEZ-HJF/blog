@@ -64,8 +64,8 @@
         />
         <lineChart v-if="showVisitDataLineChart" ref="visitDataLineChart" :title="visitChartTitle" :x-data="visitChartXData" :series="visitChartSeries" />
       </el-col>
-      <el-col :xl="8" :lg="8" :md="24" :sm="24" :xs="24">
-        <!-- <lineChart /> -->
+      <el-col v-if="showSystemInfo" :xl="8" :lg="8" :md="24" :sm="24" :xs="24">
+        <lineChart />
       </el-col>
     </el-row>
   </div>
@@ -90,7 +90,10 @@ export default {
           fontSize: 16
         }
       },
-      showVisitDataLineChart: false
+      showVisitDataLineChart: false,
+      userInfo: this.$store.state.user.userInfo,
+      socket: null,
+      showSystemInfo: true
     }
   },
 
@@ -99,11 +102,42 @@ export default {
   mounted() {
     this.getVisitData()
     this.getSummaryData()
-    const websocket = new WebSocket('ws://localhost:3000/api_v1/systemInfo/admin/data')
-    websocket.addEventListener('open', () => {
-    })
+    this.socket = new WebSocket(`ws://localhost:3000/api_v1/systemInfo/admin/data?gid=${this.userInfo.gid}&api=systemInfo/admin/data`)
+    this.socket.onopen = (evt) => {
+      this.sysInfoOnOpen(evt)
+    }
+    this.socket.onclose = (evt) => {
+      this.sysInfoOnClose(evt)
+    }
+    this.socket.onmessage = (evt) => {
+      this.sysInfoOnMessage(evt)
+    }
+    this.socket.onerror = (evt) => {
+      this.sysInfoOnError(evt)
+    }
   },
   methods: {
+    sysInfoOnError(evt) {
+      console.log(evt)
+    },
+    sysInfoOnMessage(evt) {
+      const data = JSON.parse(evt.data)
+      if (data.code === 200) {
+        setTimeout(() => {
+          this.socket.send('获取数据')
+        }, 60 * 1000)
+        console.log(data)
+      } else {
+        this.showSystemInfo = false
+        this.socket.close()
+      }
+    },
+    sysInfoOnClose(evt) {
+      console.log(evt)
+    },
+    sysInfoOnOpen(evt) {
+      this.socket.send('连接成功')
+    },
     // 选择日期获取
     selectDate() {
       this.getVisitData()
