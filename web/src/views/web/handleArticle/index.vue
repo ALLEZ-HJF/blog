@@ -23,7 +23,7 @@
         </template>
       </el-input>
       <el-input v-model="article.sub_title" class="title subTitle" placeholder="请输入副标题" />
-      <Markdown ref="markdown" />
+      <Markdown ref="markdown" @saveArticle="saveArticle" />
       <div v-if="categoryList.length > 0" class="categoryBox">
         <div class="text">
           选择分类:
@@ -42,6 +42,7 @@
 </template>
 <script>
 import { getArticleByAid, insertArticle, editArticle } from '@/api/article'
+import { getDraftArticleInfo, insertDraftArticle, editDraftArticle } from '@/api/draftArticle'
 import { getCategoryList } from '@/api/category'
 import { uploadFile } from '@/api/upload'
 import SelectCategory from '@/components/SelectCategory'
@@ -55,6 +56,7 @@ export default {
   data() {
     return {
       aid: '',
+      did: '', // 草稿id
       categoryList: [],
       article: {
         aid: '',
@@ -76,12 +78,58 @@ export default {
     if (this.$route.query.isEdit) {
       this.isEdit = this.$route.query.isEdit
     }
+    if (this.$route.query.did) {
+      this.did = this.$route.query.did
+      // 获取草稿文章
+      this.getDraftArticleInfo()
+    }
     this.getCategoryList()
   },
   methods: {
-    // 获取富文本返回的值
-    getContent(content) {
+    // 保存
+    async saveArticle(content) {
       this.article.content = content
+      if (this.article.content && this.article.title && !this.article.aid) {
+        if (this.did) {
+          // 修改草稿
+          this.article.did = this.did
+          this.article.cids = this.$refs['selectCategory'].getSelectIds()
+          const data = await editDraftArticle(this.article)
+          if (data.code === 200) {
+            this.$message.success('修改草稿成功')
+          }
+        } else {
+          // 保存草稿
+          this.article.cids = this.$refs['selectCategory'].getSelectIds()
+          const data = await insertDraftArticle(this.article)
+          if (data.code === 200) {
+            this.did = data.data.did
+            this.$message.success('保存成功')
+          }
+        }
+      }
+    },
+    async getDraftArticleInfo() {
+      const data = await getDraftArticleInfo({ did: this.did })
+      if (data.code === 200) {
+        this.$refs.markdown.content = data.data.content
+        this.article.content = data.data.content
+        this.article.title = data.data.title
+        this.article.sub_title = data.data.sub_title
+        this.article.imgs = data.data.imgs
+        this.article.cids = data.data.cids
+        const imgArr = []
+        if (data.data.imgs !== 'null' && data.data.imgs) {
+          data.data.imgs.split(',').forEach(item => {
+            imgArr.push({ uid: new Date().getTime(), url: item })
+          })
+        }
+        this.articleImgArr = imgArr
+        this.$nextTick(() => {
+          this.selectIds = data.data.cids !== 'null' ? data.data.cids ? data.data.cids.split(',') : [] : []
+          this.selectIds = this.selectIds.map(x => Number(x))
+        })
+      }
     },
     // 编辑文章
     async editArticle() {
@@ -110,6 +158,9 @@ export default {
       if (data.code === 200) {
         this.$message.success('添加成功')
         this.articleImgArr.push({ url: data.data[0] })
+        if (this.did) {
+          this.article.imgs = this.articleImgArr.map(x => x.url).join(',')
+        }
       }
     },
     beforeImgUpload(file) {

@@ -12,6 +12,17 @@ class draftArticlesController {
         ctx.response.status = 200
         ctx.success(200,'获取成功',res)
     }
+
+    // 根据did获取草稿详情
+    static async getDraftArticleInfo(ctx) {
+        const token = ctx.header.authorization
+        const uid = ctx.verify(token).data.uid
+        const param = ctx.request.query
+        param.uid = uid
+        const res = await draftArticlesDao.getDraftArticleInfo(param)
+        ctx.success(200,'获取成功',res)
+    }
+
     //  添加草稿    
     static async insertDraftArticle(ctx) {
         const param = ctx.request.body

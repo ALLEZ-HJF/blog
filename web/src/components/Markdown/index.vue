@@ -57,9 +57,11 @@ export default {
     change(value, render) {
       this.html = render
     },
-    save() { // 保存文章内容
+    save(val) { // 保存文章内容
+      this.$emit('saveArticle', val)
     },
-    intervalSave() { // 自动保存
+    intervalSave(val) { // 自动保存
+      this.$emit('saveArticle', val)
     },
     async imgAdd(pos, file) { // 添加图片，pos为位置
       const data = await uploadFile({ file: file })

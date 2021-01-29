@@ -16,6 +16,15 @@ class draftArticlesDao {
         limit: Number(data.page_size) || 10
       })
    }
+  //  获取草稿详情
+  static async getDraftArticleInfo(data) {
+    return await draftArticles.findOne({
+      where: {
+        did: data.did,
+        uid: data.uid
+      }
+    })
+  }
 
   //  添加草稿
   static async insertDraftArticle(data) {

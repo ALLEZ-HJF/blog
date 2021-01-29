@@ -15,6 +15,13 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+Vue.prototype.toPage = function(name, query) {
+  const { href } = this.$router.resolve({
+    name: name,
+    query: query
+  })
+  window.open(href, '_blank')
+}
 // 全局过滤表格多余字段
 Vue.prototype.filterRow = (formData, row) => {
   const data = {}

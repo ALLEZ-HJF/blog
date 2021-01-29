@@ -3,7 +3,7 @@
     <el-container>
       <el-header>
         <el-row>
-          <el-col :xl="{span:18,offset:3}" :lg="{span:18,offset:3}" :md="{span:16,offset:4}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
+          <el-col :xl="{span:18,offset:3}" :lg="{span:18,offset:3}" :md="{span:24,offset:0}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
             <div class="left">
               <img class="logoImg" src="@/assets/logo.png">
               <div class="navMenu">
@@ -20,7 +20,8 @@
             </div>
             <div class="right">
               <el-input v-if="isShowSearch" v-model="searchText" class="rightMenu hidden-sm-and-down" size="small" prefix-icon="el-icon-search" placeholder="请输入内容回车搜索" @change="search" />
-              <el-button v-if="userInfo" class="rightMenu writeBtn" size="small" type="primary" @click="gotoWrite">写文章</el-button>
+              <el-button v-if="userInfo" class="rightMenu writeBtn" size="small" type="primary" @click="goToPage('handleArticle')">写文章</el-button>
+              <el-button v-if="userInfo" class="rightMenu writeBtn" size="small" @click="goToPage('draft')">草稿</el-button>
               <el-button v-if="!userInfo" class="rightMenu" plain size="small" type="primary" @click="showLoginDialog">登录</el-button>
               <div v-if="userInfo">
                 <el-dropdown @command="handleCommand">
@@ -176,9 +177,6 @@ export default {
         this.pathName = '首页'
       }
       this.$router.push({ name: name })
-    },
-    gotoWrite() {
-      this.$router.push({ name: 'handleArticle' })
     },
     getSearchCids(data) {
       this.search('', data)
