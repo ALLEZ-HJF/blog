@@ -70,6 +70,10 @@ export default {
     series: { // 数据
       type: Array,
       default: () => []
+    },
+    chartOption: {
+      type: Object,
+      default: () => ({})
     }
   },
   data() {
@@ -85,7 +89,7 @@ export default {
   },
   mounted() {
     this.xAxis.data = this.xData
-    Object.assign(this.option, { title: this.title }, { legend: this.legend }, { toolbox: this.toolbox }, { tooltip: this.tooltip }, { grid: this.grid }, { xAxis: this.xAxis }, { yAxis: this.yAxis }, { series: this.series })
+    Object.assign(this.option, this.chartOption, { title: this.title }, { legend: this.legend }, { toolbox: this.toolbox }, { tooltip: this.tooltip }, { grid: this.grid }, { xAxis: this.xAxis }, { yAxis: this.yAxis }, { series: this.series })
     this.initChart()
   },
   methods: {
@@ -95,7 +99,7 @@ export default {
     },
     updataChart() {
       this.xAxis.data = this.xData
-      Object.assign(this.option, { title: this.title }, { legend: this.legend }, { toolbox: this.toolbox }, { tooltip: this.tooltip }, { grid: this.grid }, { xAxis: this.xAxis }, { yAxis: this.yAxis }, { series: this.series })
+      Object.assign(this.option, this.chartOption, { title: this.title }, { legend: this.legend }, { toolbox: this.toolbox }, { tooltip: this.tooltip }, { grid: this.grid }, { xAxis: this.xAxis }, { yAxis: this.yAxis }, { series: this.series })
       this.myChart.setOption(this.option, true)
     }
   }
