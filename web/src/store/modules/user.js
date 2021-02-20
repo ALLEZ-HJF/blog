@@ -35,7 +35,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       register(user).then(response => {
         if (response.code === 200) {
-          commit('SET_USER_INFO', data.data.data)
+          commit('SET_USER_INFO', response.data.data)
           resolve(response)
         } else {
           reject(response)

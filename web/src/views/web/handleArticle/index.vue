@@ -28,13 +28,14 @@
         <div class="text">
           选择分类:
         </div>
-        <div v-if="categoryList.length > 0 && !aid || selectIds.length" class="category">
+        <div v-if="isShowCategory && !aid" class="category">
           <selectCategory ref="selectCategory" :select-ids="selectIds" :category-list="categoryList" />
         </div>
       </div>
     </el-card>
-    <el-button v-if="!isEdit" type="primary" class="btn" @click="handlePublish">发布文章</el-button>
-    <el-button v-else type="warning" class="btn" @click="editArticle">编辑文章</el-button>
+    <el-button v-if="!isEdit" type="primary" class="btn" icon="el-icon-s-promotion" @click="handlePublish">发布文章</el-button>
+    <el-button v-else type="warning" class="btn" icon="el-icon-edit" @click="editArticle">编辑文章</el-button>
+    <el-button v-if="did" type="warning" class="btn" icon="el-icon-edit" @click="saveArticle">保存草稿</el-button>
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="dialogImageUrl" alt="">
     </el-dialog>
@@ -42,7 +43,7 @@
 </template>
 <script>
 import { getArticleByAid, insertArticle, editArticle } from '@/api/article'
-import { getDraftArticleInfo, insertDraftArticle, editDraftArticle } from '@/api/draftArticle'
+import { getDraftArticleInfo, insertDraftArticle, editDraftArticle, delDraftArticle } from '@/api/draftArticle'
 import { getCategoryList } from '@/api/category'
 import { uploadFile } from '@/api/upload'
 import SelectCategory from '@/components/SelectCategory'
@@ -71,24 +72,27 @@ export default {
       dialogVisible: false,
       dialogImageUrl: '',
       articleImgArr: [],
-      isEdit: false
+      isEdit: false,
+      isShowCategory: false
     }
   },
   async created() {
     if (this.$route.query.isEdit) {
       this.isEdit = this.$route.query.isEdit
+      this.aid = this.$route.query.aid
+    } else {
+      this.getCategoryList()
     }
     if (this.$route.query.did) {
       this.did = this.$route.query.did
       // 获取草稿文章
       this.getDraftArticleInfo()
     }
-    this.getCategoryList()
   },
   methods: {
     // 保存
-    async saveArticle(content) {
-      this.article.content = content
+    async saveArticle() {
+      this.article.content = this.$refs.markdown.content
       if (this.article.content && this.article.title && !this.article.aid) {
         if (this.did) {
           // 修改草稿
@@ -128,6 +132,7 @@ export default {
         this.$nextTick(() => {
           this.selectIds = data.data.cids !== 'null' ? data.data.cids ? data.data.cids.split(',') : [] : []
           this.selectIds = this.selectIds.map(x => Number(x))
+          this.isShowCategory = true
         })
       }
     },
@@ -196,7 +201,11 @@ export default {
         this.article.content = this.$refs.markdown.content
         const data = await insertArticle(this.article)
         if (data.code === 200) {
-          this.$message.success('发布成功')
+          this.$message.success('发布成功,请等待管理员审核')
+          // 删除草稿
+          if (this.did) {
+            delDraftArticle({ did: this.did })
+          }
           setTimeout(() => {
             this.$router.back()
           }, 1500)
@@ -207,15 +216,17 @@ export default {
       const data = await getCategoryList({ state: 'valid' })
       if (data.code === 200) {
         this.categoryList = data.data.rows
-        if (this.$route.query.aid) {
-          this.aid = this.$route.query.aid
+        if (this.aid) {
           this.getArticleByAid()
+        }
+        if (!this.did) {
+          this.isShowCategory = true
         }
       }
     },
     async getArticleByAid() {
       const data = await getArticleByAid({ aid: this.aid })
-      if (data.code) {
+      if (data.code === 200) {
         this.article = data.data
         this.article.categories.forEach(item => {
           this.selectIds.push(item.cid)
@@ -272,12 +283,9 @@ export default {
 </style>
 
 <style lang="less" scoped>
-.articleListContainer {
-  margin-top: 20px;
-}
 .btn {
   float: right;
-  margin: 20px 0;
+  margin: 20px 10px;
 }
 .categoryBox {
   padding: 30px 0;

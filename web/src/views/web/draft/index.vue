@@ -53,13 +53,13 @@ export default {
   },
   methods: {
     gotoEdit(did) {
-      this.toPage('handleArticle', { did })
+      this.$router.push({ name: 'handleArticle', query: { did }})
     },
     async delDraftArticle(did) {
       const data = await delDraftArticle({ did })
       if (data.code) {
         this.$message.success('删除成功')
-        if (this.searchForm.page_num > 1 && draftList.length != 0) {
+        if (this.searchForm.page_num > 1 && this.draftList.length !== 0) {
           this.getDraftArticleList()
         } else {
           this.searchForm.page_num--

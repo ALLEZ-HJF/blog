@@ -1,7 +1,10 @@
 <template>
   <div class="indexContainer">
-    <el-row :gutter="10">
-      <el-col style="margin-bottom: 20px" :xl="18" :lg="18" :md="18" :sm="24" :xs="24">
+    <el-row :gutter="15">
+      <el-col class="articleBox" :xl="18" :lg="18" :md="18" :sm="24" :xs="24">
+        <div class="menu">
+          <span v-for="(item,index) in menuList" :key="item.sortKey" :class="index === menuIndex ? 'active': ''" class="item" @click="getArticleList(item.sortKey, index)">{{ item.title }}</span>
+        </div>
         <div v-if="articleList.length > 0" class="articleList">
           <div v-for="item in articleList" :key="item.aid" class="articleItem">
             <articleItem :item="item" />
@@ -34,7 +37,22 @@ export default {
   },
   data() {
     return {
-      userList: []
+      userList: [],
+      menuList: [
+        {
+          title: '仅看博主',
+          sortKey: 'is_master'
+        },
+        {
+          title: '最新',
+          sortKey: 'create_time'
+        },
+        {
+          title: '最热门',
+          sortKey: 'look_num'
+        }
+      ],
+      menuIndex: 0
     }
   },
   computed: {
@@ -77,7 +95,18 @@ export default {
       }
     },
     // 文章列表
-    async getArticleList() {
+    async getArticleList(sortKey, index) {
+      if (this.menuIndex === index) return
+      this.menuIndex = index || 0
+      this.articleListSearchForm.page_num = 1
+      await this.$store.dispatch('article/resetArticleList')
+      if (sortKey === 'is_master' || sortKey == null) {
+        this.articleListSearchForm.is_master = true
+        this.articleListSearchForm.sortKey = ''
+      } else {
+        this.articleListSearchForm.is_master = false
+        this.articleListSearchForm.sortKey = sortKey
+      }
       const data = await this.$store.dispatch('article/getArticleList', this.articleListSearchForm)
       if (data.count === this.articleList.length) {
         this.articleListSearchForm.status = 0
@@ -88,7 +117,27 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.articleList,.aside  {
+@import "@/styles/variables.less";
+.articleBox {
+  background: #ffffff;
+  border-radius: 6px;
+  .menu {
+    padding: 10px 0;
+    .item {
+      font-size: 14px;
+      color: #333333;
+      cursor: pointer;
+      margin-right: 15px;
+      margin-left: 5px;
+      &.active {
+        color: @defaultColor;
+        border-bottom: 2px solid @defaultColor;
+      }
+    }
+  }
+}
+.aside  {
+  padding-top: 10px;
   background: #ffffff;
   border-radius: 6px;
   .text {
@@ -99,16 +148,13 @@ export default {
     margin-top: 8px;
   }
 }
-.aside {
-  padding-top: 10px;
-}
 .noMore {
   text-align: center;
   font-size: 14px;
   color: #999;
   background: #ffffff;
   padding: 20px 0;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 @media screen and (max-width: 768px) {
   .articleList {

@@ -340,7 +340,7 @@ export default {
       flex: 1;
       background: @bgColor;
       padding: 0;
-      padding-top: 20px;
+      padding-top: 15px;
     }
     @media screen and(max-width: 993px) {
       .el-main {

@@ -33,15 +33,10 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
             defaultValue: 0
         },
-        like_num: {
-            type: DataTypes.INTEGER,
+        is_master: {    // 是否博主文章
+            type: DataTypes.BOOLEAN,
             allowNull: true,
-            defaultValue: 0
-        },
-        unlike_num: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            defaultValue: 0
+            defaultValue: false
         },
         comment_num: {
             type: DataTypes.INTEGER,

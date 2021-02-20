@@ -48,65 +48,70 @@
         </div>
       </el-col>
     </el-row>
-    <!-- 系统运行信息 -->
-    <el-row v-if="showSystemInfo" class="systemBox">
-      <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
-        <lineChart ref="cpuLineChart" :title="{ text: 'CPU信息'}" :x-data="timeXData" :y-axis="yAxis" :series="cpuChartData" :chart-option="{animation: false}" />
-      </el-col>
-      <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
-        <lineChart ref="memoryLineChart" :title="{ text: '内存信息'}" :x-data="timeXData" :y-axis="yAxis" :series="memoryChartData" :chart-option="{animation: false}" />
-      </el-col>
-      <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
-        <div class="systemInfo">
-          <div style="font-size: 18px;font-weight: bold;margin-bottom: 10px">
-            系统信息:
+    <el-card>
+      <!-- 系统运行信息 -->
+      <el-row v-if="showSystemInfo" class="systemBox">
+        <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
+          <lineChart ref="cpuLineChart" :title="{ text: 'CPU信息'}" :x-data="timeXData" :y-axis="yAxis" :series="cpuChartData" :chart-option="{animation: false}" />
+        </el-col>
+        <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
+          <lineChart ref="memoryLineChart" :title="{ text: '内存信息'}" :x-data="timeXData" :y-axis="yAxis" :series="memoryChartData" :chart-option="{animation: false}" />
+        </el-col>
+        <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
+          <div class="systemInfo">
+            <div style="font-size: 18px;font-weight: bold;margin-bottom: 10px">
+              系统信息:
+            </div>
+            <div class="item">
+              <span class="title">系统:</span>
+              <span class="info">{{ systemInfo.info.type }}</span>
+            </div>
+            <div class="item">
+              <span class="title">版本:</span>
+              <span class="info">{{ systemInfo.info.release }}</span>
+            </div>
+            <div class="item">
+              <span class="title">名称:</span>
+              <span class="info">{{ systemInfo.info.hostname }}</span>
+            </div>
+            <div class="item">
+              <span class="title">cpu:</span>
+              <span class="info">{{ systemInfo.cpuInfo.cpuName }}</span>
+            </div>
+            <div class="item">
+              <span class="title">核数:</span>
+              <span class="info">{{ systemInfo.cpuInfo.countCpus }}</span>
+            </div>
+            <div class="item">
+              <span class="title">总内存:</span>
+              <span class="info">{{ systemInfo.memoryInfo.total }}G</span>
+            </div>
+            <div class="item">
+              <span class="title">空余内存:</span>
+              <span class="info">{{ systemInfo.memoryInfo.free }}G</span>
+            </div>
           </div>
-          <div class="item">
-            <span class="title">系统:</span>
-            <span class="info">{{ systemInfo.info.type }}</span>
-          </div>
-          <div class="item">
-            <span class="title">版本:</span>
-            <span class="info">{{ systemInfo.info.release }}</span>
-          </div>
-          <div class="item">
-            <span class="title">名称:</span>
-            <span class="info">{{ systemInfo.info.hostname }}</span>
-          </div>
-          <div class="item">
-            <span class="title">cpu:</span>
-            <span class="info">{{ systemInfo.cpuInfo.cpuName }}</span>
-          </div>
-          <div class="item">
-            <span class="title">核数:</span>
-            <span class="info">{{ systemInfo.cpuInfo.countCpus }}</span>
-          </div>
-          <div class="item">
-            <span class="title">总内存:</span>
-            <span class="info">{{ systemInfo.memoryInfo.total }}G</span>
-          </div>
-          <div class="item">
-            <span class="title">空余内存:</span>
-            <span class="info">{{ systemInfo.memoryInfo.free }}G</span>
-          </div>
-        </div>
-      </el-col>
-    </el-row>
-    <el-row style="margin-top: 20px" class="visitData">
-      <span>选择日期:</span>
-      <el-date-picker
-        v-model="date"
-        type="daterange"
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        size="small"
-        style="margin-bottom: 20px"
-        value-format="yyyy-MM-dd"
-        @change="selectDate"
-      />
-      <lineChart v-if="showVisitDataLineChart" ref="visitDataLineChart" :title="visitChartTitle" :x-data="visitChartXData" :series="visitChartSeries" />
-    </el-row>
+        </el-col>
+      </el-row>
+    </el-card>
+    <el-card style="margin-top: 20px">
+      <el-row class="visitData">
+        <span>选择日期:</span>
+        <el-date-picker
+          v-model="date"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          size="small"
+          style="margin-bottom: 20px"
+          value-format="yyyy-MM-dd"
+          @change="selectDate"
+        />
+        <lineChart v-if="showVisitDataLineChart" ref="visitDataLineChart" :title="visitChartTitle" :x-data="visitChartXData" :series="visitChartSeries" />
+      </el-row>
+    </el-card>
+
   </div>
 </template>
 
@@ -200,7 +205,7 @@ export default {
         this.cpuChartData[0].data.shift()
         this.cpuChartData[0].data.push(Math.floor(data.cpuInfo.ratio * 100))
         this.memoryChartData[0].data.shift()
-        this.memoryChartData[0].data.push(Math.floor(data.memoryInfo.ratio * 100))
+        this.memoryChartData[0].data.push(Math.floor((1 - data.memoryInfo.ratio) * 100))
         this.$nextTick(() => {
           if (this.$refs.cpuLineChart && this.$refs.memoryLineChart) {
             this.$refs.cpuLineChart.updataChart()

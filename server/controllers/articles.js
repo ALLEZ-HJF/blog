@@ -50,6 +50,9 @@ class articlesController {
             }
            const isPass = await client.textCensorUserDefined(str)
            if (isPass.conclusionType === 1) {
+                if (userInfo.gid) {
+                    param.is_master = true
+                }
                 const res = await articlesDao.insertArticle(param)
                 ctx.response.status = 200
                 ctx.success(200,'发布成功',res)
@@ -89,6 +92,9 @@ class articlesController {
         if (ctx.verify(token).data.uid != param.uid) {
             ctx.fail(500,'无法修改他人文章')
             return
+        }
+        if (param.is_master) {
+            delete param.is_master
         }
         param.update_time = Date.now()
         const res = await articlesDao.editArticle(param)

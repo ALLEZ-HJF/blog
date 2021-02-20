@@ -107,6 +107,9 @@ class articlesDao {
         if (data.cids) {
             where.cid = data.cids.split(',')
         }
+        if (data.is_master) {
+            data.is_master = data.is_master === 'true' ? true : false
+        }
         let allData = await articles.findAll({
             attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num','comment_num','imgs'],
             where: {
@@ -119,6 +122,7 @@ class articlesDao {
                 title: {
                     [Op.like]: `%${data.title || ''}%`
                 },
+                is_master: data.is_master || false,
                 state: data.state || 'valid'
             },
             include:[
@@ -131,9 +135,10 @@ class articlesDao {
                     where: where,
                     attributes: ['name','cid'],
                     through: { attributes: [] },
-                    required: true
+                    required: false
                 }
             ],
+            order: [[data.sortKey ? data.sortKey : 'create_time', 'DESC'] ],
             offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
             limit: Number(data.page_size) || 10
         })
@@ -148,6 +153,7 @@ class articlesDao {
                 title: {
                     [Op.like]: `%${data.title || ''}%`
                 },
+                is_master: data.is_master || false,
                 state: data.state || 'valid'
             }
         })
