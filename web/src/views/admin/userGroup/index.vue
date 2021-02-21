@@ -54,11 +54,6 @@
             width="200"
           />
           <el-table-column
-            prop="role"
-            label="角色"
-            width="200"
-          />
-          <el-table-column
             fixed="right"
             label="操作"
             min-width="180"

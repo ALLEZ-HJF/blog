@@ -16,6 +16,7 @@ const { logger, accessLogger } = require('./config/logger');
 const responseData = require('./middleware/responseData')
 const handleToken = require('./middleware/handleToken')
 const verifyPrower = require('./middleware/verifyPrower')
+const handleError = require('./middleware/handleError')
 
 // 路由
 const index = require('./routes/index')
@@ -60,6 +61,7 @@ app.use(views(__dirname + '/views', {
 }))
 // 自定义统一返回数据格式
 app.use(responseData())
+app.use(handleError())
 app.use(handleToken())
 app.use(verifyPrower())
 // token验证
