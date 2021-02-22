@@ -1,6 +1,6 @@
 <template>
   <div class="indexContainer">
-    <el-row :gutter="15">
+    <el-row :gutter="25">
       <el-col class="articleBox" :xl="18" :lg="18" :md="18" :sm="24" :xs="24">
         <div class="menu">
           <span v-for="(item,index) in menuList" :key="item.sortKey" :class="index === menuIndex ? 'active': ''" class="item" @click="getArticleList(item.sortKey, index)">{{ item.title }}</span>

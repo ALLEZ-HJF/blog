@@ -112,12 +112,11 @@ export default {
       height: 80px;
       border-bottom: 1px solid #eee;
       .info {
-        height: 100%;
         flex: 1;
         font-size: 15px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: center !important;
         overflow: hidden;
         .title {
           width: 100%;
@@ -126,6 +125,7 @@ export default {
           white-space: nowrap;
           margin-bottom: 15px;
           color:@defaultColor ;
+          height: auto;
         }
         .time {
           color: #666;

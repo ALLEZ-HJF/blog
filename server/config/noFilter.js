@@ -3,6 +3,7 @@ module.exports.path = [
     `/api_v${version}/users/web/login`,
     `/api_v${version}/users/web/register`,
     `/api_v${version}/users/web/sendCode`,
+    `/api_v${version}/users/web/getUserInfo`,
     `/api_v${version}/articles/web/getArticleList`,
     `/api_v${version}/articles/web/getArticleByAid`,
     `/api_v${version}/articles/web/addArticleLookNum`,

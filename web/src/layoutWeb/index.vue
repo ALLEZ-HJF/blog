@@ -161,7 +161,7 @@ export default {
         this.$router.push({ name: 'handleArticle' })
       } else if (command === 'homePage') {
         // 前往个人中心
-        this.$router.push({ name: 'homePage', params: { uid: this.userInfo.uid }})
+        this.$router.push({ name: 'homePage', params: {}})
       } else {
         // 退出
         this.$message.success('退出成功')

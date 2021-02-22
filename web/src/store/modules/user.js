@@ -59,9 +59,6 @@ const actions = {
       })
     })
   },
-  getRouter({ commit }) {
-
-  },
   reset({ commit }) {
     commit('RESET_STATE')
   }

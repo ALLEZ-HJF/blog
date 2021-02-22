@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     gotoHomePage() {
-      this.$router.push({ name: 'homePage', params: { uid: this.item.uid }})
+      this.$router.push({ name: 'homePage', query: { uid: this.item.uid }})
     }
   }
 }

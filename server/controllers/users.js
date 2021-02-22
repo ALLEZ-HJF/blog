@@ -185,7 +185,7 @@ class userController {
         }
         if (body.phone) {
            const data = await userDao.getUserInfo({phone: body.phone})
-           if (data !== '') {
+           if (data &&  data !== '') {
              ctx.fail(500,'该手机已绑定')
              return
            }
@@ -194,6 +194,8 @@ class userController {
         if (body.gid && !userInfo.gid) {
             delete body.gid
         }
+        delete body.state
+        delete body.create_time
         body.update_time = Date.now()
         const data = await userDao.editUser(body)
         ctx.response.status = 200
