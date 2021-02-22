@@ -25,7 +25,8 @@ export function generaMenu(routes, myRouter) {
       name: item.name,
       meta: { icon: item.icon ||　'', role: item.role, title: item.title },
       hidden: item.hidden,
-      children: []
+      children: [],
+      title: item.title
     }
     if (item.redirect_name) {
       page.redirect = { name: item.redirect_name }

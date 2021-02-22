@@ -143,7 +143,7 @@ export default {
       .introduction {
         height: 100%;
         flex: 1;
-        background-color: #fafafa;
+        background-color: #eee;
         border-radius: 6px;
         font-size: 13px;
         color: #333333;
@@ -152,15 +152,15 @@ export default {
           display: flex;
           justify-content: flex-end;
           align-items: center;
-          padding-right: 20px;
-          background-color: #eee;
+          padding-right: 15px;
+          background-color: #e1e1e1;
           border-radius: 6px 6px 0 0;
           .cricle {
             display: inline-block;
             height: 12px;
             width: 12px;
             border-radius: 50%;
-            margin-left: 15px;
+            margin-left: 10px;
             &.blue {
               background-color: @defaultColor;
             }

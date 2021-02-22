@@ -116,7 +116,11 @@
             prop="sex"
             label="性别"
             width="100"
-          />
+          >
+            <template slot-scope="scope">
+              {{ scope.row.sex ? '男' : '女' }}
+            </template>
+          </el-table-column>
           <el-table-column
             prop="phone"
             label="手机号码"

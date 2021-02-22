@@ -144,7 +144,6 @@ export default {
         border-radius: 10px;
         border: 5px solid #eee;
       }
-
     }
     .info {
       width: 800px;
@@ -163,6 +162,36 @@ export default {
         float: right;
         margin-top: 10px;
       }
+    }
+
+    @media screen and (max-width: 1024px) {
+      width: 700px;
+      margin-top: 15px;
+    }
+     @media screen and (max-width: 767px) {
+      margin-top: 0px;
+      border-radius: 0;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      .avatarBox {
+        width: auto;
+        .el-image {
+          width: 100px;
+          height: 100px;
+        }
+      }
+       .info {
+         width: 100%;
+         font-size: 14px;
+         margin-top: 10px;
+         .item {
+           height: 50px;
+           span {
+             width: 60px;
+           }
+         }
+       }
     }
   }
 }

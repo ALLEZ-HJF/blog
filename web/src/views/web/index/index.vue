@@ -2,7 +2,7 @@
   <div class="indexContainer">
     <el-row :gutter="25">
       <el-col class="articleBox" :xl="18" :lg="18" :md="18" :sm="24" :xs="24">
-        <div class="menu">
+        <div class="searchMenu">
           <span v-for="(item,index) in menuList" :key="item.sortKey" :class="index === menuIndex ? 'active': ''" class="item" @click="getArticleList(item.sortKey, index)">{{ item.title }}</span>
         </div>
         <div v-if="articleList.length > 0" class="articleList">
@@ -118,47 +118,54 @@ export default {
 
 <style lang="less" scoped>
 @import "@/styles/variables.less";
-.articleBox {
-  background: #ffffff;
-  border-radius: 6px;
-  .menu {
-    padding: 10px 0;
-    .item {
-      font-size: 14px;
-      color: #333333;
-      cursor: pointer;
-      margin-right: 15px;
-      margin-left: 5px;
-      &.active {
-        color: @defaultColor;
-        border-bottom: 2px solid @defaultColor;
+.indexContainer {
+  .articleBox {
+    background: #ffffff;
+    border-radius: 6px;
+    .searchMenu {
+      padding: 10px 0;
+      .item {
+        font-size: 14px;
+        color: #333333;
+        cursor: pointer;
+        margin-right: 15px;
+        margin-left: 5px;
+        &.active {
+          color: @defaultColor;
+          border-bottom: 2px solid @defaultColor;
+        }
       }
     }
   }
-}
-.aside  {
-  padding-top: 10px;
-  background: #ffffff;
-  border-radius: 6px;
-  .text {
+  .aside  {
+    padding-top: 10px;
+    background: #ffffff;
+    border-radius: 6px;
+    .text {
+      font-size: 14px;
+      margin-left: 5px;
+    }
+    .userList {
+      margin-top: 8px;
+    }
+  }
+  .noMore {
+    text-align: center;
     font-size: 14px;
-    margin-left: 5px;
+    color: #999;
+    background: #ffffff;
+    padding: 20px 0;
+    border-radius: 6px;
   }
-  .userList {
-    margin-top: 8px;
-  }
-}
-.noMore {
-  text-align: center;
-  font-size: 14px;
-  color: #999;
-  background: #ffffff;
-  padding: 20px 0;
-  border-radius: 6px;
-}
-@media screen and (max-width: 768px) {
-  .articleList {
-    padding: 0;
+  @media screen and (max-width: 768px) {
+    .articleList {
+      padding: 0;
+    }
+    >.el-row {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
   }
 }
+
 </style>

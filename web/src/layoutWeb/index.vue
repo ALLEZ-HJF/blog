@@ -5,15 +5,17 @@
         <el-row>
           <el-col :xl="{span:18,offset:3}" :lg="{span:18,offset:3}" :md="{span:24,offset:0}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
             <div class="left">
-              <img class="logoImg" src="@/assets/logo.png">
+              <router-link tag="a" :to="{ name: 'index' }">
+                <img class="logoImg" src="@/assets/logo.png">
+              </router-link>
               <div class="navMenu">
-                <router-link class="menu active" tag="a" :to="{ name: 'index' }">首页</router-link>
+                <router-link v-for="(menu) in menuList" :key="menu.name" class="menu active" tag="a" :to="{ name: menu.name }">{{ menu.title }}</router-link>
                 <el-dropdown @command="goToPage">
                   <span class="el-dropdown-link">
                     {{ pathName }}<i class="el-icon-arrow-down el-icon--right" />
                   </span>
                   <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item command="index" :disabled="$route.name === 'index'">首页</el-dropdown-item>
+                    <el-dropdown-item v-for="menu in menuList" :key="menu.name" :command="menu.name" :disabled="$route.name === menu.name">首页</el-dropdown-item>
                   </el-dropdown-menu>
                 </el-dropdown>
               </div>
@@ -126,7 +128,8 @@ export default {
       searchText: '',
       isShowSearch: false,
       isShowCategory: false,
-      pathName: '首页'
+      pathName: '首页',
+      menuList: []
     }
   },
   watch: {
@@ -148,6 +151,7 @@ export default {
     ...mapGetters(['articleListSearchForm', 'articleList'])
   },
   created() {
+    this.menuList = this.$store.state.permission.addRoutes[0].children.filter(menu => !menu.hidden)
     this.getCategoryList()
     if (getToken()) {
       // 有登录记录 获取userInfo
@@ -166,6 +170,7 @@ export default {
         // 退出
         this.$message.success('退出成功')
         this.$store.dispatch('user/reset')
+        this.$router.push({ name: 'index' })
         window.localStorage.clear()
         setTimeout(() => {
           window.location.reload()
