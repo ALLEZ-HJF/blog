@@ -9,7 +9,8 @@
                 <img class="logoImg" src="@/assets/logo.png">
               </router-link>
               <div class="navMenu">
-                <router-link v-for="(menu) in menuList" :key="menu.name" class="menu active" tag="a" :to="{ name: menu.name }">{{ menu.title }}</router-link>
+                <span v-for="(menu, index) in menuList" :key="menu.name" class="menu" :class="currMenu === index ? 'active' : ''" @click="goToPage(menu.name,index)">{{ menu.title }}</span>
+                <!-- <router-link  tag="a" :to="{ name: menu.name }"></router-link> -->
                 <el-dropdown @command="goToPage">
                   <span class="el-dropdown-link">
                     {{ pathName }}<i class="el-icon-arrow-down el-icon--right" />
@@ -129,7 +130,8 @@ export default {
       isShowSearch: false,
       isShowCategory: false,
       pathName: '首页',
-      menuList: []
+      menuList: [],
+      currMenu: 0
     }
   },
   watch: {
@@ -177,10 +179,11 @@ export default {
         }, 1000)
       }
     },
-    goToPage(name) {
+    goToPage(name, index) {
       if (name === 'index') {
         this.pathName = '首页'
       }
+      this.currMenu = index || 0
       this.$router.push({ name: name })
     },
     getSearchCids(data) {
@@ -309,6 +312,9 @@ export default {
             .menu {
               margin-left: 50px;
               font-size: 16px;
+              color: #666666;
+              cursor: pointer;
+              transition: color 0.5s;
               &:hover {
                 color: @defaultColor;
               }
