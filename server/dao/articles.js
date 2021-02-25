@@ -135,7 +135,7 @@ class articlesDao {
                     where: where,
                     attributes: ['name','cid'],
                     through: { attributes: [] },
-                    required: false
+                    required: true
                 }
             ],
             order: [[data.sortKey ? data.sortKey : 'create_time', 'DESC'] ],

@@ -24,7 +24,7 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath: '/',
+  publicPath: './',
   outputDir: 'dist',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
@@ -47,11 +47,6 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
-    },
-    output: { // 输出重构  打包编译后的 文件名称  【模块名称.时间戳.版本号】
-      path: path.resolve(__dirname, 'dist'),
-      filename: `static/[name].${new Date().getTime()}.js`,
-      chunkFilename: `static/[name].${new Date().getTime()}.js`
     }
   },
   chainWebpack(config) {
@@ -85,14 +80,14 @@ module.exports = {
         symbolId: 'icon-[name]'
       })
       .end()
-      config.module
-      .rule('eslint')
-      .use('eslint-loader')
-      .loader('eslint-loader')
-      .tap(options => {
-        options.fix = true
-        return options
-      }).end()
+      // config.module
+      // .rule('eslint')
+      // .use('eslint-loader')
+      // .loader('eslint-loader')
+      // .tap(options => {
+      //   options.fix = true
+      //   return options
+      // }).end()
 
     config
       .when(process.env.NODE_ENV !== 'development',

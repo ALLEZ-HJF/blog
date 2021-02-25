@@ -75,7 +75,7 @@
             min-width="200"
           >
             <template slot-scope="scope">
-              <!-- <el-button v-if="scope.row.state !== 'valid'" type="success" size="small" icon="el-icon-check" @click="gotoPublish(scope.row)">审核</el-button> -->
+              <el-button v-if="scope.row.state !== 'valid'" type="success" size="small" icon="el-icon-check" @click="gotoPublish(scope.row)">审核</el-button>
               <el-button type="warning" size="small" icon="el-icon-edit" @click="gotoPublish(scope.row,true)">编辑</el-button>
               <el-button v-if="scope.row.state === 'valid'" size="small" type="danger" icon="el-icon-delete" @click="adminDelArticle(scope.row)">删除</el-button>
             </template>

@@ -48,8 +48,7 @@
         </div>
       </el-col>
     </el-row>
-    <el-card>
-      <!-- 系统运行信息 -->
+    <!-- <el-card>
       <el-row v-if="showSystemInfo" class="systemBox">
         <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
           <lineChart ref="cpuLineChart" :title="{ text: 'CPU信息'}" :x-data="timeXData" :y-axis="yAxis" :series="cpuChartData" :chart-option="{animation: false}" />
@@ -93,7 +92,7 @@
           </div>
         </el-col>
       </el-row>
-    </el-card>
+    </el-card> -->
     <el-card style="margin-top: 20px">
       <el-row class="visitData">
         <span>选择日期:</span>
@@ -118,6 +117,7 @@
 <script type="text/ecmascript-6">
 import { getVisitData, getSummaryData } from '@/api/stat'
 import lineChart from '@/components/chart/lineChart/index.vue'
+import { getFormatDate } from '@/utils'
 export default {
   components: {
     lineChart
@@ -125,7 +125,7 @@ export default {
   data() {
     return {
       summaryObject: {},
-      date: [new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000), new Date(new Date().getTime() - 24 * 60 * 60 * 1000)],
+      date: [getFormatDate(new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)) , getFormatDate(new Date(new Date().getTime() - 24 * 60 * 60 * 1000)) ],
       visitChartSeries: [],
       visitChartXData: [],
       visitChartTitle: {
@@ -175,19 +175,19 @@ export default {
       this.cpuChartData[0].data.push('')
       this.memoryChartData[0].data.push('')
     }
-    this.socket = new WebSocket(`ws://localhost:3000/api_v1/systemInfo/admin/data?gid=${this.userInfo.gid}&api=systemInfo/admin/data`)
-    this.socket.onopen = (evt) => {
-      this.sysInfoOnOpen(evt)
-    }
-    this.socket.onclose = (evt) => {
-      this.sysInfoOnClose(evt)
-    }
-    this.socket.onmessage = (evt) => {
-      this.sysInfoOnMessage(evt)
-    }
-    this.socket.onerror = (evt) => {
-      this.sysInfoOnError(evt)
-    }
+    // this.socket = new WebSocket(`ws://localhost:3000/api_v1/systemInfo/admin/data?gid=${this.userInfo.gid}&api=systemInfo/admin/data`)
+    // this.socket.onopen = (evt) => {
+    //   this.sysInfoOnOpen(evt)
+    // }
+    // this.socket.onclose = (evt) => {
+    //   this.sysInfoOnClose(evt)
+    // }
+    // this.socket.onmessage = (evt) => {
+    //   this.sysInfoOnMessage(evt)
+    // }
+    // this.socket.onerror = (evt) => {
+    //   this.sysInfoOnError(evt)
+    // }
   },
   methods: {
     sysInfoOnError(evt) {

@@ -32,14 +32,6 @@
           <selectCategory ref="selectCategory" :select-ids="selectIds" :category-list="categoryList" />
         </div>
       </div>
-      <div v-if="isEdit" style="margin: 15px 0">
-        <span>状态：</span>
-        <el-select v-model="article.state" size="small">
-          <el-option label="通过" value="valid" />
-          <el-option label="未审核" value="invalid" />
-          <el-option label="锁定" value="lock" />
-        </el-select>
-      </div>
     </el-card>
     <el-button v-if="!isEdit" type="primary" class="btn" @click="handlePublish">{{ aid ? '审核文章' : '发布文章' }}</el-button>
     <el-button v-else type="warning" class="btn" @click="adminEditArticle">编辑文章</el-button>
