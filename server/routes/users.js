@@ -24,6 +24,8 @@ router.post('/web/sendCode',userController.sendCode)
 router.post('/web/getUserRankingList',userController.getUserRankingList)
 // 获取用户详情
 router.post('/web/getUserInfo',userController.getUserInfo)
+// 忘记密码
+router.post('/web/forgetPassword',userController.forgetPassword)
 
 
 module.exports = router

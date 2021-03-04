@@ -49,26 +49,7 @@ class commentsController {
             return
         }
         const data = await commentsDao.getCommentByAid(param)
-        const data2 = JSON.parse(JSON.stringify(data))
-        let replys = []
-        data2.forEach(item => {
-            for (let i=0;i<item.replys.length; i++) {
-                item.replys[i].replys = []
-                if (item.replys[i].pid !== 0) {
-                    replys.push(item.replys[i])
-                    item.replys.splice(i,1)
-                    i--
-                }
-            }
-            item.replys.forEach((item2) => {
-                replys.forEach((item3) => {
-                    if (item3.pid === item2.rid) {
-                        item2.replys.push(item3)
-                    }
-                })
-            })
-        })
-        ctx.success(200,'获取成功',data2)
+        ctx.success(200,'获取成功',data)
     }
 }
 

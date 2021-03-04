@@ -21,3 +21,12 @@ export function getSummaryData() {
     method: 'get'
   })
 }
+
+// 访问列表
+export function getVisitDataList(data) {
+  return request({
+    url: 'stat/admin/getVisitDataList',
+    method: 'post',
+    data
+  })
+}

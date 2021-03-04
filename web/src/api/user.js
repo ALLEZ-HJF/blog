@@ -100,3 +100,12 @@ export function updateUser(data) {
     }]
   })
 }
+
+// 忘记密码
+export function forgetPassword(data) {
+  return request({
+    url: 'users/web/forgetPassword',
+    method: 'post',
+    data
+  })
+}

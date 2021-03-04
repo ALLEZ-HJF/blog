@@ -15,6 +15,8 @@
               :file-list="articleImgArr"
               :before-upload="beforeImgUpload"
               :http-request="uploadImg"
+              :limit="3"
+              :on-remove="removePicture"
             >
               <i class="el-icon-plus" />
             </el-upload>
@@ -35,7 +37,7 @@
     </el-card>
     <el-button v-if="!isEdit" type="primary" class="btn" icon="el-icon-s-promotion" @click="handlePublish">发布文章</el-button>
     <el-button v-else type="warning" class="btn" icon="el-icon-edit" @click="editArticle">编辑文章</el-button>
-    <el-button v-if="did" type="warning" class="btn" icon="el-icon-edit" @click="saveArticle">保存草稿</el-button>
+    <el-button v-if="did || !aid" type="warning" class="btn" icon="el-icon-edit" @click="saveArticle">保存草稿</el-button>
     <el-dialog :visible.sync="dialogVisible">
       <img width="100%" :src="dialogImageUrl" alt="">
     </el-dialog>
@@ -156,6 +158,9 @@ export default {
       if (data.code === 200) {
         this.$message.success('修改成功')
       }
+    },
+    removePicture(file, fileList) {
+      this.articleImgArr = fileList
     },
     async uploadImg(params) {
       const file = params.file

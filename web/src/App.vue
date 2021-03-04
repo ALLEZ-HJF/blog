@@ -14,10 +14,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less">
+@import "@/styles/variables.less";
 body,html,#app {
   width: 100%;
   height: 100%;
+  background: @bgColor;
 }
 #app {
       font-family: Noto Sans SC;

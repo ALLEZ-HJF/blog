@@ -16,7 +16,7 @@
                     {{ pathName }}<i class="el-icon-arrow-down el-icon--right" />
                   </span>
                   <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item v-for="menu in menuList" :key="menu.name" :command="menu.name" :disabled="$route.name === menu.name">首页</el-dropdown-item>
+                    <el-dropdown-item v-for="menu in menuList" :key="menu.name" :command="menu.name" :disabled="$route.name === menu.name">{{ menu.title }}</el-dropdown-item>
                   </el-dropdown-menu>
                 </el-dropdown>
               </div>
@@ -25,7 +25,7 @@
               <el-input v-if="isShowSearch" v-model="searchText" class="rightMenu hidden-sm-and-down" size="small" prefix-icon="el-icon-search" placeholder="请输入内容回车搜索" @change="search" />
               <el-button v-if="userInfo" class="rightMenu writeBtn" size="small" type="primary" @click="goToPage('handleArticle')">写文章</el-button>
               <el-button v-if="userInfo" class="rightMenu writeBtn" size="small" @click="goToPage('draft')">草稿</el-button>
-              <el-button v-if="!userInfo" class="rightMenu" plain size="small" type="primary" @click="showLoginDialog">登录</el-button>
+              <el-button v-if="!userInfo" class="rightMenu" plain size="small" type="primary" @click="goToPage('signin')">登录</el-button>
               <div v-if="userInfo">
                 <el-dropdown @command="handleCommand">
                   <span class="el-dropdown-link">
@@ -42,86 +42,20 @@
           </el-col>
         </el-row>
       </el-header>
-      <div v-if="isShowCategory" class="categoryListBox">
-        <el-row>
-          <el-col :xl="{span:18,offset:3}" :lg="{span:18,offset:3}" :md="{span:24,offset:0}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}">
-            <selectCategory ref="selectCategory" :select-ids="selectIds" :category-list="categoryList" @getSearchCids="getSearchCids" />
-          </el-col>
-        </el-row>
+      <div class="main">
+        <router-view :key="$route.fullPath" ref="main" />
       </div>
-      <el-main>
-        <el-row>
-          <el-col :xl="{span:18,offset:3}" :lg="{span:18,offset:3}" :md="{span:24,offset:0}" :sm="{span:24,offset:0}" :xs="{span:24,offset:0}" class="main">
-            <router-view :key="$route.fullPath" ref="main" />
-          </el-col>
-        </el-row>
-      </el-main>
     </el-container>
-    <el-dialog title="用户登录" :visible.sync="loginDialogFormVisible" width="400px">
-      <el-form ref="loginForm" :model="loginForm" label-width="80px" label-position="left" :rules="loginRules">
-        <el-form-item label="用户名:" prop="username">
-          <el-input v-model="loginForm.username" autocomplete="off" placeholder="请输入用户名" />
-        </el-form-item>
-        <el-form-item label="密码:" prop="password">
-          <el-input v-model="loginForm.password" type="password" autocomplete="off" placeholder="请输入密码" show-password />
-        </el-form-item>
-        <el-form-item v-if="isNoAccount" label="邮箱:" prop="email">
-          <el-input v-model="loginForm.email" autocomplete="off" placeholder="请输入密码" />
-        </el-form-item>
-        <el-form-item label="验证码:" prop="code">
-          <el-input v-model="loginForm.code" autocomplete="off">
-            <template slot="append" class="sendCode">
-              <span class="sendCode" @click="sendCode">{{ isSend ? '请'+num+'秒后再试' : '点击获取验证码' }}</span>
-            </template>
-          </el-input>
-        </el-form-item>
-        <span class="registerText" @click="isNoAccount = !isNoAccount">{{ isNoAccount ? '前往登陆' : '注册账号' }}</span>
-        <el-button type="primary" style="width: 100%" :loading="isLoading" :disabled="!isSend" @click="login">{{ isNoAccount ? '注册': '登录' }}</el-button>
-      </el-form>
-    </el-dialog>
   </div>
 </template>
 
 <script>
-import { sendCode } from '@/api/user'
-import { setToken, getToken } from '@/utils/auth'
-import SelectCategory from '@/components/SelectCategory'
-import { getCategoryList } from '@/api/category'
+import {  getToken } from '@/utils/auth'
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
-  components: {
-    SelectCategory
-  },
   data() {
     return {
-      loginDialogFormVisible: false,
-      loginForm: {
-        username: '',
-        password: '',
-        code_id: '',
-        isLogin: true
-      },
-      loginRules: {
-        username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 5, max: 20, message: '用户名长度在 5 到 20 个字符之间', trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
-        ],
-        email: [
-          { required: true, message: '请输入邮箱地址', trigger: 'blur' },
-          { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur' }
-        ],
-        code: [
-          { required: true, message: '请输入验证码', trigger: 'blur' }
-        ]
-      },
-      isSend: false,
-      isNoAccount: false,
-      isLoading: false,
-      num: 120,
       userInfo: '',
       selectIds: [],
       categoryList: [],
@@ -129,7 +63,7 @@ export default {
       searchText: '',
       isShowSearch: false,
       isShowCategory: false,
-      pathName: '首页',
+      pathName: '推荐',
       menuList: [],
       currMenu: 0
     }
@@ -137,7 +71,21 @@ export default {
   watch: {
     $route: {
       handler: function(val, oldVal) {
-        if (val.name !== 'indexContent') {
+        switch (val.name) {
+          case 'indexContent':
+            this.currMenu = 0
+            this.pathName = '推荐'
+            break
+          case 'articleList':
+            this.currMenu = 1
+            this.pathName = '用户文章'
+            break
+          case 'about':
+            this.currMenu = 2
+            this.pathName = '关于我'
+            break
+        }
+        if (val.name !== 'articleList') {
           this.isShowSearch = false
           this.isShowCategory = false
         } else {
@@ -154,7 +102,6 @@ export default {
   },
   created() {
     this.menuList = this.$store.state.permission.addRoutes[0].children.filter(menu => !menu.hidden)
-    this.getCategoryList()
     if (getToken()) {
       // 有登录记录 获取userInfo
       this.userInfo = this.$store.state.user.userInfo
@@ -180,8 +127,12 @@ export default {
       }
     },
     goToPage(name, index) {
-      if (name === 'index') {
-        this.pathName = '首页'
+      if (index === 0) {
+        this.pathName = '推荐'
+      } else if (index === 1) {
+        this.pathName = '用户文章'
+      } else {
+        this.pathName = '关于我'
       }
       this.currMenu = index || 0
       this.$router.push({ name: name })
@@ -201,65 +152,6 @@ export default {
           this.articleListSearchForm.status = 0
         }
       })
-    },
-    async getCategoryList() {
-      const data = await getCategoryList({ state: 'valid' })
-      if (data.code === 200) {
-        this.categoryList = data.data.rows
-      }
-    },
-    login() {
-      this.isLoading = true
-      this.$refs.loginForm.validate(async(valid) => {
-        if (valid) {
-          let data = ''
-          try {
-            if (!this.isNoAccount) {
-              data = await this.$store.dispatch('user/login', this.loginForm)
-            } else {
-            // 注册
-              data = await this.$store.dispatch('user/register', this.loginForm)
-            }
-            setToken(data.data.token)
-            this.userInfo = data.data.data
-            this.loginDialogFormVisible = false
-            if (this.timer) {
-              window.clearInterval(this.timer)
-              this.num = 120
-              this.isSend = false
-            }
-          } catch (error) {
-            this.isLoading = false
-          }
-        }
-      })
-    },
-    showLoginDialog() {
-      this.loginDialogFormVisible = true
-    },
-    async sendCode() {
-      if (this.loginForm.username === '') {
-        this.$message.info('请输入用户名')
-        return false
-      }
-      if (this.isSend) {
-        this.$message.info('请' + this.num + '秒后再试!')
-      } else {
-        if (this.isNoAccount) {
-          this.loginForm.isLogin = false
-        }
-        const resData = await sendCode(this.loginForm)
-        this.loginForm.code_id = resData.data
-        this.isSend = true
-        this.timer = window.setInterval(() => {
-          --this.num
-          if (this.num === 0) {
-            this.isSend = false
-            this.num = 120
-            window.clearInterval(this.timer)
-          }
-        }, 1000)
-      }
     }
   }
 }
@@ -347,15 +239,15 @@ export default {
         }
       }
     }
-    .el-main {
-      flex: 1;
-      background: @bgColor;
-      padding: 0;
-      padding-top: 15px;
+    .main {
+      margin: 0 auto;
+      width: 1120px;
+      padding: 15px 0;
     }
-    @media screen and(max-width: 993px) {
-      .el-main {
-       padding-top: 0px;
+    @media screen and(max-width: 992px) {
+      .main {
+        width: 100%;
+        padding-top: 0px;
       }
     }
   }

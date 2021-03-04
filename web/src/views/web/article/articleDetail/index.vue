@@ -1,7 +1,10 @@
 <template>
   <div class="articleDetailContainer">
     <el-row :gutter="20">
-      <el-col :xl="18" :lg="18" :md="24" :sm="24" :xs="24" class="articleDetail">
+      <el-col :xl="18" :lg="18" :md="18" :sm="24" :xs="24" class="articleDetail">
+        <div v-if="article.imgs" class="imgsBox">
+          <img v-for="src in article.imgs.split(',')" :key="src" :src="src" alt="">
+        </div>
         <div class="title">{{ article.title }}</div>
         <div class="subTitle">{{ article.sub_title }}</div>
         <div class="content" v-html="content" />
@@ -16,8 +19,8 @@
           <commentList v-if="aid" ref="commentList" :aid="aid" />
         </div>
       </el-col>
-      <el-col class="authorDetail  hidden-md-and-down" :xl="6" :lg="6">
-        <div v-if="article.user" class="authorInfo">
+      <el-col class="authorDetail  hidden-sm-and-down" :xl="6" :lg="6" :md="6">
+        <div v-if="article.user" class="authorInfo" @click="gotoHomePage(article.user.uid)">
           <div class="avatar">
             <el-image lazy :src="article.user.avatar" />
           </div>
@@ -78,7 +81,7 @@ export default {
     this.aid = Number(this.$route.params.aid)
     this.getArticleDetail()
     this.$nextTick(() => {
-      const el = document.getElementsByClassName('el-main')[0]
+      const el = document.getElementsByClassName('main')[0]
       el.onscroll = (e) => {
         if (el.scrollHeight - (el.scrollTop + el.offsetHeight) < 200) {
           this.handleMethod()
@@ -101,6 +104,9 @@ export default {
       res.user.nickname = this.userInfo.nickname
       res.replys = []
       this.$refs.commentList.list.unshift(res)
+    },
+    gotoHomePage(uid) {
+      this.$router.push({ name: 'homePage', query: { uid: uid }})
     },
     gotoDetail(aid) {
       this.$router.push({ name: 'articleDetail', params: { aid: aid }})
@@ -156,10 +162,25 @@ export default {
 <style lang="less" scoped>
 @import "@/styles/variables.less";
 
+@media screen and(max-width: 992px) {
+  .articleDetailContainer > .el-row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
 .articleDetail {
   background: #ffffff;
   padding-top: 15px;
   border-radius: 6px;
+
+  .imgsBox {
+    > img {
+      margin: 0 auto;
+      display: block;
+      margin-bottom: 20px;
+      max-width: 100%;
+    }
+  }
   .title {
     font-size: 28px;
     color: #333333;
@@ -173,10 +194,12 @@ export default {
     font-size: 18px;
     color: #666666;
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 15px;
   }
-  .comment {
-    padding: 0 30px;
+  .content {
+    line-height: 1.5;
+    font-size: 14px;
+    color: #333333;
   }
   // 一级回复
   .commentBox {
@@ -198,6 +221,7 @@ export default {
   }
 }
 .authorDetail {
+  cursor: pointer;
   .authorArticleList {
     background: #ffffff;
     border-radius: 6px;

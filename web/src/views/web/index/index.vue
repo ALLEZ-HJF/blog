@@ -1,32 +1,37 @@
 <template>
   <div class="indexContainer">
-    <el-row :gutter="25">
-      <el-col class="articleBox" :xl="18" :lg="18" :md="18" :sm="24" :xs="24">
-        <div class="searchMenu">
-          <span v-for="(item,index) in menuList" :key="item.sortKey" :class="index === menuIndex ? 'active': ''" class="item" @click="getArticleList(item.sortKey, index)">{{ item.title }}</span>
-        </div>
-        <div v-if="articleList.length > 0" class="articleList">
-          <div v-for="item in articleList" :key="item.aid" class="articleItem">
-            <articleItem :item="item" />
+    <div class="masterArticleBox">
+      <div v-for="(item,index) in articleList" :key="item.aid" class="article " :class="index % 6 === 0 ? 'bigArticle' : ''" @click="gotoDetail(item.aid)">
+        <el-image fit="cover" :src="item.imgs.split(',')[0]" />
+        <div class="info">
+          <div class="categortyList">
+            <span v-for="category in item.categories" :key="category.cid" class="item">{{ category.name }}</span>
+          </div>
+          <h2 class="title">{{ item.title }}</h2>
+          <span class="subTitle">{{ item.sub_title }}</span>
+          <div class="metaBox">
+            <div class="userInfo">
+              <img :src="item.user.avatar" alt="" class="avatar">
+              <span class="nickname">{{ item.user.nickname }}</span>
+            </div>
+            <div class="meta">
+              <span class="lookNum el-icon-chat-dot-round">&nbsp;{{ item.comment_num }}</span>
+              <span class="commentNum el-icon-view">&nbsp;{{ item.look_num }}</span>
+            </div>
           </div>
         </div>
-        <div v-if="articleList.length === 0 || articleListSearchForm.status === 0" class="noMore">暂无更多</div>
-      </el-col>
-      <el-col class="hidden-sm-and-down" :xl="6" :lg="6" :md="6">
-        <div class="aside">
-          <span class="text">作者排行榜</span>
-          <div v-if="userList.length > 0" class="userList">
-            <userItem v-for="item in userList" :key="item.uid" :item="item" />
-          </div>
-          <div v-else class="noMore">暂无数据</div>
-        </div>
-      </el-col>
-    </el-row>
+      </div>
+    </div>
+    <el-pagination
+      background
+      layout="prev, pager, next"
+      :total="$store.state.article.articleTotal"
+      @current-change="currentChange"
+    />
   </div>
 </template>
 
 <script>
-import { getUserRankingList } from '@/api/user'
 import articleItem from '@/components/article/articleItem.vue'
 import userItem from '@/components/user/userItem.vue'
 
@@ -37,22 +42,7 @@ export default {
   },
   data() {
     return {
-      userList: [],
-      menuList: [
-        {
-          title: '仅看博主',
-          sortKey: 'is_master'
-        },
-        {
-          title: '最新',
-          sortKey: 'create_time'
-        },
-        {
-          title: '最热门',
-          sortKey: 'look_num'
-        }
-      ],
-      menuIndex: 0
+      userList: []
     }
   },
   computed: {
@@ -64,49 +54,22 @@ export default {
     }
   },
   mounted() {
-    if (this.articleList.length === 0) {
-      this.getArticleList()
-    }
-    this.getUserRankingList()
-    this.$nextTick(() => {
-      const el = document.getElementsByClassName('el-main')[0]
-      el.onscroll = (e) => {
-        if (el.scrollHeight - (el.scrollTop + el.offsetHeight) < 200) {
-          this.handleMethod()
-        }
-      }
-    })
+    this.articleListSearchForm.is_recommend = true
+    this.articleListSearchForm.title = ''
+    this.getArticleList()
   },
   methods: {
-    handleMethod() {
-      clearTimeout(this.timer)
-      this.timer = setTimeout(() => {
-        if (this.articleListSearchForm.status) {
-          this.articleListSearchForm.page_num++
-          this.getArticleList()
-        }
-      }, 1000)
+    gotoDetail(id) {
+      this.$router.push({ name: 'articleDetail', params: { aid: id }})
     },
-    // 作者列表 默认显示前五
-    async getUserRankingList() {
-      const data = await getUserRankingList({ page_num: 1, page_size: 5 })
-      if (data.code === 200) {
-        this.userList = data.data
-      }
+    currentChange(page_num) {
+      this.articleListSearchForm.page_num = page_num
+      this.getArticleList()
     },
     // 文章列表
-    async getArticleList(sortKey, index) {
-      if (this.menuIndex === index) return
-      this.menuIndex = index || 0
-      this.articleListSearchForm.page_num = 1
+    async getArticleList() {
       await this.$store.dispatch('article/resetArticleList')
-      if (sortKey === 'is_master' || sortKey == null) {
-        this.articleListSearchForm.is_master = true
-        this.articleListSearchForm.sortKey = ''
-      } else {
-        this.articleListSearchForm.is_master = false
-        this.articleListSearchForm.sortKey = sortKey
-      }
+      this.articleListSearchForm.is_recommend = true
       const data = await this.$store.dispatch('article/getArticleList', this.articleListSearchForm)
       if (data.count === this.articleList.length) {
         this.articleListSearchForm.status = 0
@@ -119,44 +82,121 @@ export default {
 <style lang="less" scoped>
 @import "@/styles/variables.less";
 .indexContainer {
-  .articleBox {
-    background: #ffffff;
-    border-radius: 6px;
-    .searchMenu {
-      padding: 10px 0;
-      .item {
-        font-size: 14px;
-        color: #333333;
-        cursor: pointer;
-        margin-right: 15px;
-        margin-left: 5px;
-        &.active {
-          color: @defaultColor;
-          border-bottom: 2px solid @defaultColor;
+  margin-top: 15px;
+  .el-pagination {
+    text-align: center;
+  }
+  .masterArticleBox {
+    display: flex;
+    flex-wrap: wrap;
+    .article {
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+      flex: 1 1 300px;
+      margin: 0 15px 30px;
+      background-color: #ffffff;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: all 0.3s;
+      .el-image {
+          height: 200px;
+          border-radius: 3px 3px 0 0;
+      }
+      .info {
+        width: 100%;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+        .title {
+          font-size: 18px;
+          font-weight: 600;
+          color: #333333;
+          margin: 10px 0;
+          height: auto;
+        }
+        .subTitle {
+          font-size: 14px;
+          color: #666666;
+          line-height: 1.4;
+          flex: 1;
+        }
+        .metaBox {
+          display: flex;
+          justify-content: space-between;
+          margin-top: 10px;
+          .userInfo {
+            display: flex;
+            align-items: center;
+            .avatar {
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+            }
+            .nickname {
+              font-size: 14px;
+              margin-left: 5px;
+              color: #666666;
+            }
+          }
+          .meta {
+            font-size: 16px;
+            color: #666666;
+            display: flex;
+            align-items: center;
+            span {
+              margin-left: 10px;
+            }
+          }
+        }
+        .categortyList {
+          font-size: 12px;
+          width: 100%;
+          margin-top: 15px;
+          .item {
+            border-radius: 5px;
+            color: #999999;
+            margin-right: 5px;
+          }
+        }
+      }
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+    .bigArticle {
+      flex: 1 1 100%;
+      flex-direction: row;
+        .el-image {
+          flex: 1;
+          height: 300px;
+          border-radius: 3px 0 0 3px;
+        }
+        .info {
+          width: 350px;
+        }
+    }
+    @media screen and(max-width: 767px) {
+      .bigArticle {
+        flex: 1 1 300px;
+        flex-direction: column;
+        .el-image {
+          height: 200px;
+        }
+        .info  {
+          width: 100%;
+        }
+      }
+      .article {
+        margin:  0 5px 10px;
+        .info {
+          padding: 10px;
         }
       }
     }
   }
-  .aside  {
-    padding-top: 10px;
-    background: #ffffff;
-    border-radius: 6px;
-    .text {
-      font-size: 14px;
-      margin-left: 5px;
-    }
-    .userList {
-      margin-top: 8px;
-    }
-  }
-  .noMore {
-    text-align: center;
-    font-size: 14px;
-    color: #999;
-    background: #ffffff;
-    padding: 20px 0;
-    border-radius: 6px;
-  }
+
   @media screen and (max-width: 768px) {
     .articleList {
       padding: 0;

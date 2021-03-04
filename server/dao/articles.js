@@ -1,4 +1,5 @@
 const db = require('../config/db')
+const { filterParams } = require('../utils')
 const sequelize = db.sequelize
 const moment = require('moment')
 const Op = db.Op
@@ -9,6 +10,15 @@ const article_category = db.article_category
 const users = db.users
 
 class articlesDao {
+    // 推荐, 取消推荐
+    static async setArticleRecommend(data) {
+        return await articles.update({ is_recommend: data.is_recommend }, {
+            where: {
+                aid: data.aid
+            }
+        })
+    }
+
     // 添加文章
     static async insertArticle(data) {
         let article = await articles.create(data)
@@ -41,50 +51,6 @@ class articlesDao {
             ]
         })
     }
-
-    // 根据分类获取文章列表
-    static async getArticleByCid(data) {
-        let aids = await article_category.findAll({
-            where: {
-                cid: data.cid,
-                state: data.state || 'valid'
-            },
-            attributes: ['aid'],
-            offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
-            limit: Number(data.page_size) || 10
-        })
-        let count = await article_category.count({
-            where: {
-                cid: data.cid,
-                state: data.state || 'valid'
-            }
-        })
-        aids = aids.map((item) => {
-            return item.aid
-        })
-        let rows = ''
-        if (aids.length !== 0) {
-            rows =  await articles.findAll({
-                where: {
-                    aid: aids
-                },
-                include:[
-                    {
-                        model: users,
-                        attributes: ['nickname','avatar','uid']
-                    },
-                    {
-                        model: categories,
-                        attributes: ['name','cid'],
-                        through: { attributes: [] },
-                        required: false
-                    }
-                ],
-            })
-        }
-        let result = [ {count: count, rows:rows } ]
-        return result
-    }
     // 获取新增文章数量与未审核数量
     static async getArticleSummary() {
         const newCount = await articles.count({
@@ -101,30 +67,71 @@ class articlesDao {
         })
         return {newCount:newCount,invalidCount: invalidCount}
     }
+
+    // 后台获取文章列表
+    static async getAdminArticleList(data) {
+        let params = filterParams(data, ['aid', 'uid', 'title', 'state'])
+        if (data.title) {
+            let obj = {}
+            for (const key in params) {
+                if (key === 'title') {
+                    // title 模糊查询
+                    obj['title'] = {
+                        [Op.like]: '%'+params[key]+'%'
+                    }
+                } else {
+                    obj[key] = params[key]
+                }
+            }
+            params = obj
+        }
+        let list = await articles.findAndCountAll({
+            where: params,
+            include: [
+                {
+                    model: users,
+                    attributes: ['nickname','username','avatar','uid']
+                },
+                {
+                    model: categories,
+                    attributes: ['name','cid'],
+                    through: { attributes: [] },
+                    required: true
+                }
+            ],
+            distinct: true,
+            offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
+            limit: Number(data.page_size) || 10
+        })
+        return list
+    }
+
     // 获取文章列表
     static async getArticleList(data) {
         let where = {}
         if (data.cids) {
             where.cid = data.cids.split(',')
         }
-        if (data.is_master) {
-            data.is_master = data.is_master === 'true' ? true : false
+        let obj = {}
+        let params = filterParams(data, ['title' , 'is_recommend', 'uid'])
+        for (const key in params) {
+            if (key === 'title') {
+                // title 模糊查询
+                obj['title'] = {
+                    [Op.like]: '%'+params[key]+'%'
+                }
+            } else {
+                if (key === 'is_recommend') {
+                    obj[key] = params[key] === 'true' ? true : false
+                } else {
+                    obj[key] = params[key]
+                }
+            }
         }
-        let allData = await articles.findAll({
+        obj['state'] = 'valid'
+        let list = await articles.findAndCountAll({
             attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num','comment_num','imgs'],
-            where: {
-                aid: {
-                    [Op.like]: `%${data.aid || ''}%`
-                },
-                uid: {
-                    [Op.like]: `%${data.uid || ''}%`
-                },
-                title: {
-                    [Op.like]: `%${data.title || ''}%`
-                },
-                is_master: data.is_master || false,
-                state: data.state || 'valid'
-            },
+            where: obj ,
             include:[
                 {
                     model: users,
@@ -138,26 +145,12 @@ class articlesDao {
                     required: true
                 }
             ],
+            distinct: true,
             order: [[data.sortKey ? data.sortKey : 'create_time', 'DESC'] ],
             offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
             limit: Number(data.page_size) || 10
         })
-        let count = await articles.count({
-            where: {
-                aid: {
-                    [Op.like]: `%${data.aid || ''}%`
-                },
-                uid: {
-                    [Op.like]: `%${data.uid || ''}%`
-                },
-                title: {
-                    [Op.like]: `%${data.title || ''}%`
-                },
-                is_master: data.is_master || false,
-                state: data.state || 'valid'
-            }
-        })
-        return { count: count , rows: allData}
+        return list
     }
 
     // 添加评论数或者减少评论数

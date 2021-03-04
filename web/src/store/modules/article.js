@@ -3,6 +3,7 @@ import { getArticleList } from '@/api/article'
 const getDefaultState = () => {
   return {
     articleList: [],
+    articleTotal: 0,
     searchForm: {
       page_num: 1,
       page_size: 10,
@@ -22,6 +23,9 @@ const mutations = {
   SET_ARTICLE_LIST: (state, articleList) => {
     state.articleList = state.articleList.concat(articleList)
   },
+  SET_ARTICLE_TOTAL: (state, total) => {
+    state.articleTotal = total
+  },
   RESET_ARTICLE_LIST: (state) => {
     state.articleList = []
   }
@@ -33,6 +37,7 @@ const actions = {
       getArticleList(state.searchForm).then(response => {
         const { data } = response
         commit('SET_ARTICLE_LIST', data.rows)
+        commit('SET_ARTICLE_TOTAL', data.count)
         resolve(data)
       }).catch(error => {
         reject(error)

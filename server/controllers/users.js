@@ -33,26 +33,39 @@ class userController {
     // 发送邮箱验证码
     static async sendCode(ctx) {
         let param = ctx.request.body
-        let isLogin = param.isLogin
-        if (isLogin === 'true') {
-            try {
-                const userInfo = await userDao.getUserInfo(param)
-                param.email = userInfo.email
-            } catch (error) {
-                ctx.fail(500,'用户不存在')
-                return
-            }
-        }
-        if (!param.email && !isLogin) {
-            ctx.fail(500,'请输入邮箱地址')
-            return
-        }
+        let userInfo = ''
+        let msg = ''
         let numArr = []
         for(let i=0;i<4;i++) {
             let num = Math.floor(Math.random()*10)
             numArr.push(num)
         }
-        const isSend = sendEmail(param.email, isLogin === 'true' ? '用户登录' : '用户注册','验证码是:' + numArr.join(''),'验证码是:' + numArr.join('') + ', 有效期 10 分钟！')
+        switch (Number(param.type)) {
+            case 1:
+                // 登录
+                try {
+                    userInfo = await userDao.getUserInfo(param)
+                    param.email = userInfo.email
+                    msg = '用户登录: 验证码是:' + numArr.join('') + ',10 分钟内有效!'
+                } catch (error) {
+                    ctx.fail(500,'用户不存在')
+                    return
+                }
+                break;
+            case 2:
+                // 注册
+                msg = '用户注册: 验证码是:' + numArr.join('') + ',10 分钟内有效!'
+                break;
+            case 3:
+                // 设置密码
+                msg = '重置密码: 验证码是:' + numArr.join('') + ',10 分钟内有效!'
+                break;
+        }
+        if (!param.email && Number(param.type) === 2) {
+            ctx.fail(500,'请输入邮箱地址')
+            return
+        }
+        const isSend = sendEmail(param.email,msg)
         if (isSend) {
             const data = await codesDao.insertCode({code: numArr.join(''), create_time: Date.now()})
             ctx.success(200,'发送成功',data.code_id)
@@ -200,6 +213,48 @@ class userController {
         const data = await userDao.editUser(body)
         ctx.response.status = 200
         ctx.success(200,'修改成功',data)
+    }
+    // 忘记密码
+    static async forgetPassword(ctx) {
+        let body = ctx.request.body
+        if (!body.username) {
+            ctx.fail(500,'请输入用户名')
+        } else if (!body.email) {
+            ctx.fail(500, '请输入邮箱')
+        } else if (!body.newPassword) {
+            ctx.fail(500, '请输入新密码')
+        } else if (!body.code_id) {
+            ctx.fail(500, '请携带验证码id')
+        } else {
+            // 判断这个邮箱是否属于这个账号
+            const userInfo = await userDao.getUserInfo({email: body.email})
+            if (userInfo) {
+                if (userInfo.email === body.email && userInfo.username === body.username) {
+                    // 查询验证码是否正确
+                    const codeInfo = await codesDao.getCodeInfo(body.code_id)
+                    if (codeInfo) {
+                        // 判断是否过期
+                        if ((new Date().getTime() - new Date(codeInfo.create_time).getTime()) / 60 / 1000 > 10){
+                            ctx.fail(500,'验证码已过期,请重新发送')
+                            codesDao.delCode({code_id: body.code_id})
+                        } else if (codeInfo.code != body.code) {
+                            ctx.fail(500,'验证码错误')
+                        } else {
+                            // 修改操作
+                            body.newPassword =  bcrypt.hashSync(body.newPassword,10)
+                            const data = await userDao.forgetPassword(body)
+                            ctx.success(200,'修改成功', data)
+                        }
+                    } else {
+                        ctx.fail(500, '验证码失效')
+                    }
+                } else {
+                    ctx.fail(500, '邮箱地址或账号有误!')
+                }
+            } else {
+                ctx.fail(500,'该邮箱地址未绑定账号')
+            }
+        }
     }
     // 修改用户后台
     static async updateUser(ctx) {

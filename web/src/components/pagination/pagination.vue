@@ -33,11 +33,15 @@ export default {
 }
 </script>
 
-<style scope>
+<style>
  .el-pagination {
-     margin-top: 10px;
+     margin: 10px 0;
  }
- .el-select--mini, .el-input--mini {
-    width: auto;
- }
+</style>
+<style>
+@media screen and (max-width: 767px) {
+  .el-pagination__total , .el-pagination__sizes, .el-pagination__jump {
+      display:  none !important;
+  }
+}
 </style>

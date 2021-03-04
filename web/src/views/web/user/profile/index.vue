@@ -28,6 +28,10 @@
           <el-input v-model="userInfo.username" disabled type="text" />
         </div>
         <div class="item">
+          <span class="tip">邮箱</span>
+          <el-input v-model="userInfo.email" disabled type="email" />
+        </div>
+        <div class="item">
           <span class="tip">昵称</span>
           <el-input v-model="userInfo.nickname" type="text" />
         </div>
@@ -41,10 +45,6 @@
         <div class="item">
           <span class="tip">电话</span>
           <el-input v-model="userInfo.phone" type="number" />
-        </div>
-        <div class="item">
-          <span class="tip">邮箱</span>
-          <el-input v-model="userInfo.email" disabled type="email" />
         </div>
         <div class="item">
           <span class="tip">密码</span>
@@ -62,7 +62,7 @@
 
 <script>
 import { uploadFile } from '@/api/upload'
-import { getUserInfo, editUser } from '@/api/user'
+import { editUser } from '@/api/user'
 export default {
   data() {
     return {

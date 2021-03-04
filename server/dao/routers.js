@@ -34,7 +34,6 @@ class routersDao {
                 role: data.role || 'user',
                 pid: null
             },
-            order: [['sort','DESC']],
             include : {
                 model: routers,
                 as:'child', 
@@ -43,7 +42,6 @@ class routersDao {
                     state: data.state || 'valid',
                     role: data.role || 'user'
                 },
-                order: [['sort','DESC']],
                 include : {
                     model: routers,
                     as:'child',
@@ -52,7 +50,6 @@ class routersDao {
                         state: data.state || 'valid',
                         role: data.role || 'user'
                     },
-                    order: [['sort','DESC']],
                     include : {
                         model: routers,
                         as:'child',
@@ -60,11 +57,11 @@ class routersDao {
                         where: {
                             state: data.state || 'valid',
                             role: data.role || 'user'
-                        },
-                        order: [['sort','DESC']]
+                        }
                     }
                 }
-            }
+            },
+            order: [['sort', 'DESC'], ['child', 'sort', 'DESC']]
         })
     }
     // 获取用户组的路由
@@ -82,7 +79,6 @@ class routersDao {
                 pid: null,
                 rid: rids
             },
-            order: [['sort','DESC']],
             include : {
                 model: routers,
                 as:'child', 
@@ -91,7 +87,6 @@ class routersDao {
                     rid: rids,
                     is_page: 'yes'
                 },
-                order: [['sort','DESC']],
                 include : {
                     model: routers,
                     as:'child', 
@@ -100,7 +95,6 @@ class routersDao {
                         rid: rids,
                         is_page: 'yes'
                     },
-                    order: [['sort','DESC']],
                     include : {
                         model: routers,
                         as:'child', 
@@ -108,11 +102,11 @@ class routersDao {
                         where: {
                             rid: rids,
                             is_page: 'yes'
-                        },
-                        order: [['sort','DESC']]
+                        }
                     }
                 }
-            }
+            },
+            order: [['sort', 'DESC'], ['child', 'sort', 'DESC']]
         })
     }
     // 获取路由列表 不需要登录
@@ -124,7 +118,6 @@ class routersDao {
                 is_page: 'yes',
                 pid: null
             },
-            order: [['sort','DESC']],
             include : {
                 model: routers,
                 as:'child', 
@@ -134,7 +127,6 @@ class routersDao {
                     state: 'valid',
                     is_page: 'yes',
                 },
-                order: [['sort','DESC']],
                 include : {
                     model: routers,
                     as:'child',
@@ -148,10 +140,10 @@ class routersDao {
                             state: 'valid',
                             is_page: 'yes',
                         }
-                    },
-                    order: [['sort','DESC']]
+                    }
                 }
-            }
+            },
+            order: [['sort', 'DESC'], ['child', 'sort', 'DESC']]
         })
     }
 }

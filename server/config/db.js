@@ -88,6 +88,11 @@ replys.belongsTo(users,{
   foreignKey: 'uid'
 })
 
+replys.hasMany(replys, {
+  as: 'replys',
+  foreignKey: 'pid'
+})
+
 
 // 草稿与用户关联 n：1
 users.hasMany(draft_articles, {

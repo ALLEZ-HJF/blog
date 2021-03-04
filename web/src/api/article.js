@@ -105,3 +105,11 @@ export function adminEditArticle(data) {
     data
   })
 }
+
+export function setArticleRecommend(data) {
+  return request({
+    url: 'articles/admin/setArticleRecommend',
+    method: 'post',
+    data
+  })
+}

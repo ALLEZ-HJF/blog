@@ -33,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true,
             defaultValue: 0
         },
-        is_master: {    // 是否博主文章
+        is_recommend: {    // 是否推荐文章
             type: DataTypes.BOOLEAN,
             allowNull: true,
             defaultValue: false

@@ -21,7 +21,7 @@ class commentsDao {
     }
     // 获取评论＋回复 根据文章id获取
     static async getCommentByAid(data) {
-        return comments.findAll({
+        return comments.findAndCountAll({
             where: {
                 aid:data.aid,
                 state: data.state || 'valid'
@@ -35,10 +35,22 @@ class commentsDao {
                     where: {
                         state: 'valid'
                     },
-                    include: {
-                        model: users,
-                        attributes: ['nickname','avatar']
-                    },
+                    required : false,
+                    include: [
+                        {
+                            model: users,
+                            attributes: ['nickname','avatar']
+                        },
+                        {
+                            model: replys,
+                            required : false,
+                            attributes: ['rid','commid','uid','pid','content','imgs','state','create_time'],
+                            as:'replys', 
+                            where: {
+                                state: 'valid'
+                            }
+                        }
+                    ],
                     required:false
                 },
                 {

@@ -8,6 +8,15 @@ const user_group = db.user_group
 const articles = db.articles
 
 class userDao {
+    // 忘记密码
+    static async forgetPassword(data) {
+        return users.update({ password: data.newPassword }, {
+            where: {
+                email: data.email,
+                username: data.username
+            }
+        })
+    }
     // 作者排行榜
     static async getUserRankingList(data) {
         return await users.findAll({

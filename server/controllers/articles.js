@@ -1,11 +1,26 @@
 const articlesDao = require('../dao/articles')
 var { client } = require('../config/baiduApi.js')
+const { filterParams } = require('../utils')
 
 class articlesController {
 
+    static async setArticleRecommend(ctx) {
+        const param =  filterParams(ctx.request.body, ['aid', 'is_recommend'])
+        const res = await articlesDao.setArticleRecommend(param)
+        ctx.response.status = 200
+        ctx.success(200,'修改成功',res)
+    }
+
+    // 获取后台文章列表
+    static async getAdminArticleList(ctx) {
+        const param =  filterParams(ctx.request.body, ['aid', 'uid', 'title', 'state', 'page_num', 'page_size'])
+        const res = await articlesDao.getAdminArticleList(param)
+        ctx.response.status = 200
+        ctx.success(200,'获取成功',res)
+    }
     // 获取文章
     static async getArticleList(ctx) {
-        const param = ctx.request.body
+        const param = filterParams(ctx.request.body, ['title','is_recommend', 'sortKey' , 'cids' , 'uid' ,'page_num', 'page_size'])
         const res = await articlesDao.getArticleList(param)
         ctx.response.status = 200
         ctx.success(200,'获取成功',res)
@@ -18,13 +33,6 @@ class articlesController {
             return false
         }
         const res = await articlesDao.getArticleByAid(aid)
-        ctx.response.status = 200
-        ctx.success(200,'获取成功',res)
-    }
-
-    static async getArticleByCid(ctx) {
-        const param = ctx.request.body
-        const res = await articlesDao.getArticleByCid(param)
         ctx.response.status = 200
         ctx.success(200,'获取成功',res)
     }
@@ -50,9 +58,6 @@ class articlesController {
             }
            const isPass = await client.textCensorUserDefined(str)
            if (isPass.conclusionType === 1) {
-                if (userInfo.gid) {
-                    param.is_master = true
-                }
                 const res = await articlesDao.insertArticle(param)
                 ctx.response.status = 200
                 ctx.success(200,'发布成功',res)
@@ -92,9 +97,6 @@ class articlesController {
         if (ctx.verify(token).data.uid != param.uid) {
             ctx.fail(500,'无法修改他人文章')
             return
-        }
-        if (param.is_master) {
-            delete param.is_master
         }
         param.update_time = Date.now()
         const res = await articlesDao.editArticle(param)

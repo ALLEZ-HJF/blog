@@ -2,7 +2,7 @@
   <div class="container">
     <el-col class="userInfo" :xl="{span:16, offset: 4}" :lg="{span:18, offset: 3}" :md="{span:18, offset: 3}" :sm="24" :xs="24">
       <div class="avatarBox">
-        <el-image :src="userInfo.avatar" lazy />
+        <img :src="userInfo.avatar">
       </div>
       <div class="info">
         <span class="nickname">
@@ -114,7 +114,7 @@ export default {
       margin-bottom: 10px;
       border-radius: 8px;
       .avatarBox {
-        .el-image {
+        img {
           width: 100px;
           height: 100px;
           border-radius: 50%;

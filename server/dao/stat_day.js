@@ -6,19 +6,26 @@ const Op = db.Op
 const statDay = db.stat_day
 
 class statDayDao {
+    static async getVisitDataList(param) {
+        return await statDay.findAndCountAll({
+            where: {
+                time: param.time || moment().format('YYYY-MM-DD')
+            },
+            offset: Number(param.page_num - 1) * Number(param.page_size) || 0,
+            limit: Number(param.page_size) || 10
+        })
+    }
     static async insertDayData(param) {
         let taday = moment().format('YYYY-MM-DD')
-        let tomorrow = moment().add(1, 'days').format('YYYY-MM-DD')
         let data = await statDay.findOne({
             where: {
                 ip: param.ip,
-                create_time: {
-                    [Op.between]: [taday,tomorrow]
-                }
+                time: taday
             }
         })
         if (!data) {
             // 如果有数据不添加
+            param.time = taday
             return await statDay.create(param)
         }
     } 

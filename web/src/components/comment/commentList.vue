@@ -20,7 +20,7 @@
               title="确定删除该评论吗?"
               @onConfirm="delComment"
             >
-              <span v-if=" userInfo && userInfo.uid === item.uid" slot="reference" class="delReply" @click="delData(item)">删除</span>
+              <span v-if=" userInfo && userInfo.uid === item.uid && item.replys.length === 0" slot="reference" class="delReply" @click="delData(item)"> 删除</span>
             </el-popconfirm>
           </div>
           <div v-if="!item.pid && userInfo">
@@ -31,7 +31,8 @@
         <CommentList v-if="item.replys.length" :aid="aid" :replys="item.replys" :pid="item.pid" />
       </div>
     </div>
-    <div v-if="list.length === 0" class="noMore">暂无评论</div>
+    <div v-if="replys.length === 0 && list.length === 0" class="noMore">暂无评论</div>
+    <pagination v-if="replys.length === 0" :total="commentTotal" :current-page="1" @currentChange="currentChange" @handleSizeChange="handleSizeChange" />
   </div>
 </template>
 
@@ -39,10 +40,12 @@
 import { getCommentByAid, delComment } from '@/api/comment'
 import { delReply } from '@/api/reply'
 import commentInput from '@/components/comment/commentInput'
+import pagination from '@/components/pagination/pagination'
 export default {
   name: 'CommentList',
   components: {
-    commentInput
+    commentInput,
+    pagination
   },
   props: {
     aid: {
@@ -63,6 +66,7 @@ export default {
       page_num: 1,
       page_size: 10,
       list: [],
+      commentTotal: 0,
       isShowReplyBox: false,
       activeItem: {},
       userInfo: this.$store.state.user.userInfo,
@@ -84,6 +88,15 @@ export default {
     })
   },
   methods: {
+    currentChange(page_num) {
+      this.page_num = page_num
+      this.getCommentByAid()
+    },
+    handleSizeChange(page_size) {
+      this.page_num = 1
+      this.page_size = page_size
+      this.getCommentByAid()
+    },
     delComment() {
       if (this.delObj.rid) {
         this.list.forEach(async(item, index) => {
@@ -143,7 +156,8 @@ export default {
       if (this.status) {
         const data = await getCommentByAid({ aid: this.aid, page_num: this.page_num, page_size: this.page_size })
         if (data.code === 200) {
-          this.list = this.list.concat(data.data)
+          this.list = data.data.rows
+          this.commentTotal = data.data.count
           this.page_num++
           if (data.data.length === 0 || data.data.length < this.page_size) {
             this.status = 0
@@ -168,7 +182,10 @@ export default {
       border-bottom: 1px solid #eeeeee;
   }
   .isSubComment {
-      background: #fafafa !important;
+      background: #eeeeee !important;
+  }
+  .el-pagination {
+    text-align: center;
   }
   // 评论
   .commentList {
@@ -176,6 +193,7 @@ export default {
     background: #ffffff;
     padding: 15px;
     border-radius: 4px;
+    overflow: hidden;
     .noMore {
       text-align: center;
       font-size: 14px;
@@ -202,6 +220,11 @@ export default {
         font-weight: 200;
         .content {
           margin: 8px 0;
+          overflow: hidden;
+          white-space: normal;
+          word-wrap: break-word;
+          word-break: break-all;
+          text-overflow: ellipsis;
         }
         .menuList {
           display: flex;
@@ -221,9 +244,6 @@ export default {
             cursor: pointer;
           }
         }
-      }
-      .childrenCommentInfo {
-        border-bottom: 1px solid #cccccc;
       }
     }
   }

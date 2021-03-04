@@ -72,10 +72,12 @@
           <el-table-column
             fixed="right"
             label="操作"
-            min-width="200"
+            min-width="260"
           >
             <template slot-scope="scope">
               <el-button v-if="scope.row.state !== 'valid'" type="success" size="small" icon="el-icon-check" @click="gotoPublish(scope.row)">审核</el-button>
+              <el-button v-if="scope.row.state === 'valid' && !scope.row.is_recommend" type="success" size="small" icon="el-icon-check" @click="recommendArticle(scope.row.aid, true)">推荐</el-button>
+              <el-button v-if="scope.row.state === 'valid' && scope.row.is_recommend" type="warning" size="small" icon="el-icon-remove-outline" @click="recommendArticle(scope.row.aid, false)">取消</el-button>
               <el-button type="warning" size="small" icon="el-icon-edit" @click="gotoPublish(scope.row,true)">编辑</el-button>
               <el-button v-if="scope.row.state === 'valid'" size="small" type="danger" icon="el-icon-delete" @click="adminDelArticle(scope.row)">删除</el-button>
             </template>
@@ -88,7 +90,7 @@
   </div>
 </template>
 <script>
-import { adminGetArticleList, adminDelArticle } from '@/api/article'
+import { adminGetArticleList, adminDelArticle, setArticleRecommend } from '@/api/article'
 import pagination from '@/components/pagination/pagination'
 export default {
   components: {
@@ -101,7 +103,7 @@ export default {
         username: '',
         phone: '',
         email: '',
-        state: 'valid',
+        state: 'invalid',
         page_num: 1,
         page_size: 10
       },
@@ -114,6 +116,29 @@ export default {
     this.adminGetArticleList()
   },
   methods: {
+    recommendArticle(aid, flag) {
+      let message = '是否将该文章设置为推荐文章?'
+      if (!flag) {
+        message = '确定取消该推荐文章吗?'
+      }
+      this.$confirm(message, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'success'
+      }).then(async() => {
+        const data = await setArticleRecommend({ aid: aid, is_recommend: flag })
+        if (data.code === 200) {
+          if (flag) {
+            this.$message.success('设置成功')
+          } else {
+            this.$message.success('取消成功')
+          }
+          this.adminGetArticleList()
+        }
+      }).catch(() => {
+
+      })
+    },
     gotoPublish(row, isEdit) {
       if (row) {
         this.$router.push({ path: '/admin/articles/handleArticle', query: { aid: row.aid, isEdit: isEdit }})

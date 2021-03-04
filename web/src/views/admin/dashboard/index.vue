@@ -48,52 +48,10 @@
         </div>
       </el-col>
     </el-row>
-    <!-- <el-card>
-      <el-row v-if="showSystemInfo" class="systemBox">
-        <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
-          <lineChart ref="cpuLineChart" :title="{ text: 'CPU信息'}" :x-data="timeXData" :y-axis="yAxis" :series="cpuChartData" :chart-option="{animation: false}" />
-        </el-col>
-        <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
-          <lineChart ref="memoryLineChart" :title="{ text: '内存信息'}" :x-data="timeXData" :y-axis="yAxis" :series="memoryChartData" :chart-option="{animation: false}" />
-        </el-col>
-        <el-col :xl="8" :lg="8" :md="8" :sm="12" :xs="24">
-          <div class="systemInfo">
-            <div style="font-size: 18px;font-weight: bold;margin-bottom: 10px">
-              系统信息:
-            </div>
-            <div class="item">
-              <span class="title">系统:</span>
-              <span class="info">{{ systemInfo.info.type }}</span>
-            </div>
-            <div class="item">
-              <span class="title">版本:</span>
-              <span class="info">{{ systemInfo.info.release }}</span>
-            </div>
-            <div class="item">
-              <span class="title">名称:</span>
-              <span class="info">{{ systemInfo.info.hostname }}</span>
-            </div>
-            <div class="item">
-              <span class="title">cpu:</span>
-              <span class="info">{{ systemInfo.cpuInfo.cpuName }}</span>
-            </div>
-            <div class="item">
-              <span class="title">核数:</span>
-              <span class="info">{{ systemInfo.cpuInfo.countCpus }}</span>
-            </div>
-            <div class="item">
-              <span class="title">总内存:</span>
-              <span class="info">{{ systemInfo.memoryInfo.total }}G</span>
-            </div>
-            <div class="item">
-              <span class="title">空余内存:</span>
-              <span class="info">{{ systemInfo.memoryInfo.free }}G</span>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </el-card> -->
     <el-card style="margin-top: 20px">
+      <div slot="header" class="clearfix">
+        <span>访问统计</span>
+      </div>
       <el-row class="visitData">
         <span>选择日期:</span>
         <el-date-picker
@@ -110,22 +68,62 @@
         <lineChart v-if="showVisitDataLineChart" ref="visitDataLineChart" :title="visitChartTitle" :x-data="visitChartXData" :series="visitChartSeries" />
       </el-row>
     </el-card>
-
+    <br>
+    <el-card>
+      <div slot="header" class="clearfix">
+        <span>访问数据</span>
+      </div>
+      <span>选择日期:</span>
+      <el-date-picker
+        v-model="getVisitDayForm.time"
+        type="date"
+        value-format="yyyy-MM-dd"
+        placeholder="选择日期"
+        size="small"
+        style="margin-left: 20px"
+        :clearable="false"
+        @change="getVisitDataList"
+      />
+      <el-table
+        :data="visitDataList"
+        style="width: 100%;margin-top:15px"
+        border
+        stripe
+      >
+        <el-table-column
+          prop="ip"
+          label="IP"
+          width="180"
+        />
+        <el-table-column
+          prop="browser"
+          label="浏览器信息"
+          min-width="300"
+        />
+        <el-table-column
+          prop="create_time"
+          label="访问时间"
+        />
+      </el-table>
+      <pagination :total="visitDataTotal" :current-page="getVisitDayForm.page_num" @currentChange="currentChange" @handleSizeChange="handleSizeChange" />
+    </el-card>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import { getVisitData, getSummaryData } from '@/api/stat'
+import { getVisitData, getSummaryData, getVisitDataList } from '@/api/stat'
 import lineChart from '@/components/chart/lineChart/index.vue'
+import pagination from '@/components/pagination/pagination'
 import { getFormatDate } from '@/utils'
 export default {
   components: {
-    lineChart
+    lineChart,
+    pagination
   },
   data() {
     return {
       summaryObject: {},
-      date: [getFormatDate(new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)) , getFormatDate(new Date(new Date().getTime() - 24 * 60 * 60 * 1000)) ],
+      date: [getFormatDate(new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000)), getFormatDate(new Date(new Date().getTime() - 24 * 60 * 60 * 1000))],
       visitChartSeries: [],
       visitChartXData: [],
       visitChartTitle: {
@@ -161,7 +159,14 @@ export default {
         type: 'line',
         smooth: true,
         data: []
-      }]
+      }],
+      getVisitDayForm: {
+        time: getFormatDate(),
+        page_size: 10,
+        page_num: 1
+      },
+      visitDataList: [],
+      visitDataTotal: 0
     }
   },
 
@@ -170,58 +175,23 @@ export default {
   mounted() {
     this.getVisitData()
     this.getSummaryData()
-    for (let i = 30; i > 0; i--) {
-      this.timeXData.push(i + 's')
-      this.cpuChartData[0].data.push('')
-      this.memoryChartData[0].data.push('')
-    }
-    // this.socket = new WebSocket(`ws://localhost:3000/api_v1/systemInfo/admin/data?gid=${this.userInfo.gid}&api=systemInfo/admin/data`)
-    // this.socket.onopen = (evt) => {
-    //   this.sysInfoOnOpen(evt)
-    // }
-    // this.socket.onclose = (evt) => {
-    //   this.sysInfoOnClose(evt)
-    // }
-    // this.socket.onmessage = (evt) => {
-    //   this.sysInfoOnMessage(evt)
-    // }
-    // this.socket.onerror = (evt) => {
-    //   this.sysInfoOnError(evt)
-    // }
+    this.getVisitDataList()
   },
   methods: {
-    sysInfoOnError(evt) {
-      console.log(evt)
+    currentChange(page_num) {
+      this.getVisitDayForm.page_num = page_num
+      this.getVisitDataList()
     },
-    sysInfoOnMessage(evt) {
-      const data = JSON.parse(evt.data)
+    handleSizeChange(page_size) {
+      this.getVisitDayForm.page_size = page_size
+      this.getVisitDataList()
+    },
+    async getVisitDataList() {
+      const data = await getVisitDataList(this.getVisitDayForm)
       if (data.code === 200) {
-        setTimeout(() => {
-          this.socket.send('获取数据')
-        }, 1 * 1000)
-        this.systemInfo.cpuInfo = data.cpuInfo
-        this.systemInfo.memoryInfo = data.memoryInfo
-        this.systemInfo.info = data.systemInfo
-        this.cpuChartData[0].data.shift()
-        this.cpuChartData[0].data.push(Math.floor(data.cpuInfo.ratio * 100))
-        this.memoryChartData[0].data.shift()
-        this.memoryChartData[0].data.push(Math.floor((1 - data.memoryInfo.ratio) * 100))
-        this.$nextTick(() => {
-          if (this.$refs.cpuLineChart && this.$refs.memoryLineChart) {
-            this.$refs.cpuLineChart.updataChart()
-            this.$refs.memoryLineChart.updataChart()
-          }
-        })
-      } else {
-        this.showSystemInfo = false
-        this.socket.close()
+        this.visitDataList = data.data.rows
+        this.visitDataTotal = data.data.count
       }
-    },
-    sysInfoOnClose(evt) {
-      console.log(evt)
-    },
-    sysInfoOnOpen(evt) {
-      this.socket.send('连接成功')
     },
     // 选择日期获取
     selectDate() {
@@ -278,6 +248,7 @@ export default {
       justify-content: space-between;
       height: 150px;
       margin-bottom: 10px;
+      background-color: #FFFFFF;
       .numBox {
         font-size: 22px;
         height: 100%;
@@ -336,23 +307,6 @@ export default {
       font-size: 16px;
       color: #333;
       margin-right: 20px;
-    }
-  }
-  .systemBox {
-    .systemInfo {
-      margin-top: 50px;
-      .item {
-        margin-top: 5px;
-        font-size: 14px;
-        border-bottom: 1px solid #ccc;
-        padding-bottom: 5px;
-        .title {
-          display: inline-block;
-          width: 80px;
-          font-size: 16px;
-          font-weight: bold;
-        }
-      }
     }
   }
 }

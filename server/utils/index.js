@@ -10,5 +10,16 @@ function getClientIP(req) {
     }
     return ip;
   }
+
+  // 过滤传递参数 只保留需要的字段参数 data 页面传递参数数据  params需要的参数数组
+  function filterParams(data, params = [] ) {
+    let obj = {}
+    for (const key in data) {
+      if (params.indexOf(key) !== -1) {
+        obj[key] = data[key]
+      }
+    }
+    return Object.keys(obj).length === 0 ? null : obj
+  }
   
-  module.exports = { getClientIP }
+  module.exports = { getClientIP,filterParams }
