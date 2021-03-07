@@ -5,31 +5,31 @@
         {{ loginForm.type === 1 ? '用户登录' : loginForm.type === 2 ? '用户注册' : '更改密码' }}
       </div>
       <div>
-          <el-form ref="loginForm" :model="loginForm" label-width="80px" label-position="left" :rules="loginRules">
-        <el-form-item label="用户名:" prop="username">
-          <el-input v-model="loginForm.username" autocomplete="off" placeholder="请输入用户名" />
-        </el-form-item>
-        <el-form-item label="密码:" prop="password" v-if="loginForm.type !== 3">
-          <el-input v-model="loginForm.password" type="password" autocomplete="off" placeholder="请输入密码" show-password />
-        </el-form-item>
-        <el-form-item v-if="loginForm.type === 2 || loginForm.type === 3" label="邮箱:" prop="email">
-          <el-input v-model="loginForm.email" autocomplete="off" placeholder="请输入邮箱" />
-        </el-form-item>
-        <el-form-item label="验证码:" prop="code">
-          <el-input v-model="loginForm.code" autocomplete="off">
-            <template slot="append" class="sendCode">
-              <span class="sendCode" @click="sendCode">{{ isSend ? '请'+num+'秒后再试' : '点击获取验证码' }}</span>
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item v-if="loginForm.type === 3" label="新密码:" prop="newPassword">
-          <el-input v-model="loginForm.newPassword" autocomplete="off" placeholder="请输入新密码" show-password />
-        </el-form-item>
-        <span class="registerText" @click="loginForm.type = 2" v-show="loginForm.type === 1">注册账号</span>
-        <span class="registerText" @click="loginForm.type = 1" v-show="loginForm.type === 2 || loginForm.type === 3">前往登录</span>
-        <span class="registerText" @click="loginForm.type = 3" v-show="loginForm.type !== 3"  style="margin-right: 15px">忘记密码</span>
-        <el-button type="primary" style="width: 100%" :loading="isLoading" :disabled="!isSend" @click="handleLogin">{{ loginForm.type === 2 ? '注册': loginForm.type === 1 ? '登录' : '更改密码' }}</el-button>
-      </el-form>
+        <el-form ref="loginForm" :model="loginForm" label-width="80px" label-position="left" :rules="loginRules">
+          <el-form-item label="用户名:" prop="username">
+            <el-input v-model="loginForm.username" autocomplete="off" placeholder="请输入用户名" />
+          </el-form-item>
+          <el-form-item v-if="loginForm.type !== 3" label="密码:" prop="password">
+            <el-input v-model="loginForm.password" type="password" autocomplete="off" placeholder="请输入密码" show-password />
+          </el-form-item>
+          <el-form-item v-if="loginForm.type === 2 || loginForm.type === 3" label="邮箱:" prop="email">
+            <el-input v-model="loginForm.email" autocomplete="off" placeholder="请输入邮箱" />
+          </el-form-item>
+          <el-form-item label="验证码:" prop="code">
+            <el-input v-model="loginForm.code" autocomplete="off">
+              <template slot="append" class="sendCode">
+                <span class="sendCode" @click="sendCode">{{ isSend ? '请'+num+'秒后再试' : '点击获取验证码' }}</span>
+              </template>
+            </el-input>
+          </el-form-item>
+          <el-form-item v-if="loginForm.type === 3" label="新密码:" prop="newPassword">
+            <el-input v-model="loginForm.newPassword" autocomplete="off" placeholder="请输入新密码" show-password />
+          </el-form-item>
+          <span v-show="loginForm.type === 1" class="registerText" @click="loginForm.type = 2">注册账号</span>
+          <span v-show="loginForm.type === 2 || loginForm.type === 3" class="registerText" @click="loginForm.type = 1">前往登录</span>
+          <span v-show="loginForm.type !== 3" class="registerText" style="margin-right: 15px" @click="loginForm.type = 3">忘记密码</span>
+          <el-button type="primary" style="width: 100%" :loading="isLoading" :disabled="!isSend" @click="handleLogin">{{ loginForm.type === 2 ? '注册': loginForm.type === 1 ? '登录' : '更改密码' }}</el-button>
+        </el-form>
       </div>
     </div>
   </div>
@@ -84,7 +84,7 @@ export default {
             if (this.loginForm.type === 1) {
               data = await this.$store.dispatch('user/login', this.loginForm)
             } else if (this.loginForm.type === 2) {
-               // 注册
+              // 注册
               data = await this.$store.dispatch('user/register', this.loginForm)
             } else {
               // 更改密码
@@ -95,9 +95,9 @@ export default {
               this.loginForm.code = ''
               this.loginForm.code_id = ''
               setTimeout(() => {
-              this.$router.push({name: 'index'})
-              window.location.reload()
-            }, 1000);
+                this.$router.push({ name: 'index' })
+                window.location.reload()
+              }, 1000)
             } else {
               if (data.code === 200) {
                 this.$message.success('修改成功')
@@ -141,7 +141,7 @@ export default {
 }
 
 </script>
-<style lang="less">
+<style lang="less" scoped>
 @import "@/styles/variables.less";
 .signinContainer {
   text-align: center;
@@ -159,6 +159,17 @@ export default {
       margin-bottom: 15px;
     }
 
+  }
+  @media screen and (max-width: 767px) {
+    .signinBox {
+      width: 95%;
+      .title {
+        font-size: 22px;
+      }
+      .registerText {
+        font-size: 14px;
+      }
+    }
   }
 }
 </style>

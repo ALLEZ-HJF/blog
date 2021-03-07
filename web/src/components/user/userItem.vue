@@ -1,8 +1,6 @@
 <template>
   <div class="userItem" @click="gotoHomePage">
-    <div class="avatar">
-      <el-image lazy :src="item.avatar" />
-    </div>
+    <avatar :src="item.avatar" />
     <div class="userInfo">
       <span class="nickname">{{ item.nickname }}</span>
       <!-- <span class="introduction">{{ item.introduction }}</span> -->
@@ -15,7 +13,11 @@
 </template>
 
 <script>
+import avatar from '@/components/avatar/index.vue'
 export default {
+  components: {
+    avatar
+  },
   props: {
     item: {
       type: Object,
@@ -41,13 +43,11 @@ export default {
     &:hover {
         background: #eeeeee;
     }
-    .avatar {
+    .avatarBox {
         margin-right: 15px;
-        .el-image {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-        }
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
     }
     .userInfo {
         font-size: 12px;

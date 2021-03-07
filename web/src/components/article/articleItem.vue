@@ -1,8 +1,12 @@
 <template>
   <div class="articleItem" @click="gotoDetail">
+    <div v-if="isShowBtn" class="btns">
+      <i class="el-icon-edit" @click.stop="gotoEditArticle" />
+      <i class="el-icon-delete" @click.stop="deleteArticle" />
+    </div>
     <div class="articleInfo">
-      <div class="userInfo">
-        <el-image class="avatar" :src="item.user.avatar" lazy />
+      <div v-if="item.user" class="userInfo">
+        <avatar :src="item.user.avatar" />
         <span class="nickname">{{ item.user.nickname }}</span>
       </div>
       <div class="title">{{ item.title }}</div>
@@ -13,17 +17,28 @@
       </div>
     </div>
     <div v-if="item.imgs" class="cover  hidden-sm-and-down">
-      <el-image v-for="img in item.imgs.split(',')" :key="img" :src="img" lazy />
+      <template v-for="img in item.imgs.split(',')">
+        <el-image :key="img" :src="img" />
+      </template>
     </div>
   </div>
 </template>
 
 <script>
+import avatar from '@/components/avatar/index.vue'
+import { delArticle } from '@/api/article.js'
 export default {
+  components: {
+    avatar
+  },
   props: {
     item: {
       type: Object,
       default: () => {}
+    },
+    isShowBtn: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -33,6 +48,20 @@ export default {
   created() {
   },
   methods: {
+    deleteArticle() {
+      this.$confirm('是否删除该文章?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async() => {
+        const data = await delArticle({ aid: this.item.aid })
+        this.$message.success(data.code === 200 ? '删除成功' : '删除失败')
+        this.$emit('deleteSuccess', data.code === 200)
+      })
+    },
+    gotoEditArticle() {
+      this.$router.push({ name: 'handleArticle', query: { aid: this.item.aid, isEdit: true }})
+    },
     gotoDetail() {
       this.$router.push({ name: 'articleDetail', params: { aid: this.item.aid }})
     }
@@ -50,8 +79,27 @@ export default {
     overflow: hidden;
     align-items: center;
     transition: background 0.5s;
+    position: relative;
     &:hover {
       background: #fafafa;
+    }
+    .btns {
+      position: absolute;
+      right: 0;
+      top: 5px;
+      i {
+        padding: 5px 10px;
+        border-radius: 2px;
+        cursor: pointer;
+        color: #fff;
+        margin-right: 10px;
+        &.el-icon-edit {
+          background: @defaultWarningColor;
+        }
+         &.el-icon-delete {
+          background: @defaultDangerColor;
+        }
+      }
     }
     .articleInfo {
       display: flex;
@@ -62,7 +110,7 @@ export default {
       .userInfo {
         display: flex;
         align-items: center;
-        .avatar {
+        .avatarBox {
           width: 40px;
           height: 40px;
           border-radius: 50%;
@@ -74,7 +122,7 @@ export default {
         }
       }
       .title {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 500;
         color: #333333;
         margin-top: 5px;
@@ -120,7 +168,7 @@ export default {
           margin: 5px 0;
         }
         .userInfo {
-          .avatar {
+          .avatarBox {
             width: 30px;
             height: 30px;
           }

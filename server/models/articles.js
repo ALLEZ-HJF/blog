@@ -49,9 +49,13 @@ module.exports = function(sequelize, DataTypes) {
         },
         state: {
             type: DataTypes.ENUM,
-            values: ['valid','invalid','lock'],
+            values: ['valid','invalid','lock', 'delete'],
             field: 'state',
             defaultValue: 'invalid'
+        },
+        filing_date: {
+            type: DataTypes.STRING,
+            defaultValue: moment().format('YYYY-MM'),
         },
         update_time: {
             type: DataTypes.DATE,

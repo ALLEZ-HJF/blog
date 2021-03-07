@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
         pid: {
             type: DataTypes.INTEGER,
             allowNull: true,
-            defaultValue: 0
+            defaultValue: null
         },
         aid: {
             type: DataTypes.INTEGER,

@@ -30,7 +30,7 @@
         <div class="text">
           选择分类:
         </div>
-        <div v-if="isShowCategory && !aid" class="category">
+        <div v-if="isShowCategory" class="category">
           <selectCategory ref="selectCategory" :select-ids="selectIds" :category-list="categoryList" />
         </div>
       </div>
@@ -79,12 +79,9 @@ export default {
     }
   },
   async created() {
-    if (this.$route.query.isEdit) {
-      this.isEdit = this.$route.query.isEdit
-      this.aid = this.$route.query.aid
-    } else {
-      this.getCategoryList()
-    }
+    this.isEdit = this.$route.query.isEdit
+    this.aid = this.$route.query.aid
+    this.getCategoryList()
     if (this.$route.query.did) {
       this.did = this.$route.query.did
       // 获取草稿文章
@@ -151,12 +148,14 @@ export default {
         title: this.article.title,
         sub_title: this.article.sub_title,
         content: this.$refs.markdown.content,
-        imgs: imgArr.join(','),
-        state: this.article.state
+        imgs: imgArr.join(',')
       }
       const data = await editArticle(reqObj)
       if (data.code === 200) {
-        this.$message.success('修改成功')
+        this.$message.success(data.msg)
+        setTimeout(() => {
+          this.$router.back()
+        }, 1500)
       }
     },
     removePicture(file, fileList) {
@@ -206,7 +205,7 @@ export default {
         this.article.content = this.$refs.markdown.content
         const data = await insertArticle(this.article)
         if (data.code === 200) {
-          this.$message.success('发布成功,请等待管理员审核')
+          this.$message.success(data.msg)
           // 删除草稿
           if (this.did) {
             delDraftArticle({ did: this.did })
@@ -224,7 +223,7 @@ export default {
         if (this.aid) {
           this.getArticleByAid()
         }
-        if (!this.did) {
+        if (!this.aid && !this.did) {
           this.isShowCategory = true
         }
       }
@@ -233,6 +232,7 @@ export default {
       const data = await getArticleByAid({ aid: this.aid })
       if (data.code === 200) {
         this.article = data.data
+        this.$refs.markdown.content = data.data.content
         this.article.categories.forEach(item => {
           this.selectIds.push(item.cid)
         })
@@ -242,6 +242,7 @@ export default {
             this.articleImgArr.push({ url: item })
           })
         }
+        this.isShowCategory = true
         this.$forceUpdate()
       }
     }

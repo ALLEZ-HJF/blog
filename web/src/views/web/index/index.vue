@@ -2,7 +2,8 @@
   <div class="indexContainer">
     <div class="masterArticleBox">
       <div v-for="(item,index) in articleList" :key="item.aid" class="article " :class="index % 6 === 0 ? 'bigArticle' : ''" @click="gotoDetail(item.aid)">
-        <el-image fit="cover" :src="item.imgs.split(',')[0]" />
+        <el-image v-if="item.imgs" fit="cover" :src="item.imgs.split(',')[0]" />
+        <el-image v-else fit="cover" :src="noCoverImg" />
         <div class="info">
           <div class="categortyList">
             <span v-for="category in item.categories" :key="category.cid" class="item">{{ category.name }}</span>
@@ -10,8 +11,8 @@
           <h2 class="title">{{ item.title }}</h2>
           <span class="subTitle">{{ item.sub_title }}</span>
           <div class="metaBox">
-            <div class="userInfo">
-              <img :src="item.user.avatar" alt="" class="avatar">
+            <div class="userInfo" @click.stop="gotoHomePage(item.user.uid)">
+              <avatar :src="item.user.avatar" />
               <span class="nickname">{{ item.user.nickname }}</span>
             </div>
             <div class="meta">
@@ -32,17 +33,15 @@
 </template>
 
 <script>
-import articleItem from '@/components/article/articleItem.vue'
-import userItem from '@/components/user/userItem.vue'
+import avatar from '@/components/avatar/index.vue'
 
 export default {
   components: {
-    articleItem,
-    userItem
+    avatar
   },
   data() {
     return {
-      userList: []
+      noCoverImg: require('@/assets/image/cover/noCover.jpg')
     }
   },
   computed: {
@@ -59,6 +58,9 @@ export default {
     this.getArticleList()
   },
   methods: {
+    gotoHomePage(uid) {
+      this.$router.push({ name: 'homePage', query: { uid: uid }})
+    },
     gotoDetail(id) {
       this.$router.push({ name: 'articleDetail', params: { aid: id }})
     },
@@ -78,7 +80,6 @@ export default {
   }
 }
 </script>
-
 <style lang="less" scoped>
 @import "@/styles/variables.less";
 .indexContainer {
@@ -129,15 +130,14 @@ export default {
           .userInfo {
             display: flex;
             align-items: center;
-            .avatar {
-              width: 30px;
-              height: 30px;
-              border-radius: 50%;
-            }
             .nickname {
               font-size: 14px;
               margin-left: 5px;
               color: #666666;
+            }
+            .avatarBox {
+              width: 30px;
+              height: 30px;
             }
           }
           .meta {

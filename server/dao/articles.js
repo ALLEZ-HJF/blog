@@ -29,14 +29,18 @@ class articlesDao {
             }
         })
         categorys.forEach(item => {
-            item.state = 'invalid'
+            item.state = data.state
         })
         await article.setCategories(categorys)
         return article
     }
 
     static async getArticleByAid(aid) {
-        return await articles.findByPk(aid,{
+        return await articles.findOne({
+            where: {
+                aid: aid,
+                state: 'valid'
+            },
             include:[
                 {
                     model: users,
@@ -113,7 +117,7 @@ class articlesDao {
             where.cid = data.cids.split(',')
         }
         let obj = {}
-        let params = filterParams(data, ['title' , 'is_recommend', 'uid'])
+        let params = filterParams(data, ['title' , 'is_recommend', 'uid', 'state'])
         for (const key in params) {
             if (key === 'title') {
                 // title 模糊查询
@@ -128,7 +132,6 @@ class articlesDao {
                 }
             }
         }
-        obj['state'] = 'valid'
         let list = await articles.findAndCountAll({
             attributes: ['aid','title','sub_title','content','state','create_time','update_time','uid','look_num','comment_num','imgs'],
             where: obj ,
@@ -170,8 +173,7 @@ class articlesDao {
         let article = await articles.findByPk(data.aid)
         return await articles.update({look_num: ++article.look_num ,update_time: Date.now()},{
             where: {
-                aid: data.aid,
-                state: 'valid'
+                aid: data.aid
             }
         })
     }
@@ -216,7 +218,7 @@ class articlesDao {
     // 删除文章 state => lock
     static async delArticle(data) {
         data.update_time = Date.now()
-        let result = articles.update({state: 'lock'},{
+        let result = articles.update({state: 'delete'},{
             where: {
                 aid: data.aid
             }

@@ -29,7 +29,7 @@
               <div v-if="userInfo">
                 <el-dropdown @command="handleCommand">
                   <span class="el-dropdown-link">
-                    <el-avatar :src="userInfo.avatar" />
+                    <el-avatar :src="userInfo.avatar || defaultAvatar" />
                   </span>
                   <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item command="write">写文章</el-dropdown-item>
@@ -46,13 +46,15 @@
         <router-view :key="$route.fullPath" ref="main" />
       </div>
     </el-container>
+    <footer class="footer">
+      <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2021024815号</a>
+    </footer>
   </div>
 </template>
 
 <script>
-import {  getToken } from '@/utils/auth'
+import { getToken } from '@/utils/auth'
 import { mapActions, mapGetters } from 'vuex'
-
 export default {
   data() {
     return {
@@ -65,7 +67,8 @@ export default {
       isShowCategory: false,
       pathName: '推荐',
       menuList: [],
-      currMenu: 0
+      currMenu: 0,
+      defaultAvatar: require('@/assets/image/avatar/defaultAvatar.jpeg')
     }
   },
   watch: {
@@ -162,7 +165,7 @@ export default {
 .layoutContainer {
   height: 100%;
   .el-container {
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     .categoryListBox {
@@ -247,9 +250,20 @@ export default {
     @media screen and(max-width: 992px) {
       .main {
         width: 100%;
-        padding-top: 0px;
+        padding: 0;
+      }
+      .el-header {
+        padding: 0;
       }
     }
+  }
+  .footer {
+    background-color: #FFFFFF;
+    height: 40px;
+    text-align: center;
+    color: #666666;
+    font-size: 14px;
+    padding: 10px;
   }
 }
 .sendCode {

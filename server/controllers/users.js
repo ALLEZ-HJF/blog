@@ -46,7 +46,7 @@ class userController {
                 try {
                     userInfo = await userDao.getUserInfo(param)
                     param.email = userInfo.email
-                    msg = '用户登录: 验证码是:' + numArr.join('') + ',10 分钟内有效!'
+                    msg = '【小何博客】用户登录: 验证码是:' + numArr.join('') + '有效期10分钟!'
                 } catch (error) {
                     ctx.fail(500,'用户不存在')
                     return
@@ -54,11 +54,11 @@ class userController {
                 break;
             case 2:
                 // 注册
-                msg = '用户注册: 验证码是:' + numArr.join('') + ',10 分钟内有效!'
+                msg = '【小何博客】用户注册: 验证码是:' + numArr.join('') + ',有效期10分钟!'
                 break;
             case 3:
                 // 设置密码
-                msg = '重置密码: 验证码是:' + numArr.join('') + ',10 分钟内有效!'
+                msg = '【小何博客】重置密码: 验证码是:' + numArr.join('') + ',有效期10分钟!'
                 break;
         }
         if (!param.email && Number(param.type) === 2) {

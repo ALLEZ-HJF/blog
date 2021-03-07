@@ -3,10 +3,8 @@
   <div class="commentList" :class="{'isSubComment': replys.length > 0}">
     <!-- 评论列表 -->
     <div v-for="(item,index) in list" :key="index" class="item" :class="{'isComment': replys.length === 0}">
-      <div class="avatar">
-        <el-image lazy :src="item.user.avatar" />
-      </div>
-      <div class="commentInfo" :class="replys.length > 0 && item.pid === 0 ? 'childrenCommentInfo' : ''">
+      <avatar v-if="item.user" :src="item.user.avatar" />
+      <div v-if="item.user" class="commentInfo" :class="replys.length > 0 && item.pid === 0 ? 'childrenCommentInfo' : ''">
         <span class="nickname">{{ item.user.nickname }}</span>
         <span class="content">{{ item.content }}</span>
         <div class="menuList">
@@ -41,11 +39,14 @@ import { getCommentByAid, delComment } from '@/api/comment'
 import { delReply } from '@/api/reply'
 import commentInput from '@/components/comment/commentInput'
 import pagination from '@/components/pagination/pagination'
+import avatar from '@/components/avatar/index.vue'
+
 export default {
   name: 'CommentList',
   components: {
     commentInput,
-    pagination
+    pagination,
+    avatar
   },
   props: {
     aid: {
@@ -70,8 +71,7 @@ export default {
       isShowReplyBox: false,
       activeItem: {},
       userInfo: this.$store.state.user.userInfo,
-      delObj: {},
-      status: 1
+      delObj: {}
     }
   },
   mounted() {
@@ -136,7 +136,7 @@ export default {
       res.user.avatar = this.userInfo.avatar
       res.user.nickname = this.userInfo.nickname
       //  回复第一层
-      if (data.pid === 0) {
+      if (data.pid === null) {
         this.list.forEach(item => {
           if (Number(item.commid) === Number(data.commid)) {
             res.replys = []
@@ -153,16 +153,10 @@ export default {
       }
     },
     async getCommentByAid() {
-      if (this.status) {
-        const data = await getCommentByAid({ aid: this.aid, page_num: this.page_num, page_size: this.page_size })
-        if (data.code === 200) {
-          this.list = data.data.rows
-          this.commentTotal = data.data.count
-          this.page_num++
-          if (data.data.length === 0 || data.data.length < this.page_size) {
-            this.status = 0
-          }
-        }
+      const data = await getCommentByAid({ aid: this.aid, page_num: this.page_num, page_size: this.page_size })
+      if (data.code === 200) {
+        this.list = data.data.rows
+        this.commentTotal = data.data.count
       }
     },
     showReply(item) {
@@ -198,18 +192,14 @@ export default {
       text-align: center;
       font-size: 14px;
       color: #999999;
+      margin-top: 10px;
     }
     .item {
       display: flex;
       padding-bottom: 5px;
-      .avatar {
+      .avatarBox {
         width: 40px;
         height: 40px;
-        .el-image {
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
-        }
         margin-right: 10px;
       }
       .commentInfo {

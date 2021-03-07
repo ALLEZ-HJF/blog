@@ -2,18 +2,24 @@
   <div class="articleDetailContainer">
     <el-row :gutter="20">
       <el-col :xl="18" :lg="18" :md="18" :sm="24" :xs="24" class="articleDetail">
+        <div v-if="article.user" class="authorInfo " @click="gotoHomePage(article.user.uid)">
+          <avatar :src="article.user.avatar" />
+          <div class="userInfo">
+            <span class="nickname">{{ article.user.nickname }}</span>
+            <span class="introduction">{{ article.user.introduction }}</span>
+            <span class="lookNum">阅读: &nbsp;&nbsp; {{ article.look_num }}</span>
+          </div>
+        </div>
         <div v-if="article.imgs" class="imgsBox">
-          <img v-for="src in article.imgs.split(',')" :key="src" :src="src" alt="">
+          <img v-for="src in article.imgs.split(',')" :key="src" :src="src">
         </div>
         <div class="title">{{ article.title }}</div>
         <div class="subTitle">{{ article.sub_title }}</div>
         <div class="content" v-html="content" />
         <div class="comment">
           <!-- 评论 -->
-          <div v-if="userInfo" class="commentBox">
-            <div class="avatar">
-              <el-image lazy :src="userInfo.avatar" />
-            </div>
+          <div v-if="userInfo && article.user" class="commentBox">
+            <avatar :src="article.user.avatar" />
             <commentInput v-if="aid" :aid="aid" @insertResult="insertResult" />
           </div>
           <commentList v-if="aid" ref="commentList" :aid="aid" />
@@ -21,9 +27,7 @@
       </el-col>
       <el-col class="authorDetail  hidden-sm-and-down" :xl="6" :lg="6" :md="6">
         <div v-if="article.user" class="authorInfo" @click="gotoHomePage(article.user.uid)">
-          <div class="avatar">
-            <el-image lazy :src="article.user.avatar" />
-          </div>
+          <avatar :src="article.user.avatar" />
           <div class="userInfo">
             <span class="nickname">{{ article.user.nickname }}</span>
             <span class="introduction">{{ article.user.introduction }}</span>
@@ -59,12 +63,14 @@ import { getArticleByAid, getArticleList, addArticleLookNum } from '@/api/articl
 import commentInput from '@/components/comment/commentInput'
 import commentList from '@/components/comment/commentList'
 import marked from 'marked'
+import avatar from '@/components/avatar/index.vue'
 import 'highlight.js/scss/atelier-estuary-dark.scss'
 import hljs from 'highlight.js' // 导入代码高亮文件
 export default {
   components: {
     commentList,
-    commentInput
+    commentInput,
+    avatar
   },
   data() {
     return {
@@ -129,7 +135,7 @@ export default {
       }
     },
     async getArticleList() {
-      const data = await getArticleList({ uid: this.article.user.uid, page_num: 1, page_size: 10 })
+      const data = await getArticleList({ uid: this.article.user.uid, page_num: 1, page_size: 10, state: 'valid' })
       if (data.code === 200) {
         this.articleList = data.data.rows
       }
@@ -151,6 +157,9 @@ export default {
     margin-bottom: 10px;
     border-radius: 4px;
   }
+  pre {
+    margin-top: 15px;
+  }
   img {
     width: auto;
     height: auto;
@@ -158,21 +167,33 @@ export default {
     max-height: 100%;
   }
 }
+
+.avatarBox {
+  width: 70px;
+  height: 70px;
+  flex-shrink: 0;
+  margin-right: 15px
+}
 </style>
 <style lang="less" scoped>
 @import "@/styles/variables.less";
-
 @media screen and(max-width: 992px) {
   .articleDetailContainer > .el-row {
     margin-left: 0 !important;
     margin-right: 0 !important;
+    .articleDetail {
+      border-radius: 0;
+      padding: 0 !important;
+      .authorInfo  {
+        display: flex;
+      }
+    }
   }
 }
 .articleDetail {
   background: #ffffff;
   padding-top: 15px;
   border-radius: 6px;
-
   .imgsBox {
     > img {
       margin: 0 auto;
@@ -201,6 +222,9 @@ export default {
     font-size: 14px;
     color: #333333;
   }
+  .comment {
+    border-top: 1px solid #ccc;
+  }
   // 一级回复
   .commentBox {
     padding: 10px 15px;
@@ -208,14 +232,27 @@ export default {
     border-radius: 4px;
     display: flex;
     margin-top: 20px;
-    .avatar {
+    .avatarBox {
       width: 40px;
       height: 40px;
       margin-right: 20px;
-      .el-image {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
+    }
+  }
+  .authorInfo  {
+    display: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    .avatarBox {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+    .userInfo {
+      .nickname {
+        font-size: 14px;
+      }
+      .introduction {
+        font-size: 12px;
       }
     }
   }
@@ -262,44 +299,35 @@ export default {
       }
     }
   }
-  .authorInfo {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
+}
+.authorInfo {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  .userInfo {
+    flex: 1;
     overflow: hidden;
+    font-size: 16px;
+    color: #333333;
     display: flex;
-    flex-direction: row;
-    .avatar {
-      .el-image {
-        display: block;
-        width: 60px;
-        height: 60px;
-      }
-      width: 70px;
-      flex-shrink: 0;
-    }
-    .userInfo {
-      flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    > span {
       overflow: hidden;
-      font-size: 16px;
-      color: #333333;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      > span {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-      .introduction {
-        font-size: 14px;
-        color: #999999;
-        margin: 5px 0;
-      }
-      .lookNum {
-        font-size: 12px;
-        color: #999999;
-      }
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .introduction {
+      font-size: 14px;
+      color: #999999;
+      margin: 5px 0;
+    }
+    .lookNum {
+      font-size: 12px;
+      color: #999999;
     }
   }
 }

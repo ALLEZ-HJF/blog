@@ -22,6 +22,7 @@
             <articleItem :item="item" />
           </div>
         </div>
+        <div v-else class="noMore">暂无更多</div>
         <pagination v-show="articleList.length !== 0" :total="$store.state.article.articleTotal" :current-page="articleListSearchForm.page_num" @currentChange="currentChange" @handleSizeChange="handleSizeChange" />
       </el-col>
       <el-col class="hidden-sm-and-down" :xl="6" :lg="6" :md="6">
@@ -134,6 +135,7 @@ export default {
     // 文章列表
     async getArticleList() {
       await this.$store.dispatch('article/resetArticleList')
+      this.articleListSearchForm.state = 'valid'
       const data = await this.$store.dispatch('article/getArticleList', this.articleListSearchForm)
     }
   }
@@ -166,7 +168,7 @@ export default {
     .child {
       margin-bottom: 10px;
       .item {
-        font-size: 12px;
+        font-size: 12px !important;
         color: #999999;
       }
       .active {
@@ -214,6 +216,16 @@ export default {
     border-radius: 6px;
   }
   @media screen and (max-width: 768px) {
+    .categoryBox {
+      .categoryList {
+        margin-top: 5px;
+        margin-left: 5px;
+        .item {
+          margin-bottom: 5px;
+          font-size: 14px;
+        }
+      }
+    }
     .articleList {
       padding: 0;
       .articleItem {

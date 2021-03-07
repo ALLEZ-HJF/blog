@@ -20,7 +20,7 @@ class articlesController {
     }
     // 获取文章
     static async getArticleList(ctx) {
-        const param = filterParams(ctx.request.body, ['title','is_recommend', 'sortKey' , 'cids' , 'uid' ,'page_num', 'page_size'])
+        const param = filterParams(ctx.request.body, ['title','is_recommend', 'sortKey' , 'cids' , 'uid' ,'page_num', 'page_size', 'state'])
         const res = await articlesDao.getArticleList(param)
         ctx.response.status = 200
         ctx.success(200,'获取成功',res)
@@ -58,12 +58,12 @@ class articlesController {
             }
            const isPass = await client.textCensorUserDefined(str)
            if (isPass.conclusionType === 1) {
-                const res = await articlesDao.insertArticle(param)
-                ctx.response.status = 200
-                ctx.success(200,'发布成功',res)
+                param.state = 'valid'
            } else {
-               ctx.fail(500,isPass.data[0].msg)
+                param.state = 'invalid'
            }
+           const res = await articlesDao.insertArticle(param)
+           ctx.success(200,  param.state === 'valid' ? '发布成功' : '发布成功, 请等待管理员审核',res)
         }
     }
     // 删除文章
@@ -98,10 +98,35 @@ class articlesController {
             ctx.fail(500,'无法修改他人文章')
             return
         }
+        if (!param.content) {
+            ctx.fail(500,'请输入文章内容')
+            return
+        }
+        if (!param.title) {
+            ctx.fail(500,'请输入文章标题')
+            return
+        }
+        if (!param.cids) {
+            ctx.fail(500,'请选择分类')
+            return
+        }
         param.update_time = Date.now()
+        // 将标题 副标题 内容合并用于审核字符串是否含有敏感词汇
+        let str = ''
+        if (param.sub_title) {
+            str = str.concat(param.title+',',param.sub_title + ',',param.content)
+        } else {
+            str = str.concat(param.title + ',',param.content)
+        }
+        const isPass = await client.textCensorUserDefined(str)
+        if (isPass.conclusionType === 1) {
+                param.state = 'valid'
+        } else {
+                param.state = 'invalid'
+        }
         const res = await articlesDao.editArticle(param)
         if (res[0]) {
-            ctx.success(200,'修改成功',res)
+            ctx.success(200, param.state === 'valid' ? '修改成功' : '修改成功,请等待管理员审核',res)
         } else {
             ctx.fail(500,'修改失败')
         }

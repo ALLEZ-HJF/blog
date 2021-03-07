@@ -1,9 +1,7 @@
 <template>
   <div class="container">
     <el-col class="userInfo" :xl="{span:16, offset: 4}" :lg="{span:18, offset: 3}" :md="{span:18, offset: 3}" :sm="24" :xs="24">
-      <div class="avatarBox">
-        <img :src="userInfo.avatar">
-      </div>
+      <avatar :src="userInfo.avatar" />
       <div class="info">
         <span class="nickname">
           {{ userInfo.nickname }}
@@ -26,17 +24,18 @@
         </div>
       </div>
     </el-col>
-    <el-row>
-      <el-col :xl="{span:16, offset: 4}" :lg="{span:18, offset: 3}" :md="{span:18, offset: 3}" :sm="24" :xs="24">
-        <div class="articleList">
-          <template v-for="item in articleList">
-            <articleItem :key="item.aid" :item="item" />
-          </template>
-          <div v-if="articleList.length === 0" class="noMore">暂无文章</div>
-          <pagination :current-page="searchForm.page_num" :total="articleListTotal" @currentChange="currentChange" @handleSizeChange="handleSizeChange" />
+    <el-col :xl="{span:16, offset: 4}" :lg="{span:18, offset: 3}" :md="{span:18, offset: 3}" :sm="24" :xs="24">
+      <div class="articleList">
+        <div v-if="isMy" class="stateMenu">
+          <span v-for="(menu, index) in stateList" :key="menu.state" class="menu" :class="index === stateIndex ? 'active' : '' " @click="getArticleList(menu.state, index)">{{ menu.text }}</span>
         </div>
-      </el-col>
-    </el-row>
+        <template v-for="item in articleList">
+          <articleItem :key="item.aid" :item="item" :is-show-btn="isMy" @deleteSuccess="deleteSuccess" />
+        </template>
+        <div v-if="articleList.length === 0" class="noMore">暂无文章</div>
+        <pagination :current-page="searchForm.page_num" :total="articleListTotal" @currentChange="currentChange" @handleSizeChange="handleSizeChange" />
+      </div>
+    </el-col>
   </div>
 </template>
 
@@ -45,10 +44,13 @@ import { getUserInfo } from '@/api/user'
 import { getArticleList } from '@/api/article'
 import articleItem from '@/components/article/articleItem'
 import pagination from '@/components/pagination/pagination'
+import avatar from '@/components/avatar/index.vue'
+
 export default {
   components: {
     articleItem,
-    pagination
+    pagination,
+    avatar
   },
   data() {
     return {
@@ -59,14 +61,32 @@ export default {
       searchForm: {
         uid: '',
         page_num: 1,
-        page_size: 10
-      }
+        page_size: 10,
+        state: 'valid'
+      },
+      stateList: [
+        {
+          state: 'valid',
+          text: '已审核'
+        },
+        {
+          state: 'invalid',
+          text: '未审核'
+        },
+        {
+          state: 'lock',
+          text: '不通过'
+        }
+      ],
+      stateIndex: 0
     }
   },
   created() {
     if (this.$route.query.uid) {
       this.searchForm.uid = this.$route.query.uid
-      this.isMy = false
+      if (Number(this.$route.query.uid) !== this.$store.state.user.userInfo.uid) {
+        this.isMy = false
+      }
     } else {
       this.searchForm.uid = this.$store.state.user.userInfo.uid
     }
@@ -74,7 +94,16 @@ export default {
     this.getArticleList()
   },
   methods: {
-    async getArticleList() {
+    deleteSuccess(flag) {
+      if (flag) {
+        this.getArticleList()
+      }
+    },
+    async getArticleList(state, index) {
+      if (state) {
+        this.searchForm.state = state
+        this.stateIndex = index
+      }
       const data = await getArticleList(this.searchForm)
       if (data.code === 200) {
         this.articleList = data.data.rows
@@ -114,12 +143,11 @@ export default {
       margin-bottom: 10px;
       border-radius: 8px;
       .avatarBox {
-        img {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-        }
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
         margin-right: 30px;
+        z-index: 1;
       }
       .info {
           display: flex;
@@ -137,7 +165,6 @@ export default {
           }
           .editBtn {
             margin-top: 10px;
-            z-index: 100;
           }
         }
       .introduction {
@@ -194,6 +221,39 @@ export default {
         text-align: center;
         overflow: auto;
       }
+      .stateMenu {
+        padding: 10px 0 10px 10px;
+        .menu {
+          color: #333333;
+          margin-right: 10px;
+          cursor: pointer;
+        }
+        .active {
+          color: @defaultColor;
+        }
+      }
+    }
+    @media screen and(max-width: 767px) {
+        .userInfo {
+          padding: 10px;
+          .avatarBox {
+            width: 70px;
+            height: 70px;
+            margin-right: 10px;
+          }
+          .info {
+            margin-top: 0;
+            .nickname {
+              font-size: 18px;
+            }
+            .create_time {
+              font-size: 12px;
+            }
+          }
+          .introduction {
+            height: 80%;
+          }
+        }
     }
 }
 </style>

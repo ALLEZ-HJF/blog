@@ -25,5 +25,7 @@ body,html,#app {
       font-family: Noto Sans SC;
       font-style: normal;
       font-weight: 400;
+      overflow-y: visible;
+      overflow-x: hidden;
  }
 </style>
