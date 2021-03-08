@@ -53,6 +53,8 @@ class draftArticlesController {
             ctx.fail(500,'请输入文章内容')
         } else {
             param.update_time = Date.now()
+            const uid = ctx.verify(ctx.header.authorization).data.uid
+            param.uid = uid
             const data = await draftArticlesDao.editDraftArticle(param)
             if (data[0]) {
                 ctx.success(200,'修改成功')
@@ -68,7 +70,9 @@ class draftArticlesController {
         if (!param.did) {
             ctx.fail(500,'草稿id不能为空')
         } else {
-            const data = await draftArticlesDao.delDraftArticle(param.did)
+            const uid = ctx.verify(ctx.header.authorization).data.uid
+            param.uid = uid
+            const data = await draftArticlesDao.delDraftArticle(param)
             if (data) {
                 ctx.success(200,'删除成功')
             } else {

@@ -90,6 +90,7 @@ export default {
     this.articleListSearchForm.sortKey = ''
     this.articleListSearchForm.page_num = 1
     this.articleListSearchForm.page_size = 10
+    this.articleListSearchForm.state = 'valid'
   },
   methods: {
     searchArticle(cid) {

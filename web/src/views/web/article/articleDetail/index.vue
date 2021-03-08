@@ -270,6 +270,7 @@ export default {
       color: #666666;
       display: flex;
       justify-content: space-between;
+      height: auto;
     }
     .list {
       .item {

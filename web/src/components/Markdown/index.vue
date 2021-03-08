@@ -68,11 +68,11 @@ export default {
       this.$refs.md.$img2Url(pos, data.data[0])
     },
     imgDel(pos, url) { // 删除图片，并不是修改就会触发，仅支持工具栏操作
+      console.log(pos, url);
     }
   }
 }
 </script>
 
 <style>
-
 </style>

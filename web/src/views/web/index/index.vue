@@ -72,6 +72,7 @@ export default {
     async getArticleList() {
       await this.$store.dispatch('article/resetArticleList')
       this.articleListSearchForm.is_recommend = true
+      this.articleListSearchForm.state = 'valid'
       const data = await this.$store.dispatch('article/getArticleList', this.articleListSearchForm)
       if (data.count === this.articleList.length) {
         this.articleListSearchForm.status = 0

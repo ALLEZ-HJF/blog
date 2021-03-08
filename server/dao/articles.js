@@ -104,6 +104,7 @@ class articlesDao {
                 }
             ],
             distinct: true,
+            order: [[data.sortKey ? data.sortKey : 'create_time', 'DESC'] ],
             offset: Number(data.page_num - 1) * Number(data.page_size) || 0,
             limit: Number(data.page_size) || 10
         })

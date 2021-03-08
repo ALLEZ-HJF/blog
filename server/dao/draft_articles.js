@@ -35,16 +35,18 @@ class draftArticlesDao {
   static async editDraftArticle(data) {
     return await draftArticles.update(data,{
       where: {
-        did: data.did
+        did: data.did,
+        uid: data.uid
       }
     })
   }
 
   // 删除草稿
-  static async delDraftArticle(did) {
+  static async delDraftArticle(data) {
     return await draftArticles.destroy({
       where: {
-        did: did
+        did: data.did,
+        uid: data.uid
       }
     })
   }

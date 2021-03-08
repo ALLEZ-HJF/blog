@@ -17,6 +17,7 @@
               <el-option value="valid" label="已审核" />
               <el-option value="invalid" label="未审核" />
               <el-option value="lock" label="锁定" />
+              <el-option value="delete" label="已删除" />
             </el-select>
           </el-form-item>
           <el-form-item label=" ">
@@ -47,12 +48,12 @@
           <el-table-column
             prop="user.username"
             label="用户名称"
-            width="200"
+            width="150"
           />
           <el-table-column
             prop="user.nickname"
             label="用户昵称"
-            width="200"
+            width="150"
           />
           <el-table-column
             prop="title"
@@ -62,17 +63,17 @@
           <el-table-column
             prop="look_num"
             label="浏览量"
-            width="150"
+            width="100"
           />
           <el-table-column
             prop="category_str"
             label="分类"
-            width="250"
+            min-width="100"
           />
           <el-table-column
             fixed="right"
             label="操作"
-            min-width="260"
+            width="260"
           >
             <template slot-scope="scope">
               <el-button v-if="scope.row.state !== 'valid'" type="success" size="small" icon="el-icon-check" @click="gotoPublish(scope.row)">审核</el-button>

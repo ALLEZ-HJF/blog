@@ -42,7 +42,7 @@
           </el-col>
         </el-row>
       </el-header>
-      <div class="main">
+      <div class="main" :style="{width: isSetWidth ? '98%': ''}">
         <router-view :key="$route.fullPath" ref="main" />
       </div>
     </el-container>
@@ -68,7 +68,8 @@ export default {
       pathName: '推荐',
       menuList: [],
       currMenu: 0,
-      defaultAvatar: require('@/assets/image/avatar/defaultAvatar.jpeg')
+      defaultAvatar: require('@/assets/image/avatar/defaultAvatar.jpeg'),
+      isSetWidth: false
     }
   },
   watch: {
@@ -87,6 +88,11 @@ export default {
             this.currMenu = 2
             this.pathName = '关于我'
             break
+        }
+        if (val.name === 'handleArticle') {
+          this.isSetWidth = true
+        } else {
+          this.isSetWidth = false
         }
         if (val.name !== 'articleList') {
           this.isShowSearch = false

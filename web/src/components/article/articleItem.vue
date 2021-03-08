@@ -127,6 +127,7 @@ export default {
         color: #333333;
         margin-top: 5px;
         height: auto;
+        margin-bottom: 5px;
       }
       .subTitle {
         font-size: 14px;

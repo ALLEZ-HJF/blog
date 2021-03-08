@@ -79,6 +79,11 @@ export default {
     }
   },
   async created() {
+    if (!this.$store.state.user.userInfo) {
+      this.$message.error('请登录')
+      this.$router.push({name: 'signin'})
+      return
+    }
     this.isEdit = this.$route.query.isEdit
     this.aid = this.$route.query.aid
     this.getCategoryList()
@@ -203,16 +208,33 @@ export default {
         }
         this.article.cids = cids
         this.article.content = this.$refs.markdown.content
-        const data = await insertArticle(this.article)
-        if (data.code === 200) {
-          this.$message.success(data.msg)
-          // 删除草稿
-          if (this.did) {
-            delDraftArticle({ did: this.did })
+        // 判断文章中的图片是否有图片 仅支持上传图片
+        let reg = /!\[((.+?)|)\]\((.+?)\)/ig
+        let contentImgs = this.article.content.match(reg)
+        // 如果有不是本服务器的图片则不通过验证
+        let isPass = true
+        if (contentImgs !== null) {
+          let imgReg = /uploads\/[0-9]*\./
+          contentImgs.forEach(img => {
+            if (!imgReg.test(img)) {
+              isPass = false
+            }
+          })
+        } 
+        if (isPass) {
+          const data = await insertArticle(this.article)
+          if (data.code === 200) {
+            this.$message.success(data.msg)
+            // 删除草稿
+            if (this.did) {
+              delDraftArticle({ did: this.did })
+            }
+            setTimeout(() => {
+              this.$router.push({name: 'homePage'})
+            }, 1500)
           }
-          setTimeout(() => {
-            this.$router.back()
-          }, 1500)
+        } else {
+          this.$message.error('暂不支持网络图片!,如有需要请手动上传.')
         }
       }
     },
@@ -231,19 +253,24 @@ export default {
     async getArticleByAid() {
       const data = await getArticleByAid({ aid: this.aid })
       if (data.code === 200) {
-        this.article = data.data
-        this.$refs.markdown.content = data.data.content
-        this.article.categories.forEach(item => {
-          this.selectIds.push(item.cid)
-        })
-        if (this.article.imgs) {
-          const imgArr = this.article.imgs.split(',')
-          imgArr.forEach(item => {
-            this.articleImgArr.push({ url: item })
+        if (data.data.user.uid === this.$store.state.user.userInfo.uid) {
+          this.article = data.data
+          this.$refs.markdown.content = data.data.content
+          this.article.categories.forEach(item => {
+            this.selectIds.push(item.cid)
           })
+          if (this.article.imgs) {
+            const imgArr = this.article.imgs.split(',')
+            imgArr.forEach(item => {
+              this.articleImgArr.push({ url: item })
+            })
+          }
+          this.isShowCategory = true
+          this.$forceUpdate()
+        } else {
+          this.$message.error("无法修改他人文章")
+          this.$router.push({name: 'homePage'})
         }
-        this.isShowCategory = true
-        this.$forceUpdate()
       }
     }
   }
@@ -285,7 +312,6 @@ export default {
     }
   }
 }
-
 </style>
 
 <style lang="less" scoped>

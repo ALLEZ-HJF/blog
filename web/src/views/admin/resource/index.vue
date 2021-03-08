@@ -26,12 +26,12 @@
         <el-table-column
           prop="uid"
           label="用户ID"
-          width="100"
+          width="80"
         />
         <el-table-column
           prop="resource_name"
           label="资源名称"
-          width="200"
+          min-width="200"
         />
         <el-table-column
           prop="resource_url"
@@ -40,13 +40,14 @@
         />
         <el-table-column
           label="缩略图"
-          min-width="200"
+          width="220"
         >
           <template slot-scope="scope">
             <el-image
               v-if="scope.row.resource_type === 'img' && scope.row.resource_type"
-              style="width: 200px; height: 100%"
+              style="width: 200px; max-height: 300px"
               :src="scope.row.resource_url"
+              :preview-src-list="[scope.row.resource_url]"
               :fit="fit"
             />
           </template>
@@ -54,7 +55,7 @@
         <el-table-column
           fixed="right"
           label="操作"
-          width="180"
+          width="100"
         >
           <template slot-scope="scope">
             <el-button v-if="scope.row.state === 'valid'" size="small" type="danger" icon="el-icon-delete" @click="delResource(scope.row)">删除</el-button>
