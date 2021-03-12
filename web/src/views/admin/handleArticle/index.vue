@@ -41,7 +41,7 @@
   </div>
 </template>
 <script>
-import { getArticleByAid, adminInsertArticle, adminArticleVerify, adminEditArticle } from '@/api/article'
+import { getAdminArticleByAid, adminInsertArticle, adminArticleVerify, adminEditArticle } from '@/api/article'
 import { getCategoryList } from '@/api/category'
 import { uploadFile } from '@/api/upload'
 import SelectCategory from '@/components/SelectCategory'
@@ -171,12 +171,12 @@ export default {
         this.categoryList = data.data.rows
         if (this.$route.query.aid) {
           this.aid = this.$route.query.aid
-          this.getArticleByAid()
+          this.getAdminArticleByAid()
         }
       }
     },
-    async getArticleByAid() {
-      const data = await getArticleByAid({ aid: this.aid })
+    async getAdminArticleByAid() {
+      const data = await getAdminArticleByAid({ aid: this.aid })
       if (data.code) {
         this.article = data.data
         this.article.categories.forEach(item => {

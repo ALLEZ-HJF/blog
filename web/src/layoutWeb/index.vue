@@ -26,6 +26,7 @@
               <el-button v-if="userInfo" class="rightMenu writeBtn" size="small" type="primary" @click="goToPage('handleArticle')">写文章</el-button>
               <el-button v-if="userInfo" class="rightMenu writeBtn" size="small" @click="goToPage('draft')">草稿</el-button>
               <el-button v-if="!userInfo" class="rightMenu" plain size="small" type="primary" @click="goToPage('signin')">登录</el-button>
+              <el-button v-if="userInfo && userInfo.gid" class="rightMenu"  size="small" type="danger" @click="goToPage('dashboard')">后台管理</el-button>
               <div v-if="userInfo">
                 <el-dropdown @command="handleCommand">
                   <span class="el-dropdown-link">

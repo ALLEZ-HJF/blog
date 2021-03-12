@@ -113,3 +113,11 @@ export function setArticleRecommend(data) {
     data
   })
 }
+// 后台获取文章
+export function getAdminArticleByAid(data) {
+  return request({
+    url: 'articles/admin/getArticleByAid',
+    method: 'post',
+    data
+  })
+}

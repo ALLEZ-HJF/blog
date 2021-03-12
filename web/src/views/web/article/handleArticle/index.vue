@@ -251,27 +251,34 @@ export default {
       }
     },
     async getArticleByAid() {
-      const data = await getArticleByAid({ aid: this.aid })
-      if (data.code === 200) {
-        if (data.data.user.uid === this.$store.state.user.userInfo.uid) {
-          this.article = data.data
-          this.$refs.markdown.content = data.data.content
-          this.article.categories.forEach(item => {
-            this.selectIds.push(item.cid)
-          })
-          if (this.article.imgs) {
-            const imgArr = this.article.imgs.split(',')
-            imgArr.forEach(item => {
-              this.articleImgArr.push({ url: item })
-            })
+      try {
+        const data = await getArticleByAid({ aid: this.aid })
+         if (data.code === 200) {
+            if (data.data.user.uid === this.$store.state.user.userInfo.uid) {
+              this.article = data.data
+              this.$refs.markdown.content = data.data.content
+              this.article.categories.forEach(item => {
+                this.selectIds.push(item.cid)
+              })
+              if (this.article.imgs) {
+                const imgArr = this.article.imgs.split(',')
+                imgArr.forEach(item => {
+                  this.articleImgArr.push({ url: item })
+                })
+              }
+              this.isShowCategory = true
+              this.$forceUpdate()
+            } else {
+              this.$message.error("无法修改他人文章")
+              this.$router.push({name: 'homePage'})
+            }
+          } else {
+            this.$message.error(data)
           }
-          this.isShowCategory = true
-          this.$forceUpdate()
-        } else {
-          this.$message.error("无法修改他人文章")
-          this.$router.push({name: 'homePage'})
-        }
+      } catch (error) {
+        this.$router.back()
       }
+     
     }
   }
 }

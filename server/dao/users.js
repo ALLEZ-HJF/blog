@@ -22,8 +22,8 @@ class userDao {
         return await users.findAll({
             attributes: [
                 'uid','username','nickname','phone','avatar','introduction',
-                [sequelize.literal(`(SELECT COUNT(*) FROM articles WHERE articles.uid = users.uid)`),'article_count'],
-                [sequelize.literal(`(SELECT SUM(articles.look_num) FROM articles WHERE articles.uid = users.uid)`),'article_look_num']
+                [sequelize.literal(`(SELECT COUNT(*) FROM articles WHERE articles.uid = users.uid and articles.state = 'valid')`),'article_count'],
+                [sequelize.literal(`(SELECT SUM(articles.look_num) FROM articles WHERE articles.uid = users.uid and articles.state = 'valid')`),'article_look_num']
             ],
             where: sequelize.where(sequelize.literal(`(SELECT COUNT(*) FROM articles WHERE articles.uid = users.uid)`), { [Op.gt] : 0} ),
             include: [

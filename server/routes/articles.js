@@ -28,5 +28,7 @@ router.post('/admin/editArticle',articlesController.editArticle)
 router.post('/admin/delArticle',articlesController.delArticle)
 // 推荐, 取消推荐
 router.post('/admin/setArticleRecommend',articlesController.setArticleRecommend)
+// 后台获取文章详情
+router.post('/admin/getArticleByAid',articlesController.getAdminArticleByAid)
 
 module.exports = router

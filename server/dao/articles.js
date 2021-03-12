@@ -35,12 +35,33 @@ class articlesDao {
         return article
     }
 
-    static async getArticleByAid(aid) {
+    static async getAdminArticleByAid(data) {
         return await articles.findOne({
             where: {
-                aid: aid,
-                state: 'valid'
+                aid: data.aid
             },
+            include:[
+                {
+                    model: users,
+                    attributes: ['nickname','username','avatar','uid', 'introduction']
+                },
+                {
+                    model: categories,
+                    attributes: ['name','cid'],
+                    through: { attributes: [] },
+                    required: false
+                }
+            ]
+        })
+    }
+
+    static async getArticleByAid(data) {
+        let where = data
+        if (data.uid) {
+            where.uid = data.uid
+        }
+        return await articles.findOne({
+            where: where,
             include:[
                 {
                     model: users,

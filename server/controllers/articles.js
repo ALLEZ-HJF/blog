@@ -26,15 +26,38 @@ class articlesController {
         ctx.success(200,'获取成功',res)
     }
 
-    static async getArticleByAid(ctx) {
-        const aid = ctx.request.body.aid
-        if (!aid) {
+    static async getAdminArticleByAid(ctx) {
+        const param = ctx.request.body
+        if (!param.aid) {
             ctx.fail(500,'请输入文章id')
             return false
         }
-        const res = await articlesDao.getArticleByAid(aid)
-        ctx.response.status = 200
-        ctx.success(200,'获取成功',res)
+        const res = await articlesDao.getAdminArticleByAid(param)
+        if (res !== null) {
+            ctx.success(200,'获取成功',res)
+        } else {
+            ctx.fail(500,'获取失败',res)
+        }
+    }
+
+    static async getArticleByAid(ctx) {
+        const param = ctx.request.body
+        if (!param.aid) {
+            ctx.fail(500,'请输入文章id')
+            return false
+        }
+        if (ctx.header.authorization) {
+            const article = await articlesDao.getArticleByAid(param)
+            if (article.state !== 'valid') {
+                param.uid = ctx.verify(ctx.header.authorization).data.uid
+            }
+        }
+        const res = await articlesDao.getArticleByAid(param)
+        if (res !== null) {
+            ctx.success(200,'获取成功',res)
+        } else {
+            ctx.fail(500,'获取失败',res)
+        }
     }
 
     // 发布文章
@@ -49,21 +72,9 @@ class articlesController {
         } else if (!param.cids) {
             ctx.fail(500,'请选择分类')
         } else {
-            // 将标题 副标题 内容合并用于审核字符串是否含有敏感词汇
-            let str = ''
-            if (param.sub_title) {
-                str = str.concat(param.title+',',param.sub_title + ',',param.content)
-            } else {
-                str = str.concat(param.title + ',',param.content)
-            }
-           const isPass = await client.textCensorUserDefined(str)
-           if (isPass.conclusionType === 1) {
-                param.state = 'valid'
-           } else {
-                param.state = 'invalid'
-           }
+           param.state = 'invalid'
            const res = await articlesDao.insertArticle(param)
-           ctx.success(200,  param.state === 'valid' ? '发布成功' : '发布成功, 请等待管理员审核',res)
+           ctx.success(200, '发布成功, 请等待管理员审核')
         }
     }
     // 删除文章
@@ -110,19 +121,28 @@ class articlesController {
             ctx.fail(500,'请选择分类')
             return
         }
-        param.update_time = Date.now()
-        // 将标题 副标题 内容合并用于审核字符串是否含有敏感词汇
-        let str = ''
-        if (param.sub_title) {
-            str = str.concat(param.title+',',param.sub_title + ',',param.content)
+        const article = await articlesDao.getArticleByAid({ aid: param.aid, uid: ctx.verify(token).data.uid  })
+        if (article !== null && article.state === 'valid') {
+             // 将标题 副标题 内容合并用于审核字符串是否含有敏感词汇
+            let str = ''
+            if (param.sub_title) {
+                str = str.concat(param.title+',',param.sub_title + ',',param.content)
+            } else {
+                str = str.concat(param.title + ',',param.content)
+            }
+            const isPass = await client.textCensorUserDefined(str)
+            if (isPass.conclusionType === 1) {
+                    param.state = 'valid'
+            } else {
+                    param.state = 'invalid'
+            }
         } else {
-            str = str.concat(param.title + ',',param.content)
-        }
-        const isPass = await client.textCensorUserDefined(str)
-        if (isPass.conclusionType === 1) {
-                param.state = 'valid'
-        } else {
-                param.state = 'invalid'
+            if (article === null) {
+                ctx.fail(500, '无法修改他人文章')
+                return
+            }
+            param.update_time = Date.now()
+            param.state = article.state
         }
         const res = await articlesDao.editArticle(param)
         if (res[0]) {
