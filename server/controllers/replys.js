@@ -1,6 +1,6 @@
 const replysDao = require('../dao/replys')
 const articles = require('../dao/articles')
-
+var { client } = require('../config/baiduApi.js')
 class replysController {
     // 添加回复
     static async insertReply(ctx) {
@@ -14,10 +14,15 @@ class replysController {
         } else if (!param.aid) {
             ctx.fail(500,'请输入文章id')
         } else {
-            const res = await replysDao.insertReply(param)
-            ctx.response.status = 200
-            ctx.success(200,'回复成功',res)
-            articles.handleArticleCommentNum({aid:param.aid},true)
+            const isPass = await client.textCensorUserDefined(param.content)
+            if (isPass.conclusionType === 1) {
+                const res = await replysDao.insertReply(param)
+                ctx.response.status = 200
+                ctx.success(200,'回复成功',res)
+                articles.handleArticleCommentNum({aid:param.aid},true)
+            } else {
+                ctx.fail(500, '回复失败' + isPass.data.map(x => x.msg).join(','))
+            }
         }
     }
     // 删除回复

@@ -4,6 +4,7 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import getPageTitle from '@/utils/get-page-title'
 import { getToken } from '@/utils/auth'
+import { asyncRoutes } from '@/router'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 router.beforeEach(async(to, from, next) => {
   // start progress bar
@@ -24,10 +25,10 @@ router.beforeEach(async(to, from, next) => {
     const accessRoutes = await store.dispatch('permission/setRouter')
     if (userInfo.gid) {
       const adminRouter = await store.dispatch('permission/setAdminRouter', { gid: userInfo.gid })
-      const routers = accessRoutes.concat(adminRouter)
+      const routers = accessRoutes.concat(adminRouter,asyncRoutes)
       router.addRoutes(routers)
     } else {
-      router.addRoutes(accessRoutes)
+      router.addRoutes(accessRoutes.concat(asyncRoutes))
     }
     next({ ...to })
   } else {
